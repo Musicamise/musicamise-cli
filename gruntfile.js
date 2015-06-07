@@ -8,7 +8,9 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		mochaTests: ['app/tests/**/*.js'],
+		sass: 'public/sass/{,*/}*.{scss,sass}'
+
 	};
 
 	// Project Configuration
@@ -45,6 +47,13 @@ module.exports = function(grunt) {
 				files: watchFiles.clientCSS,
 				tasks: ['csslint'],
 				options: {
+					livereload: true
+				}
+			},
+			sass: {
+			    files: watchFiles.sass,
+			    tasks: ['sass:dev'],
+			    options: {
 					livereload: true
 				}
 			}
@@ -92,6 +101,32 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		/**
+		 * Sass
+		 */
+		 sass: {
+		  	dev: {
+		  		options: {
+		  			style: 'expanded',
+		 			compass: false
+			  	},
+		  		files: {
+				   'public/css/app.css': 'public/sass/{,*/}*.{scss,sass}'
+				 //  'public/css/bootstrap.css': 'public/lib/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss'
+			  	}
+		 	},
+		  	dist: {
+			  	//you could use this as part of the build job (instead of using cssmin)
+			    options: {
+		      		style: 'compressed',
+		      		compass: false
+			    },
+			    files: {
+		      		'public/dist/style.min.css': 'style/{,*/}*.{scss,sass}'
+			    }
+		  	}
+		},
+
 		'node-inspector': {
 			custom: {
 				options: {
@@ -158,7 +193,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['lint','sass:dev', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);

@@ -1,94 +1,173 @@
-<section data-ng-controller="HomeController">
-	<div class="jumbotron text-center">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-				<img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/img/brand/logo.png" />
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<p class="lead">
-				Open-Source Full-Stack Solution For MEAN Applications
-			</p>
-		</div>
-		<div class="row">
-			<p>
-				<a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-			</p>
-		</div>
+<section data-ng-controller="HomeController" >
+
+	<div class="arriv">
+				<div class="container">
+					<div class="arriv-top">
+					    <!-- Jssor Slider Begin -->
+					   	<div class="col-md-12">
+				              <div id="owl-demo" class="owl-carousel"  >
+
+				                <div class="item"><a href="#"><img  class="img-responsive"src="plugin/owl-carousel/fullimage1.jpg" alt="The Last of us"> </a></div>
+				                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage2.jpg" alt="GTA V"></div>
+				                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage3.jpg" alt="Mirror Edge"></div>
+
+				              </div>
+			            </div>
+						<div class="clearfix"> </div>
+					</div>		 
+					<div class="arriv-top">
+						<div class="col-md-6 arriv-left">
+							<img src="images/1.jpg" class="img-responsive" alt="">
+							<div class="arriv-info">
+								<h3>NEW ARRIVALS</h3>
+								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<div class="crt-btn">
+									<a href="details.html">TAKE A LOOK</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 arriv-right">
+							<img src="images/2.jpg" class="img-responsive" alt="">
+							<div class="arriv-info">
+								<h3>TUXEDO</h3>
+								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<div class="crt-btn">
+									<a href="details.html">SHOP NOW</a>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="arriv-bottm">
+						<div class="col-md-8 arriv-left1">
+							<img src="images/3.jpg" class="img-responsive" alt="">
+							<div class="arriv-info1">
+								<h3>SWEATER</h3>
+								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<div class="crt-btn">
+									<a href="details.html">SHOP NOW</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 arriv-right1">
+							<img src="images/4.jpg" class="img-responsive" alt="">
+							<div class="arriv-info2">
+								<a href="details.html"><h3>Trekking Shoes<i class="ars"></i></h3></a>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="arriv-las">
+						<div class="col-md-4 arriv-left2">
+							<img src="images/5.jpg" class="img-responsive" alt="">
+							<div class="arriv-info2">
+								<a href="details.html"><h3>Casual Glasses<i class="ars"></i></h3></a>
+							</div>
+						</div>
+						<div class="col-md-4 arriv-middle">
+							<img src="images/6.jpg" class="img-responsive" alt="">
+							<div class="arriv-info3">
+								<h3>FRESH LOOK T-SHIRT</h3>
+								<div class="crt-btn">
+									<a href="details.html">SHOP NOW</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 arriv-right2">
+							<img src="images/7.jpg" class="img-responsive" alt="">
+							<div class="arriv-info2">
+								<a href="details.html"><h3>Elegant Watches<i class="ars"></i></h3></a>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
 	</div>
-	<div>
-		<h2>Congrats! You've configured and run the sample application.</h2>
-		<p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-		<p>This sample application tracks users and articles.</p>
-		<ul>
-			<li>
-				Click
-				<em>Signup</em>
-				to get started.
-			</li>
-			<li>
-				Configure your app to work with your social accounts, by editing the
-				<em>/config/env/*.js</em>
-				files.
-			</li>
-			<li>
-				Edit your users module.
-			</li>
-			<li>
-				Add new CRUD modules.
-			</li>
-			<li>
-				Have fun...
-			</li>
-		</ul>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-			<h2>
-				<strong>M</strong>ongoDB
-			</h2>
-			<p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
-		</div>
-		<div class="col-md-3">
-			<h2>
-				<strong>E</strong>xpress
-			</h2>
-			<p><a target="_blank" href="http://expressjs.com/"> Express</a> is an app server. Check out <a target="_blank" href="http://expressjs.com/guide.html">The Express Guide</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-		</div>
-		<div class="col-md-3">
-			<h2>
-				<strong>A</strong>ngularJS
-			</h2>
-			<p>AngularJS is web app framework. <a target="_blank" href="http://angularjs.org/">Angular's website</a> offers a lot. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-		</div>
-		<div class="col-md-3">
-			<h2>
-				<strong>N</strong>ode.js
-			</h2>
-			<p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a web server. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-		</div>
-	</div>
-	<div class="well">
-		<h2>MEAN.JS Documentation</h2>
-		<p>
-			Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-			<ul>
-				<li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
+			
+	<div class="special">
+			<div class="container">
+				<h3>Special Offers</h3>
+				<div class="specia-top">
+					<ul class="grid_2">
+				<li>
+						<a href="details.html"><img src="images/8.jpg" class="img-responsive" alt=""></a>
+						<div class="special-info grid_1 simpleCart_shelfItem">
+							<h5>Lorem ipsum dolor</h5>
+							<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
+							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+						</div>
 				</li>
-				<li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
+				<li>
+						<a href="details.html"><img src="images/9.jpg" class="img-responsive" alt=""></a>
+						<div class="special-info grid_1 simpleCart_shelfItem">
+							<h5>Consectetur adipis</h5>
+							<div class="item_add"><span class="item_price"><h6>ONLY $60.00</h6></span></div>
+							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+					</div>
 				</li>
-				<li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
+				<li>
+						<a href="details.html"><img src="images/10.jpg" class="img-responsive" alt=""></a>
+						<div class="special-info grid_1 simpleCart_shelfItem">
+							<h5>Commodo consequat</h5>
+							<div class="item_add"><span class="item_price"><h6>ONLY $14.00</h6></span></div>
+							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+					</div>
 				</li>
-				<li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
+				<li>
+						<a href="details.html"><img src="images/11.jpg" class="img-responsive" alt=""></a>
+						<div class="special-info grid_1 simpleCart_shelfItem">
+							<h5>Voluptate velit</h5>
+							<div class="item_add"><span class="item_price"><h6>ONLY $37.00</h6></span></div>
+							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+						</div>
 				</li>
-				<li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-				</li>
-				<li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-				</li>
+				<div class="clearfix"> </div>
 			</ul>
-		</p>
+				</div>
+			</div>
 	</div>
-	<br>Enjoy &amp; Keep Us Updated,
-	<br>The MEAN.JS Team.
+
+
+
+<script src="plugin/js/jquery-1.11.1.min.js"></script> 
+
+<!-- Important Owl stylesheet -->
+<link rel="stylesheet" href="plugin/owl-carousel/owl.carousel.css">
+ 
+<!-- Owl Theme -->
+<link rel="stylesheet" href="plugin/owl-carousel/owl.theme.css">
+ 	<!-- Include Owl js plugin -->
+	<script type="text/javascript" src="plugin/owl-carousel/owl.carousel.js"></script>
+		
+
+
+			<style>
+			    #owl-demo .item img{
+			        display: block;
+			        width: 100%;
+			        height: auto;
+			    }
+		    </style>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+		      $("#owl-demo").owlCarousel({
+
+		      navigation : false,
+		      slideSpeed : 300,
+		      paginationSpeed : 400,
+		      singleItem : true,
+		      navigationText: false,
+		      responsive: true,
+		      autoPlay:true,
+		      rewindNav:true,
+		      // "singleItem:true" is a shortcut for:
+		      // items : 1, 
+		      // itemsDesktop : false,
+		      // itemsDesktopSmall : false,
+		      // itemsTablet: false,
+		      // itemsMobile : false
+
+		      });
+		    });
+		    </script>
 </section>
