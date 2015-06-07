@@ -1,0 +1,74 @@
+@media(max-width: 640px){
+	.logo {
+	  float: left;
+	  margin: 0.9em 0;
+	}
+	.header_right {
+	  float: right;
+	  width: 53%;
+	}
+	.rgt-bottom {
+	  margin-bottom: 0.5em;
+	}
+	.box_cart {
+		margin: 0.15em 0.1em 0;
+		width: 43%;
+		h3 { 
+			font-size: 0.8125em;
+		}
+	}
+	.create_btn {
+		float: left;
+		width: 20%;
+		a {
+			padding: 10px 5px;
+			font-size: 0.8125em;
+			padding: 3px 5px;
+			font-size: 0.7em;
+		}
+	}
+	.log {
+		float: right;
+		width: 15%;
+	}
+
+	#loginContainer {
+		a {
+			span {
+				padding: 0px 4px;
+				font-size: .8em;
+			}
+		}
+	}
+	.footer h4 {
+	  font-size: 0.8125em;
+	}
+	.customer-footer {
+		padding: 0 5px;
+
+		li{ 
+			a {
+			font-size: 0.875em;
+			}
+		}
+	}
+	.about-footer {
+	 padding: 0 5px;
+	}
+	.about-footer li a{
+		font-size: 0.875em;
+	}
+	.myaccount-footer {
+	  padding: 0 5px;
+	}
+	.myaccount-footer li a {
+	  font-size: 0.875em;
+	}
+
+	.ourstory-footer {
+	  padding: 0 5px;
+	}
+	.ourstory-footer li {
+	  font-size: 0.875em;
+	}
+}

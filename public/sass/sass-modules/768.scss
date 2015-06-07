@@ -1,0 +1,63 @@
+@media (max-width:768px){
+	.box_cart {
+	  width: 41%;
+	}
+	.create_btn a {
+	  padding: 6px 8px;
+	  font-size: 0.750em;
+	}
+	.log {
+		float: right;
+		width: 15%;
+	}
+	#loginContainer {
+		a {
+			span {
+				padding: 2px 4px;
+			}
+		}
+	}
+	.search {
+		input[type="text"] {
+			width: 79.33333%;
+		}
+	}
+
+	.foot-top {
+	  text-align: center;
+	}
+	.footer {
+		padding: 2em 0 1em;
+		p {
+			font-size: 0.875em;
+			text-align: center;
+		}
+		h4 {
+			font-size: 0.875em;
+		}
+	}
+	.customer-footer {
+	  float: left;
+	  width: 21%;
+	}
+	.about-footer {
+		float: left;
+		width: 16%;
+	}
+	.myaccount-footer {
+	  float: left;
+	  width: 19%;
+	}
+	.ourstory-footer {
+	  float: left;
+	  width: 44%;
+	}
+	.creat_button a {
+	  padding: 3px 12px;
+	  font-size: 0.8125em;
+	}
+	.creat_button_filled a {
+	  padding: 2px 11px;
+	  font-size: 0.8125em;
+	}
+}

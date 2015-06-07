@@ -1,0 +1,12 @@
+$brand-primary:         #967ADC;
+$brand-success:         #A0D468;
+
+@import "../public/lib/bootstrap-sass-official/assets/stylesheets/_bootstrap";
+
+body {
+  margin: 0;
+}
+
+.sample {
+	background: $brand-success;
+}

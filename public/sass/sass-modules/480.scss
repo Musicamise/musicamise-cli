@@ -1,0 +1,67 @@
+@media (max-width: 480px) {
+    .header_top {
+        padding: 13px 0 2px;
+    }
+    .top_right {
+        ul {
+            li {
+                display: inline-block;
+                margin-right: 5px;
+                a {
+                    padding: 0px 1px;
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+    .top_left {
+        h2 {
+            font-size: 11px;
+            line-height: 1.5em;
+        }
+    }
+    .logo {
+        margin: 0;
+    }
+    .header_right {
+        float: right;
+        width: 42%;
+    }
+    .rgt-bottom {
+        margin: 0;
+        padding: 0;
+    }
+    .box_cart {
+        width: 62%;
+    }
+    .create_btn {
+        float: left;
+        width: 36%;
+    }
+    .log {
+        width: 45%;
+    }
+    .search {
+        display: none;
+    }
+    .footer p {
+        margin: 1em 0 0;
+    }
+    .customer-footer {
+        float: left;
+        width: 33.33%;
+    }
+    .about-footer {
+	  float: left;
+	  width: 33.33%;
+	}
+	.myaccount-footer {
+	  float: left;
+	  width: 33.33%;
+	}
+	.ourstory-footer {
+	  float: left;
+	  width: 100%;
+	  margin: 1.5em 0 0;
+	}
+}
