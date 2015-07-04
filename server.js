@@ -20,6 +20,14 @@ var db = mongoose.connect(config.db, function(err) {
 	}
 });
 
+// Access the mongoose-dbref module and the utilities
+var dbref = require('mongoose-dbref');
+var utils = dbref.utils;
+
+// Install the monkey patches
+var loaded = dbref.install(mongoose);
+
+
 // Init the express application
 var app = require('./config/express')(db);
 

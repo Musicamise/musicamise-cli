@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/musicamise-cli-dev',
+	db: 'mongodb://localhost/musicamise',
 	app: {
 		title: 'musicamise-cli - Development Environment'
 	},
