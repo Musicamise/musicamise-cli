@@ -18,8 +18,91 @@ var mongoose = require('mongoose'),
  * Show the current article
  */
 exports.readProductSlug = function(req, res) {
-	res.json(req.product);
+	if(req.err){
+		return res.status(400).send({
+				message: req.err
+				});
+	}
+	var inventoriesObj = [];
+	var product = req.product;
+	
+	if(product.inventories){
+		product.inventories.forEach(function(inventory){
+			inventoriesObj.push(inventory.oid);
+		});
+		var count = 0;
+		Inventory.find({'_id':{$in:inventoriesObj}}).select('-product -_id -_class').exec(function(err,inventories){
+			product.inventories.forEach(function(inventory,indexInventory){
+				 product.inventories[indexInventory] = inventories[count];
+				 count++;
+			});
+				res.json(product);
+
+		});
+	}else{
+		res.json(product);
+	}
+
 };
+exports.listRelated = function(req, res) {
+	if(req.err){
+		return res.status(400).send({
+				message: req.err
+			});
+	}
+	var inventoriesObj = [];
+	var product = req.product;
+	var quantity = req.query.quantity||4;
+	var query = Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]);
+	query.distinct('product.$id').exec(function(err, productsId){
+		if(err){
+			return res.status(400).send({
+				message: err
+			});
+		}		 
+		productsId = productsId.filter(function(productId){return productId+''!==product._id+'';});
+
+		var queryProduct = Product.find({ '_id':{$in:productsId}})
+									.where('onLineVisible').equals(true);
+		var userTagQuery = {};
+		if(product.userTags){
+			userTagQuery = {'userTags':{$in:product.userTags}};
+		}
+		var collectionSlugQuery = {};
+		if(product.collectionsSlugs){
+			collectionSlugQuery = {'collectionsSlugs':{$in:product.collectionsSlugs}};
+		}
+		queryProduct.and([userTagQuery,collectionSlugQuery]);
+		
+		queryProduct.limit(quantity);
+		queryProduct.exec(function(err,products){
+			if(err){
+				return res.status(400).send({
+					message: err
+				});
+			}		
+ 			res.json({products:products,queryDate:new Date()});
+		});
+	});
+	// if(product.inventories){
+	// 	product.inventories.forEach(function(inventory){
+	// 		inventoriesObj.push(inventory.oid);
+	// 	});
+	// 	var count = 0;
+	// 	Inventory.find({'_id':{$in:inventoriesObj}}).select('-product -_id -_class').exec(function(err,inventories){
+	// 		product.inventories.forEach(function(inventory,indexInventory){
+	// 			 product.inventories[indexInventory] = inventories[count];
+	// 			 count++;
+	// 		});
+	// 			res.json(product);
+
+	// 	});
+	// }else{
+	// 	res.json(product);
+	// }
+
+};
+
 exports.readProductCollectionSlug = function(req, res) {
 	res.json(req.products);
 };
@@ -49,14 +132,11 @@ exports.listAll = function(req, res) {
 
 		Inventory.find({'_id':{$in:inventoriesObj}}).select('-product -_id -_class').exec(function(err,inventories){
 					var count = 0;
-			console.log('tamanho obt:'+inventories.length)
+			console.log('tamanho obt:'+inventories.length);
 			console.log('tamanho obt:'+inventories);
 			products.forEach(function(product,indexProduct){
 				product.inventories.forEach(function(inventory,indexInventory){
-					 products[indexProduct].inventories[indexInventory] = inventories.filter(function(i){
-					 	if(i.oid===products[indexProduct].inventories[indexInventory]._id)
-					 		{return i}
-					 });
+					 products[indexProduct].inventories[indexInventory] = inventories[count];
 					 count++;
 				});
 			});
@@ -67,25 +147,42 @@ exports.listAll = function(req, res) {
  
 exports.list = function(req, res) {
 	
+	var collection = req.query.collection;
+	var gender = req.query.gender;
+
 	var price = req.query.price;
 	var size = req.query.size;
 	var model = req.query.model;
 	var color = req.query.color;
-	var quantity = req.query.quantity||10;
-	var page = req.query.page;
+	var userTags = req.query.userTags;
 
+	var sort = req.query.sort;
+	var order = req.query.order||'desc';
+
+	var quantity = req.query.quantity||10;
+	var page = req.query.page||1;
+
+	console.log('collection='+collection);
+	console.log('gender='+gender);
 	console.log('price='+price);
 	console.log('size='+size);
 	console.log('model='+model);
 	console.log('color='+color);
+	console.log('userTags='+userTags);
+	console.log('sort='+sort);
+	console.log('order='+order);
 	console.log('quantity='+quantity);
 	console.log('page='+page);
+
 
 	var query = Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]);
 
  	
  	if(size){
  		query.where('size').equals(size);
+ 	}
+ 	if(gender){
+ 		query.where('genderSlug').equals(gender);
  	}
 
  	query.distinct('product.$id').exec(function(err, productsId){
@@ -98,10 +195,46 @@ exports.list = function(req, res) {
 		var queryProduct = Product.find({ '_id':{$in:productsId}})
 									.where('onLineVisible').equals(true);
 		if(price){
-			queryProduct.where('price').lte(price);
+			queryProduct.where('price').lte(parseFloat(price));
+		}
+		if(collection){
+			queryProduct.where('collectionsSlugs').in([collection]);
+		}
+		if(color){
+			queryProduct.where('color').equals(color);
+		}
+		if(model){
+			queryProduct.where('type').equals(model);
+		}
+		if(userTags){
+			queryProduct.where('userTags').in(userTags.split(','));
+		}
+		if(sort){
+			switch(sort) {
+				case 'price':
+					if(order==='desc')
+						queryProduct.sort({'price':-1});
+					else
+						queryProduct.sort({'price':1});
+					break;
+				case 'new':
+					if(order==='desc')
+						queryProduct.sort({'newProduct':-1});
+					else
+						queryProduct.sort({'newProduct':1});
+					break;
+				case 'discount':
+					if(order==='desc')
+						queryProduct.sort({'priceCompareWith':-1});
+					else
+						queryProduct.sort({'priceCompareWith':1});
+					break;
+			}
 		}
 		if(page){
-			queryProduct.limit(quantity).skip(page*quantity);
+			queryProduct.limit(quantity).skip((page-1)*quantity);
+		}else{
+			queryProduct.limit(quantity);
 		}
 		queryProduct.exec(function(err,products){
 			if(err){
@@ -109,7 +242,7 @@ exports.list = function(req, res) {
 					message: err
 				});
 			}		
- 			res.json(products);
+ 			res.json({products:products,queryDate:new Date()});
 		});
 	});
 };
@@ -163,6 +296,7 @@ exports.availableColor = function(req,res){
 					message: err
 				});
 			}		
+			colors = colors.filter(function(color){return color!=='';});
  			res.json(colors);
 		});
 	});
@@ -257,7 +391,12 @@ exports.availablePrice = function(req,res){
 					message: err
 				});
 			}		
- 			res.json(prices);
+			var  pricesFormatted = [];
+			prices.forEach(function(price){
+				var formatted = ('R$ '+price).replace('.',',');
+				pricesFormatted.push({price:price, priceFormatted:formatted});
+			});
+ 			res.json(pricesFormatted);
 		});
 	});
 };
@@ -332,11 +471,16 @@ exports.productBySlug = function(req, res, next, productSlug) {
 	Product.findOne({'slug':productSlug})
 		.where('onLineVisible').equals(true)
 		.exec(function(err, product) {
-		if (err) return next(err);
-		if (!product) return next(new Error('Failed to load article ' + productSlug));
-		req.product = product;
-		next();
-	});
+			if (err) return next(err);
+			if (!product){
+				res.status(404).send({
+						message: 'not Found' 
+					});
+			}
+				//return next(new Error('Failed to load product ' + productSlug));
+			req.product = product;
+			next();
+		});
 };
 
 exports.productByCollectionSlug = function(req, res, next, collectionSlug) {

@@ -5,14 +5,27 @@ angular.module('products').factory('Product', ['$resource',
 	function($resource) {
 		return $resource('api/products/:productSlug', {
 			productSlug: '@productSlug'
-		});
+			},{'query': {
+						method: 'GET', 
+						isArray: false,
+						// interceptor: {
+			   //              response: function (data) {
+			   //                  console.log('response in interceptor', data);
+			   //              },
+			   //              responseError: function (data) {
+			   //                  console.log('error in interceptor', data);
+			   //              }
+			   //          }
+         		}
+     		}
+ 		);
 	}
 ]);
 
-angular.module('products').factory('ProductCollection', ['$resource',
+angular.module('products').factory('ProductRelated', ['$resource',
 	function($resource) {
-		return $resource('api/products/collection/:collectionSlug', {
-			collectionSlug: '@collectionSlug'
+		return $resource('api/products/related/:productSlug', {
+			productSlug: '@productSlug'
 		});
 	}
 ]);
@@ -32,6 +45,15 @@ angular.module('products').factory('Size', ['$resource',
 		});
 	}
 ]);
+
+// angular.module('products').factory('Inventory', ['$resource',
+// 	function($resource) {
+// 		return $resource('api/products/availableInventory/:productSlug', {
+// 			productSlug: '@productSlug'
+// 		});
+// 	}
+// ]);
+
 angular.module('products').factory('Price', ['$resource',
 	function($resource) {
 		return $resource('api/products/availablePrice/:collectionSlug', {

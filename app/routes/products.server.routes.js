@@ -10,6 +10,10 @@ module.exports = function(app) {
 	// Article Routes
 	app.route('/api/products')
 		.get(products.list);
+	app.route('/api/products/related/:productSlug')
+		.get(products.listRelated);
+
+
 	app.route('/api/productsAll')
 		.get(products.listAll);
 

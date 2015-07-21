@@ -16,7 +16,7 @@ var mongoose = require('mongoose'),
 
 exports.listCollections = function(req, res) {
 	
- 	Collection.find({"onLineVisible":true}).exec(function(err, collections){
+ 	Collection.find({'onLineVisible':true}).exec(function(err, collections){
 		if(err){
 			return res.status(400).send({
 				message: err

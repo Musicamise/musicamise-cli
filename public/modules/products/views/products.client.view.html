@@ -1,5 +1,16 @@
 <section data-ng-controller="ProductsController" data-ng-init="find()"  >
 	<!-- content -->
+	<style type="text/css">
+	.active{
+		background-color: red;
+	}
+	.color.active{
+		background-color: transparent;
+		border-style: solid;
+		border-width: 1px;
+		border-color:red;
+	}
+	</style>
 <div class="container">
 <div class="women_main">
 	<!-- start sidebar -->
@@ -8,58 +19,72 @@
 		<div class="w_nav1">
 			<h4>Gender</h4>
 			<ul>
-				<li ng-repeat="collection in collectionsGender"><a data-ng-href="#!/products/{{collection.slug}}">{{collection.title}}</a></li>
+				<li  ng-repeat="collection in collectionsGender" ng-class="genderMarked==collection.slug?'active' : ''">
+					<a ng-href="{{linkGender(collection.slug)}}">{{collection.title}}</a>
+				</li>
 			</ul>	
 		</div>
 		<h3>filter by</h3>
+		<div class="w_nav1" ng-if="hasFilter">
+			<ul>
+				<li><a href="#!/products">Clear Filter</a></li>
+			</ul>	
+		</div>
 		<section  class="sky-form">
-					<h4>Size</h4>
-						<div class="row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox" ng-repeat="size in sizes">
-									<input type="checkbox" ng-click="clickSize(size)"  ng-checked="sizesMarked.indexOf(size)>=0" name="{{size}}"><i></i>{{size}}
-								</label>
-							</div>
-						</div>
-		</section>
-		<section class="sky-form">
-			<h4>Collections</h4>
+			<h4>Model <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Clear Model</a></h4>
 			<div class="row1 scroll-pane">
 				<div class="col col-4">
-				<ul>
-					<li class="radio" ng-repeat="collection in collections">
-						<a data-ng-href="#!/products/{{collection.slug}}"> {{collection.title}}
+					<li class="radio" ng-repeat="model in models" ng-class="modeloCamisaMarked==model?'active' : ''"><a ng-href="{{linkModel(model)}}">{{model}}</a></li>
+				</div> 
+			</div>
+		</section>
+		<section  class="sky-form">
+		<h4>Size  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Clear Size</a></li>
+				
+		</h4>
+			<div class="row1 scroll-pane">
+				<div class="col col-4">
+					<!-- <label class="checkbox" ng-repeat="size in sizes">
+						<input type="checkbox" ng-click="clickSize(size)"  ng-checked="sizesMarked.indexOf(size)>=0" name="{{size}}"><i></i>{{size}}
+					</label> -->
+							<li class="radio" ng-repeat="size in sizes" ng-class="sizeMarked==size?'active' : ''">
+								<a href="" ng-click="clickSize(size)"> {{size}}
+								</a>
+							</li>
+				</div>
+			</div>
+		</section>
+		<section class="sky-form" ng-if="collections.length>0">
+			<h4>Collections  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Clear Collection</a></h4>
+			<div class="row1 scroll-pane">
+				<div class="col col-4">
+					<li class="radio" ng-repeat="collection in collections" ng-class="collectionMarked==collection.slug?'active' : ''">
+						<a ng-click="clickCollection(collection.slug)" ng-href="{{linkCollection(collection.slug)}}"> {{collection.title}}
 						</a>
 					</li>
-				</ul>
 				</div>
 			</div>						
 		</section>
+		
 		<section  class="sky-form">
-			<h4>Model</h4>
+			<h4>Price <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Clear Price</a></h4>
 			<div class="row1 scroll-pane">
 				<div class="col col-4">
-				<ul>
-					<li ng-repeat="model in models"><a data-ng-href="#!/products/{{model}}">{{model}}</a></li>
-				</ul>	
-				</div> 
-			</div>
-		</section>
-		<section  class="sky-form">
-			<h4>Price</h4>
-			<div class="row1 scroll-pane">
-				<div class="col col-4">
-					<label class="checkbox" ng-repeat="price in prices">
+					<!-- <label class="checkbox" ng-repeat="price in prices">
 						<input type="checkbox" ng-click="clickPrice(price)" name="{{price}}" ><i></i>{{price}}
-					</label>
+					</label> -->
+					<li class="radio" ng-repeat="price in prices" ng-class="priceMarked==price.price?'active' : ''">
+						<a href="" ng-click="clickPrice(price.price)"> {{price.priceFormatted}}
+						</a>
+					</li>
 				</div> 
 			</div>
 		</section>
 		<section class="sky-form">
-			<h4>colour</h4>
+			<h4>Color <a ng-style="colorMarkedStyle" href="" ng-click="removeColor()">Clear Color</a></h4>
 			<ul class="w_nav2">
-				<li ng-repeat="color in colors">
-					<a  style=" background-color: {{color}}; " ng-click="clickColor(price)" href="#"></a>
+				<li ng-repeat="color in colors" class = "color" ng-class="colorMarked==color?'active' : ''">
+					<a  style=" background-color: {{color}}; " ng-click="clickColor(color)" href=""></a>
 				</li>
 			</ul>
 		</section>
@@ -86,29 +111,41 @@
 			<a href="#"><h4>Enthecwear - <span ng-bind="products.length"> </span> items </h4></a>
 			<ul class="w_nav">
 						<li>Sort : </li>
-		     			<li><a class="active" href="#">popular</a></li> |
-		     			<li><a href="#">new </a></li> |
-		     			<li><a href="#">discount</a></li> |
-		     			<li><a href="#">price: Low High </a></li> 
+		     			<li><a ng-class="sortMarked==='popular'?'active' : ''" href="" ng-click="clickOrder('popular')">popular</a></li> |
+		     			<li><a ng-class="sortMarked==='new'?'active' : ''" href="" ng-click="clickOrder('new')">new </a></li> |
+		     			<li><a ng-class="sortMarked==='discount'?'active' : ''" href="" ng-click="clickOrder('discount')">discount</a></li> |
+		     			<li><a ng-class="sortMarked==='price'?'active' : ''" href="" ng-click="clickOrder('price')">price: Low High </a></li> 
 		     			<div class="clear"></div>	
 		     </ul>
 		     <div class="clearfix"></div>	
 		</div>
 		<!-- grids_of_4 -->
 		<div class="grids_of_4" >
-		  <div class="grid1_of_4" ng-repeat="product in products">
-				<div class="content_box"><a data-ng-href="#!/products/{{product.slug}}">
-			   	   	 <img src="images/w1.jpg" class="img-responsive" alt=""/>
-				   	  </a>
-				    <h4><a data-ng-href="#!/products/{{product.slug}}" ng-bind="product.title">  </a></h4>
-				     <p>It is a long established fact that</p>
-					 <div class="grid_1 simpleCart_shelfItem">
-				    
-					 <div class="item_add"><span class="item_price"><h6>ONLY $99.00</h6></span></div>
-					<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
-					 </div>
+		  	<div class="grid1_of_4" ng-repeat="product in products" >
+				<div class="content_box">
+					<a ng-href="#!/product/{{product.slug}}">
+		   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+		   		  	</a>
+		    		<h4>
+	    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  
+		    			</a>
+	    			</h4>
+			     	<p>{{product.type}} new: {{product.newProduct}}</p>
+				 	<div class="grid_1 simpleCart_shelfItem">
+					 	<div class="item_add">
+					 		<span class="item_price">
+						 		<h6>
+						 			<span class="price-new">{{product.priceFormatted}}</span>
+						 			<br/>
+						 			<span class="price-old">{{product.priceOldFormatted}}
+					 				</span> 
+					 			</h6>
+				 			</span>
+			 			</div>
+						<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+				 	</div>
 			   	</div>
-			</div>
+			</div >
 			<div class="clearfix"></div>
 		</div>
 		 

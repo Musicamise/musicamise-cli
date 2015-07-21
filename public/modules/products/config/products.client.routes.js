@@ -13,17 +13,41 @@ angular.module('products').config(['$stateProvider',
 			url: '/product/:productSlug',
 			templateUrl: 'modules/products/views/view-product.client.view.html'
 		}).
+		state('productWithGender', {
+			url: '/products/gender/:genderSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
+		}).
+		state('productWithCollection', {
+			url: '/products/collection/:collectionSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
+		}).
+		state('productWithCollectionSlugAndGender', {
+			url: '/products/collection/:genderSlug/:collectionSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
+		}).
 		state('productWithModel', {
-			url: '/products/:model',
-			templateUrl: 'modules/products/views/products.client.view.html'
+			url: '/:model',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
+		}).
+		state('productWithModelAndGender', {
+			url: '/:model/:genderSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
 		}).
 		state('productWithModelAndCollection', {
-			url: '/products/:model/:collectionSlug',
-			templateUrl: 'modules/products/views/products.client.view.html'
+			url: '/:model/collection/:collectionSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
 		}).
-		state('productWithCollectionSlug', {
-			url: '/products/collection/:collectionSlug',
-			templateUrl: 'modules/products/views/products.client.view.html'
+		state('productWithModelAndCollectionAndGender', {
+			url: '/:model/:genderSlug/:collectionSlug',
+			templateUrl: 'modules/products/views/products.client.view.html',
+		 	reloadOnSearch: false
 		});
+		
 	}
 ]);
