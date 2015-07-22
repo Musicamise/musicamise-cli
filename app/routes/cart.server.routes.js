@@ -12,7 +12,11 @@ module.exports = function(app) {
 		.get(cart.getCart);
 
 	app.route('/api/cart/addItem')
-		.get(cart.addItemCart);
+		.post(cart.addItemCart);
+		
+	app.route('/api/cart/removeItem')
+		.post(cart.removeItemCart);
+		
 	app.route('/api/cart/clean')
 		.get(cart.clean);
 };

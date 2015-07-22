@@ -1,14 +1,11 @@
 'use strict';
 
 angular.module('products').controller('ProductsController', ['$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model',
-	function($scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Cart',
+	function($scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Cart) {
 		// Products controller logic
 		// ...
 
-		
-
-		
 		//in controller that doesn't reload
 		$scope.$on('$locationChangeSuccess',function(){
 		  //update your scope based on new $routeParams
@@ -41,7 +38,7 @@ angular.module('products').controller('ProductsController', ['$scope','$location
 
 			});
 
-			$scope.updateVariables();
+			$scope.updateVariablesInProductsView();
 
 
 		};
@@ -52,30 +49,19 @@ angular.module('products').controller('ProductsController', ['$scope','$location
 			$scope.product = Product.query({
 				productSlug: $stateParams.productSlug
 			});
-			$timeout(function(){
-		      $scope.loadEtalage();
-		    },1000);
 		    //get 5 related items
 		    $scope.relatedProducts = [];
 		    $scope.product.$promise.then(function(product){
 		    	if(product){
 					var queryObject = {};
-					if(product.userTags){
-						queryObject.quantity = 4;
-						queryObject.productSlug = product.slug;
-						ProductRelated.get(queryObject,function(data) {
-		                	if(data.products){
-		                		$scope.relatedProducts = data.products;
-		                	}
-		            	});
-					}else{
-						queryObject.quantity = 4;
-						Product.query(queryObject,function(data) {
-		                	if(data.products){
-		                		$scope.relatedProducts = data.products;
-		                	}
-		            	});
-					}
+					queryObject.quantity = 4;
+					queryObject.productSlug = product.slug;
+					ProductRelated.get(queryObject,function(data) {
+	                	if(data.products){
+	                		$scope.relatedProducts = data.products;
+	                	}
+	            	});
+					
 					$scope.inventories = {};
 					if(product.inventories){
 						product.inventories.forEach(function(inventory){
@@ -96,6 +82,9 @@ angular.module('products').controller('ProductsController', ['$scope','$location
 			},function(progressback){
 				console.log('progressback '+ progressback);
 			});
+
+		   	$scope.updateVariablesInSingleProductView();
+			
 		};
 
 		$scope.loadEtalage = function(){
@@ -110,8 +99,17 @@ angular.module('products').controller('ProductsController', ['$scope','$location
 					}
 				});
 		};
+		$scope.updateVariablesInSingleProductView = function(){
+			$scope.inventoryChecked = {
+		        id: ''
+		      };
+	      	$scope.cart = {};
+	      	$timeout(function(){
+		      	$scope.loadEtalage();
+		    	},1000);
+		};
 
-		$scope.updateVariables = function(){
+		$scope.updateVariablesInProductsView = function(){
 			$scope.allCollections = Collection.query();
 			$scope.collectionsGender = [];
 			$scope.collections = [];
@@ -194,6 +192,20 @@ angular.module('products').controller('ProductsController', ['$scope','$location
 
 		};
 
+		$scope.cartAddItem = function(id){
+			if(id){
+				$scope.cartCall = Cart.addItem({id:id});
+				$scope.cartCall.$promise.then(function(cart,error,progressback){
+					// console.log(p);
+					if(cart.cart)
+						$scope.cart = cart.cart;
+
+				});
+				$location.path('/cart');		
+			}
+		};
+
+		
 
 		$scope.linkGender = function(gender){
 			var queryString = $location.absUrl().split('?')[1];

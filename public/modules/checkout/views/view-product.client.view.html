@@ -60,7 +60,7 @@
 									<input type="checkbox" checked>GG -->
 									<div ng-repeat="inventory in inventoriesByGender">
 										<label class="size-marker">
-										    <input name="size" ng-disabled="inventory.quantity<=0"  ng-model="inventoryChecked.id"  value="{{inventory._id}}"  class="fancy-select"  type="radio">
+										    <input name="size"  ng-model="inventoryChecked.id"  value="{{inventory._id}}"  class="fancy-select"  type="radio">
 										    <span ng-bind="inventory.size" ></span>
 
 										</label>
@@ -102,7 +102,7 @@
 									</div>
 									<div class="item_add">
 										<span class="item_price">
-											<a ng-href="#!/product/{{product.slug}}">Ver detalhe</a>
+											<a href="#">Adicionar ao Carrinho</a>
 										</span>
 									</div>
 								</div>

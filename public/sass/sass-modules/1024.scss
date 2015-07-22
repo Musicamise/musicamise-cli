@@ -1,30 +1,101 @@
 @media (max-width:1024px){
-	.header_right {
-	  float: right;
-	  width: 48%;
-	}
-	.foot-top {
-	  padding: 1em 0;
-	}
-	.fooll h5 {
-	  font-size: 1em;
-	}
-	.footer {
-		padding: 2em 0;
-		h4 {
-			font-size: 1em;
-		}
-	}
-	.customer-footer li a {
-	  font-size: 0.9em;
-	}
-	.about-footer li a {
-	  font-size:0.9em;
-	}
-	.myaccount-footer li a {
-	   font-size:0.9em;
-	}
-	.ourstory-footer li {
-	   font-size:0.9em;
-	}
+	.grid_list {
+	padding-bottom: 1.5em;
+	margin-bottom: 1.5em;
+}
+.header_right {
+  float: right;
+  width: 48%;
+}
+.grid_text h3, .grid_text-middle h3 {
+	font-size: 15px;
+}
+.grid_text p, .grid_text-middle p {
+	font-size: 12px;
+}
+.content_text h4 a {
+	font-size: 1.2em;
+}
+.span1_of_2 {
+	width: 26.33333%;
+}
+.span_3_of_2 {
+	width: 52.3333%;
+}
+.button1 {
+	padding: 7px 10px;
+}
+.view .mask, .view .content {
+	top: 138px;
+	left: 82px;
+}
+.arriv h3 {
+  font-size: 1.4em;
+}
+.arriv-info {
+  top: 149px;
+  left: 72px;
+}
+.arriv-info1 {
+  top: 80px;
+  left: 147px;
+}
+.arriv-top {
+  margin: 1em 0;
+}
+.special {
+  padding: 2em 0;
+  position: relative;
+}
+.special h3:before {
+  left: 35px;
+  top: 52px;
+}
+.special h3:after {
+  right: 35px;
+  top: 52px;
+}
+.specia-top {
+  margin: 2em 0;
+}
+.special h5 {
+  font-size: 1em;
+}
+.special h6 {
+  font-size: 0.9em;
+}
+.special {
+  padding: 2em 0 0;
+  position: relative;
+}
+.foot-top {
+  padding: 1em 0;
+}
+.fooll h5 {
+  font-size: 1em;
+}
+.stay form input[type="text"] {
+  font-size: 0.9em;
+}
+.btn-1 form input[type="submit"] {
+  font-size: 0.93em;
+}
+.footer {
+  padding: 2em 0;
+}
+.footer h4 {
+  font-size: 1em;
+}
+.cust li a {
+  font-size: 0.9em;
+}
+.abt li a {
+  font-size:0.9em;
+}
+.myac li a {
+   font-size:0.9em;
+}
+.our-st li {
+   font-size:0.9em;
+}
 }

@@ -31,7 +31,7 @@ exports.readProductSlug = function(req, res) {
 			inventoriesObj.push(inventory.oid);
 		});
 		var count = 0;
-		Inventory.find({'_id':{$in:inventoriesObj}}).select('-product -_id -_class').exec(function(err,inventories){
+		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).select('-product -_class').exec(function(err,inventories){
 			product.inventories.forEach(function(inventory,indexInventory){
 				 product.inventories[indexInventory] = inventories[count];
 				 count++;
@@ -127,13 +127,9 @@ exports.listAll = function(req, res) {
 				inventoriesObj.push(inventory.oid);
 			});
 		});
-		console.log('tamanho :'+inventoriesObj.length);
-		console.log('tamanho :'+inventoriesObj);
 
 		Inventory.find({'_id':{$in:inventoriesObj}}).select('-product -_id -_class').exec(function(err,inventories){
 					var count = 0;
-			console.log('tamanho obt:'+inventories.length);
-			console.log('tamanho obt:'+inventories);
 			products.forEach(function(product,indexProduct){
 				product.inventories.forEach(function(inventory,indexInventory){
 					 products[indexProduct].inventories[indexInventory] = inventories[count];

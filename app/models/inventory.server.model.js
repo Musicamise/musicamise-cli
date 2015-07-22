@@ -25,6 +25,11 @@ var InventorySchema = new Schema({
 		default: '',
 		trim: true
 	},
+	genderSlug: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	quantity: {
 		type: Number,
 		default:0
