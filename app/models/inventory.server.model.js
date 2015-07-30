@@ -10,7 +10,7 @@ var DBRef = mongoose.SchemaTypes.DBRef;
 /**
  * Article Schema
  */
-var InventorySchema = new Schema({
+var objectInventorySchema = {
 	 
 	orderOutOfStock: {
 		type: Boolean,
@@ -34,8 +34,19 @@ var InventorySchema = new Schema({
 		type: Number,
 		default:0
 	},
+	priceWithQuantity: {
+		type: Number,
+		default: 0
+	},
+	priceWithQuantityFormatted: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	product:{type: DBRef, resolve: true}
 
-});
+};
 
+var InventorySchema = new Schema(objectInventorySchema);
+ 
 mongoose.model('Inventory', InventorySchema,'inventory');

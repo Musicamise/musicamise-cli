@@ -24,11 +24,11 @@ var CollectionSchema = new Schema({
 	},
 	onLineVisible: {
 		type: Boolean,
-		default: true
+		default: false
 	},
 	onLocalStore: {
 		type: Boolean,
-		default: true
+		default: false
 	},
 });
 

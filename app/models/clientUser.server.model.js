@@ -5,7 +5,9 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
+  	AddressSchema = require('./address.server.model').getAddressSchema(),
 	crypto = require('crypto');
+
 
 /**
  * A Validation function for local strategy properties
@@ -24,7 +26,7 @@ var validateLocalStrategyPassword = function(password) {
 /**
  * User Schema
  */
-var UserSchema = new Schema({
+var objectUserSchema = {
 	firstName: {
 		type: String,
 		trim: true,
@@ -37,10 +39,6 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
 	},
-	displayName: {
-		type: String,
-		trim: true
-	},
 	email: {
 		type: String,
 		trim: true,
@@ -48,49 +46,74 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
-	username: {
-		type: String,
-		unique: 'testing error message',
-		required: 'Please fill in a username',
-		trim: true
-	},
 	password: {
 		type: String,
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
+	marketingEmail:{
+		type: Boolean,
+		default: false
+	},
+	active:{
+		type: Boolean,
+		default: false
+	},
+	tags:{
+		type:[String],
+		default: []
+	},
+	address:{
+		type:[AddressSchema]
+	},
+	fbId:{
+		type:String,
+		default:''
+	},
+	wishList:{
+		type:[String],
+		default:[]
+	},
+	displayName:{
+		type:String,
+		default:''
+	},
 	salt: {
 		type: String
 	},
-	provider: {
-		type: String,
-		required: 'Provider is required'
-	},
-	providerData: {},
-	additionalProvidersData: {},
-	roles: {
-		type: [{
-			type: String,
-			enum: ['user', 'admin']
-		}],
-		default: ['user']
-	},
-	updated: {
+	// provider: {
+	// 	type: String,
+	// 	required: 'Provider is required'
+	// },
+	// providerData: {},
+	// additionalProvidersData: {},
+	// roles: {
+	// 	type: [{
+	// 		type: String,
+	// 		enum: ['user', 'admin']
+	// 	}],
+	// 	default: ['user']
+	// },
+	updatedDate: {
 		type: Date
 	},
-	created: {
+	createdDate: {
 		type: Date,
 		default: Date.now
 	},
 	/* For reset password */
-	resetPasswordToken: {
-		type: String
+	resetPasswordToken:{
+		type: String,
+		default:''
 	},
 	resetPasswordExpires: {
 		type: Date
 	}
-});
-
+};
+var UserSchema = new Schema(objectUserSchema);
+exports.getUserSchema = function(){
+	return objectUserSchema;
+};
 /**
  * Hook a pre save method to hash the password
  */
@@ -113,7 +136,6 @@ UserSchema.methods.hashPassword = function(password) {
 		return password;
 	}
 };
-
 /**
  * Create instance method for authenticating user
  */
@@ -143,4 +165,4 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	});
 };
 
-mongoose.model('User', UserSchema);
+mongoose.model('User', UserSchema,'user');

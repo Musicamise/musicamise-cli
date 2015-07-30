@@ -12,8 +12,15 @@ var mongoose = require('mongoose'),
 	Inventory = mongoose.model('Inventory'),
 
 	_ = require('lodash');
+var	orderController = require('../../app/controllers/order.server.controller');
 
 exports.index = function(req, res) {
+	res.render('index', {
+		user: req.user || null,
+	});
+};
+
+exports.mainMenu = function(req,res){
 	Collection.find({'mainMenu':true,'onLineVisible':true}).select('-_id slug').exec(function(err, collectionsSlugs){
 		if(err){
 			return res.status(400).send({
@@ -25,7 +32,7 @@ exports.index = function(req, res) {
 			collectionsSlugsMapped.push(collection.slug);
 		});
 		//todo with inventory?
-		Inventory.find().or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+		Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 				.distinct('product.$id')
 		 		.exec(function(err, productsId){
 
@@ -47,17 +54,10 @@ exports.index = function(req, res) {
 					   			}
 					   		});
 			            });
-
-						res.render('index', {
-							user: req.user || null,
-							request: req,
-							mainMenu:mainMenu
-						});
+        				res.json(mainMenu);
 
 			}); 
 		});
 		
 	});
-
-	
 };

@@ -1,67 +1,71 @@
 <section data-ng-controller="CheckoutController" data-ng-init="cartInit()"  >
 	<!-- content -->
 <div class="container">
-	<div class="check">	
+	<div class="check" ng-if="order.totalItems>0">	
 	 	<div class="col-md-3 cart-total">
-		 	<a class="continue" href="#">Continue to basket</a>
+		 	<a class="continue" ng-href="#!/products">Continue to basket</a>
 		 	<div class="price-details">
 				 <h3>Price Details</h3>
 				 <span>Total</span>
-				 <span class="total1" ng-bind="cart.totalValueItemsFormatted"></span>
+				 <span class="total1" ng-bind="order.totalValueItemsFormatted"></span>
 				 <span>Discount</span>
-				 <span class="total1"  ng-bind="'-' + cart.totalDiscountFormatted"></span>
+				 <span class="total1"  ng-bind="'-' + order.totalDiscountFormatted"></span>
 				 <span>Delivery Charges</span>
-				 <span class="total1"  ng-bind="cart.totalShippingFormatted"></span>
+				 <span class="total1"  ng-bind="order.totalShippingFormatted"></span>
 				 <div class="clearfix"></div>				 
 			 </div>	
 		 	<ul class="total_price">
 			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span  ng-bind="cart.totalFormatted"></span></li>
+			   <li class="last_price"><span  ng-bind="order.totalFormatted"></span></li>
 			   <div class="clearfix"> </div>
 		 	</ul>
 		 	<div class="clearfix"></div>
-	 		<a class="order" href="#">Place Order</a>
+	 		<a class="order" ng-href="#!/checkout">Place Order</a>
 				<div class="total-item">
 		 		<h3>OPTIONS</h3>
 		 		<h4>COUPONS</h4>
 		 		<a class="cpns" href="#">Apply Coupons</a>
-		 		<p><a href="#">Log In</a> to use accounts - linked coupons</p>
+		 		<p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p>
 			</div>
 		</div>
 	 	<div class="col-md-9 cart-items">
-	 		<h1>My Shopping Bag ({{cart.totalItems}})</h1>
+	 		<h1>My Shopping Bag ({{order.totalItems}})</h1>
 			
- 			<div  class="cart-header" ng-repeat="(key,item) in cart.items" >
+ 			<div  class="cart-header" ng-repeat="product in order.products" >
 		 		<script> 
 			   	</script>
-		 		<div class="close1" ng-click='cartRemoveItem(key)'> </div>
+		 		<div class="close1" ng-click='cartRemoveItem(product._id)'> </div>
 			 	<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
 				 		<img src="images/8.jpg" class="img-responsive" alt=""/>
 					</div>
 				   	<div class="cart-item-info">
-						<h3><a href="#" ng-bind="item.product.title"> </a><span ng-bind="item.product.type"></span></h3>
+						<h3><a href="#" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
 						<ul class="qty">
-							<li><p>Size : <label ng-bind="item.size"></label></p></li>
-							<li><p>Qty : <input type='number' class='quantity' ng-model='item.quantity' min="0" max="99" ng-change="updateQuantity(key,item.quantity)" ng-value="item.quantity"></p></li>
+							<li><p>Size : <label ng-bind="product.size"></label></p></li>
+							<li><p>Qty : <input type='number' class='quantity' ng-model='product.quantity' min="1" max="4" ng-change="updateQuantity(product._id,product.quantity)" ng-value="product.quantity"></p></li>
 						</ul>
 					 	<div class="delivery">
-						 	<p>Service Charges : <label ng-bind="item.product.priceFormatted"></label></p>
-						 	<span>Delivered in 2-3 bussiness days</span>
+						 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
 					 		<div class="clearfix"></div>
 				        </div>	
+					 	<div class="delivery">
+						 	<p>Service Charges : <label ng-bind="order.totalShippingFormatted"></label></p>
+						 	<span>Delivered in 2-3 bussiness days</span>
+					 		<div class="clearfix"></div>
+				        </div>		
 				   	</div>
 			   		<div class="clearfix"></div>
 			  	</div>
 		 	</div>
 		</div>
-		 
-		
 		<div class="clearfix"> </div>
 	</div>
+	<div class="check" ng-if="order.totalItems<=0">
+		<div class="col-md-9 cart-items">
+	 		<h1>Voçê não possui nada no seu carrinho :(</h1>
+			<h3><a href="#!/products"> Continue Comprando :) </a></h3>
+		</div>
+	</div>
 </div>
- <script type="text/javascript">
- 	//$('.quantity').spinner();
- </script>
-
 </section>

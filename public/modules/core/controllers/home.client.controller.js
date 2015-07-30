@@ -1,13 +1,13 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication','Collection',
-	function($scope, Authentication,Collection) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication',
+	function($scope, Authentication) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
 		$scope.inicialCall = function() {
-			$scope.articles = Collection.query();
+			// $scope.articles = MainMenu.query();
 			console.log('teste');
 		};
 	}

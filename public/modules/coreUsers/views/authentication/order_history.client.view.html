@@ -1,0 +1,44 @@
+<section data-ng-controller="AuthenticationController" data-ng-init="profile()"  >
+	<!-- content -->
+<div class="container">
+	<div class="check">	
+	 	<div class="col-md-2 ">
+	 		<ul>
+			 	<li><a href="#">Update profile</a></li>
+				<li><a href="#">Order history</a></li>
+				<li><a href="#">Privacy</a></li>
+		 	</ul>
+		</div>
+		<div class="col-md-10 cart-items">
+	 		<h1>Order history</h1>
+ 			<div class="cart-header" ng-repeat="product in order.products" >
+		 		<div class="close1" ng-click='cartRemoveItem(product._id)'> </div>
+			 	<div class="cart-sec simpleCart_shelfItem">
+					<div class="cart-item cyc">
+				 		<img src="images/8.jpg" class="img-responsive" alt=""/>
+					</div>
+				   	<div class="cart-item-info">
+						<h3><a href="#" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
+						<ul class="qty">
+							<li><p>Size : <label ng-bind="product.size"></label></p></li>
+							<li><p>Qty : <input type='number' class='quantity' ng-model='product.quantity' min="1" max="4" ng-change="updateQuantity(product._id,product.quantity)" ng-value="product.quantity"></p></li>
+						</ul>
+					 	<div class="delivery">
+						 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
+					 		<div class="clearfix"></div>
+				        </div>	
+					 	<div class="delivery">
+						 	<p>Service Charges : <label ng-bind="order.totalShippingFormatted"></label></p>
+						 	<span>Delivered in 2-3 bussiness days</span>
+					 		<div class="clearfix"></div>
+				        </div>		
+				   	</div>
+			   		<div class="clearfix"></div>
+			  	</div>
+		 	</div>
+		</div>
+		<div class="clearfix"> </div>
+	  	
+	</div>
+</div>
+</section>

@@ -21,7 +21,13 @@ angular.module('products').factory('Product', ['$resource',
  		);
 	}
 ]);
-
+angular.module('products').factory('ProductSearch', ['$resource',
+	function($resource) {
+		return $resource('api/search/products/',{},{'query': {
+						method: 'GET', 
+						isArray: false}});
+	}
+]);
 angular.module('products').factory('ProductRelated', ['$resource',
 	function($resource) {
 		return $resource('api/products/related/:productSlug', {
@@ -37,9 +43,9 @@ angular.module('products').factory('Collection', ['$resource',
 	}
 ]);
 
-angular.module('products').factory('Cart', ['$resource',
+angular.module('products').factory('Order', ['$resource',
 	function($resource) {
-		return $resource('api/cart/:action', {
+		return $resource('api/order/:action', {
 			action: '@action'
 			},{'removeItem': {
 						method: 'POST', 
@@ -49,7 +55,7 @@ angular.module('products').factory('Cart', ['$resource',
          		},'addItem': {
 						method: 'POST', 
 						isArray: false,
-						params:{action:'addItem'}
+						params:{action:'updateOrderOrAddItem'}
          		}
      		}
  		);

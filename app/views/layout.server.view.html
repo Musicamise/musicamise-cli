@@ -71,109 +71,14 @@
 		</div>
 	</div>
 	
-	<div class="header">
-		<div class="container">
-				<div class="head-t">
-					<div class="logo">
-						<a href="/"><img src="images/musicamise_marca.svg" width="100%" class="img-responsive" alt=""/> </a>
-					</div>
-					<!-- start header_right -->
-					<div class="header_right">
-						<div class="log">
-								<div class="login" >
-									<div id="loginContainer"><a href="#" id="loginButton"><span>Login</span></a>
-									    <div id="loginBox">                
-									        <form id="loginForm">
-									                <fieldset id="body">
-									                	<fieldset>
-									                          <label for="email">Email Address</label>
-									                          <input type="text" name="email" id="email">
-									                    </fieldset>
-									                    <fieldset>
-									                            <label for="password">Password</label>
-									                            <input type="password" name="password" id="password">
-									                     </fieldset>
-									                    <input type="submit" id="login" value="Sign in">
-									                	<label for="checkbox"><input type="checkbox" id="checkbox"> <i>Remember me</i></label>
-									            	</fieldset>
-									            	<img  style="border-radius: .4em;" src="images/fb-login.png" alt="facebook"/>
-									            <span><a href="#">Forgot your password?</a></span>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						<div class="rgt-bottom">
-							<div class="cart box_cart">
-								<a href="checkout.html">
-									<h3> <span class="simpleCart_total">R$0,00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> item)<img src="images/bag.png" alt=""></h3>
-								</a>	
-								<p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p>
-								<div class="clearfix"> </div>
-							</div>
-
-							<div >
-								  <button type="button" class="btn">REGISTER</button>
-								
-							</div>
-						
-						 
-							<div class="clearfix"> </div>
-						</div>
-
-					<div class="search">
-						<form>
-							<input type="search" placeholder="Search">
-						</form>
-					</div>
-					<div class="clearfix"> </div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<!-- start header menu -->
-				<ul class="megamenu musicamise">
-					<li class="active grid"><a class="color1" href="/">Home</a></li>
-					
-					<li class="grid"><a class="color2" href="#">Loja</a>
-						<div class="megapanel">
-
-							<div class="row">
-							{%for key,types in mainMenu%}
-								<div class="col1">
-									<div class="header_nav">
-										<h4>{{key}}</h4>
-										<ul>
-											<li><a href="women.html">new arrivals</a></li>
-											{%for type in types %}
-											<li><a href="women.html">{{type}}</a></li>
-											{%endfor%}
-
-										</ul>	
-									</div>							
-								</div>
-							{%endfor%}
-
-							</div>
-							<div class="row">
-							{%for collection in mainMenu%}
-								<div class="col1"></div>
-							{%endfor%}
-
-
-							</div>
-	    				</div>
-					</li>
-				</ul> 
-		</div>
-	</div>
+	
+	<div data-ng-include="'/modules/core/views/header_2.client.view.html'" class="header"></div>
 
 	<section class="content">
 		<section class="container">
 			{% block content %}{% endblock %}
 		</section>
 	</section>
-
-
 
 
 	<div class="foot-top">
@@ -266,6 +171,7 @@
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
+
 	</script>
 
 	<script type="text/javascript" src="plugin/js/megamenu.js"></script>

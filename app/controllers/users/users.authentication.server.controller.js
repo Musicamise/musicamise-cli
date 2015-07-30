@@ -15,14 +15,20 @@ var _ = require('lodash'),
 exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
-
+	if(!req.body.agreeWithTerms){return res.status(400).send({
+				message: 'Aceite os termos'
+			});}
 	// Init Variables
+	console.log(req.body);
+
 	var user = new User(req.body);
 	var message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
+
+	console.log(user);
 
 	// Then save the user 
 	user.save(function(err) {
@@ -50,6 +56,7 @@ exports.signup = function(req, res) {
  * Signin after passport authentication
  */
 exports.signin = function(req, res, next) {
+	console.log(req.body);
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
 			res.status(400).send(info);
@@ -57,12 +64,37 @@ exports.signin = function(req, res, next) {
 			// Remove sensitive data before login
 			user.password = undefined;
 			user.salt = undefined;
-
+			console.log(user);
 			req.login(user, function(err) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
 					res.json(user);
+				}
+			});
+		}
+	})(req, res, next);
+};
+/**
+ * Signin after passport authentication 
+ */
+exports.login = function(req, res, next) {
+	console.log(req.body);
+	passport.authenticate('local', function(err, user, info) {
+		if (err || !user) {
+			req.flash('login_error', info.message);
+			res.redirect('/');
+		} else {
+			// Remove sensitive data before login
+			user.password = undefined;
+			user.salt = undefined;
+
+			req.login(user, function(err) {
+				if (err) {
+					req.flash('login_error', err);
+					res.redirect('/');
+				} else {
+					res.redirect('/');
 				}
 			});
 		}

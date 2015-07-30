@@ -1,0 +1,97 @@
+<div class="container" data-ng-controller="HeaderController">
+		<div class="head-t" data-ng-init="headerLoginAndCart()">
+			<div class="logo">
+				<a href="/"><img src="images/musicamise_marca.svg" width="100%" class="img-responsive" alt=""/> </a>
+			</div>
+			<!-- start header_right -->
+			<div class="header_right">
+				<div class="log">
+					<div ng-if="authentication.user===''" class="login" >
+						<div id="loginContainer" ng-init="bindLoginEvent()" ><a href="" id="loginButton"><span>Login</span></a>
+						    <div id="loginBox">                
+						        <form id="loginForm"  ng-submit="login(user)">
+						        	<label class="error">{{login_error}}</label>
+					                <fieldset id="body">
+					                	<fieldset>
+					                          <label for="email">Email Address</label>
+					                          <input type="text" ng-model='user.email' name="email" id="email">
+					                    </fieldset>
+					                    <fieldset>
+					                            <label for="password"  ng-keyup="$event.keyCode == 13 && login(user)">Password</label>
+					                            <input type="password" ng-model='user.password' name="password" id="password">
+					                     </fieldset>
+					                    <input type="submit" id="login" value="Sign in">
+					                	 <label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Remember me</i></label> 
+					            	</fieldset>
+					            	<img  style="border-radius: .4em;" src="images/fb-login.png" alt="facebook"/>
+						            <span><a href="#!/user/esquecisenha">Forgot your password?</a></span>
+								</form>
+							</div>
+						</div>
+						
+					</div>
+						<label ng-if="authentication.user!==''"> Olá, {{authentication.user.displayName }}
+					 	<a href="#!/user/profile" > Profile </a>
+					 	<a href="/auth/signout" > Logout </a> </label>
+				</div>
+				<div class="rgt-bottom">
+					<div class="cart box_cart">
+						<a href="/#!/cart">
+							<h3> <span class="simpleCart_total">{{order.totalFormatted}}</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">{{order.totalItems}}</span> item)<img src="images/bag.png" alt=""></h3>
+						</a>	
+						<!-- <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p> -->
+						<div class="clearfix"> </div>
+					</div>
+
+					<div ng-if="authentication.user===''"  >
+						  <a type="button" class="btn" ng-href="#!/login">REGISTER</a>
+					</div>
+				
+				 
+					<div class="clearfix"> </div>
+				</div>
+
+			<div class="search">
+				<form >
+					<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" placeholder="Search">
+				</form>
+			</div>
+			<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<!-- start header menu -->
+		<ul class="megamenu musicamise">
+			<li class="active grid"><a class="color1" href="/">Home</a></li>
+			
+			<li class="grid"><a class="color2" href="#">Loja</a>
+				<div class="megapanel">
+
+					<div class="row">
+					{%for key,types in mainMenu%}
+						<div class="col1">
+							<div class="header_nav">
+								<h4>{{key}}</h4>
+								<ul>
+									<li><a href="women.html">new arrivals</a></li>
+									{%for type in types %}
+									<li><a href="women.html">{{type}}</a></li>
+									{%endfor%}
+
+								</ul>	
+							</div>							
+						</div>
+					{%endfor%}
+
+					</div>
+					<div class="row">
+					{%for collection in mainMenu%}
+						<div class="col1"></div>
+					{%endfor%}
+
+
+					</div>
+				</div>
+			</li>
+		</ul> 
+</div>

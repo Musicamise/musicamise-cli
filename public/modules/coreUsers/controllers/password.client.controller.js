@@ -23,6 +23,21 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 			});
 		};
 
+		$scope.resetpassword = function(){
+			$http.get('/auth/reset/'+$stateParams.token, {}).success(function(response) {
+				// Show user success message and clear form
+				$scope.credentials = null;
+				$scope.success = response.valid;
+
+			}).error(function(response) {
+				// Show user error message and clear form
+				$scope.credentials = null;
+				$scope.error = response.valid;
+				$location.path('/password/reset/invalid');
+
+			});
+		};
+
 		// Change user password
 		$scope.resetUserPassword = function() {
 			$scope.success = $scope.error = null;

@@ -1,0 +1,173 @@
+<section data-ng-controller="CheckoutController" data-ng-init="shipping()">
+
+<!-- content -->
+	<div class="container">
+		<div class="main">
+			<!-- start registration -->
+			<div class="registration">
+				<div class="registration_left">
+					<h2 ng-show="window.user">new user? <span> create an account </span></h2>
+					<!-- [if IE] 
+					    < link rel='stylesheet' type='text/css' href='ie.css'/>  
+				 	[endif] -->  
+					  
+					<!-- [if lt IE 7]>  
+					    < link rel='stylesheet' type='text/css' href='ie6.css'/>  
+					<! [endif] -->  
+				 	<div class="registration_form">
+					 	<!-- Form -->
+						<form id="registration_form" name="form" action="javacript:void(0)" novalidate >
+							<div ng-if="user===''">
+								<div>
+									<label>
+										<input placeholder="first name:" type="text" tabindex="1" required autofocus>
+									</label>
+								</div>
+								<div>
+									<label>
+										<input placeholder="last name:" type="text" tabindex="2" required autofocus>
+									</label>
+								</div>
+								<div>
+									<label>
+										<input placeholder="email address:" type="email" tabindex="3" required>
+									</label>
+								</div>
+								<div class="sky-form">
+									<div class="sky_form1">
+										<ul>
+											<li><label class="radio left"><input type="radio" name="radio" checked=""><i></i>Male</label></li>
+											<li><label class="radio"><input type="radio" name="radio"><i></i>Female</label></li>
+											<div class="clearfix"></div>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div ng-if="user!==''">
+								logado!! {{user.displayName}} <span>Not you? <a href="/auth/signout">Logout!</a> </span>
+							</div>
+							
+							<div ng-show="user!==''&&user.address!==''&&user.address.length>0">
+								<select ng-model="selectedSavedAddress" ng-change="selectDeliveryAddress(selectedSavedAddress)">
+									<option value="">Selecione um endereço</option>
+									<option ng-repeat="addressSaved in user.address" ng-bind="addressSaved.name||(addressSaved.address+' '+addressSaved.number+' '+addressSaved.city)" ng-value="addressSaved._id"
+									></option>
+								</select>
+								<button ng-model="address.newAddress" name="newAddresslink" ng-click="address.openAddressForm = true">
+									<label ng-show="address._id===undefined">Adicionar novo endereço</label>
+									<label ng-show="address._id!==undefined">Edit endereço</label>
+								</button>
+
+							</div>
+							<!-- <label ng-show="form.newAddresslink.$touched">new address</label>
+							<label ng-bind="address.openAddressForm!==undefined"></label> -->
+							<!-- ng-show="address.new||(user===''&&user.address === [])" -->
+							<div ng-show="user===''||user!==''&&user.address.length<=0||address.openAddressForm!==undefined">
+								<label ng-show="address._id===undefined">Precisamos de seu endereco! :)</label>
+								<label ng-show="address._id!==undefined">Editando o endereço</label>
+								
+								<div class="sky-form" ng-show="user!==''&&address._id===undefined">
+									<label class="checkbox"><input type="checkbox" data-ng-model="address.saveaddress" name="saveaddress" ><i></i>Salvar o endereço</label>
+								</div>
+								<div ng-show="error" class="text-center text-danger">
+									<strong ng-bind="error"></strong>
+								</div>
+								<div>
+									<label>
+										<input placeholder="Nome do endereco" name="name" ng-model="address.name" type="text" tabindex="1"   autofocus>
+									</label> 
+								</div>	
+								<div>
+									<label>
+										<input placeholder="Cep" name="cep" ng-model="address.cep" type="text" tabindex="2"  required autofocus>
+									</label>
+									<div ng-show="form.cep.$touched&&form.cep.$error.required">Coloca o CEP</div>
+								</div>	
+								<div>
+									<label>
+										<input placeholder="Endereço"  ng-model="address.address" type="text" tabindex="3" name="address"  required autofocus>
+									</label>
+									<div ng-show="form.address.$touched&&form.address.$error.required">Por favor coloca o endereço</div>
+								</div>	
+								<div>
+									<label>
+										<input placeholder="Numero" ng-model="address.number" type="text" tabindex="4" name="number"  required autofocus>
+									</label>
+									<div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o número</div>
+								</div>	
+								<div>
+									<label>
+										<input placeholder="Bairro"  ng-model="address.bairro" type="text" tabindex="5" name="bairro" autofocus>
+									</label>
+									<!-- <div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o endereço</div> -->
+								</div>	
+								<div>
+									<label>
+										<input placeholder="Cidade"  ng-model="address.city" type="text" tabindex="6" name="city" required autofocus>
+									</label>
+									<div ng-show="form.city.$touched&&form.city.$error.required">Por favor coloca a cidade</div>
+								</div>						
+								<div>
+									<label>
+										<select  class="sky-form select" ng-model="address.state" tabindex="7" name="state"  required autofocus>
+											<option value="">Selecione</option>
+											<option value="AC">Acre</option>
+											<option value="AL">Alagoas</option>
+											<option value="AP">Amapá</option>
+											<option value="AM">Amazonas</option>
+											<option value="BA">Bahia</option>
+											<option value="CE">Ceará</option>
+											<option value="DF">Distrito Federal</option>
+											<option value="ES">Espirito Santo</option>
+											<option value="GO">Goiás</option>
+											<option value="MA">Maranhão</option>
+											<option value="MS">Mato Grosso do Sul</option>
+											<option value="MT">Mato Grosso</option>
+											<option value="MG">Minas Gerais</option>
+											<option value="PA">Pará</option>
+											<option value="PB">Paraíba</option>
+											<option value="PR">Paraná</option>
+											<option value="PE">Pernambuco</option>
+											<option value="PI">Piauí</option>
+											<option value="RJ">Rio de Janeiro</option>
+											<option value="RN">Rio Grande do Norte</option>
+											<option value="RS">Rio Grande do Sul</option>
+											<option value="RO">Rondônia</option>
+											<option value="RR">Roraima</option>
+											<option value="SC">Santa Catarina</option>
+											<option value="SP">São Paulo</option>
+											<option value="SE">Sergipe</option>
+											<option value="TO">Tocantins</option>
+										</select>
+									</label>
+									<div ng-show="form.state.$touched&&form.state.$error.required">Por favor coloca o estado</div>
+								</div>
+								<div>
+									<label>
+										BRASIL
+										<input ng-model="address.country" type="hidden"/>
+										<input ng-model="address._id" type="hidden"/>
+
+									</label>
+								</div>
+							</div>
+							<div>
+								<input type="submit" ng-class="{disabled:form.$error.required}" ng-disabled="form.$error.required" ng-click="submitShipping(address)" value="Submit Shipping" id="shipping-submit">
+							</div>
+							<!-- <div class="sky-form">
+								<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>i agree to shoppe.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>
+							</div> -->
+						</form>
+						<!-- /Form -->
+					</div>
+				</div>
+				
+				<div class="clearfix"></div>
+			</div>
+			<!-- end registration -->
+		</div>
+	</div>
+
+<!-- end content -->
+
+</section>

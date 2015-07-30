@@ -8,6 +8,8 @@ var users = require('../../app/controllers/users.server.controller'),
 
 module.exports = function(app) {
 	// Article Routes
+	app.route('/api/search/products')
+		.get(products.search);
 	app.route('/api/products')
 		.get(products.list);
 	app.route('/api/products/related/:productSlug')

@@ -25,21 +25,23 @@ exports.forgot = function(req, res, next) {
 				done(err, token);
 			});
 		},
-		// Lookup user by username
+		// Lookup user by email
 		function(token, done) {
-			if (req.body.username) {
+			if (req.body.email) {
 				User.findOne({
-					username: req.body.username
+					email: req.body.email
 				}, '-salt -password', function(err, user) {
 					if (!user) {
 						return res.status(400).send({
-							message: 'No account with that username has been found'
+							message: 'No account with that email has been found'
 						});
-					} else if (user.provider !== 'local') {
-						return res.status(400).send({
-							message: 'It seems like you signed up using your ' + user.provider + ' account'
-						});
-					} else {
+					} 
+					// else if (user.provider !== 'local') {
+					// 	return res.status(400).send({
+					// 		message: 'It seems like you signed up using your ' + user.provider + ' account'
+					// 	});
+					// }
+					else {
 						user.resetPasswordToken = token;
 						user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
@@ -50,7 +52,7 @@ exports.forgot = function(req, res, next) {
 				});
 			} else {
 				return res.status(400).send({
-					message: 'Username field must not be blank'
+					message: 'Email field must not be blank'
 				});
 			}
 		},
@@ -58,7 +60,8 @@ exports.forgot = function(req, res, next) {
 			res.render('templates/reset-password-email', {
 				name: user.displayName,
 				appName: config.app.title,
-				url: 'http://' + req.headers.host + '/auth/reset/' + token
+				url: 'http://' + req.headers.host + '/#!/password/reset/' + token
+				// url: 'http://' + req.headers.host + '/auth/reset/' + token
 			}, function(err, emailHTML) {
 				done(err, emailHTML, user);
 			});
@@ -90,7 +93,7 @@ exports.forgot = function(req, res, next) {
 /**
  * Reset password GET from email token
  */
-exports.validateResetToken = function(req, res) {
+exports.validateResetTokenHttp = function(req, res) {
 	User.findOne({
 		resetPasswordToken: req.params.token,
 		resetPasswordExpires: {
@@ -102,6 +105,23 @@ exports.validateResetToken = function(req, res) {
 		}
 
 		res.redirect('/#!/password/reset/' + req.params.token);
+	});
+};
+//api
+exports.validateResetToken = function(req, res) {
+	User.findOne({
+		resetPasswordToken: req.params.token,
+		resetPasswordExpires: {
+			$gt: Date.now()
+		}
+	}, function(err, user) {
+		if (!user) {
+			// return res.redirect('/#!/password/reset/invalid');
+			res.json({valid:''});
+		}
+		res.json({valid:'Válido para troca de senha!'});
+
+		// res.redirect('/#!/password/reset/' + req.params.token);
 	});
 };
 

@@ -9,13 +9,18 @@ var DBRef = mongoose.SchemaTypes.DBRef;
 /**
  * Product Schema
  */
-var ProductSchema = new Schema({
+var objectProductSchema = {
 	
 	createdDate: {
 		type: Date,
 		default: Date.now
 	},
 	title: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	slug: {
 		type: String,
 		default: '',
 		trim: true
@@ -32,14 +37,30 @@ var ProductSchema = new Schema({
 	},
 	collectionsSlugs: {
 		type: [String],
-		default: '',
+		default: [],
 		trim: true
 	},
 	price: {
 		type: Number,
 		default:0
 	},
+	priceFormatted: {
+		type: String,
+		default:''
+	},
+	
+	discountValue: {
+		type: Number,
+		default:0
+	},
+	discountValueFormatted: {
+		type: String,
+		default:''
+	},
 	inventories:[DBRef]
-});
-
+};
+var ProductSchema = new Schema(objectProductSchema);
+exports.getProductSchema = function(){
+	return objectProductSchema;
+};
 mongoose.model('Product', ProductSchema,'product');

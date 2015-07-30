@@ -14,8 +14,49 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 
 
+
+exports.search = function(req,res){
+	var query = req.query.q;
+	query = '.*'+query+'.*';
+	var productsOutOfStock = [];
+	var productsForHome = [];//poster,obra_de_arte
+	var prodcutsAccessories = [];//lenco,acessorio
+	var productsInStock = [];
+	var inventoriesObj = [];
+
+
+	Product.find({'onLineVisible':true,$or:[{'title' : {$regex : query}},{'description' : {$regex : query}},{'userTags' : {$elemMatch : {$regex:query}}}]})
+	.select('-_class -createdDate')
+	.exec(function(err,products){
+
+		products.forEach(function(product,index){
+			if(product.type==='poster'||product.type==='obra_de_arte'){
+				productsForHome.push(product);
+			}else if(product.type==='lenco'||product.type==='acessorio'){
+				prodcutsAccessories.push(product);
+			}else{
+				product.inventories.forEach(function(inventory){
+					inventoriesObj.push(inventory.oid);
+				});
+			}
+			products[index].inventories = [];
+		});
+
+		Inventory.find({'_id':{$in:inventoriesObj}}).exec(function(err,inventories){
+			inventories.forEach(function(inventory){
+				if(inventory.sellInOutOfStock||(inventory.quantity>0&&!inventory.orderOutOfStock)){
+					productsInStock = productsInStock.concat(products.filter(function(obj){return inventory.product.oid+''===obj._id+'';}));
+				}else{
+					productsOutOfStock = productsOutOfStock.concat(products.filter(function(obj){return inventory.product.oid+''===obj._id+'';}));
+				}
+			});
+			res.json({productsOutOfStock:productsOutOfStock,productsForHome:productsForHome,prodcutsAccessories:prodcutsAccessories,productsInStock:productsInStock});
+		});
+	});
+};
+
 /**
- * Show the current article
+ * Show the current Product
  */
 exports.readProductSlug = function(req, res) {
 	if(req.err){
@@ -28,15 +69,22 @@ exports.readProductSlug = function(req, res) {
 	
 	if(product.inventories){
 		product.inventories.forEach(function(inventory){
-			inventoriesObj.push(inventory.oid);
+			if(inventory)
+				inventoriesObj.push(inventory.oid);
 		});
+		console.log(inventoriesObj);
 		var count = 0;
-		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).select('-product -_class').exec(function(err,inventories){
-			product.inventories.forEach(function(inventory,indexInventory){
-				 product.inventories[indexInventory] = inventories[count];
-				 count++;
+		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+		.select('-product -_class').exec(function(err,inventories){
+			
+			inventories.forEach(function(inventory,indexInventory){
+				product.inventories.forEach(function(inventoryFromProduct,indexInventoryFromProduct){
+					if(inventory._id.toString()+''===inventoryFromProduct.oid+''){
+						product.inventories[indexInventoryFromProduct] = inventories[indexInventory];
+					}
+				});
 			});
-				res.json(product);
+			res.json(product);
 
 		});
 	}else{

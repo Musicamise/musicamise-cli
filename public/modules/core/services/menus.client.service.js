@@ -1,7 +1,41 @@
 'use strict';
 
+angular.module('core').factory('MainMenu',['$resource',
+	function($resource) {
+		return $resource('api/mainmenu/', {
+			},{'query': {
+					method: 'GET', 
+					isArray: false,
+         		} 
+     		}
+ 		);
+	}
+]);
+angular.module('core').factory('User', ['$resource',
+	function($resource) {
+		return $resource('auth/:action/:token', {
+			action: '@action',
+			token: '@token',
+			},{'signin': {
+						method: 'POST', 
+						isArray: false,
+						params:{action:'signin'}
+						
+         		},'signout': {
+						method: 'GET', 
+						isArray: false,
+						params:{action:'signout'}
+         		},'forgot': {
+						method: 'POST', 
+						isArray: false,
+						params:{action:'forgot'}
+         		}
+     		}
+ 		);
+	}
+]);
 //Menu service used for managing  menus
-angular.module('core').service('Menus', [
+/*angular.module('core').service('Menus', [
 
 	function() {
 		// Define a set of default roles
@@ -163,23 +197,6 @@ angular.module('core').service('Menus', [
 		//Adding the topbar menu
 		this.addMenu('topbar');
 	}
-]);
+]);*/
 
-angular.module('core').factory('Cart', ['$resource',
-	function($resource) {
-		return $resource('api/cart/:action', {
-			action: '@action'
-			},{'removeItem': {
-						method: 'POST', 
-						isArray: false,
-						params:{action:'removeItem'}
-						
-         		},'addItem': {
-						method: 'POST', 
-						isArray: false,
-						params:{action:'addItem'}
-         		}
-     		}
- 		);
-	}
-]);
+
