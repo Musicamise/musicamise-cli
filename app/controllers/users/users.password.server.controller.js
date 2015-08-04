@@ -27,6 +27,7 @@ exports.forgot = function(req, res, next) {
 		},
 		// Lookup user by email
 		function(token, done) {
+			console.log(req.body.email);
 			if (req.body.email) {
 				User.findOne({
 					email: req.body.email
@@ -225,6 +226,9 @@ exports.changePassword = function(req, res) {
 										message: errorHandler.getErrorMessage(err)
 									});
 								} else {
+									user.password = undefined;
+									user.salt = undefined;
+
 									req.login(user, function(err) {
 										if (err) {
 											res.status(400).send(err);

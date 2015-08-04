@@ -20,24 +20,24 @@
 							<div ng-if="user===''">
 								<div>
 									<label>
-										<input placeholder="first name:" type="text" tabindex="1" required autofocus>
+										<input ng-model="user.fullName" placeholder="Name:" type="text" tabindex="1" required autofocus>
 									</label>
 								</div>
-								<div>
+								<!-- <div>
 									<label>
 										<input placeholder="last name:" type="text" tabindex="2" required autofocus>
 									</label>
-								</div>
+								</div> -->
 								<div>
 									<label>
-										<input placeholder="email address:" type="email" tabindex="3" required>
+										<input ng-model="user.email" placeholder="email address:" type="email" tabindex="3" required>
 									</label>
 								</div>
 								<div class="sky-form">
 									<div class="sky_form1">
 										<ul>
-											<li><label class="radio left"><input type="radio" name="radio" checked=""><i></i>Male</label></li>
-											<li><label class="radio"><input type="radio" name="radio"><i></i>Female</label></li>
+											<li><label class="radio left"><input ng-model="user.gender" value="masculino" type="radio" name="gender"  checked=""><i></i>Male</label></li>
+											<li><label class="radio"><input ng-model="user.gender" value="masculino" type="radio" name="gender"><i></i>Female</label></li>
 											<div class="clearfix"></div>
 										</ul>
 									</div>
@@ -79,13 +79,13 @@
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Cep" name="cep" ng-model="address.cep" type="text" tabindex="2"  required autofocus>
+										<input placeholder="Cep ex:52031-300" name="cep" ng-model="address.cep" type="text" tabindex="2"  mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' ng-blur="!form.cep.$invalid? getAddress(address.cep) : angular.noop()" required autofocus>
 									</label>
-									<div ng-show="form.cep.$touched&&form.cep.$error.required">Coloca o CEP</div>
+									<div ng-show="form.cep.$touched&&form.cep.$invalid">Coloca o CEP</div>
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Endereço"  ng-model="address.address" type="text" tabindex="3" name="address"  required autofocus>
+										<input placeholder="Endereço"  ng-model="address.address" ng-disabled="address.blockAll" type="text" tabindex="3" name="address"  required autofocus>
 									</label>
 									<div ng-show="form.address.$touched&&form.address.$error.required">Por favor coloca o endereço</div>
 								</div>	
@@ -97,19 +97,19 @@
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Bairro"  ng-model="address.bairro" type="text" tabindex="5" name="bairro" autofocus>
+										<input placeholder="Bairro"  ng-disabled="address.blockAll" ng-model="address.bairro" type="text" tabindex="5" name="bairro" autofocus>
 									</label>
 									<!-- <div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o endereço</div> -->
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Cidade"  ng-model="address.city" type="text" tabindex="6" name="city" required autofocus>
+										<input placeholder="Cidade" ng-disabled="address.blockAll"  ng-model="address.city" type="text" tabindex="6" name="city" required autofocus>
 									</label>
 									<div ng-show="form.city.$touched&&form.city.$error.required">Por favor coloca a cidade</div>
 								</div>						
 								<div>
 									<label>
-										<select  class="sky-form select" ng-model="address.state" tabindex="7" name="state"  required autofocus>
+										<select  class="sky-form select" ng-model="address.state" tabindex="7" ng-disabled="address.blockAll" name="state"  required autofocus>
 											<option value="">Selecione</option>
 											<option value="AC">Acre</option>
 											<option value="AL">Alagoas</option>

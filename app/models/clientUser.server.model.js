@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
   	AddressSchema = require('./address.server.model').getAddressSchema(),
 	crypto = require('crypto');
+var Address = require('./address.server.model').getAddressSchema();
 
 
 /**
@@ -30,14 +31,20 @@ var objectUserSchema = {
 	firstName: {
 		type: String,
 		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		default: ''
+		// validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
 	lastName: {
 		type: String,
 		trim: true,
+		default: ''
+		// validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+	},
+	fullName: {
+		type: String,
+		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		validate: [validateLocalStrategyProperty, 'Please fill in your name']
 	},
 	email: {
 		type: String,
@@ -61,10 +68,16 @@ var objectUserSchema = {
 	},
 	tags:{
 		type:[String],
-		default: []
+		default: [],
+		select: false
+	},
+	notes:{
+		type:String,
+		default: '',
+		select: false
 	},
 	address:{
-		type:[AddressSchema]
+		type:[Address]
 	},
 	fbId:{
 		type:String,
@@ -78,22 +91,23 @@ var objectUserSchema = {
 		type:String,
 		default:''
 	},
+	gender: {
+		type: String
+	},
 	salt: {
 		type: String
 	},
-	// provider: {
-	// 	type: String,
-	// 	required: 'Provider is required'
-	// },
-	// providerData: {},
-	// additionalProvidersData: {},
-	// roles: {
-	// 	type: [{
-	// 		type: String,
-	// 		enum: ['user', 'admin']
-	// 	}],
-	// 	default: ['user']
-	// },
+	provider: {
+		type: String,
+		//required: 'Provider is required'
+	},
+	providerData: {},
+	additionalProvidersData: {},
+	manager: {
+		type: Boolean,
+		default: false,
+		select: false
+	},
 	updatedDate: {
 		type: Date
 	},
@@ -104,10 +118,12 @@ var objectUserSchema = {
 	/* For reset password */
 	resetPasswordToken:{
 		type: String,
-		default:''
+		default:'',
+		select: false
 	},
 	resetPasswordExpires: {
-		type: Date
+		type: Date,
+		select: false
 	}
 };
 var UserSchema = new Schema(objectUserSchema);

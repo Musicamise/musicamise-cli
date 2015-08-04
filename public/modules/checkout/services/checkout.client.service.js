@@ -14,6 +14,10 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 						method: 'POST', 
 						isArray: false,
 						params:{action:'updateOrderOrAddItem'}
+         		},'addDiscountCode': {
+						method: 'POST', 
+						isArray: false,
+						params:{action:'updateOrderOrAddItem'}
          		},'pagseguro': {
 						method: 'GET', 
 						isArray: false,
@@ -36,7 +40,18 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 	}
 ]);
 
-
+angular.module('checkout').factory('Cep', ['$resource',
+	function($resource) {
+		return $resource('http://cep.correiocontrol.com.br/:cep.json', {
+			cep:'@cep',
+			},{'get': {
+					method: 'GET', 
+					isArray: false
+         		}
+     		}
+ 		);
+	}
+]);
 
 angular.module('checkout').factory('UserCheckout', ['$resource',
 	function($resource) {

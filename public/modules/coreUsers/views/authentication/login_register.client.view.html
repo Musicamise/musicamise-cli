@@ -61,16 +61,16 @@
 							</div>
 							<div>
 								<label>
-									<input  placeholder="first name:" name="firstName" data-ng-model="user.firstName" type="text" tabindex="1" required >
+									<input  placeholder="Name:" name="fullName" data-ng-model="user.fullName" type="text" tabindex="1" required >
 								</label>
-							      <div ng-show="form.firstName.$touched&&form.firstName.$error.required">Fale seu Nome.</div>
+							      <div ng-show="form.fullName.$touched&&form.fullName.$error.required">Fale seu Nome.</div>
 							</div>
-							<div>
+							<!-- <div>
 								<label>
 									<input placeholder="last name:" name="lastName" data-ng-model="user.lastName" type="text" tabindex="2" required >
 								</label>
 							      <div ng-show="form.lastName.$touched&&form.lastName.$error.required">Fale seu Ultimo Nome.</div>
-							</div>
+							</div> -->
 							<div>
 								<label>
 									<input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="3" required>
@@ -121,22 +121,25 @@
 					<h2>existing user</h2>
 				 	<div class="registration_form">
 					 <!-- Form -->
-						<form id="registration_form" action="contact.php" method="post">
+						<form id="registration_form" ng-submit="login(user)" >
+				        	<label class="error">{{login_error}}</label>
 							<div>
 								<label>
-									<input placeholder="email:" type="email" tabindex="3" required>
+									<input placeholder="email:" type="email" ng-model='user.email' name="email" tabindex="3" required>
 								</label>
 							</div>
 							<div>
 								<label>
-									<input placeholder="password" type="password" tabindex="4" required>
+									<input placeholder="password" type="password" ng-model='user.password' name="password" tabindex="4" required>
 								</label>
 							</div>						
 							<div>
 								<input type="submit" value="sign in" id="register-submit">
 							</div>
+						 	<label for="rememberme-login"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Remember me</i></label> 
+
 							<div class="forget">
-								<a href="#">forgot your password</a>
+								<a href="#!/user/esquecisenha">forgot your password</a>
 							</div>
 						</form>
 						<!-- /Form -->

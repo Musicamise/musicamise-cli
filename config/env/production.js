@@ -28,6 +28,10 @@ module.exports = {
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/facebook/callback'
 	},
+	pagseguro: {
+		clientMail: process.env.PAGSEGURO_MAIL || '',
+		clientSecret: process.env.PAGSEGURO_SECRET || '',
+	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
 		clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',

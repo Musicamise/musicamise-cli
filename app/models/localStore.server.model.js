@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 /**
  * Product Schema
  */
-var CollectionSchema = new Schema({
+var LocalStoreSchema = new Schema({
 	
 	title: {
 		type: String,
@@ -18,15 +18,15 @@ var CollectionSchema = new Schema({
 		type: String,
 		default: ''
 	},
+	description: {
+		type: String,
+		default: ''
+	},
 	image: {},
 	onLineVisible: {
 		type: Boolean,
 		default: false
-	},
-	onLocalStore: {
-		type: Boolean,
-		default: false
-	},
+	}
 });
 
-mongoose.model('Collection', CollectionSchema,'collection');
+mongoose.model('LocalStore', LocalStoreSchema,'localStore');

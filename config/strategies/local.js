@@ -16,7 +16,7 @@ module.exports = function() {
 		function(email, password, done) {
 			User.findOne({
 				email: email
-			}, function(err, user) {
+			}).select('-__v -notes -tags').exec(function(err, user) {
 				if (err) {
 					return done(err);
 				}
@@ -30,6 +30,10 @@ module.exports = function() {
 						message: 'Unknown user or invalid password'
 					});
 				}
+				user.password = undefined;
+				user.salt = undefined;
+				user.notes = undefined;
+				user.tags = [];
 				return done(null, user);
 			});
 		}

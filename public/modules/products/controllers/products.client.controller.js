@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('products').controller('ProductsController', ['$rootScope','$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch',
-	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI',
+	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI) {
 		// Products controller logic
 		//in controller that doesn't reload
 		$scope.$on('$locationChangeSuccess',function(){

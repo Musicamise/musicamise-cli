@@ -27,6 +27,7 @@ module.exports = function() {
 			var providerUserProfile = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
+				fullName: profile.displayName,
 				displayName: profile.displayName,
 				email: profile.emails[0].value,
 				username: profile.username,

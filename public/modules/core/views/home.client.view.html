@@ -7,13 +7,20 @@
 					   	<div class="col-md-12">
 				              <div id="owl-demo" class="owl-carousel"  >
 
-				                <div class="item"><a href="#"><img  class="img-responsive"src="plugin/owl-carousel/fullimage1.jpg" alt="The Last of us"> </a></div>
-				                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage2.jpg" alt="GTA V"></div>
-				                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage3.jpg" alt="Mirror Edge"></div>
+				                <div class="item" ng-repeat="image in mainContent.images" ng-init="$last?initCarousel():angular.noop()">
+				                	<a ng-href="{{image.redirectUrl||''}}" target="_blank">
+				                		<img  class="img-responsive" ng-src="{{image.url}}" alt="{{image.name}}"> 
+			                		</a>
+			                		 <p ng-if="image.subtitle" ng-bind="image.subtitle"></p>
+			                	</div>
+				                <!-- <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage2.jpg" alt="GTA V"></div>
+				                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage3.jpg" alt="Mirror Edge"></div> -->
 
 				              </div>
 			            </div>
 						<div class="clearfix"> </div>
+						<a id="manual1" ng-show="false" href="" ng-click="openManual1();" title="">Image</a>
+					
 					</div>		 
 					<div class="arriv-top">
 						<div class="col-md-6 arriv-left">
@@ -86,41 +93,17 @@
 			
 	<div class="special">
 			<div class="container">
-				<h3>Special Offers</h3>
+				<h3>Em destaque</h3>
 				<div class="specia-top">
-					<ul class="grid_2">
-				<li>
-						<a href="details.html"><img src="images/8.jpg" class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Lorem ipsum dolor</h5>
-							<div class="item_add"><span class="item_price"><h6>ONLY $40.00</h6></span></div>
-							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
-						</div>
-				</li>
-				<li>
-						<a href="details.html"><img src="images/9.jpg" class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Consectetur adipis</h5>
-							<div class="item_add"><span class="item_price"><h6>ONLY $60.00</h6></span></div>
-							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
-					</div>
-				</li>
-				<li>
-						<a href="details.html"><img src="images/10.jpg" class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Commodo consequat</h5>
-							<div class="item_add"><span class="item_price"><h6>ONLY $14.00</h6></span></div>
-							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
-					</div>
-				</li>
-				<li>
-						<a href="details.html"><img src="images/11.jpg" class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Voluptate velit</h5>
-							<div class="item_add"><span class="item_price"><h6>ONLY $37.00</h6></span></div>
-							<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
-						</div>
-				</li>
+				<ul class="grid_2">
+					<li ng-repeat="product in destaque">
+							<a href="details.html"><img src="images/8.jpg" class="img-responsive" alt=""></a>
+							<div class="special-info grid_1 simpleCart_shelfItem">
+								<h5 ng-bind="product.title"></h5>
+								<div class="item_add"><span class="item_price"><h6 >ONLY <span ng-bind="product.price"></span></h6></span></div>
+								<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+							</div>
+					</li>
 				<div class="clearfix"> </div>
 			</ul>
 				</div>
@@ -128,18 +111,14 @@
 	</div>
 
 
-
-<script src="plugin/js/jquery-1.11.1.min.js"></script> 
+<!-- <div block-ui="myBlockUI" >
+  <p> ... I'm blockable ... </p>
+</div> -->
 
 <!-- Important Owl stylesheet -->
-<link rel="stylesheet" href="plugin/owl-carousel/owl.carousel.css">
  
 <!-- Owl Theme -->
-<link rel="stylesheet" href="plugin/owl-carousel/owl.theme.css">
  	<!-- Include Owl js plugin -->
-	<script type="text/javascript" src="plugin/owl-carousel/owl.carousel.js"></script>
-		
-
 
 			<style>
 			    #owl-demo .item img{
@@ -147,27 +126,13 @@
 			        width: 100%;
 			        height: auto;
 			    }
+			    #owl-demo .item{
+			    	text-align: center;
+			    }
+			    #owl-demo .item p{
+			    	color:#000000;
+			    	width:100%;
+			    }
 		    </style>
-		<script type="text/javascript">
-		    $(document).ready(function() {
-		      $("#owl-demo").owlCarousel({
-
-		      navigation : false,
-		      slideSpeed : 300,
-		      paginationSpeed : 400,
-		      singleItem : true,
-		      navigationText: false,
-		      responsive: true,
-		      autoPlay:true,
-		      rewindNav:true,
-		      // "singleItem:true" is a shortcut for:
-		      // items : 1, 
-		      // itemsDesktop : false,
-		      // itemsDesktopSmall : false,
-		      // itemsTablet: false,
-		      // itemsMobile : false
-
-		      });
-		    });
-		    </script>
+	 
 </section>

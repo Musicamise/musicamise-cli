@@ -6,9 +6,13 @@ module.exports = {
 		title: 'musicamise-cli - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '',
+		clientSecret: process.env.FACEBOOK_SECRET || '',
 		callbackURL: '/auth/facebook/callback'
+	},
+	pagseguro: {
+		clientMail: process.env.PAGSEGURO_MAIL || '',
+		clientSecret: process.env.PAGSEGURO_SECRET || '',
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
@@ -31,7 +35,7 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'Musicamise@musicamise.com.br',
+		from: process.env.MAILER_FROM || '',
 		options: {
 			service: process.env.MAILER_SERVICE_PROVIDER || '',
 			auth: {

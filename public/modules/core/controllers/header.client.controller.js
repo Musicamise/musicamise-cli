@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('core').controller('HeaderController', ['$window','$rootScope','$scope','$location', 'Authentication',
- 'MainMenu','Order','User',
-	function($window,$rootScope,$scope,$location, Authentication, MainMenu,Order,User) {
+ 'MainMenu','Order','User','blockUI','fancyboxService',
+	function($window,$rootScope,$scope,$location, Authentication, MainMenu,Order,User,blockUI,fancyboxService) {
 		$scope.authentication = Authentication;
 
 		// $scope.isCollapsed = false;
-
-		$scope.mainMenu = MainMenu.query();
 		
+		$scope.user = Authentication.user;
 
 		$scope.headerLoginAndCart = function(){
 			$scope.authentication = Authentication;
@@ -20,14 +19,31 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 					$rootScope.order = response.order;
 				}
 			});
+			MainMenu.query().$promise.then(function(response,error,progressback){
+				$scope.loja = response.loja;
+				$scope.localStores = response.localStores;
+				$scope.discount = response.discount;
+			});
+
+		
+		};
+		
+
+		$scope.megamenuDone = function(){
+			angular.element(document).ready(function () {
+				$('.megamenu').megamenu();
+		    });
 		};
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
-		$scope.logout = function(){
 
+		// Check if provider is already in use with current user
+		$scope.isConnectedSocialAccount = function(provider) {
+			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
+
 		$scope.login = function(user){
 			User.signin(user).$promise.then(function(userResponse,error,progressback){
 				// console.log(p);
@@ -72,13 +88,90 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			form.mouseup(function() { 
 			    return false;
 			});
-			$(this).mouseup(function(login) {
+			$('body').mouseup(function(login) {
 			    if(($(login.target).parent('#loginButton').length <= 0)) {
 			        button.removeClass('active');
 			        box.hide();
 			    }
 			});
     	};
+
+    	
+
+	////facebook start
+		$scope.checkLoginState = function() {
+		    FB.getLoginStatus(function(response) {
+		      $scope.getUserInfo(response);
+		    });
+	  	};
+
+		$scope.watchLoginChange = function() {
+
+		  var _self = this;
+
+		  FB.Event.subscribe('auth.authResponseChange', function(res) {
+
+		    if (res.status === 'connected') {
+		      
+		      /* 
+		       The user is already logged, 
+		       is possible retrieve his personal info
+		      */
+		      _self.getUserInfo();
+
+		      /*
+		       This is also the point where you should create a 
+		       session for the current user.
+		       For this purpose you can use the data inside the 
+		       res.authResponse object.
+		      */
+
+		    } 
+		    else {
+		    	console.dir(res);
+		      /*
+		       The user is not logged to the app, or into Facebook:
+		       destroy the session on the server.
+		      */
+		       
+		    }
+
+		  });
+
+		};
+
+		$scope.getUserInfo = function() {
+
+		  var _self = this;
+
+		  FB.api('/me', function(res) {
+
+		    $rootScope.$apply(function() { 
+
+		      $rootScope.user = _self.user = res; 
+
+		    });
+
+		  });
+
+		};
+
+		$scope.logoutFacebook = function() {
+
+		  var _self = this;
+
+		  FB.logout(function(response) {
+
+		    $rootScope.$apply(function() { 
+
+		      $rootScope.user = _self.user = {}; 
+
+		    }); 
+
+		  });
+
+		};
+    ///facebook end 
 
 	}
 

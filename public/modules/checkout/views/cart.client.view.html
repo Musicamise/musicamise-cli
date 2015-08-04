@@ -21,11 +21,12 @@
 		 	</ul>
 		 	<div class="clearfix"></div>
 	 		<a class="order" ng-href="#!/checkout">Place Order</a>
-				<div class="total-item">
+			<div class="total-item">
 		 		<h3>OPTIONS</h3>
 		 		<h4>COUPONS</h4>
-		 		<a class="cpns" href="#">Apply Coupons</a>
-		 		<p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p>
+		 		<input type='text'  ng-model='order.discountCode._id' > <br/><br/>
+		 		<a class="cpns" href="" ng-click="applyDiscount(order.discountCode._id)">Apply Coupons</a>
+		 		<!-- <p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p> -->
 			</div>
 		</div>
 	 	<div class="col-md-9 cart-items">

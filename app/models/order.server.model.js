@@ -146,5 +146,19 @@ var OrderSchema = new Schema({
 	}
 });
 
+/**
+ * Hook a pre save method to hash the password
+ */
+OrderSchema.pre('save', function(next) {
+	if (this.user) {
+		delete this.user.createdDate;
+		delete this.user.updatedDate;
+		delete this.user.additionalProvidersData;
+		this.email = this.user.email;
+	}
+
+	next();
+});
+
 mongoose.model('Order', OrderSchema,'order');
 mongoose.model('StatusOrder', StatusOrderSchema);

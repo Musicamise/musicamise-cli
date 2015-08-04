@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 	GiftCard = mongoose.model('GiftCard'),
 	Inventory = mongoose.model('Inventory'),
 	StatusOrder = mongoose.model('StatusOrder'),
-	
+	config = require('../../config/config'),
 	Order = mongoose.model('Order'),
 	session = require('express-session'),
 
@@ -69,11 +69,10 @@ var discountIsApplicable = function(cartItems,discountObject){
 
 var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 	var key = 'order'+req.sessionID;
-
+	
+	order.totalValueItems = 0;
+	order.totalItems = 0;
 	if(order.products.length>0){
-		console.log('has products');
-		order.totalValueItems = 0;
-		order.totalItems = 0;
 		order.products.forEach(function(product,index){
 
 			order.products[index].priceWithQuantity = order.products[index].quantity* order.products[index].product.price;
@@ -515,7 +514,7 @@ exports.removeItemCart = function(req, res) {
 					inventoryIndex = index;
 				}});
 				if(orderContains)
-					delete orderCached.products[inventoryIndex];
+					orderCached.products.splice(inventoryIndex,1);
 			}
 			return processOrder(req,res,orderCached);
 
@@ -631,13 +630,10 @@ exports.processToPagseguro = function(req,res){
 
 		if(orderCachedJsonString){
 			var orderCached = new Order(JSON.parse(orderCachedJsonString)); 
-	        // email : 'administrador@musicamise.com.br',
-	        // token: 'FC101192F9D3427DB332DB69DAE0AB4B',
-	        // mode : 'sandbox'
 	        var paymentParameters = {};
-	        paymentParameters.email =  'administrador@musicamise.com.br';
+	        paymentParameters.email =  config.pagseguro.clientMail;
 	        // paymentParameters.charset = 'UTF-8';
-	        paymentParameters.token = 'FC101192F9D3427DB332DB69DAE0AB4B';
+	        paymentParameters.token = config.pagseguro.clientSecret;
 	        paymentParameters.currency = 'BRL';
 
 	        if(orderCached.user&&orderCached.shippingAddress&&orderCached.products.length>0){
@@ -666,9 +662,11 @@ exports.processToPagseguro = function(req,res){
 		        //shipping address
 		        paymentParameters.shippingType = 1;//1 - Encomenda normal (PAC). 2 -SEDEX 3-Tipo de frete não especificado.
 		        paymentParameters.shippingAddressCountry = orderCached.shippingAddress.country||'Brasil';
-		        paymentParameters.shippingAddressState = orderCached.shippingAddress.state; //Duas letras, em maiúsculo, representando a sigla do estado brasileiro correspondente.
+		        if(orderCached.shippingAddress.state.length===2)
+		        	paymentParameters.shippingAddressState = orderCached.shippingAddress.state; //Duas letras, em maiúsculo, representando a sigla do estado brasileiro correspondente.
 		        paymentParameters.shippingAddressCity = orderCached.shippingAddress.city;
-		        paymentParameters.shippingAddressPostalCode = orderCached.shippingAddress.cep;//Um número de 8 dígitos.
+		        if(orderCached.shippingAddress.cep.length===8)
+		        	paymentParameters.shippingAddressPostalCode = orderCached.shippingAddress.cep;//Um número de 8 dígitos.
 		        paymentParameters.shippingAddressDistrict = orderCached.shippingAddress.bairro;
 		        paymentParameters.shippingAddressStreet = orderCached.shippingAddress.address;
 		        paymentParameters.shippingAddressNumber = orderCached.shippingAddress.number;

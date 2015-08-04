@@ -11,29 +11,58 @@ angular.module('core').factory('MainMenu',['$resource',
  		);
 	}
 ]);
-angular.module('core').factory('User', ['$resource',
+angular.module('users').factory('User', ['$resource',
 	function($resource) {
-		return $resource('auth/:action/:token', {
+		return $resource(':auth/:action/:token', {
 			action: '@action',
 			token: '@token',
 			},{'signin': {
 						method: 'POST', 
 						isArray: false,
-						params:{action:'signin'}
+						params:{action:'signin',auth:'auth'}
 						
          		},'signout': {
 						method: 'GET', 
 						isArray: false,
-						params:{action:'signout'}
+						params:{action:'signout',auth:'auth'}
+         		},'signup': {
+						method: 'POST', 
+						isArray: false,
+						params:{action:'signup',auth:'auth'}
          		},'forgot': {
 						method: 'POST', 
 						isArray: false,
-						params:{action:'forgot'}
+						params:{action:'forgot',auth:'auth'}
+         		},'changePassword': {
+						method: 'POST', 
+						isArray: false,
+						params:{action:'password',auth:'users'}
+         		},'updateUser':{
+         				method: 'PUT', 
+						isArray: false,
+						params:{auth:'users'}
+         		},'updateAddress':{
+         				method: 'PUT', 
+						isArray: false,
+						params:{action:'updateAddress',auth:'users'}
+         		},'removeAddress':{
+         				method: 'POST', 
+						isArray: false,
+						params:{action:'removeAddress',auth:'users'}
+         		},'updateProfile':{
+         				method: 'PUT', 
+						isArray: false,
+						params:{action:'updateAddress',auth:'users'}
+         		},'updatePassword':{
+         				method: 'PUT', 
+						isArray: false,
+						params:{action:'updateAddress',auth:'users'}
          		}
      		}
  		);
 	}
 ]);
+
 //Menu service used for managing  menus
 /*angular.module('core').service('Menus', [
 

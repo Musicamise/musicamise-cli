@@ -93,7 +93,10 @@ var DBRef = mongoose.SchemaTypes.DBRef;
 		type: [String],
 		default: [],
 		trim: true
-	}
+	},
+	description: {
+		type: String
+	},
 }; 
 var DiscountCodeSchema = new Schema(objectDiscountCode);
 

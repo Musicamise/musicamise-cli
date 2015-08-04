@@ -22,7 +22,8 @@
 		"angular": true,
 		"ApplicationConfiguration": true,
 		"$": false,
-	 	"jQuery": false
+	 	"jQuery": false,
+	 	"FB": false
 	},
 	"predef": [ // Extra globals.
 		"define",

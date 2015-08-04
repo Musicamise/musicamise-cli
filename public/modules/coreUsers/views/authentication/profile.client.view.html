@@ -1,10 +1,10 @@
-<section data-ng-controller="AuthenticationController" data-ng-init="profile()"  >
+<section data-ng-controller="SettingsController" data-ng-init="profile()"  >
 	<!-- content -->
 <div class="container">
 	<div class="check">	
 	 	<div class="col-md-2 ">
 	 		<ul>
-			 	<li><a href="#">Update profile</a></li>
+			 	<li class="active"><a href="#">Update profile</a></li>
 				<li><a href="#">Order history</a></li>
 				<li><a href="#">Privacy</a></li>
 		 	</ul>
@@ -13,19 +13,20 @@
 	 		<h1>Profiel User</h1>
 	 		<div>
 	 			<div>
-	 				<label>Nome Completo </label> <br/>
-					<label >{{user.firstName}} </label>
+	 				<label>Nome Completo </label>
+					<strong ng-bind="user.fullName"> </strong>
 				</div>
 				<div>
-	 				<label>Genero </label> <br/>
-					<label ng-value='user.gender'> </label>
+	 				<label>Genero </label>
+					<strong ng-bind="user.gender">  </strong>
 				</div>
 				<div>
-	 				<label>Email </label> <br/>
-					<label ng-value='user.email'> </label>
+	 				<label>Email </label>
+					<strong ng-bind="user.email">  </strong>
 				</div>
 				<div>
-	 				<label>Senha </label> <br/>
+	 				<label>Senha </label> 
+	 				<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editPassword">Edit password</button>
 				</div>
 			  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editProfile">Edit User</button>
 
@@ -33,45 +34,103 @@
 		</div>
 		<div class="col-md-6 ">
 	 		<h1>Endreço Cadastrados</h1>
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editOrAddAddress">Add Address</button>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress({})">Add Address</button>
 			<div>
 				<div ng-repeat="address in user.address">
 					<div>
-						<a href="#">Edit Address</a>
-						<a href="#">Remove Address</a>
-
-		 				<label>Nome </label> <br/>
-						<label ng-model='address.name'> </label>
+						<a  ng-href="" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress(address)">Edit Address</a>
+						<a ng-href="" ng-click="removeAddress(address)">Remove Address</a>
+		 				<label>Nome </label>
+						<strong ng-bind="address.name"> </strong>
 					</div>
 					<div>
-		 				<label>Address </label> <br/>
-						<label ng-model='address.address'> </label>
+		 				<label>Address </label>
+						<strong ng-bind="address.address"></strong>
 					</div>
 					<div>
-		 				<label>Number </label> <br/>
-						<label ng-model='address.name'> </label>
+		 				<label>Number </label> 
+						<strong ng-bind="address.number"> </strong>
+					</div>
+					<!-- <div>
+		 				<label>Complemento </label> 
+						<strong ng-bind="address.address">{{address.complemnto}} </strong>
+					</div> -->
+					<div>
+		 				<label>Bairro </label> 
+						<strong ng-bind="address.bairro"> </strong>
 					</div>
 					<div>
-		 				<label>Complemento </label> <br/>
-						<label ng-model='address.complemento'> </label>
+		 				<label>City </label> 
+						<strong ng-bind="address.city"> </strong>
 					</div>
 					<div>
-		 				<label>Bairro </label> <br/>
-						<label ng-model='address.bairro'> </label>
-					</div>
-					<div>
-		 				<label>City </label> <br/>
-						<label ng-model='address.city'> </label>
-					</div>
-					<div>
-		 				<label>State </label> <br/>
-						<label ng-model='address.state'> </label>
+		 				<label>State </label> 
+						<strong ng-bind="address.state"> </strong>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="clearfix"> </div>
-	  	
+	  	<!-- Modal -->
+  		<div class="modal fade" id="editPassword" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Nova senha!</h4>
+					</div>
+					<div class="modal-body">
+						<div class="registration_form" >
+							<!-- Form -->
+							<form id="registration_form" name="formNewPassword"  novalidate autocomplete="off">
+								<div ng-show="errorPassword||successPassword" class="text-center text-danger">
+									<strong ng-bind="errorPassword||successPassword"></strong>
+								</div>
+								<div>
+									<label>
+										<input placeholder="Senha atual" name="password" id="user-password" ng-minlength=7 ng-model="passwordDetails.currentPassword" type="password" tabindex="1" required>
+									</label>
+									<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$invalid">
+										<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
+										<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.required">Precisamos de uma senha!</div>
+									</div>
+								</div>
+								<div>
+									<label>
+										<input placeholder="Nova Senha" name="newPassword" id="passwordDetails-newPassword" ng-minlength=7 ng-model="passwordDetails.newPassword" type="password" tabindex="2" required>
+									</label>
+									<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$invalid">
+										<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
+										<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.required">Precisamos de uma senha!</div>
+
+									</div>
+								</div>						
+								<div>
+									<label>
+										<input placeholder="Digite novamente" name="repeatPassword" id="user.repeatPassword"  ng-model="passwordDetails.verifyPassword" type="password" tabindex="3" pw-check="passwordDetails.newPassword" required>
+									</label>
+									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
+									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$invalid">	
+									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.required">Continuamos precisando de senha!</div>
+									</div>
+								</div>	
+								<div>
+									<input type="submit" ng-class="{disabled:formNewPassword.$invalid}" ng-disabled="formNewPassword.$invalid" ng-click="changePassword(passwordDetails)" value="Atualizar a Senha" >
+								</div>
+								
+							</form>
+							<!-- /Form -->
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	  	<!-- Modal -->
 		<div class="modal fade" id="editProfile" role="dialog">
 			<div class="modal-dialog">
@@ -79,33 +138,27 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+						<h4 class="modal-title">Editar Usuário</h4>
 					</div>
 					<div class="modal-body">
-						<p>Some text in the modal.</p>
 						<div class="registration_form" >
 							<!-- Form -->
-							<form id="registration_form" name="form" ng-submit="signup()" novalidate autocomplete="off">
-								<div ng-show="error" class="text-center text-danger">
-									<strong ng-bind="error"></strong>
+							<form id="registration_form" name="formUserProfile" novalidate autocomplete="off">
+								<div ng-show="successUser||errorUser" class="text-center text-danger">
+									<strong ng-bind="successUser||errorUser"></strong>
 								</div>
 								<div>
 									<label>
-										<input  placeholder="first name:" name="firstName" data-ng-model="user.firstName" type="text" tabindex="1" required >
+										<input  placeholder="Name:" name="fullName" data-ng-model="user.fullName" type="text" tabindex="1" required >
 									</label>
-								      <div ng-show="form.firstName.$touched&&form.firstName.$error.required">Fale seu Nome.</div>
+								      <div ng-show="formUserProfile.fullName.$touched&&formUserProfile.fullName.$error.required">Fale seu Nome.</div>
 								</div>
 								<div>
 									<label>
-										<input placeholder="last name:" name="lastName" data-ng-model="user.lastName" type="text" tabindex="2" required >
+										<label ng-bind="user.email"></label>
+										<!-- <input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="3" required> -->
 									</label>
-								      <div ng-show="form.lastName.$touched&&form.lastName.$error.required">Fale seu Ultimo Nome.</div>
-								</div>
-								<div>
-									<label>
-										<input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="3" required>
-									</label>
-									<div ng-show="form.email.$touched&&(form.email.$error.email||form.email.$error.required)">Fale seu email.</div>
+									<!-- <div ng-show="formUserProfile.email.$touched&&(formUserProfile.email.$error.email||formUserProfile.email.$error.required)">Fale seu email.</div> -->
 								</div>
 								<div class="sky-form">
 									<div class="sky_form1">
@@ -116,29 +169,8 @@
 										</ul>
 									</div>
 								</div>
-								<div>
-									<label>
-										<input placeholder="password" name="password" id="user-password" ng-minlength=7 ng-model="user.password" type="password" tabindex="5" required>
-									</label>
-									<div ng-show="form.password.$touched&&form.password.$invalid">
-										<div ng-show="form.password.$touched&&form.password.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
-										<div ng-show="form.password.$touched&&form.password.$error.required">Precisamos de uma senha!</div>
-
-									</div>
-
-								</div>						
-								<div>
-									<label>
-										<input placeholder="retype password" name="repeatPassword" id="user.repeatPassword"  ng-model="user.repeatPassword" type="password" tabindex="6" pw-check="user.password" required>
-									</label>
-									<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
-									<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$invalid">	
-										
-										<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.required">Continuamos precisando de senha!</div>
-									</div>
-								</div>	
-								<div>
-									<input type="submit" value="update account" tabindex="7"  id="register-submit">
+								<div> 
+									<input type="submit" ng-class="{disabled:formUserProfile.$error.required}" ng-disabled="formUserProfile.$error.required" ng-click="editUser(user)" value="Editar Usuário" >
 								</div>
 								
 							</form>
@@ -160,16 +192,15 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+						<h4 class="modal-title">Editando ou Adicionando Endereço</h4>
 					</div>
 					<div class="modal-body">
-						<p>Editando o endereço</p>
 						<div class="registration_form" >
 						 	<!-- Form -->
-							<form id="registration_form" name="form" novalidate autocomplete="off">
+							<form id="registration_form" name="formAddress" novalidate autocomplete="off">
 								<div>
-									<div ng-show="error" class="text-center text-danger">
-										<strong ng-bind="error"></strong>
+									<div ng-show="errorAddress||successAddress" class="text-center text-danger">
+										<strong ng-bind="errorAddress||successAddress"></strong>
 									</div>
 									<div>
 										<label>
@@ -178,21 +209,21 @@
 									</div>	
 									<div>
 										<label>
-											<input placeholder="Cep" name="cep" ng-model="address.cep" type="text" tabindex="2"  required autofocus>
+											<input placeholder="Cep" name="cep" ng-model="address.cep" type="text" tabindex="2" mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' ng-blur="!formAddress.cep.$invalid? getAddress(address.cep) : angular.noop()" required autofocus>
 										</label>
-										<div ng-show="form.cep.$touched&&form.cep.$error.required">Coloca o CEP</div>
+										<div ng-show="formAddress.cep.$touched&&formAddress.cep.$invalid">Coloca o CEP</div>
 									</div>	
 									<div>
 										<label>
 											<input placeholder="Endereço"  ng-model="address.address" type="text" tabindex="3" name="address"  required autofocus>
 										</label>
-										<div ng-show="form.address.$touched&&form.address.$error.required">Por favor coloca o endereço</div>
+										<!-- <div ng-show="formAddress.address.$touched&&formAddress.address.$error.required">Por favor coloca o endereço</div> -->
 									</div>	
 									<div>
 										<label>
 											<input placeholder="Numero" ng-model="address.number" type="text" tabindex="4" name="number"  required autofocus>
 										</label>
-										<div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o número</div>
+										<div ng-show="formAddress.number.$touched&&formAddress.number.$error.required">Por favor coloca o número</div>
 									</div>	
 									<div>
 										<label>
@@ -204,7 +235,7 @@
 										<label>
 											<input placeholder="Cidade"  ng-model="address.city" type="text" tabindex="6" name="city" required autofocus>
 										</label>
-										<div ng-show="form.city.$touched&&form.city.$error.required">Por favor coloca a cidade</div>
+										<!-- <div ng-show="formAddress.city.$touched&&formAddress.city.$error.required">Por favor coloca a cidade</div> -->
 									</div>						
 									<div>
 										<label>
@@ -239,7 +270,7 @@
 												<option value="TO">Tocantins</option>
 											</select>
 										</label>
-										<div ng-show="form.state.$touched&&form.state.$error.required">Por favor coloca o estado</div>
+										<!-- <div ng-show="formAddress.state.$touched&&formAddress.state.$error.required">Por favor coloca o estado</div> -->
 									</div>
 									<div>
 										<label>
@@ -251,7 +282,7 @@
 									</div>
 								</div>
 								<div>
-									<input type="submit" ng-class="{disabled:form.$error.required}" ng-disabled="form.$error.required" ng-click="submitShipping(address)" value="Submit Shipping" id="shipping-submit">
+									<input type="submit" ng-class="{disabled:formAddress.$invalid}" ng-disabled="formAddress.invalid" ng-click="addOrEditAddress(address)" value="Adicionar Endereço" >
 								</div>
 							</form>
 							<!-- /Form -->

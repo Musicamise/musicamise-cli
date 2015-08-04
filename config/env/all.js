@@ -14,11 +14,14 @@ module.exports = {
 		lib: {
 			css: [
 				//'public/lib/bootstrap/dist/css/bootstrap.css',
-				//'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/angular-block-ui/dist/angular-block-ui.min.css',
 				'public/css/app.css',
-
+				'public/lib/fancybox-plus/css/jquery.fancybox-plus.css',
+				'public/plugin/owl-carousel/owl.theme.css',
+				'public/plugin/owl-carousel/owl.carousel.css',
 			],
 			js: [
+
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 
@@ -27,14 +30,24 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
+				'public/lib/angular-mask/dist/ngMask.min.js',
+				'public/lib/angular-fancybox-plus/js/angular-fancybox-plus.js',
+				'public/lib/angular-block-ui/dist/angular-block-ui.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/bootstrap-sass-official/assets/javascripts/bootstrap.min.js'
+
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css'
+			'public/modules/**/css/*.css',
+			'public/plugin/etalage/etalage.css',
+
 		],
 		js: [
+			'public/plugin/js/*.js',
+			'public/plugin/etalage/jquery.etalage.min.js',
+			'public/plugin/owl-carousel/owl.carousel.js',
+			'public/lib/fancybox-plus/src/jquery.fancybox-plus.js',
+			'public/lib/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',
 			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',

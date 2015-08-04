@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('checkout').controller('CheckoutController', ['$rootScope','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','UserCheckout',
-	function($rootScope,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,UserCheckout) {
+angular.module('checkout').controller('CheckoutController', ['$rootScope','$window','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','UserCheckout','Cep','blockUI',
+	function($rootScope,$window,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,UserCheckout,Cep,blockUI) {
 		// checkout controller logic
 		// ...
 		$scope.Authentication = Authentication;
@@ -17,17 +17,18 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 		};
 		$scope.shipping = function(){
 			$scope.address = {};
+			$scope.address.blockAll = true;
 			$scope.user = $scope.Authentication.user;
 
-			// $scope.orderCall = OrderCheckout.get();
-			// $scope.orderCall.$promise.then(function(response,error,progressback){
-			// 	// console.log(p);
-			// 	if(response.order.products.length>0){
-			// 		$rootScope.order = response.order;
-			// 	}else{
-			// 		$location.path('/products');
-			// 	}
-			// });
+			$scope.orderCall = OrderCheckout.get();
+			$scope.orderCall.$promise.then(function(response,error,progressback){
+				// console.log(p);
+				if(response.order.products.length>0){
+					$rootScope.order = response.order;
+				}else{
+					$location.path('/products');
+				}
+			});
 
 		};
 		$scope.selectDeliveryAddress = function(selectedSavedAddress){
@@ -58,21 +59,21 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 					});
 				}
 
-				//add address on order
-				// var deliveryAddress = {address:address};
-				// if($rootScope.order.address===undefined){
-				// 	$scope.orderCall = OrderCheckout.addDeliveryAddress(deliveryAddress);
-				// 	$scope.orderCall.$promise.then(function(response,error,progressback){
-				// 		if(!jQuery.isEmptyObject(response.order)){
-				// 			$rootScope.order = response.order;
-				// 		}
-				// 		$location.path('/review');
+				// add address on order
+				var deliveryAddress = {address:address};
+				if($rootScope.order.address===undefined){
+					$scope.orderCall = OrderCheckout.addDeliveryAddress(deliveryAddress);
+					$scope.orderCall.$promise.then(function(response,error,progressback){
+						if(!jQuery.isEmptyObject(response.order)){
+							$rootScope.order = response.order;
+						}
+						$location.path('/review');
 
-				// 	}, function(reason) {
-				// 	  	console.log('Failed: ' + reason);
-				// 		//$location.path('/review'); todo error 
-				// 	});
-				// }
+					}, function(reason) {
+					  	console.log('Failed: ' + reason);
+						//$location.path('/review'); todo error 
+					});
+				}
 
 			}else{
 				$location.path('/shipping');
@@ -100,6 +101,17 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 			});
 		}; 
 
+		$scope.getAddress = function(cep){
+			Cep.get({cep:cep}).$promise.then(function(response,error,progressback){
+				$scope.address.bairro = response.bairro;
+				$scope.address.address = response.logradouro;
+				$scope.address.city  = response.localidade;
+				$scope.address.state = response.uf;
+			},function(reason){
+				$scope.address.blockAll = false;
+			});
+		};
+
 		$scope.reviewOrder = function(){
 			$scope.Authentication = Authentication;
 			$rootScope.order = {};
@@ -124,13 +136,16 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 			$scope.Authentication = Authentication;
 
 			$scope.orderCall = OrderCheckout.pagseguro();
+			blockUI.start();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
 				 if(response.url){
-					 window.location = response.url;
+					 $window.location = response.url;
 				 }else{
 					 console.log(response);
 				 }
+				 blockUI.stop();
 			}, function(reason) {
+				blockUI.stop();
 			  	console.log('Failed: ' + reason);
 				//$location.path('/review'); todo error 
 			});
@@ -138,11 +153,16 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 		
 		$scope.cartRemoveItem = function(id){
 			if(id){	
+				blockUI.start();
 				$scope.orderCall = OrderCheckout.removeItem({id:id});
 				$scope.orderCall.$promise.then(function(response,error,progressback){
 					if(!jQuery.isEmptyObject(response.order)){
 						$rootScope.order = response.order;
 					}
+					blockUI.stop();
+				},function(reason){
+					console.log(reason);
+					blockUI.stop();
 				});
 			}
 			$location.path('/cart');
@@ -150,11 +170,32 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$scop
 		};
 		$scope.updateQuantity = function(id,quantity){
 			if(id){	
+				blockUI.start();
 				$scope.orderCall = OrderCheckout.addItem({id:id,quantity:quantity});
 				$scope.orderCall.$promise.then(function(response,error,progressback){
 					if(!jQuery.isEmptyObject(response.order)){
 						$rootScope.order = response.order;
 					}
+					blockUI.stop();
+				},function(reason){
+					console.log(reason);
+					blockUI.stop();
+				});
+			}
+			$location.path('/cart');
+		};
+		$scope.applyDiscount = function(discountCode){
+			if(discountCode||discountCode!==''){	
+				blockUI.start();
+				$scope.orderCall = OrderCheckout.addDiscountCode({discountCode:discountCode});
+				$scope.orderCall.$promise.then(function(response,error,progressback){
+					if(!jQuery.isEmptyObject(response.order)){
+						$rootScope.order = response.order;
+					}
+					blockUI.stop();
+				},function(reason){
+					console.log(reason);
+					blockUI.stop();
 				});
 			}
 			$location.path('/cart');

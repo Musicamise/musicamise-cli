@@ -22,12 +22,13 @@ exports.update = function(req, res) {
 
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
-
+	delete req.body.password;
+	delete req.body.salt;
 	if (user) {
 		// Merge existing user
 		user = _.extend(user, req.body);
-		user.updated = Date.now();
-		user.displayName = user.firstName + ' ' + user.lastName;
+		user.updatedDate = Date.now();
+		user.displayName = user.fullName||(user.firstName + ' ' + user.lastName);
 
 		user.save(function(err) {
 			if (err) {
@@ -112,6 +113,59 @@ exports.updateAddress = function(req,res){
 			});
 		}else{
 			return res.status(200).send({
+						message: 'Complete os campos do endereço'
+					});
+		}
+	}else{
+		res.status(400).send({
+			message: 'User is not signed in'
+		});
+	}
+
+	// res.status(400).send({
+	// 		message: 'User is not signed in'
+	// 	});
+};
+
+exports.removeAddress = function(req,res){
+	var userLogged = req.user;
+	var address = req.body.address;
+
+	var message = null;
+	console.dir(address);
+	if (userLogged) {
+		if(address&&address._id!==undefined){
+
+			User.findOne({email:userLogged.email},'-salt -password',function(err,user) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					if(address._id!==undefined){
+						user.address = user.address.filter(function(addressInUser,index){
+											return addressInUser._id+''!==address._id+'';
+										});
+					}else{
+						res.status(400).send({
+							message: 'Address não válido'
+						});
+					}
+					user.save(function (err) {
+						console.log(err);
+					});
+
+					req.login(user, function(err) {
+						if (err) {
+							res.status(400).send(err);
+						} else {
+							res.json(user);
+						}
+					});
+				}
+			});
+		}else{
+			return res.status(400).send({
 						message: 'Complete os campos do endereço'
 					});
 		}

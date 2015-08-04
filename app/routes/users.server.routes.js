@@ -14,6 +14,8 @@ module.exports = function(app) {
 	app.route('/users/orderHistory').get(users.orderHistory);
 	app.route('/users').put(users.update);
 	app.route('/users/updateAddress').put(users.updateAddress);
+	app.route('/users/removeAddress').post(users.removeAddress);
+
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
 
 	// Setting up the users password api
@@ -24,13 +26,12 @@ module.exports = function(app) {
 
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(users.signup);
-	app.route('/auth/login').post(users.login);
 	app.route('/auth/signin').post(users.signin);
 	app.route('/auth/signout').get(users.signout);
 
 	// Setting the facebook oauth routes
 	app.route('/auth/facebook').get(passport.authenticate('facebook', {
-		scope: ['email']
+		scope: ['email','user_friends','user_birthday','user_likes','user_actions.music']
 	}));
 	app.route('/auth/facebook/callback').get(users.oauthCallback('facebook'));
 

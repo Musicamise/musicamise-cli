@@ -33,9 +33,8 @@
 
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
-	<script type='text/javascript' src="plugin/js/jquery-1.11.1.min.js"></script>
 
-
+	
 
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
@@ -174,22 +173,29 @@
 
 	</script>
 
-	<script type="text/javascript" src="plugin/js/megamenu.js"></script>
-	<script>$(document).ready(function(){$(".megamenu").megamenu();});
-	</script>
-	<script src="plugin/js/menu_jquery.js"></script>
 	<!--
 	<script src="plugin/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="plugin/jquery-ui-1.11.4.custom/jquery-ui.min.css">
 	-->
-	<!-- login click event-->
-	<script src="plugin/js/login_click_event.js"></script>
 
 
 
+	
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
 
+
+		$(document).ready(function(){
+	 		
+			$(".megamenu").megamenu();
+
+		});
+
+
+	<!--
+	<script type="text/javascript" src="plugin/js/megamenu.js"></script>
+	<script src="plugin/js/menu_jquery.js"></script>
+	-->
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->

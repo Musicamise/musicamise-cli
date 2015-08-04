@@ -12,29 +12,6 @@ angular.module('users').factory('Authentication', [
 		return _this._data;
 	}
 ]);
-angular.module('users').factory('User', ['$resource',
-	function($resource) {
-		return $resource('auth/:action/:token', {
-			action: '@action',
-			token: '@token',
-			},{'signin': {
-						method: 'POST', 
-						isArray: false,
-						params:{action:'signin'}
-						
-         		},'signout': {
-						method: 'GET', 
-						isArray: false,
-						params:{action:'signout'}
-         		},'signup': {
-						method: 'POST', 
-						isArray: false,
-						params:{action:'signup'}
-         		}
-     		}
- 		);
-	}
-]);
 
 angular.module('users').directive('pwCheck', [function () {
     return {

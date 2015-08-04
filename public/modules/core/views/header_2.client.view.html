@@ -1,3 +1,4 @@
+
 <div class="container" data-ng-controller="HeaderController">
 		<div class="head-t" data-ng-init="headerLoginAndCart()">
 			<div class="logo">
@@ -6,8 +7,8 @@
 			<!-- start header_right -->
 			<div class="header_right">
 				<div class="log">
-					<div ng-if="authentication.user===''" class="login" >
-						<div id="loginContainer" ng-init="bindLoginEvent()" ><a href="" id="loginButton"><span>Login</span></a>
+					<div ng-if="authentication.user===''" class="login" ng-init="bindLoginEvent()" >
+						<div id="loginContainer"  ><a href="" id="loginButton"><span>Login</span></a>
 						    <div id="loginBox">                
 						        <form id="loginForm"  ng-submit="login(user)">
 						        	<label class="error">{{login_error}}</label>
@@ -23,7 +24,8 @@
 					                    <input type="submit" id="login" value="Sign in">
 					                	 <label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Remember me</i></label> 
 					            	</fieldset>
-					            	<img  style="border-radius: .4em;" src="images/fb-login.png" alt="facebook"/>
+ 									<!-- <fb:login-button data-scope="email,user_friends" show-faces="true" max-rows="1" size="large" onlogin="checkLoginState()"></fb:login-button> -->
+ 									
 						            <span><a href="#!/user/esquecisenha">Forgot your password?</a></span>
 								</form>
 							</div>
@@ -46,8 +48,10 @@
 					<div ng-if="authentication.user===''"  >
 						  <a type="button" class="btn" ng-href="#!/login">REGISTER</a>
 					</div>
-				
-				 
+					<!-- <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true" data-scope="email,user_friends,user_birthday,user_likes,user_actions.music"></div> -->
+				 	<a href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
+						<img src="/modules/coreUsers/img/buttons/facebook.png">
+					</a>
 					<div class="clearfix"> </div>
 				</div>
 
@@ -60,38 +64,61 @@
 			</div>
 			<div class="clearfix"> </div>
 		</div>
+		<p ng-bind-html="discount.description"> </p>
 		<!-- start header menu -->
-		<ul class="megamenu musicamise">
+	 	<ul class="megamenu musicamise">
 			<li class="active grid"><a class="color1" href="/">Home</a></li>
-			
-			<li class="grid"><a class="color2" href="#">Loja</a>
+			<li class="grid" ng-if="loja"><a class="color2" href="/#!/products">Loja</a>
 				<div class="megapanel">
 
 					<div class="row">
-					{%for key,types in mainMenu%}
-						<div class="col1">
+						<div class="col1" ng-repeat="(key, value) in loja" ng-init="$last ? megamenuDone() : angular.noop()">
 							<div class="header_nav">
-								<h4>{{key}}</h4>
+								<h4 ng-bind="key"></h4>
 								<ul>
-									<li><a href="women.html">new arrivals</a></li>
-									{%for type in types %}
-									<li><a href="women.html">{{type}}</a></li>
-									{%endfor%}
+									<li><a href="">new arrivals</a></li>
+									<li  ng-repeat="typeClothes in value" >
+										<a href="" ng-bind="typeClothes"></a>
+									</li>
 
 								</ul>	
 							</div>							
 						</div>
-					{%endfor%}
-
 					</div>
 					<div class="row">
-					{%for collection in mainMenu%}
-						<div class="col1"></div>
-					{%endfor%}
-
-
+						<div class="col1" ng-repeat="collection in loja"></div>
 					</div>
 				</div>
 			</li>
-		</ul> 
+			<li class="grid" ng-if="localStores"><a class="color2" href="/#!/">Lojas Parceiras</a>
+				<div class="megapanel">
+
+					<div class="row">
+						<div class="col1"  ng-repeat="(store,storeObj) in localStores" ng-init="$last ? megamenuDone() : angular.noop()">
+							<div class="header_nav">
+								<h4 ng-bind="storeObj.title"></h4>
+								<ul>
+									<li  ng-repeat="localStoreType in storeObj.products" >
+										<a href="" ng-bind="localStoreType"></a>
+									</li>
+
+								</ul>	
+							</div>							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col1" ng-repeat="store in localStores"></div>
+					</div>
+				</div>
+			</li>
+		</ul>  
+
+		<script>
+		</script>
+
+		<!-- login click event
+		<script src="plugin/js/menu_jquery.js"></script>
+
+		<script src="plugin/js/login_click_event.js"></script>-->
+		
 </div>
