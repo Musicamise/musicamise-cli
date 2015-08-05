@@ -8,7 +8,7 @@
 module.exports = function(app) {
 	// Article Routes
 	var users = require('../../app/controllers/users.server.controller'),
-		localStore = require('../../app/controllers/localStore.server.controller');
+		localStore = require('../../app/controllers/localstore.server.controller');
 
 	app.route('/api/localstore/')
 		.get(localStore.getLocalStore);
