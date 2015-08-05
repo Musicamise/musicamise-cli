@@ -11,7 +11,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		  	if($location.path()===$scope.path)
 		  		$scope.find();
 		});
-
+		$scope.productQuery = {};
 		$scope.find = function() {
 			$scope.updateVariablesInProductsView();
 			
@@ -27,20 +27,50 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				queryObject.collection = $stateParams.collectionSlug;
 			} 	
 			$scope.products = [];
-			$scope.productsServer = Product.query(queryObject,function(data) {
-                    // console.log(data.status);
-                    // return data[0];
-                });
+			$scope.productsServer = Product.query(queryObject);
 			$scope.productsServer.$promise.then(function(p,error,progressback){
-				// console.log(p);
 				if(p.products)
 					$scope.products = p.products;
 
+			},function(reason){
+				console.log(reason);
 			});
 
 		};
 
-		
+		$scope.findNextPage = function(){
+			if ($scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
+   			if ($scope.productQuery.page) 
+   				$scope.productQuery.page=$scope.productQuery.page+1; 
+
+   			$scope.productQuery.busy = true;
+
+			var queryObject = jQuery.extend(true, {}, $location.search());
+
+			if($stateParams.genderSlug){
+				queryObject.gender = $stateParams.genderSlug;
+			}
+			if($stateParams.model){
+				queryObject.model = $stateParams.model;
+			}
+			if($stateParams.collectionSlug){
+				queryObject.collection = $stateParams.collectionSlug;
+			} 	
+			if ($scope.productQuery.page) 
+				queryObject.page = $scope.productQuery.page;
+
+			$scope.productsServer = Product.query(queryObject);
+			$scope.productsServer.$promise.then(function(p,error,progressback){
+				if(p.products)
+					$scope.products = $scope.products.concat(p.products);
+				if(p.products.length===0)
+					$scope.productQuery.findNextPageStopCalling = true;
+				$scope.productQuery.busy = false;
+			},function(reason){
+				console.log(reason);
+			});
+
+		};
 
 		$scope.findOne = function() {
 			$scope.product = Product.query({
@@ -108,6 +138,9 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		};
 
 		$scope.updateVariablesInProductsView = function(){
+			$scope.productQuery.busy = false;
+			$scope.productQuery.page = 1;
+			$scope.productQuery.findNextPageStopCalling = false;
 			$scope.models = Model.query();
 			$scope.models.$promise.then(function(allCollections){
 				if($stateParams.model){
@@ -390,11 +423,16 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 angular.module('products').controller('ProductsSearchController', ['$scope','$location','$timeout','$stateParams','ProductSearch',
 	function($scope,$location,$timeout,$stateParams,ProductSearch) {
 
+		$scope.$watch(function(){ return $location.search(); }, function(params){
+		    console.log(params);
+		    $scope.search();
+		});
+
 	 	$scope.search = function() {
 			 	
 			$scope.productsServer = ProductSearch.query($location.search());
 			$scope.productsServer.$promise.then(function(response,error,progressback){
-					// console.log(p);
+
 					if(response.productsOutOfStock){
 						$scope.productsOutOfStock = response.productsOutOfStock;
 					}

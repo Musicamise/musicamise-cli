@@ -1,0 +1,44 @@
+<section data-ng-controller="LocalStoreController" data-ng-init="findLocalStore()"  >
+	<!-- content -->
+<div class="container">
+	<div class="check" >	
+	 	<div class="col-md-12 ">
+	 		<h1 ng-bind="localStore.title"></h1>
+	 		<p ng-bind-html="localStore.description"><p>
+	 		 <div id="owl-demo" class="owl-carousel"  >
+	                <div class="item" ng-repeat="image in localStore.images" ng-init="$last?initCarousel():angular.noop()">
+	                	<a ng-href="{{image.redirectUrl||''}}" target="_blank">
+	                		<img  class="img-responsive" ng-src="{{image.url}}" alt="{{image.name}}"> 
+                		</a>
+                		 <p ng-if="image.subtitle" ng-bind="image.subtitle"></p>
+                	</div>
+	                <!-- <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage2.jpg" alt="GTA V"></div>
+	                <div class="item"><img class="img-responsive" src="plugin/owl-carousel/fullimage3.jpg" alt="Mirror Edge"></div> -->
+
+	              </div>
+            </div>
+
+ 			<div  class="cart-header" ng-repeat="product in localStore.products" >
+			 	<div class="cart-sec simpleCart_shelfItem">
+					<div class="cart-item cyc">
+				 		<img src="images/8.jpg" class="img-responsive" alt=""/>
+					</div>
+				   	<div class="cart-item-info">
+						<h3><a href="#" ng-bind="product.title"> </a><span ng-bind="product.type"></span></h3>
+						<p ng-bind-html="product.description"></p>
+				   	</div>
+			   		<div class="clearfix"></div>
+			  	</div>
+		 	</div>
+		 	<div class="check" ng-if="localStore.products.length<=0">
+				<div class="col-md-9 cart-items">
+			 		<h1>Estamo sem produtos nessa loja :(</h1>
+					<h3><a href="#!/products"> Continue Comprando :) </a></h3>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	
+</div>
+</section>

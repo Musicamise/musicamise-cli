@@ -10,7 +10,8 @@ var mongoose = require('mongoose'),
 
 var objectImageSchema = {
     name: {type: String},
-    frontImage: {type: String},
+    frontImage: {type: Boolean, default: false},
+    promotion:{type: Boolean, default: false},
     size: {type: String},
     url: {type: String},
     subtitle: {type: String},

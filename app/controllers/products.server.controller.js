@@ -25,7 +25,7 @@ exports.search = function(req,res){
 	var inventoriesObj = [];
 
 
-	Product.find({'onLineVisible':true,$or:[{'title' : {$regex : query}},{'description' : {$regex : query}},{'userTags' : {$elemMatch : {$regex:query}}}]})
+	Product.find({'onLineVisible':true,$or:[{'title' : {$regex : query,$options:'i'}},{'slug' : {$regex : query,$options:'i'}},{'description' : {$regex : query,$options:'i'}},{'userTags' : {$elemMatch : {$regex:query,$options:'i'}}}]})
 	.select('-_class -createdDate')
 	.exec(function(err,products){
 
@@ -42,14 +42,16 @@ exports.search = function(req,res){
 			products[index].inventories = [];
 		});
 
-		Inventory.find({'_id':{$in:inventoriesObj}}).exec(function(err,inventories){
-			inventories.forEach(function(inventory){
-				if(inventory.sellInOutOfStock||(inventory.quantity>0&&!inventory.orderOutOfStock)){
-					productsInStock = productsInStock.concat(products.filter(function(obj){return inventory.product.oid+''===obj._id+'';}));
-				}else{
-					productsOutOfStock = productsOutOfStock.concat(products.filter(function(obj){return inventory.product.oid+''===obj._id+'';}));
-				}
+		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false})
+		.or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+		.distinct('product.$id')
+		.exec(function(err,productIds){
+			productIds.forEach(function(productId){
+				productsInStock = productsInStock.concat(products.filter(function(obj){return productId+''===obj._id+'';}));
 			});
+
+			productsOutOfStock = _.difference(productsInStock,products);
+
 			res.json({productsOutOfStock:productsOutOfStock,productsForHome:productsForHome,prodcutsAccessories:prodcutsAccessories,productsInStock:productsInStock});
 		});
 	});
@@ -203,7 +205,7 @@ exports.list = function(req, res) {
 	var sort = req.query.sort;
 	var order = req.query.order||'desc';
 
-	var quantity = req.query.quantity||10;
+	var quantity = req.query.quantity||1;
 	var page = req.query.page||1;
 
 	console.log('collection='+collection);

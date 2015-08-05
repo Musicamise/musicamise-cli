@@ -21,7 +21,7 @@ module.exports = {
 				'public/plugin/owl-carousel/owl.carousel.css',
 			],
 			js: [
-
+				'public/plugin/js/jquery-1.11.1.min.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 
@@ -34,6 +34,7 @@ module.exports = {
 				'public/lib/angular-fancybox-plus/js/angular-fancybox-plus.js',
 				'public/lib/angular-block-ui/dist/angular-block-ui.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
 
 			]
 		},
@@ -52,6 +53,7 @@ module.exports = {
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js'
+
 		],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',

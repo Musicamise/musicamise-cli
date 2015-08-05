@@ -2,7 +2,7 @@
 <div class="container" data-ng-controller="HeaderController">
 		<div class="head-t" data-ng-init="headerLoginAndCart()">
 			<div class="logo">
-				<a href="/"><img src="images/musicamise_marca.svg" width="100%" class="img-responsive" alt=""/> </a>
+				<a href="/#!/"><img src="images/musicamise_marca.svg" width="100%" class="img-responsive" alt=""/> </a>
 			</div>
 			<!-- start header_right -->
 			<div class="header_right">
@@ -57,7 +57,7 @@
 
 			<div class="search">
 				<form >
-					<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" placeholder="Search">
+					<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" ng-bind="search.query" placeholder="Search">
 				</form>
 			</div>
 			<div class="clearfix"> </div>
@@ -67,7 +67,7 @@
 		<p ng-bind-html="discount.description"> </p>
 		<!-- start header menu -->
 	 	<ul class="megamenu musicamise">
-			<li class="active grid"><a class="color1" href="/">Home</a></li>
+			<li class="active grid"><a class="color1" href="/#!/">Home</a></li>
 			<li class="grid" ng-if="loja"><a class="color2" href="/#!/products">Loja</a>
 				<div class="megapanel">
 
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="grid" ng-if="localStores"><a class="color2" href="/#!/">Lojas Parceiras</a>
+			<li class="grid" ng-if="localStores"><a class="color2" href="/#!/lojasparceiras/">Lojas Parceiras</a>
 				<div class="megapanel">
 
 					<div class="row">
@@ -99,7 +99,7 @@
 								<h4 ng-bind="storeObj.title"></h4>
 								<ul>
 									<li  ng-repeat="localStoreType in storeObj.products" >
-										<a href="" ng-bind="localStoreType"></a>
+										<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
 									</li>
 
 								</ul>	

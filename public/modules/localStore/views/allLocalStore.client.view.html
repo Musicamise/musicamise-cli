@@ -1,0 +1,25 @@
+<section data-ng-controller="LocalStoreController" data-ng-init="findAllLocalStores()"  >
+	<!-- content -->
+<div class="container">
+	<div class="check" >	
+	 	<div class="col-md-12 ">
+ 			<div  class="cart-header" ng-repeat="localStore in localStores" >
+			 	<div class="cart-sec simpleCart_shelfItem">
+					<a ng-href="/#!/lojasparceiras/{{localStore.slug}}"><h1 ng-bind="localStore.title"></h1></a>
+			 		<p ng-bind-html="localStore.description"><p>
+            		<img  class="img-responsive" ng-src="{{localStore.frontImage.url}}" alt="{{localStore.frontImage.name}}"> 
+        		 	<p ng-if="localStore.frontImage.subtitle" ng-bind="localStore.frontImage.subtitle"></p>
+	            </div>
+		   		<div class="clearfix"></div>
+		  	</div>
+		 	<div class="check" ng-if="localStores.length<=0">
+				<div class="col-md-9 cart-items">
+			 		<h1>Estamo lojas parceiras :(</h1>
+					<h3><a href="#!/products"> Continue Comprando :) </a></h3>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+</section>

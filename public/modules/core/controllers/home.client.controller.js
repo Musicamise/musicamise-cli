@@ -91,6 +91,9 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 
 	  	};
 
+	  	$scope.contact = function() {
+
+	  	};
 	}
 
 ]);

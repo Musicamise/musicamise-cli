@@ -119,11 +119,11 @@ exports.mainMenu = function(req,res){
 					localStoresSlugs.push(store.slug);
 					response.localStores[store.slug] = {'title':store.title};
 				});
-				Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
-					.distinct('product.$id')
-			 		.exec(function(err, productsId){
-
-				Product.find({ '_id':{$in:productsId}})
+				// Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+				// 	.distinct('product.$id')
+			 // 		.exec(function(err, productsId){
+				Product.find({})
+				// .find({ '_id':{$in:productsId}})
 						.where('onLineVisible').equals(true)
 					   	.where('localStoresSlugs').in(localStoresSlugs)
 					   	.select('-_id localStoresSlugs type')
@@ -142,7 +142,7 @@ exports.mainMenu = function(req,res){
 				   		  	done(err, response);
 							// res.json(response);
 				   	});
-			   	});
+			   	// });
 				// res.send({
 				// 	message: 'An email has been sent to ' + user.email + ' with further instructions.'
 				// });

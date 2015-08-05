@@ -8,6 +8,11 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 		// $scope.isCollapsed = false;
 		
 		$scope.user = Authentication.user;
+		$scope.search = {};
+		
+		$scope.$watch(function(){ return $location.search().q; }, function(params){
+			$scope.search.query = $location.search().q;
+		});
 
 		$scope.headerLoginAndCart = function(){
 			$scope.authentication = Authentication;
@@ -25,7 +30,6 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 				$scope.discount = response.discount;
 			});
 
-		
 		};
 		
 
