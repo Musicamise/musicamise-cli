@@ -11,3 +11,14 @@ angular.module('core').factory('MainPage', ['$resource',
 		});
 	}
 ]);
+angular.module('core').factory('SendContact', ['$resource',
+	function($resource) {
+		return $resource('api/sendcontact', {
+		}, {
+			send: {
+				method: 'POST',
+				isArray: false
+			}
+		});
+	}
+]);

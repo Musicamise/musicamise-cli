@@ -530,14 +530,12 @@ exports.removeItemCart = function(req, res) {
 exports.addDeliveryAddress = function(req,res){
 	var key = 'order'+req.sessionID;
 	var address = req.body.address;
-	var user = req.user;
-	console.log('address add address');
-	console.log(address);
+	var user = req.user||req.body.user;
 
 
 	if(!user){
 		return res.status(500).send({
-			message: 'Não logado'
+			message: 'Não logado ou usário nao encontrado!'
 		});
 	}
 	if(address){
@@ -551,9 +549,11 @@ exports.addDeliveryAddress = function(req,res){
 
 			if(orderCachedJsonString){
 				var orderCached = new Order(JSON.parse(orderCachedJsonString)); 
-
+				if(!user.displayName)
+					user.displayName = user.fullName;
 				orderCached.shippingAddress = address;
 				orderCached.user = user;
+
 				myCache.set(key,JSON.stringify(orderCached) , function( err, success ){
 					if( !err && success ){
 				 		console.log('cache sucess:'+ success);
@@ -615,11 +615,11 @@ exports.processToPagseguro = function(req,res){
 	// 		    }
 	// 		});
 
-	if(!user){
-		return res.status(500).send({
-			message: 'Não logado'
-		});
-	}
+	// if(!user){
+	// 	return res.status(500).send({
+	// 		message: 'Não logado'
+	// 	});
+	// }
 	myCache.get(key, function( err, orderCachedJsonString ){
 		if(err){ 	
 			console.log('error:'+ err);

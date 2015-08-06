@@ -12,7 +12,9 @@ var mongoose = require('mongoose'),
 	Inventory = mongoose.model('Inventory'),
 	LocalStore = mongoose.model('LocalStore'),
 	SiteContent = mongoose.model('SiteContent'),
+	nodemailer = require('nodemailer'),
 	async = require('async'),
+	config = require('../../config/config'),
 	_ = require('lodash');
 var	orderController = require('../../app/controllers/order.server.controller');
 var	DiscountCode = mongoose.model('DiscountCode');
@@ -227,3 +229,55 @@ exports.mainPage = function(req,res){
 	});
 };
 
+/**
+ * Forgot for reset password (forgot POST)
+ */
+exports.sendContact = function(req, res, next) {
+	async.waterfall([
+		// Lookup user by email
+		function(done) {
+			if(req.body.userContact.email&&req.body.userContact.content&&req.body.userContact.subject){
+
+				res.render('templates/contact-email', {
+					name: req.body.userContact.name,
+					email: req.body.userContact.email,
+					phone: req.body.userContact.phone,
+					content: req.body.userContact.content,
+					appName: config.app.title
+				}, function(err, emailHTML) {
+					done(err, emailHTML, req.body.userContact);
+				});
+			}else{
+				return res.status(400).send({
+					message: 'Por favor preencha os dados corretamente.'
+				});
+			}
+
+		},
+		// If valid email, send reset email using service
+		function(emailHTML, userContact, done) {
+			var smtpTransport = nodemailer.createTransport(config.mailer.options);
+			var mailOptions = {
+				to: config.mailer.from,
+				from: config.mailer.from,
+				subject: 'Contato - '+userContact.subject,
+				html: emailHTML
+			};
+			smtpTransport.sendMail(mailOptions, function(err) {
+				if (!err) {
+					res.send({
+						message: 'Obrigado por entrar em contato a equipe '+config.app.title+' agradece!'
+					});
+				}
+
+				done(err);
+			});
+		}
+	], function(err) {
+		if(err){
+			return res.status(400).send({
+				message: err
+			});
+		}	
+	});
+};

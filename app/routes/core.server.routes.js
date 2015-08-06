@@ -8,4 +8,7 @@ module.exports = function(app) {
 	app.route('/').get(core.index);
 	app.route('/api/mainmenu').get(core.mainMenu);
 	app.route('/api/mainpage').get(core.mainPage);
+	app.route('/api/sendcontact').post(core.sendContact);
+
+	
 };

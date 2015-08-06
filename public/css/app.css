@@ -12123,3 +12123,84 @@ p.cart a {
 .check-out {
   padding: 6em 0;
 }
+
+/* start contact */
+.contact {
+  margin: 2% 0;
+  display: block;
+}
+
+.contact h2 {
+  font-size: 1.5em;
+  color: #00405d;
+  text-shadow: 0 1px 0 #ffffff;
+  text-transform: capitalize;
+}
+
+.map {
+  margin: 2% 2% 2% 0;
+}
+
+.col {
+  display: block;
+}
+
+.contact-form {
+  position: relative;
+}
+
+.contact-form div {
+  padding: 5px 0;
+}
+
+.contact-form span label {
+  margin-top: 10px;
+  color: #777777;
+  display: block;
+  font-size: 0.8725em;
+  padding-bottom: 5px;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.contact-form input[type="text"], .contact-form textarea {
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #E7E7E7;
+  color: rgba(85, 81, 81, 0.84);
+  padding: 8px;
+  display: block;
+  width: 96.3333%;
+  outline: none;
+  -webkit-appearance: none;
+  text-transform: capitalize;
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 120px;
+}
+
+.contact-form input[type="submit"] {
+  margin-top: 10px;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  padding: 12px 25px;
+  background: #ff6978;
+  color: #fff;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-form input[type="submit"]:hover {
+  background: #00405d;
+  color: #ffffff;
+}

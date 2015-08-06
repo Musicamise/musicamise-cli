@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
   "dependencies": {
+    "angular": "#1.4.3",
     "bootstrap": "~3",
-    "angular": ">=1.0.8",
     "angular-resource": "~1.2",
     "angular-mocks": "~1.2",
     "angular-cookies": "~1.2",
@@ -12,15 +12,15 @@
     "angular-touch": "~1.2",
     "angular-sanitize": "~1.2",
     "angular-bootstrap": "~0.11.2",
-    "angular-ui-utils": "#0.1.1",
+    "angular-ui-utils": "latest",
     "angular-ui-router": "#0.2.15",
     "bootstrap-sass-official": "~3.3.4",
     "angular-mask": "~3.0.12",
     "angular-block-ui": "~0.2.0",
     "angular-fancybox-plus": "~1.0.2",
-    "ngInfiniteScroll":"#1.0.0"
+    "ngInfiniteScroll": "#1.0.0"
   },
   "resolutions": {
-    "angular": ">= 1.0.8"
+    "angular": "1.4.3"
   }
 }

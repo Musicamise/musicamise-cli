@@ -17,8 +17,8 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		};
 		$scope.shipping = function(){
 			$scope.address = {};
+			$scope.user = ($scope.Authentication.user)? $scope.Authentication.user : {};
 			$scope.address.blockAll = true;
-			$scope.user = $scope.Authentication.user;
 
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
@@ -31,6 +31,12 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			});
 
 		};
+
+		$scope.isEmpty = function (obj) {
+		    for (var i in obj) if (obj.hasOwnProperty(i)) return false;
+		    return true;
+		};
+
 		$scope.selectDeliveryAddress = function(selectedSavedAddress){
 			// $scope.address = 
 
@@ -45,14 +51,16 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			}
 
 		};
-		$scope.submitShipping = function(address){
-			if(address&&$scope.Authentication.user){
+		$scope.submitShipping = function(address,userModel){
+			if(address&&userModel){
 				//save or update address for user!
 				if(address.saveaddress||address.openAddressForm&&address._id!==undefined){
 					$scope.shippingCall = UserCheckout.updateAddress({address:address});
 					$scope.shippingCall.$promise.then(function(response,error,progressback){
 						if(response){
 							console.log(response); 
+							$scope.user = response;
+							$window.user= response;
 						}
 					},function(reason){
 						console.log('Save user address Failed: ' + reason.message);
@@ -60,7 +68,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 				}
 
 				// add address on order
-				var deliveryAddress = {address:address};
+				var deliveryAddress = {address:address,user:userModel};
 				if($rootScope.order.address===undefined){
 					$scope.orderCall = OrderCheckout.addDeliveryAddress(deliveryAddress);
 					$scope.orderCall.$promise.then(function(response,error,progressback){
@@ -83,7 +91,6 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 
 		$scope.checkout = function(){
 			$scope.Authentication = Authentication;
-			$rootScope.order = {};
 
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
@@ -114,7 +121,6 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 
 		$scope.reviewOrder = function(){
 			$scope.Authentication = Authentication;
-			$rootScope.order = {};
 
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){

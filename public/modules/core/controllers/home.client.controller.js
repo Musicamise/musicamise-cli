@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authentication','MainPage','blockUI','fancyboxService',
-	function($scope,$timeout, Authentication,MainPage,blockUI,fancyboxService) {
+angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authentication','MainPage','blockUI','fancyboxService','SendContact',
+	function($scope,$timeout, Authentication,MainPage,blockUI,fancyboxService,SendContact) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
@@ -92,8 +92,29 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 	  	};
 
 	  	$scope.contact = function() {
-
+	  		$scope.userContact = {};
 	  	};
+	  	
+  		$scope.sendContact = function() {
+  			if(!$scope.userContact)
+				$scope.error = 'Preencha o cadastro!';
+			else if(!$scope.userContact.email)
+				$scope.error = 'Preencha o Email!';
+			else if(!$scope.userContact.subject)
+				$scope.error = 'Preencha o Assunto!';
+			else if(!$scope.userContact.content)
+				$scope.error = 'Preencha a mensagem!';
+
+			if(!$scope.error){
+				SendContact.send({userContact:$scope.userContact}).$promise.then(function(response,error,progressback){
+  					$scope.success = response.message;
+	  			},function(reason){
+	  				$scope.error = reason.data.message;
+	  			});
+			}
+  			
+	  	};
+	  	
 	}
 
 ]);

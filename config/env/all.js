@@ -13,9 +13,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				//'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/angular-block-ui/dist/angular-block-ui.min.css',
-				'public/css/app.css',
 				'public/lib/fancybox-plus/css/jquery.fancybox-plus.css',
 				'public/plugin/owl-carousel/owl.theme.css',
 				'public/plugin/owl-carousel/owl.carousel.css',
@@ -29,7 +27,14 @@ module.exports = {
 				'public/lib/angular-touch/angular-touch.js', 
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
+				'public/lib/angular-ui-scroll/dist/ui-scroll.min.js',
+			    'public/lib/angular-ui-scrollpoint/dist/scrollpoint.min.js',
+			    'public/lib/angular-ui-event/dist/event.min.js',
+			    'public/lib/angular-ui-mask/dist/mask.min.js',
+			    'public/lib/angular-ui-validate/dist/validate.min.js',
+			    'public/lib/angular-ui-indeterminate/dist/indeterminate.min.js',
+			    'public/lib/angular-ui-uploader/dist/uploader.min.js',
+				'public/lib/angular-ui-utils/index.js',
 				'public/lib/angular-mask/dist/ngMask.min.js',
 				'public/lib/angular-fancybox-plus/js/angular-fancybox-plus.js',
 				'public/lib/angular-block-ui/dist/angular-block-ui.min.js',
@@ -40,8 +45,8 @@ module.exports = {
 		},
 		css: [
 			'public/modules/**/css/*.css',
+			'public/css/app.css',
 			'public/plugin/etalage/etalage.css',
-
 		],
 		js: [
 			'public/plugin/js/*.js',
@@ -53,7 +58,6 @@ module.exports = {
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js'
-
 		],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
