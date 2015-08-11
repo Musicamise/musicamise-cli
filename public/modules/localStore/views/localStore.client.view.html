@@ -21,10 +21,14 @@
  			<div  class="cart-header" ng-repeat="product in localStore.products" >
 			 	<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
-				 		<img src="images/8.jpg" class="img-responsive" alt=""/>
+						<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+			   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+			   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
+		   		  		</a>
 					</div>
 				   	<div class="cart-item-info">
-						<h3><a href="#" ng-bind="product.title"> </a><span ng-bind="product.type"></span></h3>
+						<h3><a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
+		    			</a><span ng-bind="product.type"></span></h3>
 						<p ng-bind-html="product.description"></p>
 				   	</div>
 			   		<div class="clearfix"></div>

@@ -25,7 +25,12 @@
 		 		<h3>OPTIONS</h3>
 		 		<h4>COUPONS</h4>
 		 		<input type='text'  ng-model='order.discountCode._id' > <br/><br/>
-		 		<a class="cpns" href="" ng-click="applyDiscount(order.discountCode._id)">Apply Coupons</a>
+		 		<a class="cpns" href="" ng-click="applyDiscount(order.discountCode._id)">Apply Coupons</a><br/><br/>
+		 		<h4>Shipping</h4><br/>
+		 		<form id='form' name="form"  action="javacript:void(0)"  novalidate>
+		 		<input placeholder="Cep ex:52031-300" name="cep" ng-model='order.shippingAddress.cep' type="text" tabindex="2"  mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' required autofocus><br/><br/>
+		 		<a class="cpns" href="" ng-click="!form.cep.$invalid?applyShippingAddress(order.shippingAddress.cep) : angular.noop() ">Apply CEP</a>
+		 		</form>
 		 		<!-- <p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p> -->
 			</div>
 		</div>
@@ -38,10 +43,10 @@
 		 		<div class="close1" ng-click='cartRemoveItem(product._id)'> </div>
 			 	<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
-				 		<img src="images/8.jpg" class="img-responsive" alt=""/>
+				 		<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/>
 					</div>
 				   	<div class="cart-item-info">
-						<h3><a href="#" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
+						<h3><a ng-href="" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
 						<ul class="qty">
 							<li><p>Size : <label ng-bind="product.size"></label></p></li>
 							<li><p>Qty : <input type='number' class='quantity' ng-model='product.quantity' min="1" max="4" ng-change="updateQuantity(product._id,product.quantity)" ng-value="product.quantity"></p></li>
@@ -50,9 +55,10 @@
 						 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
 					 		<div class="clearfix"></div>
 				        </div>	
-					 	<div class="delivery">
+					 	<div class="delivery" ng-show="order.shippingAddress.prazo">
 						 	<p>Service Charges : <label ng-bind="order.totalShippingFormatted"></label></p>
-						 	<span>Delivered in 2-3 bussiness days</span>
+						 	<span >Entregamos em até &nbsp;
+						 	<span ng-bind="order.shippingAddress.prazo"> </span></span>
 					 		<div class="clearfix"></div>
 				        </div>		
 				   	</div>

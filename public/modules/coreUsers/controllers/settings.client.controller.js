@@ -10,7 +10,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.profile =function(){
 			$scope.user = Authentication.user;
 		};
-
+		$scope.orderHistory = function(){
+			$scope.newOrders = [];
+			$scope.oldOrders = [];
+			User.orderHistory.$promise.then(function(response,error,progressback){
+				$scope.newOrders = response.newOrders;
+				$scope.oldOrders = response.oldOrders;
+			},function(reason){
+				$location.path('/');
+			});
+		};
 		$scope.getAddress = function(cep){
 			Cep.get({cep:cep}).$promise.then(function(response,error,progressback){
 				$scope.address.bairro = response.bairro;
@@ -22,6 +31,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
+		$scope.favoritos = function(){
+			$scope.favoritosProducts = [];
+			User.getFavoritos().$promise.then(function(response,error,progressback){
+				$scope.favoritosProducts = response.products;
+			},function(reason){
+
+			});
+		};
 
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {

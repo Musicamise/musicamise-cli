@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	crypto = require('crypto');
 
 var objectAddressSchema = {
+    prazo: {type: String},
     name: {type: String},
     cep: {type: String},
     address: {type: String},

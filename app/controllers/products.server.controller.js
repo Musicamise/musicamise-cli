@@ -42,6 +42,25 @@ exports.search = function(req,res){
 			products[index].inventories = [];
 		});
 
+		products.forEach(function(product,indexProduct){
+			var images = [];
+
+			var frontImages = product.images.filter(function(image,indexImage){
+				return image.frontImage;
+			});
+			var notFrontImage = product.images.filter(function(image,indexImage){
+				return !image.frontImage;
+			});
+
+			if(frontImages.length>0){
+				images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+			}else{
+				images = notFrontImage.slice(0,2);
+			}
+			products[indexProduct].images = images;
+			products[indexProduct].inventories = [];
+		});
+
 		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false})
 		.or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 		.distinct('product.$id')
@@ -131,6 +150,24 @@ exports.listRelated = function(req, res) {
 					message: err
 				});
 			}		
+			products.forEach(function(product,indexProduct){
+				var images = [];
+
+				var frontImages = product.images.filter(function(image,indexImage){
+					return image.frontImage;
+				});
+				var notFrontImage = product.images.filter(function(image,indexImage){
+					return !image.frontImage;
+				});
+
+				if(frontImages.length>0){
+					images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+				}else{
+					images = notFrontImage.slice(0,2);
+				}
+				products[indexProduct].images = images;
+				products[indexProduct].inventories = [];
+			});
  			res.json({products:products,queryDate:new Date()});
 		});
 	});
@@ -205,7 +242,7 @@ exports.list = function(req, res) {
 	var sort = req.query.sort;
 	var order = req.query.order||'desc';
 
-	var quantity = req.query.quantity||1;
+	var quantity = req.query.quantity||10;
 	var page = req.query.page||1;
 
 	console.log('collection='+collection);
@@ -288,6 +325,25 @@ exports.list = function(req, res) {
 					message: err
 				});
 			}		
+			products.forEach(function(product,indexProduct){
+				var images = [];
+
+				var frontImages = product.images.filter(function(image,indexImage){
+					return image.frontImage;
+				});
+				var notFrontImage = product.images.filter(function(image,indexImage){
+					return !image.frontImage;
+				});
+
+				if(frontImages.length>0){
+					images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+				}else{
+					images = notFrontImage.slice(0,2);
+				}
+				products[indexProduct].images = images;
+				products[indexProduct].inventories = [];
+			});
+
  			res.json({products:products,queryDate:new Date()});
 		});
 	});

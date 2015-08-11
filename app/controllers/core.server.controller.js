@@ -20,9 +20,12 @@ var	orderController = require('../../app/controllers/order.server.controller');
 var	DiscountCode = mongoose.model('DiscountCode');
 
 exports.index = function(req, res) {
-	res.render('index', {
-		user: req.user || null,
-	});
+	SiteContent.findOne({'visible':true,'_id':'socialPage'}).exec(function(err,content){
+		res.render('index', {
+			user: req.user || null,
+			content: content,
+		});
+	 });
 };
 
 var translateDiscountCode = function(discountObject){
@@ -68,7 +71,7 @@ exports.mainMenu = function(req,res){
 	async.waterfall([
 	function(done) {
 		Collection.find({'onLineVisible':true}).or([{'gender':true},{'mainMenu':true}])
-		.select('-_id slug')
+		.select('-_id slug gender')
 		.exec(function(err, collectionsSlugs){
 			if(err){
 				return res.status(400).send({
@@ -76,9 +79,16 @@ exports.mainMenu = function(req,res){
 				});
 			}		
 			var collectionsSlugsMapped = [];
+			var collectionSlugGender = [];
+			var collectionsSlugsNotGender = [];
 			collectionsSlugs.map(function(collection){
-				collectionsSlugsMapped.push(collection.slug);
+				if(collection.gender)
+					collectionSlugGender.push(collection.slug);
+				else
+					collectionsSlugsNotGender.push(collection.slug);
 			});
+			collectionsSlugsMapped = _.union(collectionSlugGender,collectionsSlugsNotGender);
+
 			//todo with inventory?
 			Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 					.distinct('product.$id')
@@ -90,21 +100,26 @@ exports.mainMenu = function(req,res){
 					   	.select('-_id collectionsSlugs type')
 					   	.exec(function(err,products){
 
-							var mainMenu = {};
+							var gender = {};
+							var collection = {};
+
 							if(products){
 					            products.forEach(function(product) {
-						       		product.collectionsSlugs.forEach(function(collection){
-							   			if(mainMenu[collection]){
-											mainMenu[collection].push(product.type);         				
-							   			}else{
-											mainMenu[collection]  = [];
-											mainMenu[collection].push(product.type);         				
+						       		product.collectionsSlugs.forEach(function(collectionSlug){
+							   			if(collectionSlugGender.indexOf(collectionSlug)>=0){
+							   				if(!gender[collectionSlug])
+							   					gender[collectionSlug] = [];
+											gender[collectionSlug].push(product.type);         				
+							   			}else if(collectionsSlugsNotGender.indexOf(collectionSlug)>=0){
+											if(!collection[collectionSlug])
+												collection[collectionSlug] = [];
+											collection[collectionSlug].push(product.type);         				
 							   			}
 							   		});
 					            });
 							}
 
-				            done(err, {'loja':mainMenu});
+				            done(err, {'loja':{gender:gender,collection:collection}});
 	        				// res.json(mainMenu);
 
 				}); 
@@ -188,9 +203,7 @@ exports.mainPage = function(req,res){
 	function(done) {
 		 SiteContent.findOne({'visible':true,'_id':'frontPage'}).exec(function(err,content){
 		 	if(err){
-				return res.status(400).send({
-					message: err
-				});
+				done(err);
 			}else{
 				if(content)
 			 		done(err,{'content':content});
@@ -198,8 +211,20 @@ exports.mainPage = function(req,res){
 			 		done(err,{'content':new SiteContent()});
 			}	
 		 });
-	},
-	function(response, done) {
+	},function(response,done) {
+		 Collection.find({'onLineVisible':true}).or([{'gender':true},{'front':true}])
+		.select('-_id title description slug image front gender')
+		.exec(function(err, collectionsSlugs){
+		 	if(err){
+				done(err);
+			}else{
+				if(collectionsSlugs){
+					response.collections = collectionsSlugs;
+			 		done(err,response);
+				}
+			}	
+		 });
+	},function(response, done) {
 			Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 						.distinct('product.$id')
 				 		.exec(function(err, productsId){
@@ -207,10 +232,28 @@ exports.mainPage = function(req,res){
 					Product.find({ '_id':{$in:productsId}})
 							.where('onLineVisible').equals(true)
 						   	.where('collectionsSlugs').in(['destaque'])
-						   	.select('-_id price title priceCompareWith images')
+						   	.select('-_id slug price title priceFormatted priceOldFormatted priceCompareWith images')
 						   	.limit(4)
 						   	.exec(function(err,products){
 						   		if(!err){
+			   						products.forEach(function(product,indexProduct){
+										var images = [];
+
+										var frontImages = product.images.filter(function(image,indexImage){
+											return image.frontImage;
+										});
+										var notFrontImage = product.images.filter(function(image,indexImage){
+											return !image.frontImage;
+										});
+
+										if(frontImages.length>0){
+											images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+										}else{
+											images = notFrontImage.slice(0,2);
+										}
+										products[indexProduct].images = images;
+										products[indexProduct].inventories = [];
+									});
 							   		response.destaque = products;
 									res.json(response);
 									//done(err,response);

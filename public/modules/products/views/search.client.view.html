@@ -20,11 +20,12 @@
 			<h3>Produtos em estoque</h3>
 		  	<div class="grid1_of_4" ng-repeat="product in productsInStock" >
 				<div class="content_box">
-					<a ng-href="#!/product/{{product.slug}}">
-		   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
 		   		  	</a>
 		    		<h4>
-	    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  
+	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
 		    			</a>
 	    			</h4>
 			     	<p>{{product.type}} new: {{product.newProduct}}</p>
@@ -52,11 +53,12 @@
 	 		<h3>Produtos para Casa</h3>
 		  	<div class="grid1_of_4" ng-repeat="product in productsForHome" >
 				<div class="content_box">
-					<a ng-href="#!/product/{{product.slug}}">
-		   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
 		   		  	</a>
 		    		<h4>
-	    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  
+	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
 		    			</a>
 	    			</h4>
 			     	<p>{{product.type}} new: {{product.newProduct}}</p>
@@ -84,11 +86,12 @@
 		 	<h3>Acessórios</h3>
 		  	<div class="grid1_of_4" ng-repeat="product in prodcutsAccessories" >
 				<div class="content_box">
-					<a ng-href="#!/product/{{product.slug}}">
-		   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
 		   		  	</a>
 		    		<h4>
-	    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  
+	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
 		    			</a>
 	    			</h4>
 			     	<p>{{product.type}} new: {{product.newProduct}}</p>
@@ -116,11 +119,12 @@
 		 	<h3>Fora de estoque</h3>
 		  	<div class="grid1_of_4" ng-repeat="product in productsOutOfStock" >
 				<div class="content_box">
-					<a ng-href="#!/product/{{product.slug}}">
-		   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
 		   		  	</a>
 		    		<h4>
-	    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  
+	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
 		    			</a>
 	    			</h4>
 			     	<p>{{product.type}} new: {{product.newProduct}}</p>

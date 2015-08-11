@@ -69,10 +69,13 @@ var OrderSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	idCompraPageseguro: {
+	updatedDate: {
+		type: Date,
+		default: Date.now
+	},
+	notes: {
 		type: String,
 		default: '',
-		trim: true
 	},
 	email: {
 		type: String,
@@ -143,7 +146,8 @@ var OrderSchema = new Schema({
 		type: String,
 		default: 'R$0,00',
 		trim: true
-	}
+	},
+	pagSeguroInfo:{}
 });
 
 /**
@@ -154,7 +158,13 @@ OrderSchema.pre('save', function(next) {
 		delete this.user.createdDate;
 		delete this.user.updatedDate;
 		delete this.user.additionalProvidersData;
+		delete this.user.providerData;
 		this.email = this.user.email;
+	}
+	if(this.discountCode){
+		delete this.discountCode.startDate;
+		delete this.discountCode.endDate;
+		delete this.discountCode.createdDate;
 	}
 
 	next();

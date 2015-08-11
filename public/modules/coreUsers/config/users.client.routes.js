@@ -9,6 +9,14 @@ angular.module('users').config(['$stateProvider',
 			url: '/user/profile',
 			templateUrl: 'modules/coreUsers/views/authentication/profile.client.view.html'
 		}).
+		state('orderHistory', {
+			url: '/user/orders',
+			templateUrl: 'modules/coreUsers/views/authentication/order_history.client.view.html'
+		}).
+		state('favoritos', {
+			url: '/user/favoritos',
+			templateUrl: 'modules/coreUsers/views/authentication/favoritos.client.view.html'
+		}).
 		state('loginAndRegister', {
 			url: '/login',
 			templateUrl: 'modules/coreUsers/views/authentication/login_register.client.view.html'

@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
 	config = require('../../config/config'),
 	Order = mongoose.model('Order'),
 	session = require('express-session'),
-
+	async = require('async'),
 	ObjectId = require('mongoose').Types.ObjectId,
 	_ = require('lodash');
 
@@ -25,7 +25,7 @@ var request = require('request');
 
 var NodeCache = require('node-cache');
 var myCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
-
+var cepOrigen = '52031300';
 
 var discountIsApplicable = function(cartItems,discountObject){
 
@@ -67,185 +67,347 @@ var discountIsApplicable = function(cartItems,discountObject){
 
 };
 
-var processOrder = function(req,res,order,discountCodePost,giftCardPost){
-	var key = 'order'+req.sessionID;
-	
-	order.totalValueItems = 0;
-	order.totalItems = 0;
-	if(order.products.length>0){
-		order.products.forEach(function(product,index){
+var getShippingCityAndState = function(cepDestino){
+	var urlTo = 'http://cep.correiocontrol.com.br/'+cepDestino+'.json';
+	request.get({url:urlTo,qs:{}},
+		function (error, response, body) {
 
-			order.products[index].priceWithQuantity = order.products[index].quantity* order.products[index].product.price;
-			order.products[index].priceWithQuantityFormatted = 'R$'+ numeral(order.products[index].priceWithQuantity).format('0.00').replace('.',',');
-			
-			order.totalValueItems = order.totalValueItems +  order.products[index].quantity* order.products[index].product.price;
-		 	order.totalItems =  order.totalItems +1;
+		    if (!error && response.statusCode === 200) {
+	    		
+    			console.log(body);
+				return body;
+		    }else{
+				return error;
+		    }
 
 		});
-	}
-	var discountCode ;
-	if(order.discountCode)
-		discountCode = order.discountCode._id;
-	else if(discountCodePost)
-		discountCode = discountCodePost;
 
-	var giftCard ;
-	if(order.giftCardCode)
-		giftCard = order.giftCardCode._id;
-	else if(giftCardPost)
-		giftCard = giftCardPost;
+	
+};
+var getShippingPriceAndDate = function(cepOrigen,cepDestino){
+	async.waterfall([
+	function(done) {
+		var object = {};
+		object.nCdEmpresa = '';
+		object.sDsSenha = '';
+		object.sCepOrigem = cepOrigen;
+		object.sCepDestino = cepDestino;
+		object.nVlPeso = '1';
+		object.nCdFormato = '1';
+		object.nVlComprimento = '16';
+		object.nVlAltura = '2';
+		object.nVlLargura = '11';
+		object.sCdMaoPropria = 'N';
+		object.nVlValorDeclarado = '150';
+		object.sCdAvisoRecebimento = 'N';
+		object.nCdServico = '41106'; // outros sao possiveis
+		object.nVlDiametro = '0';
+		object.StrRetorno = 'xml';
 
-	console.log('discountObject Process');
-	console.log(discountCode);
-	if(discountCode){
-		DiscountCode.findOne({_id:discountCode,active:true,
-			$and:[{$or:[{noTimesLimits:true},{timesLeft:{$gt:0}}]},
-					{$or:[{noDateLimits:true},{endDate:{$lte:new Date()}}]}
-				 ]
-			})
-			.exec(function(err,discountObject){
+		request.get({url:'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx', 
+				qs: object},
+				function (error, response, body) {
 
-				if(!err&&discountObject){
-					order.discountCode = discountObject;
-					if(order.products.length>0){
-						switch(discountObject.whereApply){
-							case 'oncePerOrder':
-								if(discountIsApplicable(order.products,discountObject)){
-									switch(discountObject.typeForPay){
-										case 'value':
-											order.totalDiscount = discountObject.valueOf;
-											break;
-										case 'percent':
-											order.totalDiscount = order.totalValueItems*discountObject.valueOf/100;
-											break;
-									}
-								 	order.products.forEach(function(product,index){
-										delete order.products[index].product.discountValue;
-										delete order.products[index].product.discountValueFormatted;
-									});
-								}
-								break;
-							case 'toEveryProduct':
-								order.totalDiscount = 0;
-							 	order.products.forEach(function(product,index){
+				    if (!error && response.statusCode === 200) {
+			    		parseString(body, function (err, result) {
+			    			console.log(result);
+							done(undefined,result);
 
-									if(discountIsApplicable([order.products[index]],discountObject)){
-										switch(discountObject.typeForPay){
-											case 'value':
-												order.products[index].product.discountValue = order.products[index].quantity*discountObject.valueOf;
-												order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
-												order.totalDiscount = order.totalDiscount+order.products[index].quantity*discountObject.valueOf;
-												break;
-											case 'percent': 
-												order.products[index].product.discountValue = order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
-												order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
-												order.totalDiscount = order.totalDiscount+order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
-												break;
-										}
-
-									}		 							
-								});
-								break;
-						}
-					}
-				}
-				if(giftCard){
-					GiftCard.find({_id:giftCard,active:true,used:false}).exec(function(err,giftCardObject){
-						if(!err){
-							if(giftCardObject){
-								order.giftCard =giftCardObject;
-								order.giftCardValue = giftCardObject.price;  
-								order.giftCardValueFormatted = 'R$'+numeral(order.giftCardValue).format('0.00').replace('.',',');
-							}
-						}
-						order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
-						order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
-						order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
-						order.total = order.totalValueItems + order.totalShipping - order.totalDiscount- (order.giftCardValue||0);
-						order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
-			      		myCache.set(key,JSON.stringify(order) , function( err, success ){
-							if( !err && success ){
-						 		console.log('cache sucess:'+ success);
-
-							}else{
-								console.log('error:'+ err);
-									return res.status(500).send({
-									message: err
-								});
-							}
 						});
-			      		res.json({order:order});
+				    }else{
+						done(error);
+				    }
+
+				});
+	},function(result,done){
+		console.log('done!');
+		return result;
+	}],function(err){
+		console.log('error');
+		return err;
+	});
+
+};
+exports.correios = function(req,res){
+	async.waterfall([
+	function(done) {
+		var result = getShippingCityAndState('96825150'); 
+		done(null,result);
+	},function(result,done){
+		res.json({test:result});
+	}],function(err){
+		res.json({error:err});
+	});
+
+};
+var processOrder = function(req,res,order,discountCodePost,giftCardPost){
+	async.waterfall([
+	function(done){
+		if(order.shippingUpdated){
+			var cepDestino ;
+			if(order.shippingAddress)
+				cepDestino = order.shippingAddress.cep;
+			else
+				cepDestino = undefined;
+			if(cepDestino){
+
+				var object = {};
+				object.nCdEmpresa = '';
+				object.sDsSenha = '';
+				object.sCepOrigem = cepOrigen;
+				object.sCepDestino = cepDestino;
+				object.nVlPeso = '1';
+				object.nCdFormato = '1';
+				object.nVlComprimento = '16';
+				object.nVlAltura = '2';
+				object.nVlLargura = '11';
+				object.sCdMaoPropria = 'N';
+				object.nVlValorDeclarado = '150';
+				object.sCdAvisoRecebimento = 'N';
+				object.nCdServico = '41106'; // outros sao possiveis
+				object.nVlDiametro = '0';
+				object.StrRetorno = 'xml';
+
+				request.get({url:'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx', 
+						qs: object,timeout: 120000},
+						function (error, response, body) {
+
+						    if (!error && response.statusCode === 200) {
+					    		parseString(body, function (err, result) {
+					    			console.log(result);
+									done(err,{correios:result});
+								});
+						    }else{
+								done(error);
+						    }
+
+						});
+			}else{
+				done(undefined,{correios:undefined});
+			}
+		}else{
+			done(undefined,{correios:undefined});
+		}
+
+	},function(result,done){
+		if(order.shippingUpdated){
+			var cepDestino ;
+			if(order.shippingAddress)
+				cepDestino = order.shippingAddress.cep;
+			else
+				cepDestino = undefined;
+
+			if(cepDestino){
+				var urlTo = 'http://cep.correiocontrol.com.br/'+cepDestino+'.json';
+				request.get({url:urlTo,timeout: 120000},
+					function (error, response, body) {
+
+					    if (!error && response.statusCode === 200) {
+					    	if(body.indexOf('erro')<0){
+					    		result.destinoAddress = JSON.parse(body);
+				    			done(error,result);
+					    	}else{
+					    		result.destinoAddress = undefined;
+					    		done('Endereço não encontrado');
+					    	}
+					    }else{
+					    	done(error);
+					    }
 
 					});
-				}else{
-					delete order.giftCard;
-					delete order.giftCardValue;
-					delete order.giftCardValueFormatted;
-				}
+			}else{
+		    	result.destinoAddress = undefined;
+				done(undefined,result);
+			}
+		}else{
+			result.destinoAddress = undefined;
+			done(undefined,result);
+		}
 
-				console.log('building last part');
-				order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
-				order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
-				order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
-				order.total = order.totalValueItems + order.totalShipping - order.totalDiscount - (order.giftCardValue||0);
-				order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
-				
-				myCache.set(key,JSON.stringify(order) , function( err, success ){
-					if( !err && success ){
-				 		console.log('cache sucess:'+ success);
-
-					}else{
-						console.log('error:'+ err);
-							return res.status(500).send({
-							message: err
-						});
-					}
-				});
-	      		res.json({order:order});
-		});
-	}else{
-
+	},function(result,done) {
+		var cepDestino ;
+		if(order.shippingAddress)
+			cepDestino = order.shippingAddress.cep;
+		else
+			cepDestino = undefined;	
+		//calculate the frete!
+		if(cepDestino&&order.shippingUpdated){
+			//todo get result and set on shipping
+			if(result.destinoAddress&&result.destinoAddress.uf==='PE'){
+				order.totalShipping = 0.00;
+			}
+			else if(result.correios.Servicos.cServico.length>0&&result.correios.Servicos.cServico[0].Valor){
+				order.totalShipping =parseFloat(result.correios.Servicos.cServico[0].Valor[0].replace(',','.'));
+			}
+			else if(result.correios.Servicos.cServico.length>0&&result.correios.Servicos.cServico[0].MsgErro){
+				order.message = 'Algo errado com o cep. Entre em contato com a Equipe Musicamise: administrador@musicamise.com.br';
+			}
+			if(result.correios.Servicos.cServico.length>0&&result.correios.Servicos.cServico[0].PrazoEntrega){
+				order.shippingAddress.prazo = result.correios.Servicos.cServico[0].PrazoEntrega[0]+' dias úteis';
+			}
+		}
+		order.shippingUpdated = false;
+	 	done(undefined,order);
+	},function(order,done){
+		var giftCard ;
+		if(order.giftCardCode)
+			giftCard = order.giftCardCode._id;
+		else if(giftCardPost)
+			giftCard = giftCardPost;
 		if(giftCard){
 			GiftCard.find({_id:giftCard,active:true,used:false}).exec(function(err,giftCardObject){
 				if(!err){
 					if(giftCardObject){
 						order.giftCard =giftCardObject;
-						order.giftCardValue = giftCardObject.price;  
-						order.giftCardValueFormatted = 'R$'+numeral(order.giftCardValue).format('0.00').replace('.',',');
 					}
 				}
 
-				order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
-				order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
-				order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
-				order.total = order.totalValueItems + order.totalShipping - order.totalDiscount - (order.giftCardValue||0);
-				order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
-	      		myCache.set(key,JSON.stringify(order) , function( err, success ){
-					if( !err && success ){
-				 		console.log('cache sucess:'+ success);
-
-					}else{
-						console.log('error:'+ err);
-							return res.status(500).send({
-							message: err
-						});
-					}
-				});
-	      		res.json({order:order});
+	  		 	done(err, order);
 
 			});
+		}else{
+			done(undefined,order);
+		}
+	},function(order,done){
+		var discountCode ;
+		if(order.discountCode)
+			discountCode = order.discountCode._id;
+		else if(discountCodePost)
+			discountCode = discountCodePost;
+		if(discountCode){
+		DiscountCode.findOne({_id:discountCode,active:true,
+				$and:[{$or:[{noTimesLimits:true},{timesLeft:{$gt:0}}]},
+						{$or:[{noDateLimits:true},{endDate:{$lte:new Date()}}]}
+					 ]
+				})
+				.exec(function(err,discountObject){
+
+					if(!err&&discountObject){
+						order.discountCode = discountObject;
+					}
+  		  		 	done(err, order);
+					// res.json({order:order});
+			});
+		}else{
+			done(undefined,order);
+		}
+	},function(order, done) {
+		//check for availality
+		order.message = undefined;
+		if(order.products.length>0){
+			var inventoryIds = [];
+			order.products.forEach(function(product,_index){
+				inventoryIds.push(product._id);
+			});
+			Inventory.find({ '_id':{$in:inventoryIds},'orderOutOfStock':false})
+				 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+				 .select('-_class')
+				 .exec(function(err,inventories){
+				 	inventories.forEach(function(inventory,index){
+				 		var product ;
+				 		order.products.forEach(function(productOrder,_index2){
+				 			if(productOrder._id+''===inventory._id+'')
+				 				product = productOrder;
+						});
+
+				 		if(err||!inventory||inventory&&inventory.quantity<product.quantity){
+		 					if(!order.message)
+			 					order.message ='';
+			 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
+			 				var indexToExclude ;
+			 				order.products.forEach(function(product,inventoryIndex){
+			 					if(product._id+''===inventory._id+''){
+			 						indexToExclude = inventoryIndex;
+			 					}
+							});
+							if(indexToExclude)
+								order.products.splice(indexToExclude,1);	 				
+
+			 			}
+				 	});
+				 	done(err,order);
+
+				 });
+		}else{
+			done(undefined,order);
+		}
+	},function(order, done) {
+		var key = 'order'+req.sessionID;
+		var discountObject = order.discountCode;
+		var giftCardObject = order.giftCard;
+		
+		order.totalValueItems = 0;
+		order.totalItems = 0;
+		if(order.products.length>0){
+			order.products.forEach(function(product,index){
+
+				order.products[index].priceWithQuantity = order.products[index].quantity* order.products[index].product.price;
+				order.products[index].priceWithQuantityFormatted = 'R$'+ numeral(order.products[index].priceWithQuantity).format('0.00').replace('.',',');
+				
+				order.totalValueItems = order.totalValueItems +  order.products[index].quantity* order.products[index].product.price;
+			 	order.totalItems =  order.totalItems +1;
+
+			});
+		}
+
+		if(discountObject){
+			if(order.products.length>0){
+				switch(discountObject.whereApply){
+					case 'oncePerOrder':
+						if(discountIsApplicable(order.products,discountObject)){
+							switch(discountObject.typeForPay){
+								case 'value':
+									order.totalDiscount = discountObject.valueOf;
+									break;
+								case 'percent':
+									order.totalDiscount = order.totalValueItems*discountObject.valueOf/100;
+									break;
+							}
+						 	order.products.forEach(function(product,index){
+								delete order.products[index].product.discountValue;
+								delete order.products[index].product.discountValueFormatted;
+							});
+						}
+						break;
+					case 'toEveryProduct':
+						order.totalDiscount = 0;
+					 	order.products.forEach(function(product,index){
+							if(discountIsApplicable([order.products[index]],discountObject)){
+								switch(discountObject.typeForPay){
+									case 'value':
+										order.products[index].product.discountValue = order.products[index].quantity*discountObject.valueOf;
+										order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
+										order.totalDiscount = order.totalDiscount+order.products[index].quantity*discountObject.valueOf;
+										break;
+									case 'percent': 
+										order.products[index].product.discountValue = order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
+										order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
+										order.totalDiscount = order.totalDiscount+order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
+										break;
+								}
+
+							}		 							
+						});
+						break;
+				}
+			}
+		}
+		if(giftCardObject){
+			order.giftCardValue = giftCardObject.price;  
+			order.giftCardValueFormatted = 'R$'+numeral(order.giftCardValue).format('0.00').replace('.',',');
 		}else{
 			delete order.giftCard;
 			delete order.giftCardValue;
 			delete order.giftCardValueFormatted;
 		}
+
+		//
 		order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
 		order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
 		order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
-		order.total = order.totalValueItems + order.totalShipping - order.totalDiscount;
+		order.total = order.totalValueItems + order.totalShipping - order.totalDiscount- (order.giftCardValue||0);
 		order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
-		
-		myCache.set(key,JSON.stringify(order) , function( err, success ){
+  		myCache.set(key,JSON.stringify(order) , function( err, success ){
 			if( !err && success ){
 		 		console.log('cache sucess:'+ success);
 
@@ -257,7 +419,13 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 			}
 		});
   		res.json({order:order});
-	}
+	}], function(err) {
+		if(err){
+			return res.status(400).send({
+				message: err
+			});
+		}	
+	});
 };
 
 var clone = function(obj) {
@@ -267,6 +435,7 @@ var clone = function(obj) {
 var isEmptyObject = function(obj) {
   return !Object.keys(obj).length;
 };
+
 
 exports.getOrder = function(req, res) {
 	
@@ -286,12 +455,15 @@ exports.getOrder = function(req, res) {
 				//res.json({cart:cart});
 				console.log('going to proccess');
 				// res.json({order:order});
-				return processOrder(req,res,order);
+				// return processOrder(req,res,order);
+		  		res.json({order:order});
 
 	    	}else{
 				var orderCached = new Order(JSON.parse(orderCachedJsonString)); 
 	  			console.log('order found');
-				return processOrder(req,res,orderCached);
+				// return processOrder(req,res,orderCached);
+		  		res.json({order:orderCached});
+
 	    	}
 	  	}else{
 		  	console.log('order error:'+err);
@@ -365,7 +537,6 @@ exports.getOrderJson = function(req, res) {
 
 };
 
-
 exports.updateOrderOrAddItem = function(req, res) {
 	var key = 'order'+req.sessionID;
 	var discountCode = req.body.discountCode;
@@ -383,7 +554,7 @@ exports.updateOrderOrAddItem = function(req, res) {
 				if(inventory){
 					Product.findOne({'_id':inventory.product.oid})
 					.where('onLineVisible').equals(true)
-					.select('-_class -_id -userTags -inventories -storeVisible -localStoresSlugs')
+					.select('-_class -_id -userTags -inventories  -storeVisible -localStoresSlugs')
 					.exec(function(err,product){
 
 						if(err){
@@ -398,7 +569,6 @@ exports.updateOrderOrAddItem = function(req, res) {
 								message: 'no product found'
 							});
 						}
-
 						var quantity  = parseInt(req.body.quantity)||1;
 
 						myCache.get(key, function( err, orderCachedJsonString ){
@@ -471,20 +641,20 @@ exports.updateOrderOrAddItem = function(req, res) {
 		});
 	}else{
 		myCache.get(key, function( err, orderCachedJsonString ){
-							if(err){ 	
-								console.log('error:'+ err);
-								return res.status(500).send({
-									message: err
-								});
-							}
-							var order ;
-							if(orderCachedJsonString){
-								order = new Order(JSON.parse(orderCachedJsonString));
-							}else{
-								order = new Order();
-							}
-							return processOrder(req,res,order,discountCode,giftCard);
-						});
+			if(err){ 	
+				console.log('error:'+ err);
+				return res.status(500).send({
+					message: err
+				});
+			}
+			var order ;
+			if(orderCachedJsonString){
+				order = new Order(JSON.parse(orderCachedJsonString));
+			}else{
+				order = new Order();
+			}
+			return processOrder(req,res,order,discountCode,giftCard);
+		});
 	}
 
 };
@@ -494,7 +664,6 @@ exports.removeItemCart = function(req, res) {
 	// var quantity = parseInt(req.body.quantity)||1;
 	// res.json({body:req.body,qunatity:quantity});
 	var inventoryId = req.body.inventoryId||req.body.id;
-
 	myCache.get(key, function( err, orderCachedJsonString ){
 		if(err){ 	
 			console.log('error:'+ err);
@@ -509,13 +678,26 @@ exports.removeItemCart = function(req, res) {
 			var inventoryIndex = null;
 			var orderContains = false;
 			if(orderCached.products){
-				orderCached.products.forEach(function(inventory,index){if(inventory._id+''===inventoryId+''){
-					orderContains=true;
-					inventoryIndex = index;
+				orderCached.products.forEach(function(inventory,index){
+					if(inventory._id+''===inventoryId+''){
+						orderContains=true;
+						inventoryIndex = index;
 				}});
 				if(orderContains)
 					orderCached.products.splice(inventoryIndex,1);
 			}
+			myCache.set(key,JSON.stringify(orderCached) , function( err, success ){
+				if( !err && success ){
+			 		console.log('cache sucess:'+ success);
+
+				}else{
+					console.log('error:'+ err);
+					return res.status(500).send({
+						message: err
+					});
+				}
+			});
+
 			return processOrder(req,res,orderCached);
 
 		}else{
@@ -532,8 +714,9 @@ exports.addDeliveryAddress = function(req,res){
 	var address = req.body.address;
 	var user = req.user||req.body.user;
 
+	var checkPriceForDelivery = req.body.checkPriceForDelivery;
 
-	if(!user){
+	if(!user&&!checkPriceForDelivery){
 		return res.status(500).send({
 			message: 'Não logado ou usário nao encontrado!'
 		});
@@ -549,23 +732,25 @@ exports.addDeliveryAddress = function(req,res){
 
 			if(orderCachedJsonString){
 				var orderCached = new Order(JSON.parse(orderCachedJsonString)); 
-				if(!user.displayName)
-					user.displayName = user.fullName;
+				if(!checkPriceForDelivery){
+					orderCached.user = user;
+					if(!user.displayName)
+						user.displayName = user.fullName;
+				}
 				orderCached.shippingAddress = address;
-				orderCached.user = user;
 
 				myCache.set(key,JSON.stringify(orderCached) , function( err, success ){
 					if( !err && success ){
 				 		console.log('cache sucess:'+ success);
-
 					}else{
 						console.log('error:'+ err);
-							return res.status(500).send({
+						return res.status(500).send({
 							message: err
 						});
 					}
 				});
-	      		res.json({order:orderCached});
+				orderCached.shippingUpdated = true;
+				return processOrder(req,res,orderCached);
 			}else{
 				return res.status(500).send({
 					message: 'order não achado'
@@ -581,62 +766,69 @@ exports.addDeliveryAddress = function(req,res){
 	}
 };
 
+
 exports.processToPagseguro = function(req,res){
-	var key = 'order'+req.sessionID;
-	var user = req.user;
-	// request.post({url:'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout',
-	//  form: {email:'administrador@musicamise.com.br',
-	// 		token:'FC101192F9D3427DB332DB69DAE0AB4B',
-	// 		currency:'BRL',
-	// 		itemId1:'item1',
-	// 		itemDescription1:'description',
-	// 		itemAmount1: '10.00',
-	// 		itemQuantity1:1
-	// 		}},
- 
-	// 		function (error, response, body) {
-	// 		    if (!error && response.statusCode === 200) {
-	// 	    		parseString(body, function (err, result) {
-	// 				    console.dir(result);
-	// 				    //code={código de checkout}
-	// 				    var code = result.checkout.code[0];
-	// 				    console.log('code');
-	// 				    console.log(code); 
+	async.waterfall([
+	function(done){
+		var key = 'order'+req.sessionID;
+		console.log('init');
+		myCache.get(key, function( err, orderCachedJsonString ){
+			if(err){ 	
+				console.log('error:'+ err);
+				return res.status(500).send({
+					message: err
+				});
+			}else{
+				var order = new Order(JSON.parse(orderCachedJsonString));
+				order.message = undefined;
+				if(order.products.length>0){
+					var inventoryIds = [];
+					order.products.forEach(function(product,_index){
+						inventoryIds.push(product._id);
+					});
+					Inventory.find({ '_id':{$in:inventoryIds},'orderOutOfStock':false})
+						 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+						 .select('-_class')
+						 .exec(function(err,inventories){
+						 	inventories.forEach(function(inventory,index){
+						 		var product ;
+						 		order.products.forEach(function(productOrder,_index2){
+						 			if(productOrder._id+''===inventory._id+'')
+						 				product = productOrder;
+								});
+						 		if(err||!inventory||inventory&&inventory.quantity<product.quantity){
+				 					if(!order.message)
+					 					order.message ='';
+					 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
+					 				var indexToExclude ;
+					 				order.products.forEach(function(product,inventoryIndex){
+					 					if(product._id+''===inventory._id+''){
+					 						indexToExclude = inventoryIndex;
+					 					}
+									});
+									if(indexToExclude)
+										order.products.splice(indexToExclude,1);	 				
 
-	// 				    res.writeHead(301,
-	// 				  		{Location: 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code}
-	// 					);
-	// 					res.end();
-	// 				});
-	// 		    }else{
-	// 				return res.status(500).send({
-	// 					message: error
-	// 				});
-	// 		    }
-	// 		});
+					 			}
+						 	});
+			 				done(err,order);
+						 });
+				}
 
-	// if(!user){
-	// 	return res.status(500).send({
-	// 		message: 'Não logado'
-	// 	});
-	// }
-	myCache.get(key, function( err, orderCachedJsonString ){
-		if(err){ 	
-			console.log('error:'+ err);
-			return res.status(500).send({
-				message: err
-			});
-		}
-
-		if(orderCachedJsonString){
-			var orderCached = new Order(JSON.parse(orderCachedJsonString)); 
+			}
+		});
+	},function(order,done){
+		var key = 'order'+req.sessionID;
+		var user = req.user;
+		if(order){
 	        var paymentParameters = {};
 	        paymentParameters.email =  config.pagseguro.clientMail;
 	        // paymentParameters.charset = 'UTF-8';
 	        paymentParameters.token = config.pagseguro.clientSecret;
 	        paymentParameters.currency = 'BRL';
 
-	        if(orderCached.user&&orderCached.shippingAddress&&orderCached.products.length>0){
+	        if(order.user&&order.shippingAddress&&order.products.length>0){
+				console.log('init2');
 
 		        //user - receiver
 		        // paymentParameters.receiverEmail = orderCached.user.email;
@@ -651,54 +843,46 @@ exports.processToPagseguro = function(req,res){
 
 		        //reference
 		        console.log('_id');
-		        console.log(orderCached._id.toString());
+		        console.log(order._id.toString());
 
-		        paymentParameters.reference = orderCached._id.toString();
+		        paymentParameters.reference = order._id.toString();
 
 		     
-		        // paymentParameters.shippingCost =  orderCached.totalShipping;//Total de shipping maior que 0.00 e menor ou igual a 9999999.00.
+		        paymentParameters.shippingCost = numeral(order.totalShipping).format('0.00'); //Total de shipping maior que 0.00 e menor ou igual a 9999999.00.
 
 		        
 		        //shipping address
 		        paymentParameters.shippingType = 1;//1 - Encomenda normal (PAC). 2 -SEDEX 3-Tipo de frete não especificado.
-		        paymentParameters.shippingAddressCountry = orderCached.shippingAddress.country||'Brasil';
-		        if(orderCached.shippingAddress.state.length===2)
-		        	paymentParameters.shippingAddressState = orderCached.shippingAddress.state; //Duas letras, em maiúsculo, representando a sigla do estado brasileiro correspondente.
-		        paymentParameters.shippingAddressCity = orderCached.shippingAddress.city;
-		        if(orderCached.shippingAddress.cep.length===8)
-		        	paymentParameters.shippingAddressPostalCode = orderCached.shippingAddress.cep;//Um número de 8 dígitos.
-		        paymentParameters.shippingAddressDistrict = orderCached.shippingAddress.bairro;
-		        paymentParameters.shippingAddressStreet = orderCached.shippingAddress.address;
-		        paymentParameters.shippingAddressNumber = orderCached.shippingAddress.number;
-		        paymentParameters.shippingAddressComplement = orderCached.shippingAddress.complemento||'';
+		        paymentParameters.shippingAddressCountry = order.shippingAddress.country||'Brasil';
+		        if(order.shippingAddress.state.length===2)
+		        	paymentParameters.shippingAddressState = order.shippingAddress.state; //Duas letras, em maiúsculo, representando a sigla do estado brasileiro correspondente.
+		        paymentParameters.shippingAddressCity = order.shippingAddress.city;
+		        if(order.shippingAddress.cep.length===8)
+		        	paymentParameters.shippingAddressPostalCode = order.shippingAddress.cep;//Um número de 8 dígitos.
+		        paymentParameters.shippingAddressDistrict = order.shippingAddress.bairro;
+		        paymentParameters.shippingAddressStreet = order.shippingAddress.address;
+		        paymentParameters.shippingAddressNumber = order.shippingAddress.number;
+		        paymentParameters.shippingAddressComplement = order.shippingAddress.complemento||'';
 
 		        //extraAmount discount or gift card
 		  //       paymentParameters.extraAmount = 0.00+'';
-		  //       if(orderCached.totalDiscount>0)
-		  //       	paymentParameters.extraAmount = -1*orderCached.totalDiscount;
-				// if(orderCached.giftCardValue>0)
-		  //       	paymentParameters.extraAmount = paymentParameters.extraAmount + (-1*orderCached.totalDiscount);
+		        if(order.totalDiscount>0)
+		        	paymentParameters.extraAmount =  numeral(-1*order.totalDiscount).format('0.00'); 
+				// if(order.giftCardValue>0)
+		  //       	paymentParameters.extraAmount = paymentParameters.extraAmount + (-1*order.totalDiscount);
 		        //redirect URL
 		        paymentParameters.redirectURL = req.protocol+'://'+req.hostname+'/#!/thank-you';
 
 		        //products
-				orderCached.products.forEach(function(inventory,index){
-				   	paymentParameters.itemId1 = inventory._id.toString();
-			        paymentParameters.itemDescription1 = inventory.product.title;
-			        paymentParameters.itemAmount1 = inventory.product.priceFormatted.replace('R$','').replace(',','.');//maior que 0.00 e menor ou igual a 9999999.00.
-			        paymentParameters.itemQuantity1 =  inventory.quantity;//Um número inteiro maior ou igual a 1 e menor ou igual a 999.
+				order.products.forEach(function(inventory,index){
+				   	paymentParameters['itemId'+(index+1)] = inventory._id.toString();
+			        paymentParameters['itemDescription'+(index+1)] = inventory.product.title;
+			        paymentParameters['itemAmount'+(index+1)]  = numeral(inventory.product.price).format('0.00'); //maior que 0.00 e menor ou igual a 9999999.00.
+			        paymentParameters['itemQuantity'+(index+1)]  =  inventory.quantity;//Um número inteiro maior ou igual a 1 e menor ou igual a 999.
 			        // paymentParameters.itemShippingCost1 = ''; //maior que 0.00 e menor ou igual a 9999999.00.
 			        // paymentParameters.itemWeight1 =  ''; // A soma dos pesos de todos os produtos não pode ultrapassar 30000 gramas
 				});
-				var status = new StatusOrder();
-				status.status = 'AGUARDANDO';
-				orderCached.status.push(status);
-			 	orderCached.save(function(err,order){
-					console.log('err');
-					console.log(err); 
-					console.log('order');
-					console.log(order); 
-			 	});
+				
 			 	console.dir(paymentParameters);
 				request.post({url:'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout', 
 					form: paymentParameters},
@@ -708,15 +892,38 @@ exports.processToPagseguro = function(req,res){
 							    console.dir(result);
 							    //code={código de checkout}
 							    var code = result.checkout.code[0];
-							    console.log('code');
-							    console.log(code); 
+						    	//check for availality
+								
+								myCache.set(key,JSON.stringify(order) , function( err, success ){
+									if( !err && success ){
+								 		console.log('cache sucess:'+ success);
 
-						    	res.json({url:'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code});
+									}else{
+										console.log('error:'+ err);
+										return res.status(500).send({
+											message: err
+										});
+									}
+								});
 
-							 //    res.writeHead(301,
-							 //  		{Location: 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code}
-								// );
-								// res.end();
+								if(order.message){
+						    		res.json({url:'/'});
+								}else{
+									var status = new StatusOrder();
+									status.status = 'AGUARDANDO';
+									order.status.push(status);
+									order.pagSeguroInfo = {};
+									order.pagSeguroInfo.reference = code;
+								 	order.save(function(err,orderSaved){
+										console.log('err');
+										console.log(err); 
+										console.log('order');
+										console.log(orderSaved); 
+								 	});
+						    		res.json({url:'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code});
+					
+								}
+							 
 							});
 					    }else{
 						    console.log(body);
@@ -737,9 +944,13 @@ exports.processToPagseguro = function(req,res){
 				message: 'order não achado'
 			});
 		} 
-
-
-	});	
+	}], function(err) {
+		if(err){
+			return res.status(400).send({
+				message: err
+			});
+		}	
+	});
 };
 
 
@@ -747,3 +958,4 @@ exports.clean = function(req, res) {
 	myCache.flushAll();
 	res.json(true);
 };
+

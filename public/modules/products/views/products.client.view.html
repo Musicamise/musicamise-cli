@@ -121,8 +121,9 @@
 				 <div infinite-scroll='findNextPage()' infinite-scroll-disabled='productQuery.busy' infinite-scroll-distance='1'>
 				  	<div class="grid1_of_4" ng-repeat="product in products" >
 						<div class="content_box">
-							<a ng-href="#!/product/{{product.slug}}">
-				   	   	 		<img src="images/w1.jpg" class="img-responsive" alt=""/>
+							<a ng-href="#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+				   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+				   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
 				   		  	</a>
 				    		<h4>
 			    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  

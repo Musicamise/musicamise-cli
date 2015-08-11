@@ -9,8 +9,10 @@ var _ = require('lodash'),
 	passport = require('passport'),
 	Address = mongoose.model('Address'),
 	Order = mongoose.model('Order'),
+	Product = mongoose.model('Product'),
 	User = mongoose.model('User');
-
+var moment = require('moment');
+moment().format();
 
 /**
  * Update user details
@@ -180,29 +182,210 @@ exports.removeAddress = function(req,res){
 	// 	});
 };
 
-exports.orderHistory = function(req,res){
+exports.orderHistory = function(req, res) {
+	var user = req.user;
+	if(!user){
+		return res.status(500).send({
+			message: 'Não logado ou usário nao encontrado!'
+		});
+	}
+
+	var email = req.query.email;
+	var nowThreeMonthsAgo = moment();
+	nowThreeMonthsAgo = nowThreeMonthsAgo.subtract(3,'months');
+
+	Order.find({'createdDate':{$gte:nowThreeMonthsAgo.valueOf()},
+				'status':{$elemMatch:{$or:[{'status':'PAGO'},
+											{'status':'CANCELADO'},
+											{'status':'DEVOLVIDA'}]}},
+				$or:[{'email':user.email},{'user.email':user.email}]})
+			.sort('-updatedDate')
+			.select('-pagSeguroInfo -user -_class -emailSents')
+			.exec(function(err,orders){
+				if(err){ 	
+					console.log('error:'+ err);
+					return res.status(500).send({
+						message: err
+					});
+				}
+				var productIds = [];
+				
+				orders.forEach(function(order){
+					order.products.forEach(function(inventory){
+						var inventoryCopy = JSON.parse(JSON.stringify(inventory));
+						productIds.push(inventoryCopy.product.$id);
+					});
+				});
+
+				Product.find({'_id':{$in:productIds}})
+					.select('-userTags -inventories')
+					.exec(function(err,products){
+					if(err){ 	
+						console.log('error:'+ err);
+						return res.status(500).send({
+							message: err
+						});
+					}
+
+					if(!err&&products){
+						orders.forEach(function(order,indexOrder){
+							order.products.forEach(function(inventory,indexInventory){
+								products.forEach(function(product){
+									var inventoryCopy = JSON.parse(JSON.stringify(inventory));
+									if(product._id+''===inventoryCopy.product.$id+''){
+										orders[indexOrder].products[indexInventory].product = product;
+									}
+								});
+							});
+						});
+					}
+
+					var newOrders = [];
+					var oldOrders = [];
+					
+					if(orders.length>0){
+						newOrders.push(orders[0]);
+						orders.slice(1,-1).forEach(function(order){
+							oldOrders.push(order);
+						});
+					}
+
+					res.json({newOrders:newOrders,oldOrders:oldOrders});
+				});
+	});
+};
+exports.addWishList = function(req,res){
 	var userLogged = req.user;
+	var productSlug = req.body.productSlug;
+
 	var message = null;
 
 	if (userLogged) {
-		User.findOne({email:userLogged.email},'-salt -password',function(err,user) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
+		if(productSlug){
+			Product.findOne({'slug':productSlug},function(err,product){
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				}
+
+				User.findOne({email:userLogged.email},'-salt -password',function(err,user) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+
+				 		user.wishList = _.union(user.wishList, [product.slug]);
+						user.save(function (err) {
+							console.log(err);
+						});
+
+						req.login(user, function(err) {
+							if (err) {
+								res.status(400).send(err);
+							} else {
+								res.json(user);
+							}
+						});
+					}
 				});
-			} else {
-				Order.find().or([{'user.email':userLogged.email},{'email':userLogged.email}])
-				.exec(function(err,orders){
-					res.json(orders);
-				});
-			}
-		});
+			});
+
+		}else{
+			return res.status(200).send({
+						message: 'Produto Slug não passado'
+					});
+		}
 	}else{
 		res.status(400).send({
 			message: 'User is not signed in'
 		});
 	}
+
+	// res.status(400).send({
+	// 		message: 'User is not signed in'
+	// 	});
 };
+exports.removeWishList = function(req,res){
+	var userLogged = req.user;
+	var productSlug = req.body.productSlug;
+
+	var message = null;
+
+	if (userLogged) {
+		if(productSlug){
+			User.findOne({email:userLogged.email},'-salt -password',function(err,user) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+
+			 		user.wishList = _.difference(user.wishList, [productSlug]);
+					user.save(function (err) {
+						console.log(err);
+					});
+
+					req.login(user, function(err) {
+						if (err) {
+							res.status(400).send(err);
+						} else {
+							res.json(user);
+						}
+					});
+				}
+			});
+
+		}else{
+			return res.status(200).send({
+						message: 'Produto Slug não passado'
+					});
+		}
+	}else{
+		res.status(400).send({
+			message: 'User is not signed in'
+		});
+	}
+
+	// res.status(400).send({
+	// 		message: 'User is not signed in'
+	// 	});
+};
+exports.getWishList = function(req,res){
+	var userLogged = req.user;
+	var productSlug = req.body.productSlug;
+
+	var message = null;
+
+	if (userLogged) {
+		if(userLogged.wishList.length>0){
+
+			Product.find({'slug':{$in:userLogged.wishList}},function(err,products){
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				}
+				if(!err&&products){
+					res.json({products:products});
+				}
+			});
+
+		}else{
+			res.json({products:[]});
+		}
+	}else{
+		res.status(400).send({
+			message: 'User is not signed in'
+		});
+	}
+
+	// res.status(400).send({
+	// 		message: 'User is not signed in'
+	// 	});
+};
+
 /**
  * Send User
  */

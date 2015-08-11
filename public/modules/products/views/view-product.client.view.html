@@ -11,13 +11,13 @@
 		  		<div class="single_left">
 					<div class="grid images_3_of_2">
 						<ul id="etalage">
-							<li>
-								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="images/d1.jpg" class="img-responsive" />
-									<img class="etalage_source_image" src="images/d1.jpg" class="img-responsive" title="" />
+							<li ng-repeat="image in product.images" >
+								<a ng-href="">
+									<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
+									<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
 								</a>
 							</li>
-							<li>
+							<!-- <li>
 								<img class="etalage_thumb_image" src="images/d2.jpg" class="img-responsive" />
 								<img class="etalage_source_image" src="images/d2.jpg" class="img-responsive" title="" />
 							</li>
@@ -28,7 +28,7 @@
 						    <li>
 								<img class="etalage_thumb_image" src="images/d4.jpg" class="img-responsive"  />
 								<img class="etalage_source_image" src="images/d4.jpg"class="img-responsive"  />
-							</li>
+							</li> -->
 						</ul>
 					 	<div class="clearfix"></div>		
 				  	</div>
@@ -75,22 +75,30 @@
 							</div>
 						</div>
 						
-						<div class="btn_form">
+						<div ng-show="inventories" class="btn_form">
 							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">buy</a>
 						</div>
-						<a href="#"><span>login to save in wishlist </span></a>
+
+						<br/><br/>
+						<div ng-if="user" class="btn_form">
+							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">
+								<span  ng-bind="!alreadyLiked(product.slug)?'Gostei!':'Já Gostei!'"></span>
+							</a>
+						</div>
+						<a ng-if="!user" ng-href="#!/login"><span>Login para favoritar :)</span></a>
 			   	 	</div>
           	    	<div class="clearfix"></div>
           	   	</div>
       	    
-				<div  ng-if="relatedProducts" class="single-bottom2">
+				<div  ng-if="relatedProducts.length>0" class="single-bottom2">
 					<div class="container">
 						<h6>Related Products</h6>
 						<ul class="grid_2">
 							<li ng-repeat="product in relatedProducts">
-								<a ng-href="#!/product/{{product.slug}}">
-									<img src="images/8.jpg" class="img-responsive" alt="">
-								</a>
+								<a ng-href="#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+					   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
+					   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
+					   		  	</a>
 								<div class="special-info grid_1 simpleCart_shelfItem">
 									<h5>{{product.title}}</h5>
 									<div class="item_add">

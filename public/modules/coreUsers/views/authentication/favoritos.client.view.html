@@ -1,0 +1,48 @@
+<section data-ng-controller="SettingsController" data-ng-init="favoritos()"  >
+	<!-- content -->
+<div class="container">
+	<div class="check">	
+	 	<div class="col-md-2 ">
+	 		<ul>
+			 	<li><a href="#!/user/profile">Update profile</a></li>
+				<li ><a href="#!/user/orders">Order history</a></li>
+				<li class="active"><a href="#!/user/favoritos">Favoritos</a></li>
+				<li><a href="#">Privacy</a></li>
+		 	</ul>
+		</div>
+		<div class="col-md-10 cart-items">
+	 		<h1>Produtos favoritados! :D </h1>
+	 		<div ng-show="favoritosProducts.length<=0">
+	 			<h1>Você não gostou de nenhum Produto? :( </h1> 
+	 			<h3><a href="#!/products"> Continue Procurando :) </a></h3>
+	 		</div>
+	 		<h2 ng-show="favoritosProducts.length>0"></h2>
+ 			<div class="cart-header" ng-repeat="product in favoritosProducts" >
+			 	<div class="cart-sec simpleCart_shelfItem">
+					<div class="cart-item cyc">
+				 		<a ng-href="#!/product/{{product.slug}}" > 
+
+				 		<img ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/></a>
+					</div>
+				   	<div class="cart-item-info">
+						<h3><a ng-href="#!/product/{{product.slug}}" ng-bind="product.title"> </a><span ng-bind="product.type"></span></h3>
+				 		<span class="item_price">
+					 		<h6>
+					 			<span class="price-new">{{product.priceFormatted}}</span>
+					 			<br/>
+					 			<span class="price-old">{{product.priceOldFormatted}}
+				 				</span> 
+				 			</h6>
+			 			</span>
+				 		<div class="clearfix"></div>
+					 	
+				   	</div>
+			   		<div class="clearfix"></div>
+			  	</div>
+		 	</div>
+		</div>
+		<div class="clearfix"> </div>
+	  	
+	</div>
+</div>
+</section>

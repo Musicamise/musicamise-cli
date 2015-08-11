@@ -18,7 +18,7 @@ angular.module('checkout').config(['$stateProvider',
 			url: '/review',
 			templateUrl: 'modules/checkout/views/review.client.view.html'
 		}).state('thankyou', {
-			url: '/thankyou',
+			url: '/thank-you',
 			templateUrl: 'modules/checkout/views/thankyou.client.view.html'
 		});
 		

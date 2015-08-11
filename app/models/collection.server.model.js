@@ -27,6 +27,18 @@ var CollectionSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	front: {
+		type: Boolean,
+		default: false
+	},
+	gender: {
+		type: Boolean,
+		default: false
+	},
+	mainMenu: {
+		type: Boolean,
+		default: false
+	},
 });
 
 mongoose.model('Collection', CollectionSchema,'collection');

@@ -12,7 +12,7 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		}).state('contact', {
-			url: '/contact/',
+			url: '/contact',
 			templateUrl: 'modules/core/views/contact.client.view.html'
 		}).state('404', {
 			url: '/404',
@@ -41,7 +41,7 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 
     FB.init({ 
 
-      appId: '1422062488114479', 
+      appId: '539560766079177', 
       cookie: true, 
       xfbml: true
     });

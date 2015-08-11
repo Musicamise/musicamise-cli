@@ -15,6 +15,10 @@ module.exports = function(app) {
 	app.route('/users').put(users.update);
 	app.route('/users/updateAddress').put(users.updateAddress);
 	app.route('/users/removeAddress').post(users.removeAddress);
+	app.route('/users/addWishList').post(users.addWishList);
+	app.route('/users/removeWishList').post(users.removeWishList);
+	app.route('/users/favoritos').get(users.getWishList);
+
 
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
 

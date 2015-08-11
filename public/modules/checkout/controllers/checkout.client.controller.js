@@ -206,13 +206,36 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			}
 			$location.path('/cart');
 		};
+
+		$scope.applyShippingAddress = function(cep){
+			if(cep||cep!==''){	
+				blockUI.start();
+				var address = {};
+				address.cep = cep;
+				var deliveryAddress = {address:address};
+				deliveryAddress.checkPriceForDelivery = true;
+				$scope.orderCall = OrderCheckout.addDeliveryAddress(deliveryAddress);
+				$scope.orderCall.$promise.then(function(response,error,progressback){
+					if(!jQuery.isEmptyObject(response.order)){
+						$rootScope.order = response.order;
+					}
+					blockUI.stop();
+				},function(reason){
+					console.log(reason);
+					blockUI.stop();
+				});
+			}
+			$location.path('/cart');
+		};
 		
 		$scope.thankyou = function(){
+			if(!$location.search().id) $location.path('/');
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
-				if(!jQuery.isEmptyObject(response.order)){
-					$rootScope.order = response.order;
+				if(!response.order.pagSeguroInfo){
+					$location.url($location.path('/'));
 				}
+				$scope.orderCall = OrderCheckout.clean();
 			});
 		};
 	}	

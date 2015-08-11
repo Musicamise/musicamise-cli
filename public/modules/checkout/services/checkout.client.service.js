@@ -34,7 +34,11 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 			   //                  console.log('error in interceptor', data);
 			   //              }
 			   //          }
-         		}
+         		},'clean': {
+						method: 'GET', 
+						isArray: false,
+						params:{action:'clean'},
+				}
      		}
  		);
 	}

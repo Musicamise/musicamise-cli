@@ -45,8 +45,8 @@
 	<![endif]-->
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -58,7 +58,7 @@
 				<div class="top_right">
 					<ul>
 						<li><a href="#">help</a></li>|
-						<li><a href="/#!/contact/">Contact</a></li>|
+						<li><a href="/#!/contact">Contact</a></li>|
 						<li><a href="#">Delivery information</a></li>
 					</ul>
 				</div>
@@ -71,7 +71,7 @@
 	</div>
 	
 	
-	<div data-ng-include="'/modules/core/views/header_2.client.view.html'" class="header"></div>
+	<div data-ng-include="'/modules/core/views/header.client.view.html'" class="header"></div>
 
 	<section class="content">
 		<section class="container">
@@ -91,12 +91,19 @@
 					<li>
 						<div class="social-ic">
 							<ul>
-								<li><a href="#"><i class="facebok"> </i></a></li>
-								<li><a href="#"><i class="twiter"> </i></a></li>
-								<li><a href="#"><i class="goog"> </i></a></li>
-								<li><a href="#"><i class="be"> </i></a></li>
-								<li><a href="#"><i class="pp"> </i></a></li>
-									<div class="clearfix"></div>	
+								{% if content.facebook!=null %}
+								<li><a ng-href="{{content.facebook}}"><i class="facebok"> </i></a></li>
+								{% endif %}
+								{% if content.twitter!=null %}
+									<li><a ng-href="{{content.twitter}}"><i class="twiter"> </i></a></li>
+								{% endif %}
+								{% if content.gPlus!=null %}
+								<li><a ng-href="{{content.gPlus}}"><i class="goog"> </i></a></li>
+								{% endif %}
+	 							{% if content.instagram!=null %}
+								<li><a ng-href="{{content.instagram}}"><i class="be"> </i></a></li>
+								{% endif %}
+								<div class="clearfix"></div>	
 							</ul>
 						</div>
 					</li>
@@ -123,31 +130,35 @@
 	<div class="footer">
 		<div class="container">
 			<div class="col-md-3 customer-footer">
-				<h4>CUSTOMER CARE</h4>
-					<li><a href="#">Help Center</a></li>
+				<h4>Área do Cliente</h4>
+					<li><a href="#">Centro de ajuda</a></li>
 					<li><a href="#">FAQ</a></li>
-					<li><a href="buy.html">How To Buy</a></li>
-					<li><a href="#">Delivery</a></li>
+					<li><a href="#">Como comprar</a></li>
+					<li><a href="#">Formas de Entrega</a></li>
 			</div>
 			<div class="col-md-2 about-footer">
-				<h4>ABOUT US</h4>
-					<li><a href="#">Our Stories</a></li>
-					<li><a href="#">Press</a></li>
-					<li><a href="#">Career</a></li>
-					<li><a href="contact.html">Contact</a></li>
+				<h4>Sobre Nós</h4>
+					<li><a href="#">Nossa História</a></li>
+					<li><a href="#">Imprensa</a></li>
+					<li><a href="#">Carreira</a></li>
+					<li><a href="/#!/contact">Contato</a></li>
 			</div>
 			<div class="col-md-2 myaccount-footer">
-				<h4>MY ACCOUNT</h4>
-					<li><a href="register.html">Register</a></li>
-					<li><a href="#">My Cart</a></li>
-					<li><a href="#">Order History</a></li>
-					<li><a href="buy.html">Payment</a></li>
+				<h4>Minha Conta</h4>
+				{% if user==null %}
+					<li><a href="/#!/login">Registrar</a></li>
+				{%endif%}
+				<li><a href="/#!/cart">Meu carrinho</a></li>
+				{% if user!=null %}
+					<li><a href="/#!/user/orders">Historico de compras</a></li>
+				{%endif%}
+				<li><a href="#">Formas de Pagamento</a></li>
 			</div>
 			<div class="col-md-5 ourstory-footer">
 				<div class="left-33">
-					<h4>OUR STORES</h4>
+					<h4>Nossa Loja</h4>
 				</div>
-				<div class="left-22">
+				<!-- <div class="left-22">
 					<div class="creat_button">
 						<a href="#">SOLO</a>
 					</div>
@@ -156,12 +167,11 @@
 					<div class="creat_button_filled">
 						<a href="#">BOGOR</a>
 					</div>
-				</div>
+				</div> -->
 				<div class="clearfix"> </div>
-					<li><i class="add"> </i>Jl. Haji Muhidin, Blok G no.69</li>
-					<li><i class="phone"> </i>025-2839341</li>
-					<li><a href="mailto:info@example.com"><i class="mail"> </i>info@sitename.com </a></li>
-				
+				<li><i class="add"> </i>Rua Guaianases, cep:52031-300 </li>
+				<li><i class="phone"> </i>(81) 9 96995060</li>
+				<li><a href="mailto:administrador@musicamise.com.br"><i class="mail"> </i>administrador@musicamise.com.br </a></li>
 			</div>
 			<div class="clearfix"> </div>
 				<p>Copyrights © 2015 Musicamise. All rights reserved</a></p>

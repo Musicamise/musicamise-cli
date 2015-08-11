@@ -19,71 +19,70 @@
 				              </div>
 			            </div>
 						<div class="clearfix"> </div>
-						<a id="manual1" ng-show="false" href="" ng-click="openManual1();" title="">Image</a>
 					
 					</div>		 
-					<div class="arriv-top">
-						<div class="col-md-6 arriv-left">
-							<img src="images/1.jpg" class="img-responsive" alt="">
+					<div ng-if="frontCollections.length>0" class="arriv-top">
+						<div ng-if="frontCollections.length>0" class="col-md-6 arriv-left">
+							<img ng-src="{{frontCollections[0].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info">
-								<h3>NEW ARRIVALS</h3>
-								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<h3 ng-bind="frontCollections[0].title"></h3>
+								<p ng-bind="frontCollections[0].description"> </p>
 								<div class="crt-btn">
-									<a href="details.html">TAKE A LOOK</a>
+									<a ng-href="/#!/products/{{frontCollections[0].gender?'gender':'collection'}}/{{frontCollections[0].slug}}">DA UMA OLHADA!</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6 arriv-right">
-							<img src="images/2.jpg" class="img-responsive" alt="">
+						<div ng-if="frontCollections.length>1" class="col-md-6 arriv-right">
+							<img ng-src="{{frontCollections[1].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info">
-								<h3>TUXEDO</h3>
-								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<h3 ng-bind="frontCollections[1].title"></h3>
+								<p ng-bind="frontCollections[1].description"> </p>
 								<div class="crt-btn">
-									<a href="details.html">SHOP NOW</a>
+									<a ng-href="/#!/products/{{frontCollections[1].gender?'gender':'collection'}}/{{frontCollections[1].slug}}">DA UMA OLHADA!</a>
 								</div>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="arriv-bottm">
-						<div class="col-md-8 arriv-left1">
-							<img src="images/3.jpg" class="img-responsive" alt="">
+					<div ng-if="frontCollections.length>2" class="arriv-bottm">
+						<div  ng-if="frontCollections.length>2" class="col-md-8 arriv-left1">
+							<img ng-src="{{frontCollections[2].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info1">
-								<h3>SWEATER</h3>
-								<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
+								<h3 ng-bind="frontCollections[2].title" ></h3>
+								<p ng-bind="frontCollections[2].description"> </p>
 								<div class="crt-btn">
-									<a href="details.html">SHOP NOW</a>
+									<a ng-href="/#!/products/{{frontCollections[2].gender?'gender':'collection'}}/{{frontCollections[2].slug}}">DA UMA OLHADA!</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 arriv-right1">
-							<img src="images/4.jpg" class="img-responsive" alt="">
+						<div  ng-if="frontCollections.length>3" class="col-md-4 arriv-right1">
+							<img ng-src="{{frontCollections[3].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info2">
-								<a href="details.html"><h3>Trekking Shoes<i class="ars"></i></h3></a>
+								<a ng-href="/#!/products/{{frontCollections[3].gender?'gender':'collection'}}/{{frontCollections[3].slug}}"><h3 ng-bind="frontCollections[3].title"> <i class="ars"></i></h3></a>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="arriv-las">
-						<div class="col-md-4 arriv-left2">
-							<img src="images/5.jpg" class="img-responsive" alt="">
+					<div ng-if="frontCollections.length>4" class="arriv-las">
+						<div ng-if="frontCollections.length>4" class="col-md-4 arriv-left2">
+							<img ng-src="{{frontCollections[4].image.url}}"   loading-src class="img-responsive" alt="">
 							<div class="arriv-info2">
-								<a href="details.html"><h3>Casual Glasses<i class="ars"></i></h3></a>
+								<a ng-href="/#!/products/{{frontCollections[4].gender?'gender':'collection'}}/{{frontCollections[4].slug}}"><h3 ng-bind="frontCollections[4].title" > <i class="ars"></i></h3></a>
 							</div>
 						</div>
-						<div class="col-md-4 arriv-middle">
-							<img src="images/6.jpg" class="img-responsive" alt="">
+						<div ng-if="frontCollections.length>5" class="col-md-4 arriv-middle">
+							<img ng-src="{{frontCollections[5].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info3">
-								<h3>FRESH LOOK T-SHIRT</h3>
+								<h3 ng-bind="frontCollections[5].title"> </h3>
 								<div class="crt-btn">
-									<a href="details.html">SHOP NOW</a>
+									<a  ng-href="/#!/products/{{frontCollections[5].gender?'gender':'collection'}}/{{frontCollections[5].slug}}">Acesse!</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 arriv-right2">
-							<img src="images/7.jpg" class="img-responsive" alt="">
+						<div ng-if="frontCollections.length>6" class="col-md-4 arriv-right2">
+							<img ng-src="{{frontCollections[6].image.url}}"  loading-src class="img-responsive" alt="">
 							<div class="arriv-info2">
-								<a href="details.html"><h3>Elegant Watches<i class="ars"></i></h3></a>
+								<a ng-href="/#!/products/{{frontCollections[6].gender?'gender':'collection'}}/{{frontCollections[6].slug}}"><h3 ng-bind="frontCollections[6].title"> <i class="ars"></i></h3></a>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
@@ -97,11 +96,13 @@
 				<div class="specia-top">
 				<ul class="grid_2">
 					<li ng-repeat="product in destaque">
-							<a href="details.html"><img src="images/8.jpg" class="img-responsive" alt=""></a>
+							<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+				   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt=""/>
+				   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="" />
+				   		  	</a>
 							<div class="special-info grid_1 simpleCart_shelfItem">
 								<h5 ng-bind="product.title"></h5>
-								<div class="item_add"><span class="item_price"><h6 >ONLY <span ng-bind="product.price"></span></h6></span></div>
-								<div class="item_add"><span class="item_price"><a href="#">add to cart</a></span></div>
+								<div class="item_add"><span class="item_price"><h6 >APENAS <span ng-bind="product.priceFormatted"></span></h6></span></div>
 							</div>
 					</li>
 				<div class="clearfix"> </div>

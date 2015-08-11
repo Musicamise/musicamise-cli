@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('products').controller('ProductsController', ['$rootScope','$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI',
-	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User',
+	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User) {
 		// Products controller logic
 		//in controller that doesn't reload
+		$scope.authentication = Authentication;
+		$scope.user = Authentication.user;
 		$scope.$on('$locationChangeSuccess',function(){
 		  //update your scope based on new $routeParams
 
@@ -116,6 +118,28 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			
 		};
 
+		$scope.like = function(productSlug){
+			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		$scope.dislike = function(productSlug){
+			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		
+		$scope.alreadyLiked = function(productSlug){
+			if($scope.user){
+				return $scope.user.wishList.indexOf(productSlug)>=0;
+			}else{
+				return false;
+			} 
+		};
 		$scope.loadEtalage = function(){
 		 	$('#etalage').etalage({
 				thumb_image_width: 300,

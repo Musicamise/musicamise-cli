@@ -51,8 +51,27 @@ exports.readLocalStoreSlug = function(req, res) {
 		   	.select('type description slug images title collectionsSlugs userTags')
 		   	.exec(function(err,products){
 		   		if(!err&&products){
+		   			products.forEach(function(product,indexProduct){
+						var images = [];
+
+						var frontImages = product.images.filter(function(image,indexImage){
+							return image.frontImage;
+						});
+						var notFrontImage = product.images.filter(function(image,indexImage){
+							return !image.frontImage;
+						});
+
+						if(frontImages.length>0){
+							images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+						}else{
+							images = notFrontImage.slice(0,2);
+						}
+						products[indexProduct].images = images;
+						products[indexProduct].inventories = [];
+					});
 					response.products = products;
 				}
+
 				res.json(response);
 		});
 	}else{

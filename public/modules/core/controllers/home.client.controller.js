@@ -29,6 +29,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 					$scope.initPromotionBanner();
 				}
 			 	$scope.destaque = response.destaque;
+			 	$scope.frontCollections = response.collections;
 			 	blockUI.stop();
 			});
 		};
