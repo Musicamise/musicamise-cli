@@ -3423,7 +3423,9 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'musicamise-cli';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ngMask','blockUI','fancyboxplus','infinite-scroll'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate', 'ngTouch', 
+							'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ngMask',
+							'blockUI','fancyboxplus','infinite-scroll','me-lazyload','dcbImgFallback'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -3618,7 +3620,7 @@ angular.module('checkout').config(['$stateProvider',
 			url: '/review',
 			templateUrl: 'modules/checkout/views/review.client.view.html'
 		}).state('thankyou', {
-			url: '/thankyou',
+			url: '/thank-you',
 			templateUrl: 'modules/checkout/views/thankyou.client.view.html'
 		});
 		
@@ -3833,13 +3835,36 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			}
 			$location.path('/cart');
 		};
+
+		$scope.applyShippingAddress = function(cep){
+			if(cep||cep!==''){	
+				blockUI.start();
+				var address = {};
+				address.cep = cep;
+				var deliveryAddress = {address:address};
+				deliveryAddress.checkPriceForDelivery = true;
+				$scope.orderCall = OrderCheckout.addDeliveryAddress(deliveryAddress);
+				$scope.orderCall.$promise.then(function(response,error,progressback){
+					if(!jQuery.isEmptyObject(response.order)){
+						$rootScope.order = response.order;
+					}
+					blockUI.stop();
+				},function(reason){
+					console.log(reason);
+					blockUI.stop();
+				});
+			}
+			$location.path('/cart');
+		};
 		
 		$scope.thankyou = function(){
+			if(!$location.search().id) $location.path('/');
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
-				if(!jQuery.isEmptyObject(response.order)){
-					$rootScope.order = response.order;
+				if(!response.order.pagSeguroInfo){
+					$location.url($location.path('/'));
 				}
+				$scope.orderCall = OrderCheckout.clean();
 			});
 		};
 	}	
@@ -3882,7 +3907,11 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 			   //                  console.log('error in interceptor', data);
 			   //              }
 			   //          }
-         		}
+         		},'clean': {
+						method: 'GET', 
+						isArray: false,
+						params:{action:'clean'},
+				}
      		}
  		);
 	}
@@ -3943,7 +3972,7 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		}).state('contact', {
-			url: '/contact/',
+			url: '/contact',
 			templateUrl: 'modules/core/views/contact.client.view.html'
 		}).state('404', {
 			url: '/404',
@@ -3952,7 +3981,7 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 	}
 ]);
 
-angular.module('core').config(function(blockUIConfig) {
+angular.module('core').config(["blockUIConfig", function(blockUIConfig) {
 
   // Change the default overlay message
   blockUIConfig.message = 'Carregando!';
@@ -3960,7 +3989,7 @@ angular.module('core').config(function(blockUIConfig) {
   // Change the default delay to 100ms before the blocking is visible
   blockUIConfig.delay = 100;
 
-});
+}]);
 
 angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
   function($rootScope, $window, User,Authentication) {
@@ -3972,7 +4001,7 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 
     FB.init({ 
 
-      appId: '1422062488114479', 
+      appId: '539560766079177', 
       cookie: true, 
       xfbml: true
     });
@@ -4228,6 +4257,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 					$scope.initPromotionBanner();
 				}
 			 	$scope.destaque = response.destaque;
+			 	$scope.frontCollections = response.collections;
 			 	blockUI.stop();
 			});
 		};
@@ -4402,178 +4432,27 @@ angular.module('users').factory('User', ['$resource',
          				method: 'PUT', 
 						isArray: false,
 						params:{action:'updateAddress',auth:'users'}
+         		},'orderHistory':{
+         				method: 'GET', 
+						isArray: false,
+						params:{action:'orderHistory',auth:'users'}
+         		},'addWishList':{
+         				method: 'POST', 
+						isArray: false,
+						params:{action:'addWishList',auth:'users'}
+         		},'removeWishList':{
+         				method: 'POST', 
+						isArray: false,
+						params:{action:'removeWishList',auth:'users'}
+         		},'getFavoritos':{
+         				method: 'GET', 
+						isArray: false,
+						params:{action:'favoritos',auth:'users'}
          		}
      		}
  		);
 	}
 ]);
-
-//Menu service used for managing  menus
-/*angular.module('core').service('Menus', [
-
-	function() {
-		// Define a set of default roles
-		this.defaultRoles = ['*'];
-
-		// Define the menus object
-		this.menus = {};
-
-		// A private function for rendering decision 
-		var shouldRender = function(user) {
-			if (user) {
-				if (!!~this.roles.indexOf('*')) {
-					return true;
-				} else {
-					for (var userRoleIndex in user.roles) {
-						for (var roleIndex in this.roles) {
-							if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
-								return true;
-							}
-						}
-					}
-				}
-			} else {
-				return this.isPublic;
-			}
-
-			return false;
-		};
-
-		// Validate menu existance
-		this.validateMenuExistance = function(menuId) {
-			if (menuId && menuId.length) {
-				if (this.menus[menuId]) {
-					return true;
-				} else {
-					throw new Error('Menu does not exists');
-				}
-			} else {
-				throw new Error('MenuId was not provided');
-			}
-
-			return false;
-		};
-
-		// Get the menu object by menu id
-		this.getMenu = function(menuId) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		// Add new menu object by menu id
-		this.addMenu = function(menuId, isPublic, roles) {
-			// Create the new menu
-			this.menus[menuId] = {
-				isPublic: isPublic || false,
-				roles: roles || this.defaultRoles,
-				items: [],
-				shouldRender: shouldRender
-			};
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		// Remove existing menu object by menu id
-		this.removeMenu = function(menuId) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Return the menu object
-			delete this.menus[menuId];
-		};
-
-		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Push new menu item
-			this.menus[menuId].items.push({
-				title: menuItemTitle,
-				link: menuItemURL,
-				menuItemType: menuItemType || 'item',
-				menuItemClass: menuItemType,
-				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-				isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].isPublic : isPublic),
-				roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].roles : roles),
-				position: position || 0,
-				items: [],
-				shouldRender: shouldRender
-			});
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		// Add submenu item object
-		this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles, position) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Search for menu item
-			for (var itemIndex in this.menus[menuId].items) {
-				if (this.menus[menuId].items[itemIndex].link === rootMenuItemURL) {
-					// Push new submenu item
-					this.menus[menuId].items[itemIndex].items.push({
-						title: menuItemTitle,
-						link: menuItemURL,
-						uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-						isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].items[itemIndex].isPublic : isPublic),
-						roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].items[itemIndex].roles : roles),
-						position: position || 0,
-						shouldRender: shouldRender
-					});
-				}
-			}
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		// Remove existing menu object by menu id
-		this.removeMenuItem = function(menuId, menuItemURL) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Search for menu item to remove
-			for (var itemIndex in this.menus[menuId].items) {
-				if (this.menus[menuId].items[itemIndex].link === menuItemURL) {
-					this.menus[menuId].items.splice(itemIndex, 1);
-				}
-			}
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		// Remove existing menu object by menu id
-		this.removeSubMenuItem = function(menuId, submenuItemURL) {
-			// Validate that the menu exists
-			this.validateMenuExistance(menuId);
-
-			// Search for menu item to remove
-			for (var itemIndex in this.menus[menuId].items) {
-				for (var subitemIndex in this.menus[menuId].items[itemIndex].items) {
-					if (this.menus[menuId].items[itemIndex].items[subitemIndex].link === submenuItemURL) {
-						this.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
-					}
-				}
-			}
-
-			// Return the menu object
-			return this.menus[menuId];
-		};
-
-		//Adding the topbar menu
-		this.addMenu('topbar');
-	}
-]);*/
-
-
 
 'use strict';
 
@@ -4615,6 +4494,14 @@ angular.module('users').config(['$stateProvider',
 		state('profile', {
 			url: '/user/profile',
 			templateUrl: 'modules/coreUsers/views/authentication/profile.client.view.html'
+		}).
+		state('orderHistory', {
+			url: '/user/orders',
+			templateUrl: 'modules/coreUsers/views/authentication/order_history.client.view.html'
+		}).
+		state('favoritos', {
+			url: '/user/favoritos',
+			templateUrl: 'modules/coreUsers/views/authentication/favoritos.client.view.html'
 		}).
 		state('loginAndRegister', {
 			url: '/login',
@@ -4773,7 +4660,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.profile =function(){
 			$scope.user = Authentication.user;
 		};
-
+		$scope.orderHistory = function(){
+			$scope.newOrders = [];
+			$scope.oldOrders = [];
+			User.orderHistory.$promise.then(function(response,error,progressback){
+				$scope.newOrders = response.newOrders;
+				$scope.oldOrders = response.oldOrders;
+			},function(reason){
+				$location.path('/');
+			});
+		};
 		$scope.getAddress = function(cep){
 			Cep.get({cep:cep}).$promise.then(function(response,error,progressback){
 				$scope.address.bairro = response.bairro;
@@ -4785,6 +4681,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
+		$scope.favoritos = function(){
+			$scope.favoritosProducts = [];
+			User.getFavoritos().$promise.then(function(response,error,progressback){
+				$scope.favoritosProducts = response.products;
+			},function(reason){
+
+			});
+		};
 
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
@@ -4949,18 +4853,6 @@ angular.module('users').directive('pwCheck', [function () {
   }]);
 
 
-'use strict';
-
-// Users service used for communicating with the users REST endpoint
-// angular.module('users').factory('Users', ['$resource',
-// 	function($resource) {
-// 		return $resource('users', {}, {
-// 			update: {
-// 				method: 'PUT'
-// 			}
-// 		});
-// 	}
-// ]);
 'use strict';
 
 //Setting up route
@@ -5138,10 +5030,12 @@ angular.module('products').config(['$stateProvider',
 'use strict';
 
 angular.module('products').controller('ProductsController', ['$rootScope','$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI',
-	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User',
+	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User) {
 		// Products controller logic
 		//in controller that doesn't reload
+		$scope.authentication = Authentication;
+		$scope.user = Authentication.user;
 		$scope.$on('$locationChangeSuccess',function(){
 		  //update your scope based on new $routeParams
 
@@ -5253,6 +5147,28 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			
 		};
 
+		$scope.like = function(productSlug){
+			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		$scope.dislike = function(productSlug){
+			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		
+		$scope.alreadyLiked = function(productSlug){
+			if($scope.user){
+				return $scope.user.wishList.indexOf(productSlug)>=0;
+			}else{
+				return false;
+			} 
+		};
 		$scope.loadEtalage = function(){
 		 	$('#etalage').etalage({
 				thumb_image_width: 300,
