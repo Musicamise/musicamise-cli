@@ -49,6 +49,65 @@ var objectInventorySchema = {
 	product:Product
 
 };
+var objectUserSchema = {
+	firstName: {
+		type: String,
+		trim: true,
+		default: ''
+		// validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+	},
+	lastName: {
+		type: String,
+		trim: true,
+		default: ''
+		// validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+	},
+	fullName: {
+		type: String,
+		trim: true,
+		default: '',
+		validate: [validateLocalStrategyProperty, 'Please fill in your name']
+	},
+	email: {
+		type: String,
+		trim: true,
+		default: '',
+		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+		match: [/.+\@.+\..+/, 'Please fill a valid email address']
+	},
+	marketingEmail:{
+		type: Boolean,
+		default: false
+	},
+	tags:{
+		type:[String],
+		default: [],
+		select: false
+	},
+	notes:{
+		type:String,
+		default: '',
+		select: false
+	},
+	address:{
+		type:[Address]
+	},
+	wishList:{
+		type:[String],
+		default:[]
+	},
+	displayName:{
+		type:String,
+		default:''
+	},
+	gender: {
+		type: String
+	},
+	provider: {
+		type: String,
+		//required: 'Provider is required'
+	}
+};
 /**
  * Product Schema
  */
@@ -87,7 +146,7 @@ var OrderSchema = new Schema({
 		default:[]
 	},
 	user: {
-		type: User
+		type: objectUserSchema
 	},
 	shippingAddress: {
 		type: Address
@@ -159,7 +218,7 @@ OrderSchema.pre('save', function(next) {
 		delete this.user.updatedDate;
 		delete this.user.additionalProvidersData;
 		delete this.user.providerData;
-		//this.email = this.user.email;
+		this.email = this.user.email;
 	}
 	if(this.discountCode){
 		delete this.discountCode.startDate;
