@@ -87,7 +87,7 @@ var OrderSchema = new Schema({
 		type:[StatusOrderSchema],
 		default:[]
 	},
-	// user: {
+	user: {
 	},
 	shippingAddress: {
 		type: Address
