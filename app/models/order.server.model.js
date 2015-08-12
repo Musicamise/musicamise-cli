@@ -46,67 +46,9 @@ var objectInventorySchema = {
 		default: '',
 		trim: true
 	},
+	pagSeguroInfo:{},
 	product:Product
 
-};
-var objectUserSchema = {
-	firstName: {
-		type: String,
-		trim: true,
-		default: ''
-		// validate: [validateLocalStrategyProperty, 'Please fill in your first name']
-	},
-	lastName: {
-		type: String,
-		trim: true,
-		default: ''
-		// validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-	},
-	fullName: {
-		type: String,
-		trim: true,
-		default: '',
-		// validate: [validateLocalStrategyProperty, 'Please fill in your name']
-	},
-	email: {
-		type: String,
-		trim: true,
-		default: '',
-		// validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		// match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	},
-	marketingEmail:{
-		type: Boolean,
-		default: false
-	},
-	tags:{
-		type:[String],
-		default: [],
-		select: false
-	},
-	notes:{
-		type:String,
-		default: '',
-		select: false
-	},
-	address:{
-		type:[Address]
-	},
-	wishList:{
-		type:[String],
-		default:[]
-	},
-	displayName:{
-		type:String,
-		default:''
-	},
-	gender: {
-		type: String
-	},
-	provider: {
-		type: String,
-		//required: 'Provider is required'
-	}
 };
 /**
  * Product Schema
@@ -146,7 +88,7 @@ var OrderSchema = new Schema({
 		default:[]
 	},
 	user: {
-		type: objectUserSchema
+		type: User
 	},
 	shippingAddress: {
 		type: Address
@@ -205,8 +147,7 @@ var OrderSchema = new Schema({
 		type: String,
 		default: 'R$0,00',
 		trim: true
-	},
-	pagSeguroInfo:{}
+	}
 });
 
 /**
@@ -219,6 +160,7 @@ OrderSchema.pre('save', function(next) {
 		delete this.user.additionalProvidersData;
 		delete this.user.providerData;
 		this.email = this.user.email;
+		this.user = JSON.parse(JSON.stringify(this.user));
 	}
 	if(this.discountCode){
 		delete this.discountCode.startDate;
