@@ -737,6 +737,7 @@ exports.addDeliveryAddress = function(req,res){
 					if(!user.displayName)
 						user.displayName = user.fullName;
 				}
+				
 				orderCached.shippingAddress = address;
 
 				myCache.set(key,JSON.stringify(orderCached) , function( err, success ){

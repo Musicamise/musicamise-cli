@@ -97,7 +97,7 @@ exports.updateAddress = function(req,res){
 							user.address[indexSelect]._id = address._id;
 						}
 					}else{
-						address._id = user.address.length;
+						address._id = user.address.length+'';
 						user.address.push(address);
 					}
 					user.save(function (err) {

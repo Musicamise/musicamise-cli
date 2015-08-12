@@ -18,7 +18,7 @@ var objectAddressSchema = {
     state: {type: String},
     country: {type: String},
     complemento: {type: String},
-    _id:{type:Number,default:0}
+    _id:{type:String,default:''}
 };
 var AddressSchema = new Schema(objectAddressSchema);
 exports.getAddressSchema = function(){
