@@ -66,14 +66,14 @@ var objectUserSchema = {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your name']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your name']
 	},
 	email: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+		// match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
 	marketingEmail:{
 		type: Boolean,
