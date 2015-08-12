@@ -153,7 +153,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			}, function(reason) {
 				blockUI.stop();
 			  	console.log('Failed: ' + reason);
-				//$location.path('/review'); todo error 
+				$location.path('/checkout');
 			});
 		}; 
 		
