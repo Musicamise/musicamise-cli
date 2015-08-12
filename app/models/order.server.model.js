@@ -159,7 +159,7 @@ OrderSchema.pre('save', function(next) {
 		delete this.user.additionalProvidersData;
 		delete this.user.providerData;
 		this.email = this.user.email;
-		// this.user = JSON.parse(JSON.stringify(this.user));
+		this.user = JSON.parse(JSON.stringify(this.user));
 	}
 	if(this.discountCode){
 		delete this.discountCode.startDate;
