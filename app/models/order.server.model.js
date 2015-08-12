@@ -46,7 +46,6 @@ var objectInventorySchema = {
 		default: '',
 		trim: true
 	},
-	pagSeguroInfo:{},
 	product:Product
 
 };
@@ -146,7 +145,8 @@ var OrderSchema = new Schema({
 		type: String,
 		default: 'R$0,00',
 		trim: true
-	}
+	},
+	pagSeguroInfo:{}
 });
 
 /**

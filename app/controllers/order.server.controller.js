@@ -303,6 +303,9 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 				 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 				 .select('-_class')
 				 .exec(function(err,inventories){
+				 	if(err){
+			 			done(err);
+			 		}
 				 	inventories.forEach(function(inventory,index){
 				 		var product ;
 				 		order.products.forEach(function(productOrder,_index2){
@@ -310,7 +313,7 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 				 				product = productOrder;
 						});
 
-				 		if(err||!inventory||inventory&&inventory.quantity<product.quantity){
+				 		if(inventory&&inventory.quantity<product.quantity){
 		 					if(!order.message)
 			 					order.message ='';
 			 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
@@ -322,10 +325,10 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 							});
 							if(indexToExclude)
 								order.products.splice(indexToExclude,1);	 				
-
 			 			}
+
 				 	});
-				 	done(err,order);
+ 					done(err,order);
 
 				 });
 		}else{
@@ -776,13 +779,13 @@ exports.processToPagseguro = function(req,res){
 		myCache.get(key, function( err, orderCachedJsonString ){
 			if(err){ 	
 				console.log('error:'+ err);
-				return res.status(500).send({
-					message: err
-				});
+				done(err);
 			}else{
 				var order = new Order(JSON.parse(orderCachedJsonString));
 				order.message = undefined;
 				if(order.products.length>0){
+					console.log('order.products.length');
+
 					var inventoryIds = [];
 					order.products.forEach(function(product,_index){
 						inventoryIds.push(product._id);
@@ -791,13 +794,16 @@ exports.processToPagseguro = function(req,res){
 						 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 						 .select('-_class')
 						 .exec(function(err,inventories){
+						 	if(err){
+			 					done(err);
+						 	}
 						 	inventories.forEach(function(inventory,index){
 						 		var product ;
 						 		order.products.forEach(function(productOrder,_index2){
 						 			if(productOrder._id+''===inventory._id+'')
 						 				product = productOrder;
 								});
-						 		if(err||!inventory||inventory&&inventory.quantity<product.quantity){
+						 		if(inventory&&inventory.quantity<product.quantity){
 				 					if(!order.message)
 					 					order.message ='';
 					 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
@@ -809,11 +815,22 @@ exports.processToPagseguro = function(req,res){
 									});
 									if(indexToExclude)
 										order.products.splice(indexToExclude,1);	 				
-
 					 			}
 						 	});
-			 				done(err,order);
+						 	
+						 	if(order.message){
+	 							console.log('order.message');
+
+			 					done(order.message);
+						 	}
+			 				else{
+								console.log('!order.message');
+
+			 					done(err,order);
+			 				}
 						 });
+				}else{
+					done(err,order);
 				}
 
 			}
