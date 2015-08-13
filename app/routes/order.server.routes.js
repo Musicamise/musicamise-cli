@@ -9,11 +9,6 @@ var users = require('../../app/controllers/users.server.controller'),
 module.exports = function(app) {
 
 	
-	app.route('/api/testeorder')
-		.get(order.testeOrder);
-	app.route('/api/order/correios')
-		.get(order.correios);
-	
 	app.route('/api/order/pagseguro')
 		.get(order.processToPagseguro);
 

@@ -14,6 +14,21 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 		}).state('contact', {
 			url: '/contact',
 			templateUrl: 'modules/core/views/contact.client.view.html'
+		}).state('faq', {
+			url: '/faq',
+			templateUrl: 'modules/core/views/faq.client.view.html'
+		}).state('politicas', {
+			url: '/politicas',
+			templateUrl: 'modules/core/views/politicas.client.view.html'
+		}).state('quemsomos', {
+			url: '/quemsomos',
+			templateUrl: 'modules/core/views/quemsomos.client.view.html'
+		}).state('comocomprar', {
+			url: '/comocomprar',
+			templateUrl: 'modules/core/views/comocomprar.client.view.html'
+		}).state('centrodeajuda', {
+			url: '/centrodeajuda',
+			templateUrl: 'modules/core/views/centrodeajuda.client.view.html'
 		}).state('404', {
 			url: '/404',
 			templateUrl: 'modules/core/views/home.client.view.html'
@@ -31,6 +46,7 @@ angular.module('core').config(function(blockUIConfig) {
 
 });
 
+
 angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
   function($rootScope, $window, User,Authentication) {
 
@@ -39,12 +55,12 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
   $window.fbAsyncInit = function() {
     // Executed when the SDK is loaded
 
-    FB.init({ 
+    // FB.init({ 
 
-      appId: '539560766079177', 
-      cookie: true, 
-      xfbml: true
-    });
+    //   appId: '539560766079177', 
+    //   cookie: true, 
+    //   xfbml: true
+    // });
 
     //User.watchAuthenticationStatusChange();
    //  FB.getLoginStatus(function(response) {

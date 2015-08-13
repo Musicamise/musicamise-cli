@@ -17,39 +17,39 @@
 						<strong ng-bind="success"></strong>
 					</div>
 			  	 	<h2>Contato</h2>
-			 	    <form name="form"  id="form" ng-submit="sendContact()" novalidate autocomplete="off">
-			    	<div>
-				    	<span><label>Nome</label></span>
-				    	<span><input ng-model="userContact.name" name="name" type="text" class="textbox"></span>
-				    </div>
-				    <div>
-				    	<span><label>E-mail</label></span>
-				    	<span><input name="email" ng-model="userContact.email" type="email" required class="textbox"></span>
-				    	<div ng-show="form.email.$touched&&(form.email.$error.email||form.email.$error.required)">Fale seu email.</div>
-				    </div>
-				    <div>
-				     	<span><label>Celular</label></span>
-				    	<span><input name="phone" ng-model="userContact.phone" type="text" class="textbox"></span>
-				    </div>
-				    <div>
-				    	<span><label>Assunto</label></span>
-				    	 <select id="subject" ng-model="userContact.subject" name="subject" required class="form-control" required="required">
-                            <option value="duvida">Dúvida</option>
-                            <option value="sugestao">Sugestão</option>
-                            <option value="anuncio">Anunciar</option>
-                        </select>
-				    	 <div ng-show="form.subject.$touched&&form.subject.$error.required">Escolha uma opção</div>
-				    </div>
-				    <div>
-				    	<span><label>Content</label></span>
-				    	<span><textarea ng-model="userContact.content"  required name="content"> </textarea></span>
-				    	 <div ng-show="form.content.$touched&&form.content.$error.required">Precisamos de sua mensagem!</div>
+		 	    	<form name="form"  id="form" ng-submit="sendContact()" novalidate autocomplete="off">
+				    	<div>
+					    	<span><label>Nome</label></span>
+					    	<span><input ng-model="userContact.name" name="name" type="text" class="textbox"></span>
+					    </div>
+					    <div>
+					    	<span><label>E-mail</label></span>
+					    	<span><input name="email" ng-model="userContact.email" type="email" required class="textbox"></span>
+					    	<div ng-show="form.email.$touched&&(form.email.$error.email||form.email.$error.required)">Fale seu email.</div>
+					    </div>
+					    <div>
+					     	<span><label>Celular</label></span>
+					    	<span><input name="phone" ng-model="userContact.phone" type="text" class="textbox"></span>
+					    </div>
+					    <div>
+					    	<span><label>Assunto</label></span>
+					    	 <select id="subject" ng-model="userContact.subject" name="subject" required class="form-control" required="required">
+	                            <option value="duvida">Dúvida</option>
+	                            <option value="sugestao">Sugestão</option>
+	                            <option value="anuncio">Anunciar</option>
+	                        </select>
+					    	 <div ng-show="form.subject.$touched&&form.subject.$error.required">Escolha uma opção</div>
+					    </div>
+					    <div>
+					    	<span><label>Content</label></span>
+					    	<span><textarea ng-model="userContact.content"  required name="content"> </textarea></span>
+					    	 <div ng-show="form.content.$touched&&form.content.$error.required">Precisamos de sua mensagem!</div>
 
-				    </div>
-				   <div>
-				   		<span><input type="submit" ng-class="{disabled:form.$error.invalid}" ng-disabled="form.$error.required"  class="" value="Mande seu Contato!"></span>
-				  </div>
-			    </form>
+					    </div>
+				  	 	<div>
+					   		<span><input type="submit" ng-class="{disabled:form.$error.invalid}" ng-disabled="form.$error.required"  class="" value="Mande seu Contato!"></span>
+					  	</div>
+			    	</form>
 		    </div>
 			<div class="clearfix"></div>		
 		</div>

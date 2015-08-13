@@ -22,14 +22,14 @@
 	<meta property="og:title" content="{{title}}">
 	<meta property="og:description" content="{{description}}">
 	<meta property="og:url" content="{{url}}">
-	<meta property="og:image" content="/img/brand/logo.png">
+	<meta property="og:image" content="public/images/musicamise_marca.svg">
 	<meta property="og:type" content="website">
 
 	<!-- Twitter META -->
 	<meta name="twitter:title" content="{{title}}">
 	<meta name="twitter:description" content="{{description}}">
 	<meta name="twitter:url" content="{{url}}">
-	<meta name="twitter:image" content="/img/brand/logo.png">
+	<meta name="twitter:image" content="public/images/musicamise_marca.svg">
 
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -57,13 +57,13 @@
 			<div class="header_top">
 				<div class="top_right">
 					<ul>
-						<li><a href="#">help</a></li>|
-						<li><a href="/#!/contact">Contact</a></li>|
-						<li><a href="#">Delivery information</a></li>
+						<li><a href="/#!/centrodeajuda">Ajuda</a></li>|
+						<li><a href="/#!/contact">Contato</a></li>|
+						<li><a href="/#!/politicas">Formas de entrega</a></li>
 					</ul>
 				</div>
 				<div class="top_left">
-					<h2><span></span> Call us : 032 2352 782</h2>
+					<h2><span></span> Whatsapp : (81) 9 96995060</h2>
 				</div>
 					<div class="clearfix"> </div>
 			</div>
@@ -131,17 +131,17 @@
 		<div class="container">
 			<div class="col-md-3 customer-footer">
 				<h4>Área do Cliente</h4>
-					<li><a href="#">Centro de ajuda</a></li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Como comprar</a></li>
-					<li><a href="#">Formas de Entrega</a></li>
+				<li><a href="/#!/centrodeajuda">Centro de ajuda</a></li>
+				<li><a href="/#!/faq">FAQ</a></li>
+				<li><a href="/#!/comocomprar">Como comprar</a></li>
+				<li><a href="/#!/politicas">Regras de entrega e Politicas de trocas</a></li>
 			</div>
 			<div class="col-md-2 about-footer">
 				<h4>Sobre Nós</h4>
-					<li><a href="#">Nossa História</a></li>
-					<li><a href="#">Imprensa</a></li>
-					<li><a href="#">Carreira</a></li>
-					<li><a href="/#!/contact">Contato</a></li>
+				<li><a href="/#!/quemsomos">Quem somos</a></li>
+				<!-- <li><a href="#">Imprensa</a></li> -->
+				<!-- <li><a href="#">Carreira</a></li> -->
+				<li><a href="/#!/contact">Contato</a></li>
 			</div>
 			<div class="col-md-2 myaccount-footer">
 				<h4>Minha Conta</h4>
@@ -152,7 +152,7 @@
 				{% if user!=null %}
 					<li><a href="/#!/user/orders">Historico de compras</a></li>
 				{%endif%}
-				<li><a href="#">Formas de Pagamento</a></li>
+				<li><a href="#">Formas de Pagamento (imagem do pagseguro e das operadoras de cartão)</a></li>
 			</div>
 			<div class="col-md-5 ourstory-footer">
 				<div class="left-33">
@@ -171,10 +171,10 @@
 				<div class="clearfix"> </div>
 				<li><i class="add"> </i>Rua Guaianases, cep:52031-300 </li>
 				<li><i class="phone"> </i>(81) 9 96995060</li>
-				<li><a href="mailto:administrador@musicamise.com.br"><i class="mail"> </i>administrador@musicamise.com.br </a></li>
+				<li><a href="mailto:{{content.email}}"><i class="mail"> </i>{{content.email}} </a></li>
 			</div>
 			<div class="clearfix"> </div>
-				<p>Copyrights © 2015 Musicamise. All rights reserved</a></p>
+				<p>Copyrights © 2015 Musicamise. Todos os direitos reservados</a></p>
 		</div>
 	</div>
 	<!--Embedding The User Object-->

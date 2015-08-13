@@ -67,82 +67,117 @@ var discountIsApplicable = function(cartItems,discountObject){
 
 };
 
-var getShippingCityAndState = function(cepDestino){
-	var urlTo = 'http://cep.correiocontrol.com.br/'+cepDestino+'.json';
-	request.get({url:urlTo,qs:{}},
-		function (error, response, body) {
+var contability = function(order,discountObject,giftCardObject){
+	order.totalValueItems = 0;
+	order.totalItems = 0;
+	if(order.products.length>0){
+		order.products.forEach(function(product,index){
 
-		    if (!error && response.statusCode === 200) {
-	    		
-    			console.log(body);
-				return body;
-		    }else{
-				return error;
-		    }
+			order.products[index].priceWithQuantity = order.products[index].quantity* order.products[index].product.price;
+			order.products[index].priceWithQuantityFormatted = 'R$'+ numeral(order.products[index].priceWithQuantity).format('0.00').replace('.',',');
+			
+			order.totalValueItems = order.totalValueItems +  order.products[index].quantity* order.products[index].product.price;
+		 	order.totalItems =  order.totalItems +1;
 
 		});
+	}else{
+		order.totalShipping = 0.0;
+		order.totalDiscount = 0.0;
+	}
 
-	
-};
-var getShippingPriceAndDate = function(cepOrigen,cepDestino){
-	async.waterfall([
-	function(done) {
-		var object = {};
-		object.nCdEmpresa = '';
-		object.sDsSenha = '';
-		object.sCepOrigem = cepOrigen;
-		object.sCepDestino = cepDestino;
-		object.nVlPeso = '1';
-		object.nCdFormato = '1';
-		object.nVlComprimento = '16';
-		object.nVlAltura = '2';
-		object.nVlLargura = '11';
-		object.sCdMaoPropria = 'N';
-		object.nVlValorDeclarado = '150';
-		object.sCdAvisoRecebimento = 'N';
-		object.nCdServico = '41106'; // outros sao possiveis
-		object.nVlDiametro = '0';
-		object.StrRetorno = 'xml';
-
-		request.get({url:'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx', 
-				qs: object},
-				function (error, response, body) {
-
-				    if (!error && response.statusCode === 200) {
-			    		parseString(body, function (err, result) {
-			    			console.log(result);
-							done(undefined,result);
-
+	if(discountObject){
+		if(order.products.length>0){
+			switch(discountObject.whereApply){
+				case 'oncePerOrder':
+					if(discountIsApplicable(order.products,discountObject)){
+						switch(discountObject.typeForPay){
+							case 'value':
+								order.totalDiscount = discountObject.valueOf;
+								break;
+							case 'percent':
+								order.totalDiscount = order.totalValueItems*discountObject.valueOf/100;
+								break;
+						}
+					 	order.products.forEach(function(product,index){
+							delete order.products[index].product.discountValue;
+							delete order.products[index].product.discountValueFormatted;
 						});
-				    }else{
-						done(error);
-				    }
+					}
+					break;
+				case 'toEveryProduct':
+					order.totalDiscount = 0;
+				 	order.products.forEach(function(product,index){
+						if(discountIsApplicable([order.products[index]],discountObject)){
+							switch(discountObject.typeForPay){
+								case 'value':
+									order.products[index].product.discountValue = order.products[index].quantity*discountObject.valueOf;
+									order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
+									order.totalDiscount = order.totalDiscount+order.products[index].quantity*discountObject.valueOf;
+									break;
+								case 'percent': 
+									order.products[index].product.discountValue = order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
+									order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
+									order.totalDiscount = order.totalDiscount+order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
+									break;
+							}
 
-				});
-	},function(result,done){
-		console.log('done!');
-		return result;
-	}],function(err){
-		console.log('error');
-		return err;
-	});
+						}		 							
+					});
+					break;
+			}
+		}
+		
+	}
+	if(giftCardObject){
+		order.giftCardValue = giftCardObject.price;  
+		order.giftCardValueFormatted = 'R$'+numeral(order.giftCardValue).format('0.00').replace('.',',');
+	}else{
+		delete order.giftCard;
+		delete order.giftCardValue;
+		delete order.giftCardValueFormatted;
+	}
 
+	//
+	order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
+	order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
+	order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
+	order.total = order.totalValueItems + order.totalShipping - order.totalDiscount- (order.giftCardValue||0);
+	order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
+	return order;
 };
-exports.correios = function(req,res){
-	async.waterfall([
-	function(done) {
-		var result = getShippingCityAndState('96825150'); 
-		done(null,result);
-	},function(result,done){
-		res.json({test:result});
-	}],function(err){
-		res.json({error:err});
-	});
 
+var updateOrderByAvaibleInventories = function(order,inventories){
+	var toRemove = [];
+	var message = '';
+	order.products.forEach(function(productOrder,productOrderIndex){
+		var inventoryToCompare ;
+
+ 		inventories.forEach(function(inventory,index){
+ 			if(productOrder._id+''===inventory._id+''){
+ 				inventoryToCompare = inventory;
+ 			}
+		});
+
+
+ 		if(!inventoryToCompare||inventoryToCompare&&inventoryToCompare.quantity<productOrder.quantity){
+ 			console.log('entrou em message');
+
+				message = message+ 'Produto '+ productOrder.product.title+' fora de estoque, desculpe o inconveniente!\n';
+				toRemove.push(productOrder);
+
+				console.log('message'); 				
+				console.log(message); 		
+			}
+
+ 	});
+ 	order.products = _.difference(order.products,toRemove);
+ 	return message;
 };
+
 var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 	async.waterfall([
 	function(done){
+		order.message = undefined;
 		if(order.shippingUpdated){
 			var cepDestino ;
 			if(order.shippingAddress)
@@ -293,7 +328,8 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 		}
 	},function(order, done) {
 		//check for availality
-		order.message = undefined;
+		console.log('checking avaibality');
+		
 		if(order.products.length>0){
 			var inventoryIds = [];
 			order.products.forEach(function(product,_index){
@@ -306,28 +342,10 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 				 	if(err){
 			 			done(err);
 			 		}
-				 	inventories.forEach(function(inventory,index){
-				 		var product ;
-				 		order.products.forEach(function(productOrder,_index2){
-				 			if(productOrder._id+''===inventory._id+'')
-				 				product = productOrder;
-						});
-
-				 		if(inventory&&inventory.quantity<product.quantity){
-		 					if(!order.message)
-			 					order.message ='';
-			 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
-			 				var indexToExclude ;
-			 				order.products.forEach(function(product,inventoryIndex){
-			 					if(product._id+''===inventory._id+''){
-			 						indexToExclude = inventoryIndex;
-			 					}
-							});
-							if(indexToExclude)
-								order.products.splice(indexToExclude,1);	 				
-			 			}
-
-				 	});
+			 		//check if all the order.products returned if not you can exclude already 
+			 		//has not quantity==0 or just got orderOutOfStock true
+			 		var message = updateOrderByAvaibleInventories(order,inventories);
+ 					order.message = message;
  					done(err,order);
 
 				 });
@@ -336,81 +354,11 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 		}
 	},function(order, done) {
 		var key = 'order'+req.sessionID;
+
 		var discountObject = order.discountCode;
 		var giftCardObject = order.giftCard;
-		
-		order.totalValueItems = 0;
-		order.totalItems = 0;
-		if(order.products.length>0){
-			order.products.forEach(function(product,index){
-
-				order.products[index].priceWithQuantity = order.products[index].quantity* order.products[index].product.price;
-				order.products[index].priceWithQuantityFormatted = 'R$'+ numeral(order.products[index].priceWithQuantity).format('0.00').replace('.',',');
-				
-				order.totalValueItems = order.totalValueItems +  order.products[index].quantity* order.products[index].product.price;
-			 	order.totalItems =  order.totalItems +1;
-
-			});
-		}
-
-		if(discountObject){
-			if(order.products.length>0){
-				switch(discountObject.whereApply){
-					case 'oncePerOrder':
-						if(discountIsApplicable(order.products,discountObject)){
-							switch(discountObject.typeForPay){
-								case 'value':
-									order.totalDiscount = discountObject.valueOf;
-									break;
-								case 'percent':
-									order.totalDiscount = order.totalValueItems*discountObject.valueOf/100;
-									break;
-							}
-						 	order.products.forEach(function(product,index){
-								delete order.products[index].product.discountValue;
-								delete order.products[index].product.discountValueFormatted;
-							});
-						}
-						break;
-					case 'toEveryProduct':
-						order.totalDiscount = 0;
-					 	order.products.forEach(function(product,index){
-							if(discountIsApplicable([order.products[index]],discountObject)){
-								switch(discountObject.typeForPay){
-									case 'value':
-										order.products[index].product.discountValue = order.products[index].quantity*discountObject.valueOf;
-										order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
-										order.totalDiscount = order.totalDiscount+order.products[index].quantity*discountObject.valueOf;
-										break;
-									case 'percent': 
-										order.products[index].product.discountValue = order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
-										order.products[index].product.discountValueFormatted = 'R$'+numeral(order.products[index].product.discountValue).format('0.00').replace('.',',');
-										order.totalDiscount = order.totalDiscount+order.products[index].quantity*order.products[index].product.price*discountObject.valueOf/100; 
-										break;
-								}
-
-							}		 							
-						});
-						break;
-				}
-			}
-		}
-		if(giftCardObject){
-			order.giftCardValue = giftCardObject.price;  
-			order.giftCardValueFormatted = 'R$'+numeral(order.giftCardValue).format('0.00').replace('.',',');
-		}else{
-			delete order.giftCard;
-			delete order.giftCardValue;
-			delete order.giftCardValueFormatted;
-		}
-
-		//
-		order.totalValueItemsFormatted = 'R$'+ numeral(order.totalValueItems).format('0.00').replace('.',',');
-		order.totalShippingFormatted = 'R$'+numeral(order.totalShipping).format('0.00').replace('.',',');
-		order.totalDiscountFormatted = 'R$'+numeral(order.totalDiscount).format('0.00').replace('.',',');
-		order.total = order.totalValueItems + order.totalShipping - order.totalDiscount- (order.giftCardValue||0);
-		order.totalFormatted = 'R$'+ numeral(order.total).format('0.00').replace('.',',');
-  		myCache.set(key,JSON.stringify(order) , function( err, success ){
+		order = contability(order,discountObject,giftCardObject);
+		myCache.set(key,JSON.stringify(order) , function( err, success ){
 			if( !err && success ){
 		 		console.log('cache sucess:'+ success);
 
@@ -476,69 +424,6 @@ exports.getOrder = function(req, res) {
 
 };
 
-exports.testeOrder = function(req,res){
-
-	Inventory.findOne({ '_id':new ObjectId('55971baafe82f4a84ba0ccbb'),'orderOutOfStock':false})
-		 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
-		 .select('-_class')
-		 .exec(function(err,inventory){
-			if(!err){
-				if(inventory){
-					Product.findOne({'_id':inventory.product.oid})
-					.where('onLineVisible').equals(true)
-					.select('-_class -_id -userTags -inventories -storeVisible -localStoresSlugs')
-					.exec(function(err,product){
-						var discountCode = 'w6RqOlKfF6';
-					 	DiscountCode.findOne({_id:discountCode,active:true,
-						$and:[{$or:[{noTimesLimits:true},{timesLeft:{$gt:0}}]},
-								{$or:[{noDateLimits:true},{endDate:{$lte:new Date()}}]}
-							 ]
-						})
-						.exec(function(err,discountObject){
-
-							var  order  = new Order();
-							var inventoryClone = clone(inventory);
-							inventoryClone.quantity = 1;
-							order.discountCode = discountObject;
-							order.products.push(inventoryClone);
-							order.products[0].product = product;
-							res.json({order:order});
-						});
-
-					});
-				}
-			}
-		});
-};
-
-exports.getOrderJson = function(req, res) {
-	var key = 'order'+req.sessionID;
-	myCache.get(key, function( err, orderCached ){
-	  if( !err ){
-	    if(!orderCached){
-	      // key not found 
-	      	var order = {};
-	      	myCache.set(key,order , function( err, success ){
-		  		if( !err && success ){
-		     		console.log('order sucess:'+ success);
-		  		}
-			});
-			//res.json({cart:cart});
-			return order;
-
-	    }else{
-  			console.log('order found 2' + orderCached);
-			return orderCached;
-
-	    }
-	  }else{
-	  	console.log('order error:'+err);
-		return {};
-
-	  }
-	});
-
-};
 
 exports.updateOrderOrAddItem = function(req, res) {
 	var key = 'order'+req.sessionID;
@@ -797,35 +682,32 @@ exports.processToPagseguro = function(req,res){
 						 	if(err){
 			 					done(err);
 						 	}
-						 	inventories.forEach(function(inventory,index){
-						 		var product ;
-						 		order.products.forEach(function(productOrder,_index2){
-						 			if(productOrder._id+''===inventory._id+'')
-						 				product = productOrder;
-								});
-						 		if(inventory&&inventory.quantity<product.quantity){
-				 					if(!order.message)
-					 					order.message ='';
-					 				order.message =order.message+ 'Produto '+ product.product.title+' fora de estoque, desculpe o inconveniente!\n';
-					 				var indexToExclude ;
-					 				order.products.forEach(function(product,inventoryIndex){
-					 					if(product._id+''===inventory._id+''){
-					 						indexToExclude = inventoryIndex;
-					 					}
-									});
-									if(indexToExclude)
-										order.products.splice(indexToExclude,1);	 				
-					 			}
-						 	});
-						 	
+
+						 	var message = updateOrderByAvaibleInventories(order,inventories);
+						 	order.message = message;
+						 	console.log('order.products');
+						 	console.log(order.products);
 						 	if(order.message){
 	 							console.log('order.message');
+	 							var discountObject = order.discountCode;
+								var giftCardObject = order.giftCard;
+								order = contability(order,discountObject,giftCardObject);
+						  		myCache.set(key,JSON.stringify(order) , function( err, success ){
+									if( !err && success ){
+								 		console.log('cache sucess:'+ success);
 
+									}else{
+										console.log('error:'+ err);
+											return res.status(500).send({
+											message: err
+										});
+									}
+								});
+	 							
 			 					done(order.message);
 						 	}
 			 				else{
 								console.log('!order.message');
-
 			 					done(err,order);
 			 				}
 						 });

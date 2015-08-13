@@ -146,13 +146,16 @@ var OrderSchema = new Schema({
 		default: 'R$0,00',
 		trim: true
 	},
-	pagSeguroInfo:{}
+	pagSeguroInfo:{},
+	message:{}
 });
 
 /**
  * Hook a pre save method to hash the password
  */
 OrderSchema.pre('save', function(next) {
+	if(this.message)
+		delete this.message;
 	if (this.user) {
 		delete this.user.createdDate;
 		delete this.user.updatedDate;

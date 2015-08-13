@@ -152,8 +152,8 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 				 blockUI.stop();
 			}, function(reason) {
 				blockUI.stop();
-			  	console.log('Failed: ' + reason);
-				$location.path('/checkout');
+			  	console.log('Failed: ' + reason.data.message);
+				$location.path('/shipping');
 			});
 		}; 
 		
