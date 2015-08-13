@@ -1,0 +1,75 @@
+<section data-ng-controller="CheckOrderController" data-ng-init="orderId()"  >
+	<!-- content -->
+<div class="container">
+	<div class="check">	
+	 	<!-- <div class="col-md-2 ">
+	 		<ul>
+			 	<li><ahref="#!/user/profile">Update profile</a></li>
+				<li class="active"><a href="#!/user/orders">Order history</a></li>
+				<li ><a href="#!/user/favoritos">Favoritos</a></li>
+				<li><a href="#">Privacy</a></li>
+		 	</ul>
+		</div> -->
+		<div class="col-md-10 cart-items">
+	 		<h1>Historico de Venda</h1>
+	 		<!-- <div ng-hide="newOrders||oldOrders">
+		 		<p>
+		 			<h1>Você não possui nenhuma Compra :( </h1> 
+		 			<h3><a href="#!/products"> Continue Comprando :) </a></h3>
+		 		</p>
+	 		</div> -->
+	 		<h2 ng-show="order">Compra atual</h2>
+	 		<div>
+	 			<div class="status">
+	 				<div class="status-order">
+	 					<label  ng-show="order.status.length>0">Status da compra: <span ng-bind="order.status[order.status.length-1].status"> </span></label>
+	 				</div>
+	 				
+					<div id="rootwizard" style="display: none" >
+						<div class="status-entrega">
+		 					<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
+		 				</div>
+						<ul>
+						  	<li class="disabled"><a ng-href="" >Em Produção</a></li>
+							<li class="disabled"><a ng-href="" >Embalagem</a></li>
+							<li class="disabled"><a ng-href="" >À Caminho</a></li>
+							<li class="disabled"><a ng-href="" >ENTREGUE</a></li>
+						</ul>
+						<div id="bar" class="progress progress-striped active">
+						  <div class="bar"></div>
+						</div>
+					</div>
+	 			</div>
+	 			<div class="cart-header" ng-repeat="product in order.products" >
+				 	<div class="cart-sec simpleCart_shelfItem">
+						<div class="cart-item cyc">
+					 		<a ng-href="#!/product/{{product.product.slug}}" > 
+				 			<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/></a>
+						</div>
+					   	<div class="cart-item-info">
+							<h3><a ng-href="#!/product/{{product.product.slug}}" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
+							<ul class="qty">
+								<li><p>Size : <label ng-bind="product.size"></label></p></li>
+								<li><p>Qty :  <label ng-bind="product.quantity"></p></li>
+							</ul>
+						 	<div class="delivery">
+							 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
+						 		<div class="clearfix"></div>
+					        </div>	
+						 	<div class="delivery">
+							 	<p>Custo de Entrega : <label ng-bind="order.totalShippingFormatted"></label></p>
+							 	<span ng-show="order.shippingAddress.prazo"> Entregamos em até &nbsp;
+						 		<span ng-bind="order.shippingAddress.prazo"> </span></span>
+						 		<div class="clearfix"></div>
+					        </div>		
+					   	</div>
+				   		<div class="clearfix"></div>
+				  	</div>
+			 	</div>
+		 	</div>
+		</div>
+		<div class="clearfix"> </div>
+	  	
+	</div>
+</div>
+</section>

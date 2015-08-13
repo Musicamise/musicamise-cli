@@ -5,7 +5,12 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 	function($resource) {
 		return $resource('api/order/:action', {
 			action: '@action'
-			},{'removeItem': {
+			},{'checkorder': {
+						method: 'GET', 
+						isArray: false,
+						params:{action:'check'}
+						
+         		},'removeItem': {
 						method: 'POST', 
 						isArray: false,
 						params:{action:'removeItem'}

@@ -17,6 +17,7 @@ var mongoose = require('mongoose'),
 	ObjectId = require('mongoose').Types.ObjectId,
 	_ = require('lodash');
 
+var moment = require('moment');
 
 var parseString = require('xml2js').parseString;
 
@@ -387,6 +388,32 @@ var isEmptyObject = function(obj) {
   return !Object.keys(obj).length;
 };
 
+exports.getOrderById = function(req,res){
+	var id = req.query.id;
+	var nowThreeMonthsAgo = moment();
+	nowThreeMonthsAgo = nowThreeMonthsAgo.subtract(3,'months');
+	Order.findOne({'_id':new ObjectId(id),
+					'status':{$elemMatch:{$or:[{'status':'PAGO'},
+											{'status':'CANCELADO'},
+											{'status':'DEVOLVIDA'}]}},
+					'createdDate':{$gte:nowThreeMonthsAgo.valueOf()}})
+					.exec(function(err,order){
+						if(err){
+							console.log('error in getOrderById');  
+							return res.status(500).send({
+								message: err
+							});
+						}
+						if(order){
+							res.json({order:order,lastStatus:order.message.lastStatus});
+						}else{
+							return res.status(404).send({
+								message: 'no inventory found'
+							});
+						}
+					});
+
+};
 
 exports.getOrder = function(req, res) {
 	

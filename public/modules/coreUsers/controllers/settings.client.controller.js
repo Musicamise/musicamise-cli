@@ -13,7 +13,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.orderHistory = function(){
 			$scope.newOrders = [];
 			$scope.oldOrders = [];
-			User.orderHistory.$promise.then(function(response,error,progressback){
+			User.orderHistory().$promise.then(function(response,error,progressback){
 				$scope.newOrders = response.newOrders;
 				$scope.oldOrders = response.oldOrders;
 			},function(reason){

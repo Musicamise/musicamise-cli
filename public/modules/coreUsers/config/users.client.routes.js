@@ -7,15 +7,15 @@ angular.module('users').config(['$stateProvider',
 		$stateProvider.
 		state('profile', {
 			url: '/user/profile',
-			templateUrl: 'modules/coreUsers/views/authentication/profile.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/profile.client.view.html'
 		}).
 		state('orderHistory', {
 			url: '/user/orders',
-			templateUrl: 'modules/coreUsers/views/authentication/order_history.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/order_history.client.view.html'
 		}).
 		state('favoritos', {
 			url: '/user/favoritos',
-			templateUrl: 'modules/coreUsers/views/authentication/favoritos.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/favoritos.client.view.html'
 		}).
 		state('loginAndRegister', {
 			url: '/login',

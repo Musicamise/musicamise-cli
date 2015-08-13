@@ -41,18 +41,22 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
 				'public/plugin/img-lazyload/me-lazyload.js',
-				'public/lib/angular-img-fallback/angular.dcb-img-fallback.min.js'
-
+				'public/lib/angular-img-fallback/angular.dcb-img-fallback.min.js',
 			]
 		},
 		css: [
 			'public/modules/**/css/*.css',
 			'public/css/app.css',
 			'public/plugin/etalage/etalage.css',
+			'public/lib/twitter-bootstrap-wizard/prettify.css',
+			'public/lib/twitter-bootstrap-wizard/bootstrap/css/bootstrap.min.css',
+			'public/lib/twitter-bootstrap-wizard/bootstrap/css/bootstrap-responsive.min.css'
 		],
 		js: [
 			'public/plugin/js/*.js',
 			'public/plugin/etalage/jquery.etalage.min.js',
+			'public/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js',
+			'public/lib/twitter-bootstrap-wizard/prettify.js',
 			'public/plugin/owl-carousel/owl.carousel.js',
 			'public/lib/fancybox-plus/src/jquery.fancybox-plus.js',
 			'public/lib/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',

@@ -208,50 +208,19 @@ exports.orderHistory = function(req, res) {
 						message: err
 					});
 				}
-				var productIds = [];
+
+				var newOrders = [];
+				var oldOrders = [];
 				
-				orders.forEach(function(order){
-					order.products.forEach(function(inventory){
-						var inventoryCopy = JSON.parse(JSON.stringify(inventory));
-						productIds.push(inventoryCopy.product.$id);
+				if(orders.length>0){
+					newOrders = orders.filter(function(order){
+						var dateOrder = moment(order.updatedDate);
+						return dateOrder.isAfter(moment().subtract(1,'month'));
 					});
-				});
+					oldOrders = _.difference(orders,newOrders);
+				}
 
-				Product.find({'_id':{$in:productIds}})
-					.select('-userTags -inventories')
-					.exec(function(err,products){
-					if(err){ 	
-						console.log('error:'+ err);
-						return res.status(500).send({
-							message: err
-						});
-					}
-
-					if(!err&&products){
-						orders.forEach(function(order,indexOrder){
-							order.products.forEach(function(inventory,indexInventory){
-								products.forEach(function(product){
-									var inventoryCopy = JSON.parse(JSON.stringify(inventory));
-									if(product._id+''===inventoryCopy.product.$id+''){
-										orders[indexOrder].products[indexInventory].product = product;
-									}
-								});
-							});
-						});
-					}
-
-					var newOrders = [];
-					var oldOrders = [];
-					
-					if(orders.length>0){
-						newOrders.push(orders[0]);
-						orders.slice(1,-1).forEach(function(order){
-							oldOrders.push(order);
-						});
-					}
-
-					res.json({newOrders:newOrders,oldOrders:oldOrders});
-				});
+				res.json({newOrders:newOrders,oldOrders:oldOrders});
 	});
 };
 exports.addWishList = function(req,res){

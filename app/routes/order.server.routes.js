@@ -7,7 +7,8 @@ var users = require('../../app/controllers/users.server.controller'),
 	order = require('../../app/controllers/order.server.controller');
 
 module.exports = function(app) {
-
+	app.route('/api/order/check')
+		.get(order.getOrderById);
 	
 	app.route('/api/order/pagseguro')
 		.get(order.processToPagseguro);

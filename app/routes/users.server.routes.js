@@ -19,7 +19,6 @@ module.exports = function(app) {
 	app.route('/users/removeWishList').post(users.removeWishList);
 	app.route('/users/favoritos').get(users.getWishList);
 
-
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
 
 	// Setting up the users password api

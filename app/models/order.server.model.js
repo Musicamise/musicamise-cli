@@ -86,6 +86,10 @@ var OrderSchema = new Schema({
 		type:[StatusOrderSchema],
 		default:[]
 	},
+	statusEntrega:{
+		type: String,
+		default: '',
+	},
 	user: {
 	},
 	shippingAddress: {
@@ -171,6 +175,12 @@ OrderSchema.pre('save', function(next) {
 
 	next();
 });
-
+OrderSchema.virtual('message.lastStatus').get(function () {
+	if(this.status.length>0){
+  		return this.status[this.status.length-1].status;
+	}else{
+		return undefined;
+	}
+});
 mongoose.model('Order', OrderSchema,'order');
 mongoose.model('StatusOrder', StatusOrderSchema);
