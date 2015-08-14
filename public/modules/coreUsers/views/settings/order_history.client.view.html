@@ -12,7 +12,7 @@
 		</div>
 		<div class="col-md-10 cart-items">
 	 		<h1>Order history</h1>
-	 		<div ng-hide="newOrders||oldOrders">
+	 		<div ng-hide="newOrders.length>0||oldOrders.length>0">
 		 		<p>
 		 			<h1>Você não possui nenhuma Compra :( </h1> 
 		 			<h3><a href="#!/products"> Continue Comprando :) </a></h3>
@@ -50,26 +50,7 @@
 		 	</div>
 	 		<h2 ng-if="oldOrders.length>0">Compras antigas</h2>
 	 		<div ng-repeat="order in oldOrders">
-	 			<div class="status">
-	 				<div class="status-order">
-	 					<label  ng-show="order.lastStatus">Status da compra: <span ng-bind="order.lastStatus"> </span></label>
-	 				</div>
-	 				
-					<div ng-attr-id="{{ 'wizard-' + order._id }}" ng-init="initTab(order)" style="display: none" >
-						<div class="status-entrega">
-		 					<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
-		 				</div>
-						<ul>
-						  	<li class="disabled"><a ng-href="" >Em Produção</a></li>
-							<li class="disabled"><a ng-href="" >Embalagem</a></li>
-							<li class="disabled"><a ng-href="" >À Caminho</a></li>
-							<li class="disabled"><a ng-href="" >ENTREGUE</a></li>
-						</ul>
-						<div id="bar" class="progress progress-striped active">
-						  <div class="bar"></div>
-						</div>
-					</div>
-	 			</div>
+	 			<my-bar order='order'></my-bar>
 	 			<div class="cart-header" ng-repeat="product in order.products" >
 				 	<div class="cart-sec simpleCart_shelfItem">
 						<div class="cart-item cyc">
