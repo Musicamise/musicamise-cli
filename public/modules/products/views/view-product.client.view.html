@@ -75,7 +75,7 @@
 							</div>
 						</div>
 						
-						<div ng-show="inventories.length>0" class="btn_form">
+						<div ng-show="inventories" class="btn_form">
 							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">buy</a>
 						</div>
 
