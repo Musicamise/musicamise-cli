@@ -90,7 +90,7 @@
 							</div>							
 						</div>
 						<div class="col1" ng-repeat="(key, value) in loja.collection" ng-init="$last ? megamenuDone() : angular.noop()">
-							<div class="header_nav">
+							<div ng-if="value.length>0" class="header_nav">
 								<h4 ng-bind="key"></h4>
 								<ul >
 									<li ng-hide="key==='Foda de estoque'"><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
