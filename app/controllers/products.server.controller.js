@@ -10,7 +10,6 @@ var mongoose = require('mongoose'),
 	Tag = mongoose.model('Tag'),
 	Article = mongoose.model('Article'),
 	Inventory = mongoose.model('Inventory'),
-
 	_ = require('lodash');
 
 

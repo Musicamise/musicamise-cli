@@ -1,0 +1,19 @@
+<div class="status" data-ng-controller="SettingsController" >
+	<div class="status-order">
+		<label  ng-show="order.lastStatus">Status da compra: <span ng-bind="order.lastStatus"> </span></label>
+	</div>
+	<div  class="wizard"  >
+		<div class="status-entrega"  >
+			<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
+		</div>
+		<ul >
+		  	<li class=""><a ng-href="" >Em Produção</a></li>
+			<li class=""><a ng-href="" >Embalagem</a></li>
+			<li class=""><a ng-href="" >À Caminho</a></li>
+			<li class=""><a ng-href="" >ENTREGUE</a></li>
+		</ul>
+		<div id="bar" class="progress progress-striped active">
+	  		<div class="bar"></div>
+		</div>
+	</div>
+</div>

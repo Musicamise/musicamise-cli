@@ -93,9 +93,12 @@
 							<div class="header_nav">
 								<h4 ng-bind="key"></h4>
 								<ul >
-									<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
-									<li  ng-repeat="typeClothes in value" >
+									<li ng-hide="key==='Foda de estoque'"><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
+									<li ng-hide="key==='Foda de estoque'" ng-repeat="typeClothes in value" >
 										<a ng-href="/#!/{{typeClothes}}/collection/{{key}}" ng-bind="typeClothes"></a>
+									</li>
+									<li ng-show="key==='Foda de estoque'" ng-repeat="product in value" >
+										<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title"></a>
 									</li>
 
 								</ul>	
@@ -107,9 +110,8 @@
 					</div>
 				</div>
 			</li>
-			<li class="grid" ng-if="localStores"><a class="color2" href="/#!/lojasparceiras/">Lojas Parceiras</a>
+			<li class="grid" ng-if="localStores.length>0"><a class="color2" href="/#!/lojasparceiras/">Lojas Parceiras</a>
 				<div class="megapanel">
-
 					<div class="row">
 						<div class="col1"  ng-repeat="(store,storeObj) in localStores" ng-init="$last ? megamenuDone() : angular.noop()">
 							<div class="header_nav">

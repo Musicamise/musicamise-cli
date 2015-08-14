@@ -151,13 +151,16 @@ var OrderSchema = new Schema({
 		trim: true
 	},
 	pagSeguroInfo:{},
-	message:{}
+	message:{},
+	lastStatus:{}
 });
 
 /**
  * Hook a pre save method to hash the password
  */
 OrderSchema.pre('save', function(next) {
+	if(this.lastStatus)
+		delete this.lastStatus;
 	if(this.message)
 		delete this.message;
 	if (this.user) {

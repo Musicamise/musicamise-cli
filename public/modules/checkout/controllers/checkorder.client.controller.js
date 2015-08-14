@@ -24,13 +24,12 @@ angular.module('checkout').controller('CheckOrderController', ['$rootScope','$wi
 			
 			OrderCheckout.checkorder($location.search()).$promise.then(function(response,error,progressback){
 				$scope.order = response.order;
-				$scope.orderLastStatus = response.lastStatus;
 			},function(){
 				$location.path('/404');
 			});
 		};
 		$scope.$watch('order', function(newValue, oldValue, scope) {
-			$scope.initTab($scope.orderLastStatus,$scope.order.statusEntrega);
+			$scope.initTab($scope.order.lastStatus,$scope.order.statusEntrega);
 		});
 
 		$scope.initTab = function(statusOrder,statusEntrega){

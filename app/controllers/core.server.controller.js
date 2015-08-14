@@ -70,6 +70,48 @@ var translateDiscountCode = function(discountObject){
 exports.mainMenu = function(req,res){
 	async.waterfall([
 	function(done) {
+		//products out of stock
+		Inventory.aggregate([{$group:{_id:'$product',inventories:{$push:'$$ROOT'},count:{$sum:1}}}])
+			 		.exec(function(err, result){
+		 			if(err){
+						return res.status(400).send({
+							message: err
+						});
+					}
+					var productsId = [];
+					result.forEach(function(product){
+						var isToAdd= true;
+						product.inventories.forEach(function(inventory){
+							if(!inventory.orderOutOfStock&&(inventory.sellInOutOfStock||inventory.quantity>0)){
+								isToAdd = false;
+							}
+						});
+						if(isToAdd)
+							productsId.push(product._id.oid);
+					});
+
+					Product.find({ '_id':{$in:productsId}})
+						.where('onLineVisible').equals(true)
+					   	.select('-_id title slug ')
+					   	.exec(function(err,products){
+					   		if(err){
+								return res.status(400).send({
+									message: err
+								});
+							}
+							var outOFStock = [];
+							if(products){
+					            products.forEach(function(product) {
+									outOFStock.push({'slug':product.slug,'title':product.title}); 
+					            });
+							}
+							var response = {'loja':{collection:{}}};
+							response.loja.collection['Foda de estoque'] = outOFStock;
+							done(err,response);
+					   	});
+   		});
+	},
+	function(response,done) {
 		Collection.find({'onLineVisible':true}).or([{'gender':true},{'mainMenu':true}])
 		.select('-_id slug gender')
 		.exec(function(err, collectionsSlugs){
@@ -101,25 +143,27 @@ exports.mainMenu = function(req,res){
 					   	.exec(function(err,products){
 
 							var gender = {};
-							var collection = {};
-
+							var collection = response.loja.collection;
 							if(products){
 					            products.forEach(function(product) {
 						       		product.collectionsSlugs.forEach(function(collectionSlug){
 							   			if(collectionSlugGender.indexOf(collectionSlug)>=0){
 							   				if(!gender[collectionSlug])
 							   					gender[collectionSlug] = [];
-											gender[collectionSlug].push(product.type);         				
+											gender[collectionSlug].push(product.type); 
+											gender[collectionSlug] = _.uniq(gender[collectionSlug], true);        				
 							   			}else if(collectionsSlugsNotGender.indexOf(collectionSlug)>=0){
 											if(!collection[collectionSlug])
 												collection[collectionSlug] = [];
-											collection[collectionSlug].push(product.type);         				
+											collection[collectionSlug].push(product.type); 
+											collection[collectionSlug] = _.uniq(collection[collectionSlug], true);        				
 							   			}
 							   		});
 					            });
 							}
-
-				            done(err, {'loja':{gender:gender,collection:collection}});
+							response.loja.gender = gender;
+							response.loja.collection = collection;
+				            done(err, response);
 	        				// res.json(mainMenu);
 
 				}); 

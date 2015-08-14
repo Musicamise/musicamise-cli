@@ -200,7 +200,7 @@ exports.orderHistory = function(req, res) {
 											{'status':'DEVOLVIDA'}]}},
 				$or:[{'email':user.email},{'user.email':user.email}]})
 			.sort('-updatedDate')
-			.select('-pagSeguroInfo -user -_class -emailSents')
+			.select('-pagSeguroInfo -user -_class -emailSents ')
 			.exec(function(err,orders){
 				if(err){ 	
 					console.log('error:'+ err);
@@ -208,6 +208,9 @@ exports.orderHistory = function(req, res) {
 						message: err
 					});
 				}
+				orders.forEach(function(order){
+					order.lastStatus = order.message.lastStatus;
+				});
 
 				var newOrders = [];
 				var oldOrders = [];

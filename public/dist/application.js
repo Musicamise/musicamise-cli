@@ -737,6 +737,54 @@ var i=aG.find(".etalage_smallthumb_last").removeClass("etalage_smallthumb_last")
 G(a3,a2,j,a4)}function ac(){m("start")}function F(){m("end")}if(q>1||!c.smallthumb_hide_single){aV.click(function(){var a7=a(this),a3,j=0,a5=false,a2,a8,a4,a6,a1;if(!a7.hasClass("etalage_smallthumb_active")&&(!ai||z)){if(a7.hasClass("etalage_smallthumb_first")&&a7.prev().length){aP("left")}else{if(a7.hasClass("etalage_smallthumb_navtoend")){F()}else{if(a7.hasClass("etalage_smallthumb_last")&&a7.next().length){aP("right")}else{if(a7.hasClass("etalage_smallthumb_navtostart")){ac()}else{if(z&&!a(this).next().length){F();
 return true}else{if(z&&!a(this).prev().length){ac();return true}}g(a7,false)}}}}}});if(c.smallthumb_select_on_hover){aV.mouseenter(function(){a(this).trigger("click")})}}if(c.click_to_zoom){w.click(function(){A=true;U()})}else{aO.click(function(){var i=ay.data("anchor");if(i){if(aI(i)){window.location=i}}})}if(q>1&&c.keyboard){a(document).keydown(function(i){if(i.keyCode===39||i.keyCode==="39"){if(!c.right_to_left){au()}else{L()}}if(i.keyCode===37||i.keyCode==="37"){if(!c.right_to_left){L()}else{au()
 }}})}a(window).bind("load",function(){w.css({"background-image":"none"});K.css({"background-image":"none"});if(ao){ao=false;an.remove()}});if(aJ){k()}}});return this}})(jQuery);
+/*!
+ * jQuery twitter bootstrap wizard plugin
+ * Examples and documentation at: http://github.com/VinceG/twitter-bootstrap-wizard
+ * version 1.0
+ * Requires jQuery v1.3.2 or later
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ * Authors: Vadim Vincent Gabriel (http://vadimg.com), Jason Gill (www.gilluminate.com)
+ */
+(function(e){var k=function(d,g){d=e(d);var b=this,a=e.extend({},e.fn.bootstrapWizard.defaults,g),f=null,c=null;this.fixNavigationButtons=function(){f.length||(c.find("a:first").tab("show"),f=c.find("li:first"));e(a.previousSelector,d).toggleClass("disabled",b.firstIndex()>=b.currentIndex());e(a.nextSelector,d).toggleClass("disabled",b.currentIndex()>=b.navigationLength());e(a.nextSelector,d).unbind("click",b.next);e(a.previousSelector,d).unbind("click",b.previous);e(a.lastSelector,d).unbind("click",
+b.last);e(a.firstSelector,d).unbind("click",b.first);e(a.nextSelector,d).one("click",b.next);e(a.previousSelector,d).one("click",b.previous);e(a.lastSelector,d).one("click",b.last);e(a.firstSelector,d).one("click",b.first);if(a.onTabShow&&"function"===typeof a.onTabShow&&!1===a.onTabShow(f,c,b.currentIndex()))return!1};this.next=function(h){if(d.hasClass("last")||a.onNext&&"function"===typeof a.onNext&&!1===a.onNext(f,c,b.nextIndex()))return!1;$index=b.nextIndex();$index>b.navigationLength()||c.find("li:eq("+
+$index+") a").tab("show")};this.previous=function(h){if(d.hasClass("first")||a.onPrevious&&"function"===typeof a.onPrevious&&!1===a.onPrevious(f,c,b.previousIndex()))return!1;$index=b.previousIndex();0>$index||c.find("li:eq("+$index+") a").tab("show")};this.first=function(h){if(a.onFirst&&"function"===typeof a.onFirst&&!1===a.onFirst(f,c,b.firstIndex())||d.hasClass("disabled"))return!1;c.find("li:eq(0) a").tab("show")};this.last=function(h){if(a.onLast&&"function"===typeof a.onLast&&!1===a.onLast(f,
+c,b.lastIndex())||d.hasClass("disabled"))return!1;c.find("li:eq("+b.navigationLength()+") a").tab("show")};this.currentIndex=function(){return c.find("li").index(f)};this.firstIndex=function(){return 0};this.lastIndex=function(){return b.navigationLength()};this.getIndex=function(a){return c.find("li").index(a)};this.nextIndex=function(){return c.find("li").index(f)+1};this.previousIndex=function(){return c.find("li").index(f)-1};this.navigationLength=function(){return c.find("li").length-1};this.activeTab=
+function(){return f};this.nextTab=function(){return c.find("li:eq("+(b.currentIndex()+1)+")").length?c.find("li:eq("+(b.currentIndex()+1)+")"):null};this.previousTab=function(){return 0>=b.currentIndex()?null:c.find("li:eq("+parseInt(b.currentIndex()-1)+")")};this.show=function(a){return d.find("li:eq("+a+") a").tab("show")};this.disable=function(a){c.find("li:eq("+a+")").addClass("disabled")};this.enable=function(a){c.find("li:eq("+a+")").removeClass("disabled")};this.hide=function(a){c.find("li:eq("+
+a+")").hide()};this.display=function(a){c.find("li:eq("+a+")").show()};this.remove=function(a){var b="undefined"!=typeof a[1]?a[1]:!1;a=c.find("li:eq("+a[0]+")");b&&(b=a.find("a").attr("href"),e(b).remove());a.remove()};c=d.find("ul:first",d);f=c.find("li.active",d);c.hasClass(a.tabClass)||c.addClass(a.tabClass);if(a.onInit&&"function"===typeof a.onInit)a.onInit(f,c,0);if(a.onShow&&"function"===typeof a.onShow)a.onShow(f,c,b.nextIndex());b.fixNavigationButtons();e('a[data-toggle="tab"]',c).on("click",
+function(d){d=c.find("li").index(e(d.currentTarget).parent("li"));if(a.onTabClick&&"function"===typeof a.onTabClick&&!1===a.onTabClick(f,c,b.currentIndex(),d))return!1});e('a[data-toggle="tab"]',c).on("shown",function(d){$element=e(d.target).parent();d=c.find("li").index($element);if($element.hasClass("disabled")||a.onTabChange&&"function"===typeof a.onTabChange&&!1===a.onTabChange(f,c,b.currentIndex(),d))return!1;f=$element;b.fixNavigationButtons()})};e.fn.bootstrapWizard=function(d){if("string"==
+typeof d){var g=Array.prototype.slice.call(arguments,1);1===g.length&&g.toString();return this.data("bootstrapWizard")[d](g)}return this.each(function(b){b=e(this);if(!b.data("bootstrapWizard")){var a=new k(b,d);b.data("bootstrapWizard",a)}})};e.fn.bootstrapWizard.defaults={tabClass:"nav nav-pills",nextSelector:".wizard li.next",previousSelector:".wizard li.previous",firstSelector:".wizard li.first",lastSelector:".wizard li.last",onShow:null,onInit:null,onNext:null,onPrevious:null,onLast:null,onFirst:null,
+onTabChange:null,onTabClick:null,onTabShow:null}})(jQuery);
+
+var q=null;window.PR_SHOULD_USE_CONTINUATION=!0;
+(function(){function L(a){function m(a){var f=a.charCodeAt(0);if(f!==92)return f;var b=a.charAt(1);return(f=r[b])?f:"0"<=b&&b<="7"?parseInt(a.substring(1),8):b==="u"||b==="x"?parseInt(a.substring(2),16):a.charCodeAt(1)}function e(a){if(a<32)return(a<16?"\\x0":"\\x")+a.toString(16);a=String.fromCharCode(a);if(a==="\\"||a==="-"||a==="["||a==="]")a="\\"+a;return a}function h(a){for(var f=a.substring(1,a.length-1).match(/\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\[0-3][0-7]{0,2}|\\[0-7]{1,2}|\\[\S\s]|[^\\]/g),a=
+[],b=[],o=f[0]==="^",c=o?1:0,i=f.length;c<i;++c){var j=f[c];if(/\\[bdsw]/i.test(j))a.push(j);else{var j=m(j),d;c+2<i&&"-"===f[c+1]?(d=m(f[c+2]),c+=2):d=j;b.push([j,d]);d<65||j>122||(d<65||j>90||b.push([Math.max(65,j)|32,Math.min(d,90)|32]),d<97||j>122||b.push([Math.max(97,j)&-33,Math.min(d,122)&-33]))}}b.sort(function(a,f){return a[0]-f[0]||f[1]-a[1]});f=[];j=[NaN,NaN];for(c=0;c<b.length;++c)i=b[c],i[0]<=j[1]+1?j[1]=Math.max(j[1],i[1]):f.push(j=i);b=["["];o&&b.push("^");b.push.apply(b,a);for(c=0;c<
+f.length;++c)i=f[c],b.push(e(i[0])),i[1]>i[0]&&(i[1]+1>i[0]&&b.push("-"),b.push(e(i[1])));b.push("]");return b.join("")}function y(a){for(var f=a.source.match(/\[(?:[^\\\]]|\\[\S\s])*]|\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\\d+|\\[^\dux]|\(\?[!:=]|[()^]|[^()[\\^]+/g),b=f.length,d=[],c=0,i=0;c<b;++c){var j=f[c];j==="("?++i:"\\"===j.charAt(0)&&(j=+j.substring(1))&&j<=i&&(d[j]=-1)}for(c=1;c<d.length;++c)-1===d[c]&&(d[c]=++t);for(i=c=0;c<b;++c)j=f[c],j==="("?(++i,d[i]===void 0&&(f[c]="(?:")):"\\"===j.charAt(0)&&
+(j=+j.substring(1))&&j<=i&&(f[c]="\\"+d[i]);for(i=c=0;c<b;++c)"^"===f[c]&&"^"!==f[c+1]&&(f[c]="");if(a.ignoreCase&&s)for(c=0;c<b;++c)j=f[c],a=j.charAt(0),j.length>=2&&a==="["?f[c]=h(j):a!=="\\"&&(f[c]=j.replace(/[A-Za-z]/g,function(a){a=a.charCodeAt(0);return"["+String.fromCharCode(a&-33,a|32)+"]"}));return f.join("")}for(var t=0,s=!1,l=!1,p=0,d=a.length;p<d;++p){var g=a[p];if(g.ignoreCase)l=!0;else if(/[a-z]/i.test(g.source.replace(/\\u[\da-f]{4}|\\x[\da-f]{2}|\\[^UXux]/gi,""))){s=!0;l=!1;break}}for(var r=
+{b:8,t:9,n:10,v:11,f:12,r:13},n=[],p=0,d=a.length;p<d;++p){g=a[p];if(g.global||g.multiline)throw Error(""+g);n.push("(?:"+y(g)+")")}return RegExp(n.join("|"),l?"gi":"g")}function M(a){function m(a){switch(a.nodeType){case 1:if(e.test(a.className))break;for(var g=a.firstChild;g;g=g.nextSibling)m(g);g=a.nodeName;if("BR"===g||"LI"===g)h[s]="\n",t[s<<1]=y++,t[s++<<1|1]=a;break;case 3:case 4:g=a.nodeValue,g.length&&(g=p?g.replace(/\r\n?/g,"\n"):g.replace(/[\t\n\r ]+/g," "),h[s]=g,t[s<<1]=y,y+=g.length,
+t[s++<<1|1]=a)}}var e=/(?:^|\s)nocode(?:\s|$)/,h=[],y=0,t=[],s=0,l;a.currentStyle?l=a.currentStyle.whiteSpace:window.getComputedStyle&&(l=document.defaultView.getComputedStyle(a,q).getPropertyValue("white-space"));var p=l&&"pre"===l.substring(0,3);m(a);return{a:h.join("").replace(/\n$/,""),c:t}}function B(a,m,e,h){m&&(a={a:m,d:a},e(a),h.push.apply(h,a.e))}function x(a,m){function e(a){for(var l=a.d,p=[l,"pln"],d=0,g=a.a.match(y)||[],r={},n=0,z=g.length;n<z;++n){var f=g[n],b=r[f],o=void 0,c;if(typeof b===
+"string")c=!1;else{var i=h[f.charAt(0)];if(i)o=f.match(i[1]),b=i[0];else{for(c=0;c<t;++c)if(i=m[c],o=f.match(i[1])){b=i[0];break}o||(b="pln")}if((c=b.length>=5&&"lang-"===b.substring(0,5))&&!(o&&typeof o[1]==="string"))c=!1,b="src";c||(r[f]=b)}i=d;d+=f.length;if(c){c=o[1];var j=f.indexOf(c),k=j+c.length;o[2]&&(k=f.length-o[2].length,j=k-c.length);b=b.substring(5);B(l+i,f.substring(0,j),e,p);B(l+i+j,c,C(b,c),p);B(l+i+k,f.substring(k),e,p)}else p.push(l+i,b)}a.e=p}var h={},y;(function(){for(var e=a.concat(m),
+l=[],p={},d=0,g=e.length;d<g;++d){var r=e[d],n=r[3];if(n)for(var k=n.length;--k>=0;)h[n.charAt(k)]=r;r=r[1];n=""+r;p.hasOwnProperty(n)||(l.push(r),p[n]=q)}l.push(/[\S\s]/);y=L(l)})();var t=m.length;return e}function u(a){var m=[],e=[];a.tripleQuotedStrings?m.push(["str",/^(?:'''(?:[^'\\]|\\[\S\s]|''?(?=[^']))*(?:'''|$)|"""(?:[^"\\]|\\[\S\s]|""?(?=[^"]))*(?:"""|$)|'(?:[^'\\]|\\[\S\s])*(?:'|$)|"(?:[^"\\]|\\[\S\s])*(?:"|$))/,q,"'\""]):a.multiLineStrings?m.push(["str",/^(?:'(?:[^'\\]|\\[\S\s])*(?:'|$)|"(?:[^"\\]|\\[\S\s])*(?:"|$)|`(?:[^\\`]|\\[\S\s])*(?:`|$))/,
+q,"'\"`"]):m.push(["str",/^(?:'(?:[^\n\r'\\]|\\.)*(?:'|$)|"(?:[^\n\r"\\]|\\.)*(?:"|$))/,q,"\"'"]);a.verbatimStrings&&e.push(["str",/^@"(?:[^"]|"")*(?:"|$)/,q]);var h=a.hashComments;h&&(a.cStyleComments?(h>1?m.push(["com",/^#(?:##(?:[^#]|#(?!##))*(?:###|$)|.*)/,q,"#"]):m.push(["com",/^#(?:(?:define|elif|else|endif|error|ifdef|include|ifndef|line|pragma|undef|warning)\b|[^\n\r]*)/,q,"#"]),e.push(["str",/^<(?:(?:(?:\.\.\/)*|\/?)(?:[\w-]+(?:\/[\w-]+)+)?[\w-]+\.h|[a-z]\w*)>/,q])):m.push(["com",/^#[^\n\r]*/,
+q,"#"]));a.cStyleComments&&(e.push(["com",/^\/\/[^\n\r]*/,q]),e.push(["com",/^\/\*[\S\s]*?(?:\*\/|$)/,q]));a.regexLiterals&&e.push(["lang-regex",/^(?:^^\.?|[!+-]|!=|!==|#|%|%=|&|&&|&&=|&=|\(|\*|\*=|\+=|,|-=|->|\/|\/=|:|::|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|[?@[^]|\^=|\^\^|\^\^=|{|\||\|=|\|\||\|\|=|~|break|case|continue|delete|do|else|finally|instanceof|return|throw|try|typeof)\s*(\/(?=[^*/])(?:[^/[\\]|\\[\S\s]|\[(?:[^\\\]]|\\[\S\s])*(?:]|$))+\/)/]);(h=a.types)&&e.push(["typ",h]);a=(""+a.keywords).replace(/^ | $/g,
+"");a.length&&e.push(["kwd",RegExp("^(?:"+a.replace(/[\s,]+/g,"|")+")\\b"),q]);m.push(["pln",/^\s+/,q," \r\n\t\xa0"]);e.push(["lit",/^@[$_a-z][\w$@]*/i,q],["typ",/^(?:[@_]?[A-Z]+[a-z][\w$@]*|\w+_t\b)/,q],["pln",/^[$_a-z][\w$@]*/i,q],["lit",/^(?:0x[\da-f]+|(?:\d(?:_\d+)*\d*(?:\.\d*)?|\.\d\+)(?:e[+-]?\d+)?)[a-z]*/i,q,"0123456789"],["pln",/^\\[\S\s]?/,q],["pun",/^.[^\s\w"-$'./@\\`]*/,q]);return x(m,e)}function D(a,m){function e(a){switch(a.nodeType){case 1:if(k.test(a.className))break;if("BR"===a.nodeName)h(a),
+a.parentNode&&a.parentNode.removeChild(a);else for(a=a.firstChild;a;a=a.nextSibling)e(a);break;case 3:case 4:if(p){var b=a.nodeValue,d=b.match(t);if(d){var c=b.substring(0,d.index);a.nodeValue=c;(b=b.substring(d.index+d[0].length))&&a.parentNode.insertBefore(s.createTextNode(b),a.nextSibling);h(a);c||a.parentNode.removeChild(a)}}}}function h(a){function b(a,d){var e=d?a.cloneNode(!1):a,f=a.parentNode;if(f){var f=b(f,1),g=a.nextSibling;f.appendChild(e);for(var h=g;h;h=g)g=h.nextSibling,f.appendChild(h)}return e}
+for(;!a.nextSibling;)if(a=a.parentNode,!a)return;for(var a=b(a.nextSibling,0),e;(e=a.parentNode)&&e.nodeType===1;)a=e;d.push(a)}var k=/(?:^|\s)nocode(?:\s|$)/,t=/\r\n?|\n/,s=a.ownerDocument,l;a.currentStyle?l=a.currentStyle.whiteSpace:window.getComputedStyle&&(l=s.defaultView.getComputedStyle(a,q).getPropertyValue("white-space"));var p=l&&"pre"===l.substring(0,3);for(l=s.createElement("LI");a.firstChild;)l.appendChild(a.firstChild);for(var d=[l],g=0;g<d.length;++g)e(d[g]);m===(m|0)&&d[0].setAttribute("value",
+m);var r=s.createElement("OL");r.className="linenums";for(var n=Math.max(0,m-1|0)||0,g=0,z=d.length;g<z;++g)l=d[g],l.className="L"+(g+n)%10,l.firstChild||l.appendChild(s.createTextNode("\xa0")),r.appendChild(l);a.appendChild(r)}function k(a,m){for(var e=m.length;--e>=0;){var h=m[e];A.hasOwnProperty(h)?window.console&&console.warn("cannot override language handler %s",h):A[h]=a}}function C(a,m){if(!a||!A.hasOwnProperty(a))a=/^\s*</.test(m)?"default-markup":"default-code";return A[a]}function E(a){var m=
+a.g;try{var e=M(a.h),h=e.a;a.a=h;a.c=e.c;a.d=0;C(m,h)(a);var k=/\bMSIE\b/.test(navigator.userAgent),m=/\n/g,t=a.a,s=t.length,e=0,l=a.c,p=l.length,h=0,d=a.e,g=d.length,a=0;d[g]=s;var r,n;for(n=r=0;n<g;)d[n]!==d[n+2]?(d[r++]=d[n++],d[r++]=d[n++]):n+=2;g=r;for(n=r=0;n<g;){for(var z=d[n],f=d[n+1],b=n+2;b+2<=g&&d[b+1]===f;)b+=2;d[r++]=z;d[r++]=f;n=b}for(d.length=r;h<p;){var o=l[h+2]||s,c=d[a+2]||s,b=Math.min(o,c),i=l[h+1],j;if(i.nodeType!==1&&(j=t.substring(e,b))){k&&(j=j.replace(m,"\r"));i.nodeValue=
+j;var u=i.ownerDocument,v=u.createElement("SPAN");v.className=d[a+1];var x=i.parentNode;x.replaceChild(v,i);v.appendChild(i);e<o&&(l[h+1]=i=u.createTextNode(t.substring(b,o)),x.insertBefore(i,v.nextSibling))}e=b;e>=o&&(h+=2);e>=c&&(a+=2)}}catch(w){"console"in window&&console.log(w&&w.stack?w.stack:w)}}var v=["break,continue,do,else,for,if,return,while"],w=[[v,"auto,case,char,const,default,double,enum,extern,float,goto,int,long,register,short,signed,sizeof,static,struct,switch,typedef,union,unsigned,void,volatile"],
+"catch,class,delete,false,import,new,operator,private,protected,public,this,throw,true,try,typeof"],F=[w,"alignof,align_union,asm,axiom,bool,concept,concept_map,const_cast,constexpr,decltype,dynamic_cast,explicit,export,friend,inline,late_check,mutable,namespace,nullptr,reinterpret_cast,static_assert,static_cast,template,typeid,typename,using,virtual,where"],G=[w,"abstract,boolean,byte,extends,final,finally,implements,import,instanceof,null,native,package,strictfp,super,synchronized,throws,transient"],
+H=[G,"as,base,by,checked,decimal,delegate,descending,dynamic,event,fixed,foreach,from,group,implicit,in,interface,internal,into,is,lock,object,out,override,orderby,params,partial,readonly,ref,sbyte,sealed,stackalloc,string,select,uint,ulong,unchecked,unsafe,ushort,var"],w=[w,"debugger,eval,export,function,get,null,set,undefined,var,with,Infinity,NaN"],I=[v,"and,as,assert,class,def,del,elif,except,exec,finally,from,global,import,in,is,lambda,nonlocal,not,or,pass,print,raise,try,with,yield,False,True,None"],
+J=[v,"alias,and,begin,case,class,def,defined,elsif,end,ensure,false,in,module,next,nil,not,or,redo,rescue,retry,self,super,then,true,undef,unless,until,when,yield,BEGIN,END"],v=[v,"case,done,elif,esac,eval,fi,function,in,local,set,then,until"],K=/^(DIR|FILE|vector|(de|priority_)?queue|list|stack|(const_)?iterator|(multi)?(set|map)|bitset|u?(int|float)\d*)/,N=/\S/,O=u({keywords:[F,H,w,"caller,delete,die,do,dump,elsif,eval,exit,foreach,for,goto,if,import,last,local,my,next,no,our,print,package,redo,require,sub,undef,unless,until,use,wantarray,while,BEGIN,END"+
+I,J,v],hashComments:!0,cStyleComments:!0,multiLineStrings:!0,regexLiterals:!0}),A={};k(O,["default-code"]);k(x([],[["pln",/^[^<?]+/],["dec",/^<!\w[^>]*(?:>|$)/],["com",/^<\!--[\S\s]*?(?:--\>|$)/],["lang-",/^<\?([\S\s]+?)(?:\?>|$)/],["lang-",/^<%([\S\s]+?)(?:%>|$)/],["pun",/^(?:<[%?]|[%?]>)/],["lang-",/^<xmp\b[^>]*>([\S\s]+?)<\/xmp\b[^>]*>/i],["lang-js",/^<script\b[^>]*>([\S\s]*?)(<\/script\b[^>]*>)/i],["lang-css",/^<style\b[^>]*>([\S\s]*?)(<\/style\b[^>]*>)/i],["lang-in.tag",/^(<\/?[a-z][^<>]*>)/i]]),
+["default-markup","htm","html","mxml","xhtml","xml","xsl"]);k(x([["pln",/^\s+/,q," \t\r\n"],["atv",/^(?:"[^"]*"?|'[^']*'?)/,q,"\"'"]],[["tag",/^^<\/?[a-z](?:[\w-.:]*\w)?|\/?>$/i],["atn",/^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],["lang-uq.val",/^=\s*([^\s"'>]*(?:[^\s"'/>]|\/(?=\s)))/],["pun",/^[/<->]+/],["lang-js",/^on\w+\s*=\s*"([^"]+)"/i],["lang-js",/^on\w+\s*=\s*'([^']+)'/i],["lang-js",/^on\w+\s*=\s*([^\s"'>]+)/i],["lang-css",/^style\s*=\s*"([^"]+)"/i],["lang-css",/^style\s*=\s*'([^']+)'/i],["lang-css",
+/^style\s*=\s*([^\s"'>]+)/i]]),["in.tag"]);k(x([],[["atv",/^[\S\s]+/]]),["uq.val"]);k(u({keywords:F,hashComments:!0,cStyleComments:!0,types:K}),["c","cc","cpp","cxx","cyc","m"]);k(u({keywords:"null,true,false"}),["json"]);k(u({keywords:H,hashComments:!0,cStyleComments:!0,verbatimStrings:!0,types:K}),["cs"]);k(u({keywords:G,cStyleComments:!0}),["java"]);k(u({keywords:v,hashComments:!0,multiLineStrings:!0}),["bsh","csh","sh"]);k(u({keywords:I,hashComments:!0,multiLineStrings:!0,tripleQuotedStrings:!0}),
+["cv","py"]);k(u({keywords:"caller,delete,die,do,dump,elsif,eval,exit,foreach,for,goto,if,import,last,local,my,next,no,our,print,package,redo,require,sub,undef,unless,until,use,wantarray,while,BEGIN,END",hashComments:!0,multiLineStrings:!0,regexLiterals:!0}),["perl","pl","pm"]);k(u({keywords:J,hashComments:!0,multiLineStrings:!0,regexLiterals:!0}),["rb"]);k(u({keywords:w,cStyleComments:!0,regexLiterals:!0}),["js"]);k(u({keywords:"all,and,by,catch,class,else,extends,false,finally,for,if,in,is,isnt,loop,new,no,not,null,of,off,on,or,return,super,then,true,try,unless,until,when,while,yes",
+hashComments:3,cStyleComments:!0,multilineStrings:!0,tripleQuotedStrings:!0,regexLiterals:!0}),["coffee"]);k(x([],[["str",/^[\S\s]+/]]),["regex"]);window.prettyPrintOne=function(a,m,e){var h=document.createElement("PRE");h.innerHTML=a;e&&D(h,e);E({g:m,i:e,h:h});return h.innerHTML};window.prettyPrint=function(a){function m(){for(var e=window.PR_SHOULD_USE_CONTINUATION?l.now()+250:Infinity;p<h.length&&l.now()<e;p++){var n=h[p],k=n.className;if(k.indexOf("prettyprint")>=0){var k=k.match(g),f,b;if(b=
+!k){b=n;for(var o=void 0,c=b.firstChild;c;c=c.nextSibling)var i=c.nodeType,o=i===1?o?b:c:i===3?N.test(c.nodeValue)?b:o:o;b=(f=o===b?void 0:o)&&"CODE"===f.tagName}b&&(k=f.className.match(g));k&&(k=k[1]);b=!1;for(o=n.parentNode;o;o=o.parentNode)if((o.tagName==="pre"||o.tagName==="code"||o.tagName==="xmp")&&o.className&&o.className.indexOf("prettyprint")>=0){b=!0;break}b||((b=(b=n.className.match(/\blinenums\b(?::(\d+))?/))?b[1]&&b[1].length?+b[1]:!0:!1)&&D(n,b),d={g:k,h:n,i:b},E(d))}}p<h.length?setTimeout(m,
+250):a&&a()}for(var e=[document.getElementsByTagName("pre"),document.getElementsByTagName("code"),document.getElementsByTagName("xmp")],h=[],k=0;k<e.length;++k)for(var t=0,s=e[k].length;t<s;++t)h.push(e[k][t]);var e=q,l=Date;l.now||(l={now:function(){return+new Date}});var p=0,d,g=/\blang(?:uage)?-([\w.]+)(?!\S)/;m()};window.PR={createSimpleLexer:x,registerLangHandler:k,sourceDecorator:u,PR_ATTRIB_NAME:"atn",PR_ATTRIB_VALUE:"atv",PR_COMMENT:"com",PR_DECLARATION:"dec",PR_KEYWORD:"kwd",PR_LITERAL:"lit",
+PR_NOCODE:"nocode",PR_PLAIN:"pln",PR_PUNCTUATION:"pun",PR_SOURCE:"src",PR_STRING:"str",PR_TAG:"tag",PR_TYPE:"typ"}})();
 /*
  *  jQuery OwlCarousel v1.3.3
  *
@@ -3464,10 +3512,6 @@ angular.element(document).ready(function() {
 });
 'use strict';
 
-// Use Applicaion configuration module to register a new module
-// ApplicationConfiguration.registerModule('articles');
-'use strict';
-
 // Use application configuration module to register a new module
 ApplicationConfiguration.registerModule('checkout');
 
@@ -3492,141 +3536,91 @@ ApplicationConfiguration.registerModule('products');
 
 'use strict';
 
-// Configuring the Articles module
-// angular.module('articles').run(['Menus',
-// 	function(Menus) {
-// 		// Set top bar menu items
-// 		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
-// 		Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles1');
-// 		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
-// 	}
-// ]);
-'use strict';
-
-// Setting up route
-// angular.module('articles').config(['$stateProvider',
-// 	function($stateProvider) {
-// 		// Articles state routing
-// 		$stateProvider.
-// 		state('listArticles', {
-// 			url: '/articles1',
-// 			templateUrl: 'modules/articles/views/list-articles.client.view.html'
-// 		}).
-// 		state('createArticle', {
-// 			url: '/articles/create',
-// 			templateUrl: 'modules/articles/views/create-article.client.view.html'
-// 		}).
-// 		state('viewArticle', {
-// 			url: '/articles/:articleId',
-// 			templateUrl: 'modules/articles/views/view-article.client.view.html'
-// 		}).
-// 		state('editArticle', {
-// 			url: '/articles/:articleId/edit',
-// 			templateUrl: 'modules/articles/views/edit-article.client.view.html'
-// 		});
-// 	}
-// ]);
-'use strict';
-
-// angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-// 	function($scope, $stateParams, $location, Authentication, Articles) {
-// 		$scope.authentication = Authentication;
-
-// 		$scope.create = function() {
-// 			var article = new Articles({
-// 				title: this.title,
-// 				content: this.content
-// 			});
-// 			article.$save(function(response) {
-// 				$location.path('articles/' + response._id);
-
-// 				$scope.title = '';
-// 				$scope.content = '';
-// 			}, function(errorResponse) {
-// 				$scope.error = errorResponse.data.message;
-// 			});
-// 		};
-
-// 		$scope.remove = function(article) {
-// 			if (article) {
-// 				article.$remove();
-
-// 				for (var i in $scope.articles) {
-// 					if ($scope.articles[i] === article) {
-// 						$scope.articles.splice(i, 1);
-// 					}
-// 				}
-// 			} else {
-// 				$scope.article.$remove(function() {
-// 					$location.path('articles');
-// 				});
-// 			}
-// 		};
-
-// 		$scope.update = function() {
-// 			var article = $scope.article;
-
-// 			article.$update(function() {
-// 				$location.path('articles/' + article._id);
-// 			}, function(errorResponse) {
-// 				$scope.error = errorResponse.data.message;
-// 			});
-// 		};
-
-// 		$scope.find = function() {
-// 			$scope.articles = Articles.query();
-// 		};
-
-// 		$scope.findOne = function() {
-// 			$scope.article = Articles.get({
-// 				articleId: $stateParams.articleId
-// 			});
-// 		};
-
-		
-// 	}
-// ]);
-'use strict';
-
-//Articles service used for communicating with the articles REST endpoints
-// angular.module('articles').factory('Articles', ['$resource',
-// 	function($resource) {
-// 		return $resource('articles1/:articleId', {
-// 			articleId: '@_id'
-// 		}, {
-// 			update: {
-// 				method: 'PUT'
-// 			}
-// 		});
-// 	}
-// ]);
-'use strict';
-
 //Setting up route
 angular.module('checkout').config(['$stateProvider',
 	function($stateProvider) {
 		// Products state routing
 		$stateProvider.
-		state('cart', {
+		state('checkorder', {
+			url: '/checkorder',
+			templateUrl: 'modules/checkout/views/checkorder/check_order.client.view.html'
+		}).state('cart', {
 			url: '/cart',
-			templateUrl: 'modules/checkout/views/cart.client.view.html'
+			templateUrl: 'modules/checkout/views/checkoutprocess/cart.client.view.html'
 		}).state('shipping', {
 			url: '/shipping',
-			templateUrl: 'modules/checkout/views/shipping.client.view.html'
+			templateUrl: 'modules/checkout/views/checkoutprocess/shipping.client.view.html'
 		}).state('checkout', {
 			url: '/checkout',
-			templateUrl: 'modules/checkout/views/checkout.client.view.html'
+			templateUrl: 'modules/checkout/views/checkoutprocess/checkout.client.view.html'
 		}).state('review', {
 			url: '/review',
-			templateUrl: 'modules/checkout/views/review.client.view.html'
+			templateUrl: 'modules/checkout/views/checkoutprocess/review.client.view.html'
 		}).state('thankyou', {
 			url: '/thank-you',
-			templateUrl: 'modules/checkout/views/thankyou.client.view.html'
+			templateUrl: 'modules/checkout/views/checkoutprocess/thankyou.client.view.html'
 		});
 		
 	}
 ]);
 
+'use strict';
+
+angular.module('checkout').controller('CheckOrderController', ['$rootScope','$window','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','blockUI',
+	function($rootScope,$window,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,blockUI) {
+		// checkout controller logic
+		// ...
+		var statusOrderEnum = {
+			'PAGO':3,
+			'DISPONIVEL':4,
+			'DEVOLVIDA':6,
+			'CANCELADO':7
+		};
+		var statusEntregaEnum = {
+		 	'SEMSTATUS':0,
+			'PRODUCAO':1,
+			'EMBALAGEM':2,
+			'EMTRANSITO':3,
+			'ENTREGUE':4
+		};
+		$scope.order = {};
+
+		$scope.orderId = function(){
+			if(!$location.search().id){$location.path('/');}
+			
+			OrderCheckout.checkorder($location.search()).$promise.then(function(response,error,progressback){
+				$scope.order = response.order;
+			},function(){
+				$location.path('/404');
+			});
+		};
+		$scope.$watch('order', function(newValue, oldValue, scope) {
+			$scope.initTab($scope.order.lastStatus,$scope.order.statusEntrega);
+		});
+
+		$scope.initTab = function(statusOrder,statusEntrega){
+			if(statusOrder&&statusOrderEnum[statusOrder]===3){
+				$('#rootwizard').show();
+				$('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+					var $total = $('#rootwizard ul.nav').find('li').length;
+					var $current = statusEntregaEnum[statusEntrega];
+					var $percent = ($current/$total) * 100;
+					$('#rootwizard ul.nav li').attr('class','disabled');
+					$('#rootwizard ul.nav li:lt('+$current+')').attr('class','active');
+					$('#rootwizard').find('.bar').css({width:$percent+'%'});
+				},
+				'tabClass': 'nav nav-pills',
+				onTabClick: function(tab, navigation, index) {
+						return false;
+					}
+				});
+			}
+			
+		};
+
+
+	}
+]);
 'use strict';
 
 angular.module('checkout').controller('CheckoutController', ['$rootScope','$window','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','UserCheckout','Cep','blockUI',
@@ -3878,7 +3872,12 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 	function($resource) {
 		return $resource('api/order/:action', {
 			action: '@action'
-			},{'removeItem': {
+			},{'checkorder': {
+						method: 'GET', 
+						isArray: false,
+						params:{action:'check'}
+						
+         		},'removeItem': {
 						method: 'POST', 
 						isArray: false,
 						params:{action:'removeItem'}
@@ -4509,15 +4508,15 @@ angular.module('users').config(['$stateProvider',
 		$stateProvider.
 		state('profile', {
 			url: '/user/profile',
-			templateUrl: 'modules/coreUsers/views/authentication/profile.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/profile.client.view.html'
 		}).
 		state('orderHistory', {
 			url: '/user/orders',
-			templateUrl: 'modules/coreUsers/views/authentication/order_history.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/order_history.client.view.html'
 		}).
 		state('favoritos', {
 			url: '/user/favoritos',
-			templateUrl: 'modules/coreUsers/views/authentication/favoritos.client.view.html'
+			templateUrl: 'modules/coreUsers/views/settings/favoritos.client.view.html'
 		}).
 		state('loginAndRegister', {
 			url: '/login',
@@ -4679,7 +4678,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.orderHistory = function(){
 			$scope.newOrders = [];
 			$scope.oldOrders = [];
-			User.orderHistory.$promise.then(function(response,error,progressback){
+			User.orderHistory().$promise.then(function(response,error,progressback){
 				$scope.newOrders = response.newOrders;
 				$scope.oldOrders = response.oldOrders;
 			},function(reason){
@@ -4704,6 +4703,38 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			},function(reason){
 
 			});
+		};
+		var statusOrderEnum = {
+			'PAGO':3,
+			'DISPONIVEL':4,
+			'DEVOLVIDA':6,
+			'CANCELADO':7
+		};
+		var statusEntregaEnum = {
+		 	'SEMSTATUS':0,
+			'PRODUCAO':1,
+			'EMBALAGEM':2,
+			'EMTRANSITO':3,
+			'ENTREGUE':4
+		};
+		$scope.initTab = function(order){
+			if(order.lastStatus&&statusOrderEnum[order.lastStatus]===3){
+				$('#wizard-'+order._id).show();
+				$('#wizard-'+order._id).bootstrapWizard({onTabShow: function(tab, navigation, index) {
+					var $total = $('#rootwizard ul.nav').find('li').length;
+					var $current = statusEntregaEnum[statusEntrega];
+					var $percent = ($current/$total) * 100;
+					$('#wizard-'+order._id+' ul.nav li').attr('class','disabled');
+					$('#wizard-'+order._id+' ul.nav li:lt('+$current+')').attr('class','active');
+					$('#wizard-'+order._id).find('.bar').css({width:$percent+'%'});
+				},
+				'tabClass': 'nav nav-pills',
+				onTabClick: function(tab, navigation, index) {
+						return false;
+					}
+				});
+			}
+			
 		};
 
 		// Check if there are additional accounts 

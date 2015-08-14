@@ -160,15 +160,19 @@ var updateOrderByAvaibleInventories = function(order,inventories){
 		});
 
 
- 		if(!inventoryToCompare||inventoryToCompare&&inventoryToCompare.quantity<productOrder.quantity){
+ 		if(!inventoryToCompare||
+ 			inventoryToCompare&&
+ 			inventoryToCompare.sellInOutOfStock===false&&
+ 			inventoryToCompare.quantity<productOrder.quantity){
+
  			console.log('entrou em message');
 
-				message = message+ 'Produto '+ productOrder.product.title+' fora de estoque, desculpe o inconveniente!\n';
-				toRemove.push(productOrder);
+			message = message+ 'Produto '+ productOrder.product.title+' fora de estoque, desculpe o inconveniente!\n';
+			toRemove.push(productOrder);
 
-				console.log('message'); 				
-				console.log(message); 		
-			}
+			console.log('message'); 				
+			console.log(message); 		
+		}
 
  	});
  	order.products = _.difference(order.products,toRemove);
@@ -397,6 +401,7 @@ exports.getOrderById = function(req,res){
 											{'status':'CANCELADO'},
 											{'status':'DEVOLVIDA'}]}},
 					'createdDate':{$gte:nowThreeMonthsAgo.valueOf()}})
+					.select('-pagSeguroInfo -user -_class -emailSents  ')
 					.exec(function(err,order){
 						if(err){
 							console.log('error in getOrderById');  
@@ -405,7 +410,8 @@ exports.getOrderById = function(req,res){
 							});
 						}
 						if(order){
-							res.json({order:order,lastStatus:order.message.lastStatus});
+							order.lastStatus = order.message.lastStatus;
+							res.json({order:order});
 						}else{
 							return res.status(404).send({
 								message: 'no inventory found'

@@ -4,7 +4,7 @@
 	<div class="check">	
 	 	<div class="col-md-2 ">
 	 		<ul>
-			 	<li><ahref="#!/user/profile">Update profile</a></li>
+			 	<li><a href="#!/user/profile">Update profile</a></li>
 				<li class="active"><a href="#!/user/orders">Order history</a></li>
 				<li ><a href="#!/user/favoritos">Favoritos</a></li>
 				<li><a href="#">Privacy</a></li>
@@ -20,14 +20,7 @@
 	 		</div>
 	 		<h2 ng-show="newOrders.length>0">Compra Atual</h2>
 	 		<div ng-repeat="order in newOrders">
-	 			<div class="status">
-	 				<div class="status-order">
-	 					<label  ng-show="order.status.length>0">Status da compra: <span ng-bind="order.status[order.status.length-1].status"> </span></label>
-	 				</div>
-	 				<div class="status-entrega">
-	 					<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
-	 				</div>
-	 			</div>
+	 			<my-bar order='order'></my-bar>
 	 			<div class="cart-header" ng-repeat="product in order.products" >
 				 	<div class="cart-sec simpleCart_shelfItem">
 						<div class="cart-item cyc">
@@ -59,11 +52,23 @@
 	 		<div ng-repeat="order in oldOrders">
 	 			<div class="status">
 	 				<div class="status-order">
-	 					<label  ng-show="order.status.length>0">Status da compra: <span ng-bind="order.status[-1]"> </span></label>
+	 					<label  ng-show="order.lastStatus">Status da compra: <span ng-bind="order.lastStatus"> </span></label>
 	 				</div>
-	 				<div class="status-entrega">
-	 					<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
-	 				</div>
+	 				
+					<div ng-attr-id="{{ 'wizard-' + order._id }}" ng-init="initTab(order)" style="display: none" >
+						<div class="status-entrega">
+		 					<label  ng-bind="order.statusEntrega">Status de Entrega: <span ng-bind="order.statusEntrega"> </span></label>
+		 				</div>
+						<ul>
+						  	<li class="disabled"><a ng-href="" >Em Produção</a></li>
+							<li class="disabled"><a ng-href="" >Embalagem</a></li>
+							<li class="disabled"><a ng-href="" >À Caminho</a></li>
+							<li class="disabled"><a ng-href="" >ENTREGUE</a></li>
+						</ul>
+						<div id="bar" class="progress progress-striped active">
+						  <div class="bar"></div>
+						</div>
+					</div>
 	 			</div>
 	 			<div class="cart-header" ng-repeat="product in order.products" >
 				 	<div class="cart-sec simpleCart_shelfItem">
