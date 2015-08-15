@@ -152,6 +152,7 @@ var OrderSchema = new Schema({
 	},
 	pagSeguroInfo:{},
 	message:{},
+	localvar:{},
 	lastStatus:{}
 });
 
@@ -161,6 +162,9 @@ var OrderSchema = new Schema({
 OrderSchema.pre('save', function(next) {
 	if(this.lastStatus)
 		delete this.lastStatus;
+	if(this.localvar)
+		delete this.localvar;
+	
 	if(this.message)
 		delete this.message;
 	if (this.user) {
@@ -178,7 +182,7 @@ OrderSchema.pre('save', function(next) {
 
 	next();
 });
-OrderSchema.virtual('message.lastStatus').get(function () {
+OrderSchema.virtual('localvar.lastStatus').get(function () {
 	if(this.status.length>0){
   		return this.status[this.status.length-1].status;
 	}else{

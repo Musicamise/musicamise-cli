@@ -410,7 +410,7 @@ exports.getOrderById = function(req,res){
 							});
 						}
 						if(order){
-							order.lastStatus = order.message.lastStatus;
+							order.lastStatus = order.localvar.lastStatus;
 							res.json({order:order});
 						}else{
 							return res.status(404).send({

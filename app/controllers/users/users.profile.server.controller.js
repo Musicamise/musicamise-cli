@@ -209,7 +209,7 @@ exports.orderHistory = function(req, res) {
 					});
 				}
 				orders.forEach(function(order){
-					order.lastStatus = order.message.lastStatus;
+					order.lastStatus = order.localvar.lastStatus;
 				});
 
 				var newOrders = [];
