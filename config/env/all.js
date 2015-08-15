@@ -48,9 +48,6 @@ module.exports = {
 			'public/modules/**/css/*.css',
 			'public/css/app.css',
 			'public/plugin/etalage/etalage.css',
-			'public/lib/twitter-bootstrap-wizard/prettify.css',
-			'public/lib/twitter-bootstrap-wizard/bootstrap/css/bootstrap.min.css',
-			'public/lib/twitter-bootstrap-wizard/bootstrap/css/bootstrap-responsive.min.css'
 		],
 		js: [
 			'public/plugin/js/*.js',
