@@ -89,7 +89,7 @@ exports.mainMenu = function(req,res){
 						if(isToAdd)
 							productsId.push(product._id.oid);
 					});
-
+					productsId = productsId.slice(0,5);
 					Product.find({ '_id':{$in:productsId}})
 						.where('onLineVisible').equals(true)
 					   	.select('-_id title slug ')

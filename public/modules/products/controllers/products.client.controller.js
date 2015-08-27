@@ -93,6 +93,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 					
 					$scope.inventories = {};
 					if(product.inventories){
+						if(product.inventories.length===1&&
+							// product.inventories[0].genderSlug.toLowerCase()==='unisex'&&
+							product.inventories[0].size.toLowerCase()==='unico'){
+							$scope.unico=true;
+							$scope.inventoryChecked.id = product.inventories[0]._id;
+						}
 						product.inventories.forEach(function(inventory){
 							if(inventory!==null&&inventory!==undefined&&inventory._id!==undefined){
 								if($.inArray(inventory.genderSlug,Object.keys($scope.inventories))<0){

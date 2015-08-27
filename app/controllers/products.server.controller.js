@@ -104,6 +104,12 @@ exports.readProductSlug = function(req, res) {
 					}
 				});
 			});
+			product = JSON.parse(JSON.stringify(product));
+			product.inventories = _.filter(product.inventories,function(inventory,index){
+					return inventory._id!==undefined;
+				}
+			);	
+
 			res.json(product);
 
 		});

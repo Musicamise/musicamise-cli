@@ -49,24 +49,31 @@
 						</div>
 						<div class="det_nav1">
 							<br/>
+							<div ng-if="product.inventories.length>0">
 							
-							<div ng-repeat="(gender, inventoriesByGender) in inventories">
-								<h3 ng-bind="gender"></h3>
-								<h4>Select a size :</h4>
-								<div class="col col-4">
-									<!-- <input type="checkbox"> G
-									<input type="checkbox" checked>GG -->
-									<div ng-repeat="inventory in inventoriesByGender">
-										<label class="size-marker">
-										    <input name="size" ng-disabled="inventory.quantity<=0"  ng-model="inventoryChecked.id"  value="{{inventory._id}}"  class="fancy-select"  type="radio">
-										    <span ng-bind="inventory.size" ></span>
+								<div ng-if="!unico" ng-repeat="(gender, inventoriesByGender) in inventories">
 
-										</label>
+									<h3 ng-bind="gender"></h3>
+									<h4>Select a size :</h4>
+									<div class="col col-4">
+										<!-- <input type="checkbox"> G
+										<input type="checkbox" checked>GG -->
+										<div ng-repeat="inventory in inventoriesByGender">
+											<label class="size-marker">
+											    <input name="size" ng-disabled="inventory.quantity<=0"  ng-model="inventoryChecked.id"  value="{{inventory._id}}"  class="fancy-select"  type="radio">
+											    <span ng-bind="inventory.size" ></span>
 
-									</div>
-									<!-- <input type="radio" name="iCheck" checked>GG -->
-								</div>	
-								<br/>
+											</label>
+
+										</div>
+										<!-- <input type="radio" name="iCheck" checked>GG -->
+									</div>	
+									<br/>
+								</div>
+							</div>
+							<div ng-if="product.inventories.length<=0">
+								Estamos em falta desse projeto, mas não desanime! 
+								Peça por aqui:
 							</div>
 							
 							<div class="single-bottom1">
@@ -75,7 +82,7 @@
 							</div>
 						</div>
 						
-						<div ng-show="inventories" class="btn_form">
+						<div ng-show="product.inventories.length>0" class="btn_form">
 							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">buy</a>
 						</div>
 
