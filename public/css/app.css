@@ -7619,9 +7619,24 @@ a:focus h3 {
 .top_right ul li:last-child {
   margin-right: 0;
 }
+.top_right ul.mainmenu {
+  position: absolute;
+  float: left;
+}
+.top_right ul.mainmenu li {
+  display: block;
+  padding: 2.5px 0;
+}
+.top_right ul.mainmenu li img {
+  width: 14%;
+}
+.top_right ul.helpmenu {
+  padding-left: 70px;
+}
 
 .top_left {
   float: right;
+  width: 40%;
 }
 .top_left h2 {
   text-transform: uppercase;
@@ -7639,6 +7654,14 @@ a:focus h3 {
   transition: all 0.3s ease-in-out;
 }
 
+.floatleft {
+  float: left;
+}
+
+.padl60 {
+  padding-left: 60px !important;
+}
+
 .head-t {
   padding: 1em 0;
 }
@@ -7647,6 +7670,7 @@ a:focus h3 {
   float: left;
   margin: 1.5em 0;
   width: 50%;
+  margin-left: 25%;
 }
 
 .header_right {
@@ -7666,7 +7690,7 @@ a:focus h3 {
 .box_cart {
   float: left;
   margin: 0.15em 0.1em 0;
-  width: 38%;
+  width: 30%;
 }
 .box_cart h3 {
   color: #7A8499;
@@ -7687,6 +7711,10 @@ a:focus h3 {
   float: left;
   margin: 0.5em 0.3em 0;
   text-align: left;
+}
+
+.facebook img {
+  width: 85%;
 }
 
 .create_btn {
@@ -7718,7 +7746,7 @@ a:focus h3 {
 }
 
 .log {
-  float: right;
+  float: left;
   width: 19%;
 }
 

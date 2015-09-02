@@ -74,11 +74,27 @@ a:focus {
 			margin-right: 0;
 		}
 	}
+	ul.mainmenu{
+		position: absolute;
+	    float: left;
+
+		li{
+			display: block;
+			padding: 2.5px 0;
+			img{
+				width: 14%;
+			}
+		}
+	}
+	ul.helpmenu{
+		padding-left: 70px;
+	}
 }
 
 
 .top_left{
 	float: right;
+	width: 40%;
 	 h2{
 		text-transform:uppercase;
 		font-size:12px;
@@ -95,7 +111,12 @@ a:focus {
 		}
 	}
 }
-
+.floatleft{
+	float:left;
+}
+.padl60{
+	padding-left: 60px!important;
+}
 .head-t {
   padding: 1em 0;
 }
@@ -103,6 +124,7 @@ a:focus {
   float: left;
   margin: 1.5em 0;
   width: 50%;
+  margin-left: 25%;
 }
 
 .header_right {
@@ -121,7 +143,7 @@ a:focus {
 .box_cart {
 	float: left;
 	margin: 0.15em 0.1em 0;
-	width:38%;
+	width:30%;
 	h3{
 		color: #7A8499;
 		font-size: 1em;
@@ -141,6 +163,11 @@ a:focus {
 		float: left;
 		margin: 0.5em 0.3em 0;
 		text-align:left;
+	}
+}
+.facebook{
+	img{
+		width: 85%;
 	}
 }
 .create_btn {
@@ -172,7 +199,7 @@ a:focus {
 }
 
 .log {
-	float: right;
+	float: left;
 	width: 19%;
 }
 
@@ -596,3 +623,4 @@ i.mail {
   background: url(../images/img-sprite.png) no-repeat -236px -76px;
   margin-right: 0.5em;
 }
+
