@@ -1,0 +1,56 @@
+@mixin generatePadding() {
+  @for $i from 1 through 100 {
+    .padt#{$i} {
+	     padding-top: #{$i}px;
+    }
+    .padb#{$i} {
+  	   padding-bottom: #{$i}px;
+    }
+    .padr#{$i} {
+  	   padding-right: #{$i}px;
+    }
+    .padl#{$i} {
+  	   padding-left: #{$i}px;
+    }
+    .padtporcent#{$i} {
+       padding-top: $i*1%;
+    }
+    .padbporcent#{$i} {
+       padding-bottom: $i*1%;;
+    }
+    .padrporcent#{$i} {
+       padding-right: $i*1%;;
+    }
+    .padlporcent#{$i} {
+       padding-left: $i*1%;;
+    }
+  }
+}
+@mixin generateMargin() {
+  @for $i from 1 through 100 {
+    .margt#{$i} {
+      margin-top: #{$i}px;
+    }
+    .margb#{$i} {
+      margin-bottom: #{$i}px;
+    }
+    .margr#{$i} {
+      margin-right: #{$i}px;
+    }
+    .margl#{$i} {
+      margin-left: #{$i}px;
+    }
+    .margtporcent#{$i} {
+      margin-top: $i*1%;;
+    }
+    .margbporcent#{$i} {
+      margin-bottom: $i*1%;;
+    }
+    .margrporcent#{$i} {
+      margin-right: $i*1%;;
+    }
+    .marglporcent#{$i} {
+      margin-left: $i*1%;;
+    }
+  }
+}

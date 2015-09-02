@@ -1,4 +1,4 @@
-
+@import 'myfunctions';  
 
 $light-color: #F5AE81;
 $medium1-color: #EE803C;
@@ -21,8 +21,8 @@ body a{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
-
-
+@include generatePadding();
+@include generateMargin();
 
 a:hover, 
 a:focus {
@@ -77,7 +77,7 @@ a:focus {
 	ul.mainmenu{
 		position: absolute;
 	    float: left;
-
+		padding-top: 20px;
 		li{
 			display: block;
 			padding: 2.5px 0;
