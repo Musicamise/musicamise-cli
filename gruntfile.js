@@ -108,7 +108,7 @@ module.exports = function(grunt) {
 		  	dev: {
 		  		options: {
 		  			style: 'expanded',
-		 			compass: false
+		 			compass: true
 			  	},
 		  		files: {
 				   'public/css/app.css': 'public/sass/{,*/}*.{scss,sass}'
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
 			  	//you could use this as part of the build job (instead of using cssmin)
 			    options: {
 		      		style: 'compressed',
-		      		compass: false
+		      		compass: true
 			    },
 			    files: {
 		      		'public/dist/style.min.css': 'style/{,*/}*.{scss,sass}'

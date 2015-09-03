@@ -21,9 +21,8 @@
 					
 					</div>		 
 					<div ng-if="frontCollections.length>0" class="arriv-top">
-						<div ng-if="frontCollections.length>0" class="col-md-3 marglporcent10">
-							<img ng-src="{{frontCollections[0].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info">
+						<div ng-if="frontCollections.length>0" class="col-md-3 marglporcent10" ng-class="frontCollections[0].slug">
+							<div class="arriv-info" >
 								<h3 ng-bind="frontCollections[0].title"></h3>
 								<p ng-bind="frontCollections[0].description"> </p>
 								<div class="crt-btn">
@@ -31,9 +30,8 @@
 								</div>
 							</div>
 						</div>
-						<div ng-if="frontCollections.length>1" class="col-md-3 ">
-							<img ng-src="{{frontCollections[1].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info">
+						<div ng-if="frontCollections.length>1" class="col-md-3 "  ng-class="frontCollections[1].slug">
+							<div class="arriv-info" >
 								<h3 ng-bind="frontCollections[1].title"></h3>
 								<p ng-bind="frontCollections[1].description"> </p>
 								<div class="crt-btn">
@@ -41,9 +39,8 @@
 								</div>
 							</div>
 						</div>
-						<div  ng-if="frontCollections.length>2" class="col-md-3 ">
-							<img ng-src="{{frontCollections[2].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info1">
+						<div  ng-if="frontCollections.length>2" class="col-md-3 " ng-class="frontCollections[2].slug">
+							<div class="arriv-info1"  >
 								<h3 ng-bind="frontCollections[2].title" ></h3>
 								<p ng-bind="frontCollections[2].description"> </p>
 								<div class="crt-btn">
@@ -53,40 +50,6 @@
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-				<!-- 	<div ng-if="frontCollections.length>2" class="arriv-bottm">
-						
-						<div  ng-if="frontCollections.length>3" class="col-md-4 arriv-right1">
-							<img ng-src="{{frontCollections[3].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info2">
-								<a ng-href="/#!/products/{{frontCollections[3].gender?'gender':'collection'}}/{{frontCollections[3].slug}}"><h3 ng-bind="frontCollections[3].title"> <i class="ars"></i></h3></a>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div> -->
-					<!-- <div ng-if="frontCollections.length>4" class="arriv-las">
-						<div ng-if="frontCollections.length>4" class="col-md-4 arriv-left2">
-							<img ng-src="{{frontCollections[4].image.url}}"   loading-src class="img-responsive" alt="">
-							<div class="arriv-info2">
-								<a ng-href="/#!/products/{{frontCollections[4].gender?'gender':'collection'}}/{{frontCollections[4].slug}}"><h3 ng-bind="frontCollections[4].title" > <i class="ars"></i></h3></a>
-							</div>
-						</div>
-						<div ng-if="frontCollections.length>5" class="col-md-4 arriv-middle">
-							<img ng-src="{{frontCollections[5].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info3">
-								<h3 ng-bind="frontCollections[5].title"> </h3>
-								<div class="crt-btn">
-									<a  ng-href="/#!/products/{{frontCollections[5].gender?'gender':'collection'}}/{{frontCollections[5].slug}}">Acesse!</a>
-								</div>
-							</div>
-						</div>
-						<div ng-if="frontCollections.length>6" class="col-md-4 arriv-right2">
-							<img ng-src="{{frontCollections[6].image.url}}"  loading-src class="img-responsive" alt="">
-							<div class="arriv-info2">
-								<a ng-href="/#!/products/{{frontCollections[6].gender?'gender':'collection'}}/{{frontCollections[6].slug}}"><h3 ng-bind="frontCollections[6].title"> <i class="ars"></i></h3></a>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div> -->
 				</div>
 	</div>
 			

@@ -13,6 +13,19 @@
     line-height: 1.8em;
     margin: 0.5em 0;
   }
+  .container{
+    .arriv-top{
+      .masculino{
+        @include icons-sprite(masculino);
+      }
+      .feminino{
+        @include icons-sprite(feminino);
+      }
+      .infantil{
+        @include icons-sprite(infantil);
+      }
+    }
+  }
 }
 
 

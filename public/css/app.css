@@ -7328,6 +7328,10 @@ button.close {
     display: none !important;
   }
 }
+.icons-sprite, .arriv .container .arriv-top .masculino, .arriv .container .arriv-top .feminino, .arriv .container .arriv-top .infantil {
+  background: url('../images/../images/icons-s8ec33b2df4.png') no-repeat;
+}
+
 .progress {
   height: 20px;
   margin-bottom: 20px;
@@ -7337,7 +7341,7 @@ button.close {
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(whitesmoke), to(#f9f9f9));
   background-image: -webkit-linear-gradient(top, whitesmoke, #f9f9f9);
   background-image: -o-linear-gradient(top, whitesmoke, #f9f9f9);
-  background-image: linear-gradient(to bottom, whitesmoke, #f9f9f9);
+  background-image: linear-gradient(to bottom, #f5f5f5, #f9f9f9);
   background-repeat: repeat-x;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -14069,7 +14073,7 @@ a:focus h3 {
 
 .logo {
   float: left;
-  margin: 1.5em 0;
+  margin: 0 0 1.5em 0;
   width: 50%;
   margin-left: 25%;
 }
@@ -15921,6 +15925,15 @@ i.mail {
   line-height: 1.8em;
   margin: 0.5em 0;
 }
+.arriv .container .arriv-top .masculino {
+  background-position: 0 -1416px;
+}
+.arriv .container .arriv-top .feminino {
+  background-position: 0 -2832px;
+}
+.arriv .container .arriv-top .infantil {
+  background-position: 0 0;
+}
 
 .arriv-top {
   margin: 1.5em 0;
@@ -16819,7 +16832,7 @@ span.item_price {
   background: -webkit-linear-gradient(top, #eeeeee 0, #dbdbdb 100%);
   background: -o-linear-gradient(top, #eeeeee 0, #dbdbdb 100%);
   background: -ms-linear-gradient(top, #eeeeee 0, #dbdbdb 100%);
-  background: linear-gradient(to bottom, #eeeeee 0, #dbdbdb 100%);
+  background: linear-gradient(to bottom, #eeeeee 0%, #dbdbdb 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee',endColorstr='#dbdbdb',GradientType=0);
 }
 

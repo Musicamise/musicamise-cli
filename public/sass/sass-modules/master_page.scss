@@ -1,5 +1,4 @@
 @import 'myfunctions';  
-
 $light-color: #F5AE81;
 $medium1-color: #EE803C;
 $medium2-color: #E75112;
@@ -122,7 +121,7 @@ a:focus {
 }
 .logo {
   float: left;
-  margin: 1.5em 0;
+  margin: 0 0 1.5em 0;
   width: 50%;
   margin-left: 25%;
 }
