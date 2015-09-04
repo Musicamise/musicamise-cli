@@ -139,18 +139,17 @@ a:focus {
 .box_cart {
 	float: left;
 	margin: 0.15em 0.1em 0;
-	width:30%;
+	background-color: $light-color;
+	a:hover{
+		color: #fff!important;
+	}
 	h3{
 		color: #7A8499;
-		font-size: 1em;
 		float: left;
 		color: #000;
-		font-size: 0.85em;
-		margin-bottom: 0;
+		font-size: 12pt;
 		float: left;
-		img{
-			margin-left: 5px;
-		}
+
 	}
 	p{
 		float: right;

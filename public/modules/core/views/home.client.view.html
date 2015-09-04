@@ -22,7 +22,7 @@
 					</div>		 
 					<div ng-if="frontCollections.length>0" class="arriv-top">
 
-						<div ng-if="frontCollections.length>0" class="col-md-3 marglporcent10" ng-class="frontCollections[0].slug">
+						<div ng-if="frontCollections.length>0" class="col-md-4 " ng-class="frontCollections[0].slug">
 							<label class="gender-label" ng-bind="frontCollections[0].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[0].gender?'gender':'collection'}}/{{frontCollections[0].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
 								<img ng-hide="picture"  src="images/icons/masculinopb.png">
@@ -36,7 +36,7 @@
 								</div>
 							</div> -->
 						</div>
-						<div ng-if="frontCollections.length>1" class="col-md-3 "  ng-class="frontCollections[1].slug">
+						<div ng-if="frontCollections.length>1" class="col-md-4 "  ng-class="frontCollections[1].slug">
 							<label class="gender-label" ng-bind="frontCollections[1].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[1].gender?'gender':'collection'}}/{{frontCollections[1].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
 								<img ng-hide="picture"  src="images/icons/femininopb.png">
@@ -50,7 +50,7 @@
 								</div>
 							</div> -->
 						</div>
-						<div  ng-if="frontCollections.length>2" class="col-md-3 " ng-class="frontCollections[2].slug">
+						<div  ng-if="frontCollections.length>2" class="col-md-4 " ng-class="frontCollections[2].slug">
 							<label class="gender-label" ng-bind="frontCollections[2].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[2].gender?'gender':'collection'}}/{{frontCollections[2].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
 								<img ng-hide="picture"  src="images/icons/infantilpb.png">
@@ -70,9 +70,9 @@
 	</div>
 			
 	<div class="special">
-			<div class="container">
-				<h3>Em destaque</h3>
-				<div class="specia-top">
+		<div class="container">
+			<h3>Em destaque</h3>
+			<div class="specia-top">
 				<ul class="grid_2">
 					<li ng-repeat="product in destaque">
 							<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
@@ -84,10 +84,10 @@
 								<div class="item_add"><span class="item_price"><h6 >APENAS <span ng-bind="product.priceFormatted"></span></h6></span></div>
 							</div>
 					</li>
-				<div class="clearfix"> </div>
-			</ul>
-				</div>
+					<div class="clearfix"> </div>
+				</ul>
 			</div>
+		</div>
 	</div>
 
 

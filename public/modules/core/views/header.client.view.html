@@ -60,7 +60,12 @@
 					</div>
 					<div class="cart box_cart">
 						<a href="/#!/cart">
-							<h3> <span class="">{{order.totalFormatted}}</span> (<span id="" class="">{{order.totalItems}}</span> item)<img src="images/bag.png" alt=""></h3>
+							<h3 class="marg5"> <!-- 
+								<span class="">{{order.totalFormatted}}</span> (
+								<span id="" class="">{{order.totalItems}}</span> item) -->
+								<img src="images/bag.png" alt="">
+								<span id="" class="">{{order.totalItems}}</span> 
+							</h3>
 						</a>	
 						<!-- <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p> -->
 						<div class="clearfix"> </div>

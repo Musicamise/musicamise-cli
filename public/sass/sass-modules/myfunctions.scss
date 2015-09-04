@@ -1,5 +1,8 @@
 @mixin generatePadding() {
   @for $i from 1 through 100 {
+    .pad#{$i} {
+       padding: #{$i}px #{$i}px;
+    }
     .padt#{$i} {
 	     padding-top: #{$i}px;
     }
@@ -28,6 +31,9 @@
 }
 @mixin generateMargin() {
   @for $i from 1 through 100 {
+    .marg#{$i} {
+      margin:#{$i}px #{$i}px;
+    }
     .margt#{$i} {
       margin-top: #{$i}px;
     }
