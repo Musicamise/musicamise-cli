@@ -1,3 +1,4 @@
+@import 'vars';  
 .arriv {
   h3 {
     font-size: 1.5em;
@@ -15,14 +16,18 @@
   }
   .container{
     .arriv-top{
-      .masculino{
-        @include icons-sprite(masculino);
-      }
-      .feminino{
-        @include icons-sprite(feminino);
-      }
-      .infantil{
-        @include icons-sprite(infantil);
+      position:relative;
+      .masculino,.feminino,.infantil{
+        position:relative;
+        padding: 0;
+        .gender-label{
+          background: $stronger-color;
+          color:white;
+          text-align: center;
+        }
+        img{
+          width: 100%;
+        }
       }
     }
   }
@@ -46,9 +51,6 @@
   position: relative;
 }
 .arriv-info {
-  position: absolute;
-  top: 216px;
-  left: 119px;
   text-align: center;
 }
 .arriv-info1 {

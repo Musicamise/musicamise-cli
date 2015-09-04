@@ -7328,7 +7328,7 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite, .arriv .container .arriv-top .masculino, .arriv .container .arriv-top .feminino, .arriv .container .arriv-top .infantil {
+.icons-sprite {
   background: url('../images/../images/icons-s8ec33b2df4.png') no-repeat;
 }
 
@@ -15925,14 +15925,20 @@ i.mail {
   line-height: 1.8em;
   margin: 0.5em 0;
 }
-.arriv .container .arriv-top .masculino {
-  background-position: 0 -1416px;
+.arriv .container .arriv-top {
+  position: relative;
 }
-.arriv .container .arriv-top .feminino {
-  background-position: 0 -2832px;
+.arriv .container .arriv-top .masculino, .arriv .container .arriv-top .feminino, .arriv .container .arriv-top .infantil {
+  position: relative;
+  padding: 0;
 }
-.arriv .container .arriv-top .infantil {
-  background-position: 0 0;
+.arriv .container .arriv-top .masculino .gender-label, .arriv .container .arriv-top .feminino .gender-label, .arriv .container .arriv-top .infantil .gender-label {
+  background: #c44613;
+  color: white;
+  text-align: center;
+}
+.arriv .container .arriv-top .masculino img, .arriv .container .arriv-top .feminino img, .arriv .container .arriv-top .infantil img {
+  width: 100%;
 }
 
 .arriv-top {
@@ -15954,9 +15960,6 @@ i.mail {
 }
 
 .arriv-info {
-  position: absolute;
-  top: 216px;
-  left: 119px;
   text-align: center;
 }
 

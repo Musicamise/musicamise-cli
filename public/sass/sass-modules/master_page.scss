@@ -1,8 +1,5 @@
 @import 'myfunctions';  
-$light-color: #F5AE81;
-$medium1-color: #EE803C;
-$medium2-color: #E75112;
-$stronger-color: #C44613;
+@import 'vars';  
 
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}

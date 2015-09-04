@@ -21,32 +21,48 @@
 					
 					</div>		 
 					<div ng-if="frontCollections.length>0" class="arriv-top">
+
 						<div ng-if="frontCollections.length>0" class="col-md-3 marglporcent10" ng-class="frontCollections[0].slug">
-							<div class="arriv-info" >
+							<label class="gender-label" ng-bind="frontCollections[0].title"> </label>
+							<a  ng-href="/#!/products/{{frontCollections[0].gender?'gender':'collection'}}/{{frontCollections[0].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+								<img ng-hide="picture"  src="images/icons/masculinopb.png">
+								<img ng-show="picture" src="images/icons/masculino.png">
+							</a>
+							<!-- <div class="arriv-info" >
 								<h3 ng-bind="frontCollections[0].title"></h3>
 								<p ng-bind="frontCollections[0].description"> </p>
 								<div class="crt-btn">
 									<a ng-href="/#!/products/{{frontCollections[0].gender?'gender':'collection'}}/{{frontCollections[0].slug}}">DA UMA OLHADA!</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div ng-if="frontCollections.length>1" class="col-md-3 "  ng-class="frontCollections[1].slug">
-							<div class="arriv-info" >
+							<label class="gender-label" ng-bind="frontCollections[1].title"> </label>
+							<a  ng-href="/#!/products/{{frontCollections[1].gender?'gender':'collection'}}/{{frontCollections[1].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+								<img ng-hide="picture"  src="images/icons/femininopb.png">
+								<img ng-show="picture" src="images/icons/feminino.png">
+							</a>
+							<!-- <div class="arriv-info" >
 								<h3 ng-bind="frontCollections[1].title"></h3>
 								<p ng-bind="frontCollections[1].description"> </p>
 								<div class="crt-btn">
 									<a ng-href="/#!/products/{{frontCollections[1].gender?'gender':'collection'}}/{{frontCollections[1].slug}}">DA UMA OLHADA!</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div  ng-if="frontCollections.length>2" class="col-md-3 " ng-class="frontCollections[2].slug">
-							<div class="arriv-info1"  >
+							<label class="gender-label" ng-bind="frontCollections[2].title"> </label>
+							<a  ng-href="/#!/products/{{frontCollections[2].gender?'gender':'collection'}}/{{frontCollections[2].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
+								<img ng-hide="picture"  src="images/icons/infantilpb.png">
+								<img ng-show="picture" src="images/icons/infantil.png">
+							</a>
+							<!-- <div class="arriv-info"  >
 								<h3 ng-bind="frontCollections[2].title" ></h3>
 								<p ng-bind="frontCollections[2].description"> </p>
 								<div class="crt-btn">
 									<a ng-href="/#!/products/{{frontCollections[2].gender?'gender':'collection'}}/{{frontCollections[2].slug}}">DA UMA OLHADA!</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div class="clearfix"> </div>
 					</div>
