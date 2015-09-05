@@ -31,7 +31,7 @@ a:focus {
 }
 
 .top_bg{
-	background: $stronger-color;
+	background: $musicamise-color;
 
 }
 .header_top{
@@ -79,6 +79,10 @@ a:focus {
 			padding: 2.5px 0;
 			img{
 				width: 14%;
+    			z-index: 100;
+			}
+			img.contato{
+			    position: absolute;
 			}
 		}
 	}
@@ -140,16 +144,16 @@ a:focus {
 	float: left;
 	margin: 0.15em 0.1em 0;
 	background-color: $light-color;
-	a:hover{
-		color: #fff!important;
+	a:hover h3, a:focus h3 {
+	    color: #fff; 
+	    text-decoration: none; 
 	}
 	h3{
 		color: #7A8499;
 		float: left;
 		color: #000;
-		font-size: 12pt;
+		font-size: 17pt;
 		float: left;
-
 	}
 	p{
 		float: right;
@@ -387,9 +391,11 @@ ul.megamenu.musicamise {
 
 /**footer**/
 .foot-top {
-  padding: 2em 0;
-  border-bottom: 1px solid #e5e4e2;
+  padding: 1em 0;
+  /* border-bottom: 1px solid #e5e4e2;
   border-top: 1px solid #e5e4e2;
+   */
+   background-color: $musicamise-color;
   	li {
 	  display: inline-block;
 	  vertical-align: middle;
@@ -397,7 +403,12 @@ ul.megamenu.musicamise {
 }
 
 .footer{
-	  padding: 3em 0;
+    background-color: $musicamise-color;
+    background-image: linear-gradient(transparent 4%, rgba(255, 255, 255, 0.9) 1%);
+    background-size: 50px 16px;
+  	padding: 3em 0;
+  	padding-top: 0;
+
 	h4 {
 	  color: #3f3d3d;
 	  font-family: 'Playfair Display', serif;
