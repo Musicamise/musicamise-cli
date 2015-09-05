@@ -65,7 +65,7 @@
 
 
 	<div class="foot-top">
-			<div class="container">
+			<!-- <div class="container">
 				<div class="col-md-6 padding-0">
 					<li>
 						<div class="fooll">
@@ -94,7 +94,7 @@
 					<div class="clearfix"> </div>
 				</div>
 				<div class="col-md-6 padding-0">
-					<!-- <div class="stay">
+					<div class="stay">
 								<div class="stay-left">
 									<form>
 										<input type="text" placeholder="Enter your email to join our newsletter" required="">
@@ -106,14 +106,33 @@
 									</form>
 								</div>
 									<div class="clearfix"> </div>
-					</div> -->
+					</div>
 				</div>
 				<div class="clearfix"> </div>
-			</div>
-	</div>
+			</div> -->
+	</div> 
 	<div class="footer">
+		<a href="/#!/"><img src="images/icons/Musicamise_site_Curvas.png" width="20%" class="img-responsive padb20" alt=""/> </a>
 		<div class="container">
-			<div class="col-md-3 customer-footer">
+			<div class="col-md-4 customer-footer">
+				<h4>Área do Cliente</h4>
+				<li><a href="/#!/centrodeajuda">Centro de ajuda</a></li>
+				<li><a href="/#!/faq">FAQ</a></li>
+				<li><a href="/#!/comocomprar">Como comprar</a></li>
+				<li><a href="/#!/politicas">Regras de entrega e Politicas de trocas</a></li>
+			</div>
+			<div class="col-md-4 customer-footer">
+				<h4>Formas de Pagamento</h4>
+				
+			</div>
+			<div class="col-md-4 customer-footer">
+				<h4>Institucional</h4>
+				<li><a href="/#!/centrodeajuda">Centro de ajuda</a></li>
+				<li><a href="/#!/faq">FAQ</a></li>
+				<li><a href="/#!/comocomprar">Como comprar</a></li>
+				<li><a href="/#!/politicas">Regras de entrega e Politicas de trocas</a></li>
+			</div>
+			<!-- <div class="col-md-3 customer-footer">
 				<h4>Área do Cliente</h4>
 				<li><a href="/#!/centrodeajuda">Centro de ajuda</a></li>
 				<li><a href="/#!/faq">FAQ</a></li>
@@ -123,8 +142,6 @@
 			<div class="col-md-2 about-footer">
 				<h4>Sobre Nós</h4>
 				<li><a href="/#!/quemsomos">Quem somos</a></li>
-				<!-- <li><a href="#">Imprensa</a></li> -->
-				<!-- <li><a href="#">Carreira</a></li> -->
 				<li><a href="/#!/contact">Contato</a></li>
 			</div>
 			<div class="col-md-2 myaccount-footer">
@@ -142,7 +159,7 @@
 				<div class="left-33">
 					<h4>Nossa Loja</h4>
 				</div>
-				<!-- <div class="left-22">
+				<div class="left-22">
 					<div class="creat_button">
 						<a href="#">SOLO</a>
 					</div>
@@ -151,14 +168,14 @@
 					<div class="creat_button_filled">
 						<a href="#">BOGOR</a>
 					</div>
-				</div> -->
+				</div>
 				<div class="clearfix"> </div>
 				<li><i class="add"> </i>Rua Guaianases, cep:52031-300 </li>
 				<li><i class="phone"> </i>(81) 9 96995060</li>
 				<li><a href="mailto:{{content.email}}"><i class="mail"> </i>{{content.email}} </a></li>
-			</div>
+			</div> -->
 			<div class="clearfix"> </div>
-				<p>Copyrights © 2015 Musicamise. Todos os direitos reservados</a></p>
+			<p>Copyrights © 2015 Musicamise. Todos os direitos reservados</a></p>
 		</div>
 	</div>
 	<!--Embedding The User Object-->
@@ -185,8 +202,8 @@
 	-->
 
 	{% if process.env.NODE_ENV === 'development' %}
-	<!--Livereload script rendered -->
-	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
+		<!--Livereload script rendered -->
+		<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
 	{% endif %}
 </body>
 

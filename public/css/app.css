@@ -7329,7 +7329,7 @@ button.close {
   }
 }
 .icons-sprite {
-  background: url('../images/../images/icons-s8ec33b2df4.png') no-repeat;
+  background: url('../images/../images/icons-s4d4750fbea.png') no-repeat;
 }
 
 .progress {
@@ -14784,7 +14784,7 @@ a:focus h3 {
 }
 
 .top_bg {
-  background: #c44613;
+  background: #f16136;
 }
 
 .header_top {
@@ -14834,6 +14834,10 @@ a:focus h3 {
 }
 .top_right ul.mainmenu li img {
   width: 14%;
+  z-index: 100;
+}
+.top_right ul.mainmenu li img.contato {
+  position: absolute;
 }
 .top_right ul.helpmenu {
   padding-left: 70px;
@@ -14897,14 +14901,15 @@ a:focus h3 {
   margin: 0.15em 0.1em 0;
   background-color: #f5ae81;
 }
-.box_cart a:hover {
-  color: white !important;
+.box_cart a:hover h3, .box_cart a:focus h3 {
+  color: #fff;
+  text-decoration: none;
 }
 .box_cart h3 {
   color: #7A8499;
   float: left;
   color: #000;
-  font-size: 12pt;
+  font-size: 17pt;
   float: left;
 }
 .box_cart p {
@@ -15135,9 +15140,11 @@ ul.megamenu.musicamise {
 
 /**footer**/
 .foot-top {
-  padding: 2em 0;
-  border-bottom: 1px solid #e5e4e2;
+  padding: 1em 0;
+  /* border-bottom: 1px solid #e5e4e2;
   border-top: 1px solid #e5e4e2;
+   */
+  background-color: #f16136;
 }
 .foot-top li {
   display: inline-block;
@@ -15145,7 +15152,11 @@ ul.megamenu.musicamise {
 }
 
 .footer {
+  background-color: #f16136;
+  background-image: linear-gradient(transparent 4%, rgba(255, 255, 255, 0.9) 1%);
+  background-size: 50px 16px;
   padding: 3em 0;
+  padding-top: 0;
 }
 .footer h4 {
   color: #3f3d3d;
@@ -16813,7 +16824,7 @@ i.ars {
 }
 
 .special-top {
-  border: 30px solid grey;
+  border: 30px solid gray;
   border-top: 0;
   margin: 0 2em;
   padding-top: 20px;
@@ -16876,6 +16887,37 @@ i.ars {
   margin: 0;
   background-color: gray;
   color: white;
+}
+
+.frete-gratis h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5em;
+  padding: 0.5em;
+  padding-left: 4em;
+  text-align: left;
+  margin: 0;
+  background-color: #f16136;
+  color: white;
+}
+.frete-gratis img {
+  width: 6%;
+  position: absolute;
+}
+
+.parcerias h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5em;
+  padding: 0.5em;
+  padding-left: 4em;
+  text-align: left;
+  margin: 0;
+  background-color: #36526d;
+  color: white;
+}
+.parcerias img.icon-parcerias {
+  width: 6%;
+  position: absolute;
+  z-index: 100;
 }
 
 .grid_1 img {

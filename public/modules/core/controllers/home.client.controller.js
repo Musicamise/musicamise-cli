@@ -59,8 +59,8 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
             fancyboxService.fancyboxPlus()($scope.promotionImage);
         };
 		
-		$scope.initCarousel = function(){
-			$('#owl-demo').owlCarousel({
+		$scope.initCarousel = function(id){
+			$('#'+id).owlCarousel({
 
 				navigation : false,
 				slideSpeed : 300,
