@@ -1,5 +1,5 @@
 @media (max-width: 480px) {
-    .top_left h2 {
+.top_right h2 {
     font-size: 11px;
     line-height: 1.5em;
 }
@@ -46,11 +46,11 @@ p.prod-desc, p.product_descr {
     width: 100%;
     margin-left: 0;
 }
-.top_right ul li {
+.top_left ul li {
   display: inline-block;
   margin-right: 5px;
 }
-.top_right ul li a {
+.top_left ul li a {
   padding: 0px 1px;
   font-size: 11px;
 }

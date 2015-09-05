@@ -14791,20 +14791,20 @@ a:focus h3 {
   padding: 15px 0 5px;
 }
 
-.top_right {
+.top_left {
   float: left;
   color: #ffffff;
   margin-top: -5px;
 }
-.top_right ul {
+.top_left ul {
   padding: 0;
   list-style: none;
 }
-.top_right ul li {
+.top_left ul li {
   display: inline-block;
   margin-right: 10px;
 }
-.top_right ul li a {
+.top_left ul li a {
   text-align: center;
   padding: 0px 4px;
   text-transform: uppercase;
@@ -14816,43 +14816,43 @@ a:focus h3 {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.top_right ul li a:hover {
+.top_left ul li a:hover {
   color: #e75112;
   text-decoration: none;
 }
-.top_right ul li:last-child {
+.top_left ul li:last-child {
   margin-right: 0;
 }
-.top_right ul.mainmenu {
+.top_left ul.mainmenu {
   position: absolute;
   float: left;
   padding-top: 20px;
 }
-.top_right ul.mainmenu li {
+.top_left ul.mainmenu li {
   display: block;
   padding: 2.5px 0;
 }
-.top_right ul.mainmenu li img {
+.top_left ul.mainmenu li img {
   width: 14%;
   z-index: 100;
 }
-.top_right ul.mainmenu li img.contato {
+.top_left ul.mainmenu li img.contato {
   position: absolute;
 }
-.top_right ul.helpmenu {
+.top_left ul.helpmenu {
   padding-left: 70px;
 }
 
-.top_left {
+.top_right {
   float: right;
   width: 40%;
 }
-.top_left h2 {
+.top_right h2 {
   text-transform: uppercase;
   font-size: 12px;
   color: #ffffff;
 }
-.top_left h2 span {
+.top_right h2 span {
   color: #000000;
   margin-right: 0px;
   padding: 1px 10px;
@@ -15154,21 +15154,26 @@ ul.megamenu.musicamise {
 .footer {
   background-color: #f16136;
   background-image: linear-gradient(transparent 4%, rgba(255, 255, 255, 0.9) 1%);
-  background-size: 50px 16px;
+  background-size: 50px 30px;
   padding: 3em 0;
   padding-top: 0;
+}
+.footer li {
+  font-size: 1.1em;
+  font-weight: 400;
 }
 .footer h4 {
   color: #3f3d3d;
   font-family: 'Playfair Display', serif;
-  font-weight: 400;
+  font-weight: 600;
   margin: 0 0 1em;
+  font-size: 1.5em;
 }
 .footer p {
-  margin: 1.5em 0 0;
+  margin: 2em 0 0;
   font-size: 1em;
   color: #3f3d3d;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.8em;
 }
 .footer p a {
@@ -15507,11 +15512,11 @@ i.mail {
   }
 }
 @media (max-width: 800px) {
-  .top_left {
+  .top_right {
     float: right;
   }
 
-  .top_right {
+  .top_left {
     float: left;
   }
 
@@ -16040,7 +16045,7 @@ i.mail {
   }
 }
 @media (max-width: 480px) {
-  .top_left h2 {
+  .top_right h2 {
     font-size: 11px;
     line-height: 1.5em;
   }
@@ -16099,12 +16104,12 @@ i.mail {
     margin-left: 0;
   }
 
-  .top_right ul li {
+  .top_left ul li {
     display: inline-block;
     margin-right: 5px;
   }
 
-  .top_right ul li a {
+  .top_left ul li a {
     padding: 0px 1px;
     font-size: 11px;
   }
@@ -16277,12 +16282,12 @@ i.mail {
     display: none;
   }
 
-  .top_left h2 {
+  .top_right h2 {
     font-size: 11px;
     line-height: 2em;
   }
 
-  .top_right ul li a {
+  .top_left ul li a {
     padding: 0;
     font-size: 11px;
   }

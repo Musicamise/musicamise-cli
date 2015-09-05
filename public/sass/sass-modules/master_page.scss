@@ -39,7 +39,7 @@ a:focus {
 }
 
 
-.top_right{
+.top_left{
 	float:left;
 	color: #ffffff;
 	margin-top: -5px;
@@ -92,7 +92,7 @@ a:focus {
 }
 
 
-.top_left{
+.top_right{
 	float: right;
 	width: 40%;
 	 h2{
@@ -405,22 +405,30 @@ ul.megamenu.musicamise {
 .footer{
     background-color: $musicamise-color;
     background-image: linear-gradient(transparent 4%, rgba(255, 255, 255, 0.9) 1%);
-    background-size: 50px 16px;
+    background-size: 50px 30px;
   	padding: 3em 0;
   	padding-top: 0;
+  	li{
+      font-size: 1.1em;
+      font-weight: 400;
 
+		a{
+
+  		}
+  	}
 	h4 {
 	  color: #3f3d3d;
 	  font-family: 'Playfair Display', serif;
-	  font-weight: 400;
+	  font-weight: 600;
 	  margin: 0 0 1em;
+      font-size: 1.5em;
 	}
 	p {
-		margin: 1.5em 0 0;
-		font-size: 1em;
-		color: #3f3d3d;
-		font-weight: 400;
-		line-height: 1.8em;
+		margin: 2em 0 0;
+	    font-size: 1em;
+	    color: #3f3d3d;
+	    font-weight: 500;
+	    line-height: 1.8em;
 		a{
 			text-decoration:none;
 		}
