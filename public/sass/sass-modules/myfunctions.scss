@@ -15,16 +15,16 @@
     .padl#{$i} {
   	   padding-left: #{$i}px;
     }
-    .padtporcent#{$i} {
+    .padtpercent#{$i} {
        padding-top: $i*1%;
     }
-    .padbporcent#{$i} {
+    .padbpercent#{$i} {
        padding-bottom: $i*1%;;
     }
-    .padrporcent#{$i} {
+    .padrpercent#{$i} {
        padding-right: $i*1%;;
     }
-    .padlporcent#{$i} {
+    .padlpercent#{$i} {
        padding-left: $i*1%;;
     }
   }
@@ -46,17 +46,37 @@
     .margl#{$i} {
       margin-left: #{$i}px;
     }
-    .margtporcent#{$i} {
+    .margtpercent#{$i} {
       margin-top: $i*1%;;
     }
-    .margbporcent#{$i} {
+    .margbpercent#{$i} {
       margin-bottom: $i*1%;;
     }
-    .margrporcent#{$i} {
+    .margrpercent#{$i} {
       margin-right: $i*1%;;
     }
-    .marglporcent#{$i} {
+    .marglpercent#{$i} {
       margin-left: $i*1%;;
+    }
+  }
+}
+@mixin generateLeft() {
+  @for $i from 1 through 100 {
+    .left#{$i} {
+      left:#{$i}px;
+    }
+    .leftpercent#{$i} {
+      left:$i*1%;;
+    }
+  }
+}
+@mixin generateRight() {
+  @for $i from 1 through 100 {
+    .right#{$i} {
+      right:#{$i}px;
+    }
+    .rightpercent#{$i} {
+      right:$i*1%;;
     }
   }
 }

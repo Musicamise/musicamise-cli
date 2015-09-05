@@ -19,6 +19,8 @@ body a{
 }
 @include generatePadding();
 @include generateMargin();
+@include generateLeft();
+@include generateRight();
 
 a:hover, 
 a:focus {
@@ -408,6 +410,10 @@ ul.megamenu.musicamise {
     background-size: 50px 30px;
   	padding: 3em 0;
   	padding-top: 0;
+  	i{
+  		position: absolute;
+  		opacity: 0.35;
+  	}
   	li{
       font-size: 1.1em;
       font-weight: 400;
