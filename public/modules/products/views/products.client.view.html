@@ -14,33 +14,37 @@
 <div class="container">
 	<div class="women_main">
 		<!-- start sidebar -->
-		<div class="col-md-3 s-d">
-	  		<div class="w_sidebar">
-				<div class="w_nav1">
-					<h4>Gender</h4>
-					<ul>
-						<li  ng-repeat="collection in collectionsGender" ng-class="genderMarked==collection.slug?'active' : ''">
-							<a ng-href="{{linkGender(collection.slug)}}">{{collection.title}}</a>
-						</li>
-					</ul>	
-				</div>
-				<h3>filter by</h3>
-				<div class="w_nav1" ng-if="hasFilter">
+		<div class="row">
+	  		<div class="filter_bar">
+				<h3>filtros:</h3>
+				<div class="filters-products" ng-if="hasFilter">
 					<ul>
 						<li><a href="#!/products">Clear Filter</a></li>
 					</ul>	
 				</div>
-				<section  class="sky-form">
+				<div class="filter">
+					<h4>Gender</h4>
+					<div class="row1 ">
+						<div class="col col-4">
+							<ul>
+								<li class="radio" ng-repeat="collection in collectionsGender" ng-class="genderMarked==collection.slug?'active' : ''">
+									<a ng-href="{{linkGender(collection.slug)}}">{{collection.title}}</a>
+								</li>
+							</ul>	
+						</div>
+					</div>
+				</div>
+				<div  class="filter">
 					<h4>Model <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Clear Model</a></h4>
-					<div class="row1 scroll-pane">
+					<div class="row1 ">
 						<div class="col col-4">
 							<li class="radio" ng-repeat="model in models" ng-class="modeloCamisaMarked==model?'active' : ''"><a ng-href="{{linkModel(model)}}">{{model}}</a></li>
 						</div> 
 					</div>
-				</section>
-				<section  class="sky-form">
+				</div>
+				<div  class="filter">
 					<h4>Size  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Clear Size</a></li></h4>
-					<div class="row1 scroll-pane">
+					<div class="row1 ">
 						<div class="col col-4">
 							<!-- <label class="checkbox" ng-repeat="size in sizes">
 								<input type="checkbox" ng-click="clickSize(size)"  ng-checked="sizesMarked.indexOf(size)>=0" name="{{size}}"><i></i>{{size}}
@@ -51,21 +55,21 @@
 							</li>
 						</div>
 					</div>
-				</section>
-				<section class="sky-form" ng-if="collections.length>0">
+				</div>
+				<div class="filter" ng-if="collections.length>0">
 					<h4>Collections  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Clear Collection</a></h4>
-					<div class="row1 scroll-pane">
+					<div class="row1 ">
 						<div class="col col-4">
 							<li class="radio" ng-repeat="collection in collections" ng-class="collectionMarked==collection.slug?'active' : ''">
 								<a ng-click="clickCollection(collection.slug)" ng-href="{{linkCollection(collection.slug)}}"> {{collection.title}} </a>
 							</li>
 						</div>
 					</div>						
-				</section>
+				</div>
 			
-				<section  class="sky-form">
+				<div  class="filter">
 					<h4>Price <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Clear Price</a></h4>
-					<div class="row1 scroll-pane">
+					<div class="row1 ">
 						<div class="col col-4">
 							<!-- <label class="checkbox" ng-repeat="price in prices">
 								<input type="checkbox" ng-click="clickPrice(price)" name="{{price}}" ><i></i>{{price}}
@@ -76,18 +80,22 @@
 							</li>
 						</div> 
 					</div>
-				</section>
-				<section class="sky-form">
+				</div>
+				<div class="filter">
 					<h4>Color <a ng-style="colorMarkedStyle" href="" ng-click="removeColor()">Clear Color</a></h4>
-					<ul class="w_nav2">
-						<li ng-repeat="color in colors" class = "color" ng-class="colorMarked==color?'active' : ''">
-							<a  style=" background-color: {{color}}; " ng-click="clickColor(color)" href=""></a>
-						</li>
-					</ul>
-				</section>
+					<div class="row1 ">
+						<div class="col col-4">
+							<ul class="w_nav2">
+								<li ng-repeat="color in colors" class = "color" ng-class="colorMarked==color?'active' : ''">
+									<a  style=" background-color: {{color}}; " ng-click="clickColor(color)" href=""></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 				<!-- <section class="sky-form">
 					<h4>discount</h4>
-					<div class="row1 scroll-pane">
+					<div class="row1 ">
 						<div class="col col-4">
 							<label class="radio"><input type="radio" name="radio" checked=""><i></i>60 % and above</label>
 							<label class="radio"><input type="radio" name="radio"><i></i>50 % and above</label>
@@ -103,7 +111,7 @@
 			</div>
 	   	</div>
 		<!-- start content -->
-		<div class="col-md-9 w_content">
+		<div class="row w_content">
 			<div class="women">
 				<a href="#"><h4>Enthecwear - <span ng-bind="products.length"> </span> items </h4></a>
 				<ul class="w_nav">

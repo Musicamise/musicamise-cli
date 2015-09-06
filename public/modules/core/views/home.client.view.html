@@ -103,7 +103,7 @@
 
 	<div class="parcerias margb60 margt20">
 		<div class="container">
-			<a href="#">
+			<a href="#!/lojasparceiras/">
 				<img class="icon-parcerias" src="modules/core/img/icons/Parceiros1.png">
 				<h3>Parcerias</h3>
 			</a>
@@ -112,10 +112,10 @@
               <div id="owl-demo1" class="owl-carousel"  >
 
                 <div class="item" ng-repeat="localStore in localStores" ng-init="$last?initCarousel('owl-demo1'):angular.noop()">
-                	<a ng-href="{{localStore.image[0].redirectUrl||''}}" target="_blank">
-                		<img  class="img-responsive" ng-src="{{localStore.image[0].url}}" alt="{{localStore.image[0].name}}"> 
+                	<a ng-href="{{localStore.images[0].redirectUrl||'#!/lojasparceiras/'+localStore.slug}}" target="_blank">
+                		<img  class="img-responsive" ng-src="{{localStore.images[0].url}}" alt="{{localStore.images[0].name}}"> 
             		</a>
-            		 <p ng-if="localStore.image[0].subtitle" ng-bind="localStore.image[0].subtitle"></p>
+            		 <p ng-if="localStore.slug" ng-bind="localStore.title"></p>
             	</div> 
               </div>
             </div>

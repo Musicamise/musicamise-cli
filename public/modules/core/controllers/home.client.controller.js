@@ -30,6 +30,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 				}
 			 	$scope.destaque = response.destaque;
 			 	$scope.frontCollections = response.collections;
+			 	$scope.localStores = response.localStores;
 			 	blockUI.stop();
 			});
 		};

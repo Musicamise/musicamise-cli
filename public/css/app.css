@@ -19545,8 +19545,11 @@ span.item_price {
 }
 
 /* start women */
-.w_sidebar {
+.filter_bar {
   border: 1px solid #EBEBEB;
+}
+.filter_bar .filter {
+  display: inline-block;
 }
 
 .w_nav1 ul {

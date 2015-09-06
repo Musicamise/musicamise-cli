@@ -281,7 +281,9 @@ exports.mainPage = function(req,res){
 			}	
 		 });
 	},function(response,done) {
-		 LocalStore.find({'onLineVisible':true}).exec(function(err,localStores){
+		 LocalStore.find({'onLineVisible':true})
+		 .select('-_id images title slug')
+		 .exec(function(err,localStores){
 		 	if(err){
 				done(err);
 			}else{
