@@ -85,11 +85,28 @@ a:focus {
 			display: block;
 			padding: 2.5px 0;
 			img{
-				width: 14%;
+				width: 60px;
     			z-index: 100;
 			}
+			img.musicamise{
+			    position: absolute;
+		        margin-top: 0;
+			}
+			img.camisas{
+			    position: absolute;
+		        margin-top: 50px;
+			}
+			img.other-products{
+			    position: absolute;
+		        margin-top: 100px;
+			}
+			img.parceiros{
+			    position: absolute;
+		        margin-top: 150px;
+			} 
 			img.contato{
 			    position: absolute;
+		        margin-top: 200px;
 			}
 		}
 	}
@@ -374,7 +391,7 @@ ul.megamenu.musicamise {
 	  opacity: 0;
 	}
 	&.ng-hide-add, &.ng-hide-remove {
-	  transition: all linear 0.5s;
+	  transition: all linear 0.1s;
 	}
 
   	i{

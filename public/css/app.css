@@ -16438,11 +16438,28 @@ a:focus h3 {
   cursor: pointer;
 }
 .top_left ul.mainmenu li img {
-  width: 14%;
+  width: 60px;
   z-index: 100;
+}
+.top_left ul.mainmenu li img.musicamise {
+  position: absolute;
+  margin-top: 0;
+}
+.top_left ul.mainmenu li img.camisas {
+  position: absolute;
+  margin-top: 50px;
+}
+.top_left ul.mainmenu li img.other-products {
+  position: absolute;
+  margin-top: 100px;
+}
+.top_left ul.mainmenu li img.parceiros {
+  position: absolute;
+  margin-top: 150px;
 }
 .top_left ul.mainmenu li img.contato {
   position: absolute;
+  margin-top: 200px;
 }
 .top_left ul.helpmenu {
   padding-left: 70px;
@@ -16725,7 +16742,7 @@ ul.megamenu.musicamise {
   opacity: 0;
 }
 .menu-expanded.ng-hide-add, .menu-expanded.ng-hide-remove {
-  transition: all linear 0.5s;
+  transition: all linear 0.1s;
 }
 .menu-expanded i {
   position: absolute;
