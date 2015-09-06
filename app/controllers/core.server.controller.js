@@ -280,6 +280,17 @@ exports.mainPage = function(req,res){
 				}
 			}	
 		 });
+	},function(response,done) {
+		 LocalStore.find({'onLineVisible':true}).exec(function(err,localStores){
+		 	if(err){
+				done(err);
+			}else{
+				if(localStores){
+					response.localStores = localStores;
+			 		done(err,response);
+				}
+			}	
+		 });
 	},function(response, done) {
 			Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 						.distinct('product.$id')
