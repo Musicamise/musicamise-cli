@@ -5,9 +5,9 @@
 				<div class="top_left">
 					<ul class="mainmenu" >
 						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="musicamise"  src="modules/core/img/icons/M1.png"> </a></li>
-						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="camisas"  src="modules/core/img/icons/Camisa1.png"> </a></li>
-						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="other-products"   src="modules/core/img/icons/Caneca1.png"> </a></li>
-						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="parceiros"  src="modules/core/img/icons/Parceiros1.png"> </a></li>
+						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu($event)"><img class="camisas"  src="modules/core/img/icons/Camisa1.png"> </a></li>
+						<li ng-show="loja.otherProducts"><a ng-href="" ng-click="clickIconMenu($event)"><img class="other-products"   src="modules/core/img/icons/Caneca1.png"> </a></li>
+						<li ng-show="parceiros"><a ng-href="" ng-click="clickIconMenu($event)"><img class="parceiros"  src="modules/core/img/icons/Parceiros1.png"> </a></li>
 						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="contato"  class="contato" src="modules/core/img/icons/Contato1.png"> </a></li>
 					</ul>
 					
@@ -76,9 +76,6 @@
 				<div class="clearfix"> </div>
 			</div>
 		</div>
-	</div>
-	<div>
-		<label ng-bind="menu.show"></label>
 	</div>
 	<div ng-init="bindMenuEvent()" ng-show="menu.show" id="menu-expanded" class="menu-expanded container">
 		

@@ -16718,6 +16718,14 @@ ul.megamenu.musicamise {
   background-size: 50px 30px;
   max-height: 250px;
   min-height: 250px;
+  opacity: 1;
+}
+.menu-expanded.ng-hide {
+  line-height: 0;
+  opacity: 0;
+}
+.menu-expanded.ng-hide-add, .menu-expanded.ng-hide-remove {
+  transition: all linear 0.5s;
 }
 .menu-expanded i {
   position: absolute;

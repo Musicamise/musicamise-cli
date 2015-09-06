@@ -73,6 +73,7 @@ a:focus {
 		}
 	}
 	ul.mainmenu{
+
 		position: absolute;
 	    float: left;
 		padding-top: 20px;
@@ -92,10 +93,12 @@ a:focus {
 			}
 		}
 	}
+
 	ul.helpmenu{
 		padding-left: 70px;
 	}
 }
+
 
 
 .top_right{
@@ -364,6 +367,16 @@ ul.megamenu.musicamise {
     background-size: 50px 30px;
     max-height: 250px;
     min-height: 250px;
+  	opacity: 1;
+
+  	&.ng-hide {
+	  line-height: 0;
+	  opacity: 0;
+	}
+	&.ng-hide-add, &.ng-hide-remove {
+	  transition: all linear 0.5s;
+	}
+
   	i{
   		position: absolute;
   		opacity: 0.35;
