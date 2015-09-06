@@ -3,12 +3,12 @@
 		<div class="container" >
 			<div class="header_top">
 				<div class="top_left">
-					<ul class="mainmenu">
-						<li><img  src="modules/core/img/icons/M1.png"></li>
-						<li><img  src="modules/core/img/icons/Camisa1.png"></li>
-						<li><img  src="modules/core/img/icons/Caneca1.png"></li>
-						<li><img  src="modules/core/img/icons/Parceiros1.png"></li>
-						<li><img class="contato" src="modules/core/img/icons/Contato1.png"></li>
+					<ul class="mainmenu" >
+						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="musicamise"  src="modules/core/img/icons/M1.png"> </a></li>
+						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="camisas"  src="modules/core/img/icons/Camisa1.png"> </a></li>
+						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="other-products"   src="modules/core/img/icons/Caneca1.png"> </a></li>
+						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="parceiros"  src="modules/core/img/icons/Parceiros1.png"> </a></li>
+						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="contato"  class="contato" src="modules/core/img/icons/Contato1.png"> </a></li>
 					</ul>
 					
 					<ul  class="helpmenu">
@@ -77,7 +77,10 @@
 			</div>
 		</div>
 	</div>
-	<div  class="menu-expanded container">
+	<div>
+		<label ng-bind="menu.show"></label>
+	</div>
+	<div ng-init="bindMenuEvent()" ng-show="menu.show" id="menu-expanded" class="menu-expanded container">
 		
 		<i class="fa fa-music fa-4x rightpercent10 padtpercent6"></i>
 		<i class="fa fa-music fa-3x rightpercent20 padtpercent11"></i>
@@ -87,7 +90,7 @@
 		<i class="fa fa-music fa-2x leftpercent20 padtpercent13"></i>
 		<i class="fa fa-music fa-4x leftpercent40 padtpercent10"></i>
 		<!-- start header menu -->
-		<div class="row menu-itens camisas">
+		<div ng-show="menu.name==='camisas'" class="row menu-itens camisas">
 			<div class="item" ng-repeat="(key, value) in loja.gender" >
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>
@@ -113,7 +116,7 @@
 				</div>							
 			</div>
 		</div>
-		<div class="row  menu-itens other-products">
+		<div ng-show="menu.name==='other-products'" class="row  menu-itens other-products">
 			<div class="item"  ng-repeat="(key, value) in loja.otherProducts" >
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>
@@ -127,7 +130,20 @@
 				</div>							
 			</div>
 		</div>
-		<div class="row  menu-itens parceiros">
+		<div ng-show="menu.name==='parceiros'" class="row  menu-itens parceiros">
+			<div class="item"  ng-repeat="(store,storeObj) in localStores" >
+				<div class="header_nav">
+					<h4 ng-bind="storeObj.title"></h4>
+					<ul>
+						<li  ng-repeat="localStoreType in storeObj.products" >
+							<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+						</li>
+
+					</ul>	
+				</div>							
+			</div>
+		</div>
+		<div ng-show="menu.name==='contatos'" class="row  menu-itens contatos">
 			<div class="item"  ng-repeat="(store,storeObj) in localStores" >
 				<div class="header_nav">
 					<h4 ng-bind="storeObj.title"></h4>

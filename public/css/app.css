@@ -16433,6 +16433,10 @@ a:focus h3 {
   display: block;
   padding: 2.5px 0;
 }
+.top_left ul.mainmenu li a {
+  text-align: start;
+  cursor: pointer;
+}
 .top_left ul.mainmenu li img {
   width: 14%;
   z-index: 100;

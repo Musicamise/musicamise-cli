@@ -9,6 +9,7 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 		
 		$scope.user = Authentication.user;
 		$scope.search = {};
+		$scope.menu = {};
 		
 		$scope.$watch(function(){ return $location.search().q; }, function(params){
 			$scope.search.query = $location.search().q;
@@ -32,16 +33,25 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 
 		};
 		
+		$scope.bindMenuEvent = function () {
+			var menu = $('#menu-expanded');
+			$scope.menu.show = false;
+			menu.mouseup(function() { 
+			    return false;
+			});
+			$('body').mouseup(function(menu) {
+			    if(($(menu.target).parent('#menu-expanded').length <= 0)) {
+			        $scope.menu.show = false;
+			        $scope.$apply();
+			    }
+			});
+    	};
 
-		$scope.megamenuDone = function(){
-			angular.element(document).ready(function () {
-				$('.megamenu').megamenu();
-		    });
+		$scope.clickIconMenu = function(event){
+			$scope.menu.show = true;
+			$scope.menu.name = event.target.className;
 		};
 
-		$scope.toggleCollapsibleMenu = function() {
-			$scope.isCollapsed = !$scope.isCollapsed;
-		};
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {

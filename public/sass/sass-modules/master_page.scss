@@ -77,6 +77,10 @@ a:focus {
 	    float: left;
 		padding-top: 20px;
 		li{
+			a{
+				text-align: start;
+				cursor: pointer;
+			}
 			display: block;
 			padding: 2.5px 0;
 			img{
