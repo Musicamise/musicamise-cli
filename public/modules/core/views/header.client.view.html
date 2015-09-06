@@ -1,5 +1,6 @@
-	<div class="top_bg" data-ng-controller="HeaderController">
-		<div class="container" data-ng-init="headerLoginAndCart()">
+<div data-ng-controller="HeaderController" data-ng-init="headerLoginAndCart()" >
+	<div class="top_bg" >
+		<div class="container" >
 			<div class="header_top">
 				<div class="top_left">
 					<ul class="mainmenu">
@@ -9,65 +10,7 @@
 						<li><img  src="modules/core/img/icons/Parceiros1.png"></li>
 						<li><img class="contato" src="modules/core/img/icons/Contato1.png"></li>
 					</ul>
-					<div class="menu-expanded">
-						<!-- start header menu -->
-					 	<ul class="">
-							<li class="grid" ng-if="loja"><a class="color2" href="/#!/products">Loja</a>
-								<div class="">
-									<div class="row">
-										<div class="col1" ng-repeat="(key, value) in loja.gender" ng-init="$last ? megamenuDone() : angular.noop()">
-											<div class="header_nav">
-												<h4 ng-bind="key"></h4>
-												<ul >
-													<li><a ng-href="/#!/products/gender/{{key}}?sort=new">Novidades</a></li>
-													<li  ng-repeat="typeClothes in value" >
-														<a ng-href="/#!/{{typeClothes}}/{{key}}" ng-bind="typeClothes"></a>
-													</li>
-
-												</ul>	
-											</div>							
-										</div>
-										<div class="col1" ng-repeat="(key, value) in loja.collection" ng-init="$last ? megamenuDone() : angular.noop()">
-											<div class="header_nav">
-												<h4 ng-bind="key"></h4>
-												<ul >
-													<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
-													<li  ng-repeat="typeClothes in value" >
-														<a ng-href="/#!/{{typeClothes}}/collection/{{key}}" ng-bind="typeClothes"></a>
-													</li>
-
-												</ul>	
-											</div>							
-										</div>
-									</div>
-									<div class="row">
-										<div class="col1" ng-repeat="collection in loja"></div>
-									</div>
-								</div>
-							</li>
-							<!-- <li class="grid" ng-if="localStores"><a class="color2" href="/#!/lojasparceiras/">Lojas Parceiras</a>
-								<div class="megapanel">
-
-									<div class="row">
-										<div class="col1"  ng-repeat="(store,storeObj) in localStores" ng-init="$last ? megamenuDone() : angular.noop()">
-											<div class="header_nav">
-												<h4 ng-bind="storeObj.title"></h4>
-												<ul>
-													<li  ng-repeat="localStoreType in storeObj.products" >
-														<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
-													</li>
-
-												</ul>	
-											</div>							
-										</div>
-									</div>
-									<div class="row">
-										<div class="col1" ng-repeat="store in localStores"></div>
-									</div>
-								</div>
-							</li> -->
-						</ul>  
-					</div>
+					
 					<ul  class="helpmenu">
 						<li><a href="/#!/centrodeajuda">Ajuda</a></li>|
 						<li><a href="/#!/contact">Contato</a></li>|
@@ -134,21 +77,107 @@
 			</div>
 		</div>
 	</div>
+	<div  class="menu-expanded container">
+		
+		<i class="fa fa-music fa-4x rightpercent10 padtpercent6"></i>
+		<i class="fa fa-music fa-3x rightpercent20 padtpercent11"></i>
+		<i class="fa fa-music fa-4x rightpercent40 padtpercent5"></i>
+		<i class="fa fa-music fa-5x rightpercent50 padtpercent2"></i>
+		<i class="fa fa-music fa-5x leftpercent10 padtpercent12"></i>
+		<i class="fa fa-music fa-2x leftpercent20 padtpercent13"></i>
+		<i class="fa fa-music fa-4x leftpercent40 padtpercent10"></i>
+		<!-- start header menu -->
+		<div class="row menu-itens camisas">
+			<div class="item" ng-repeat="(key, value) in loja.gender" >
+				<div class="header_nav">
+					<h4 ng-bind="key"></h4>
+					<ul >
+						<li><a ng-href="/#!/products/gender/{{key}}?sort=new">Novidades</a></li>
+						<li  ng-repeat="typeClothes in value" >
+							<a ng-href="/#!/{{typeClothes}}/{{key}}" ng-bind="typeClothes"></a>
+						</li>
+
+					</ul>	
+				</div>							
+			</div>
+			<div class="item"  ng-repeat="(key, value) in loja.collection" >
+				<div class="header_nav">
+					<h4 ng-bind="key"></h4>
+					<ul >
+						<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
+						<li  ng-repeat="typeClothes in value" >
+							<a ng-href="/#!/{{typeClothes}}/collection/{{key}}" ng-bind="typeClothes"></a>
+						</li>
+
+					</ul>	
+				</div>							
+			</div>
+		</div>
+		<div class="row  menu-itens other-products">
+			<div class="item"  ng-repeat="(key, value) in loja.otherProducts" >
+				<div class="header_nav">
+					<h4 ng-bind="key"></h4>
+					<ul >
+						<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
+						<li  ng-repeat="product in value" >
+							<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
+						</li>
+
+					</ul>	
+				</div>							
+			</div>
+		</div>
+		<div class="row  menu-itens parceiros">
+			<div class="item"  ng-repeat="(store,storeObj) in localStores" >
+				<div class="header_nav">
+					<h4 ng-bind="storeObj.title"></h4>
+					<ul>
+						<li  ng-repeat="localStoreType in storeObj.products" >
+							<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+						</li>
+
+					</ul>	
+				</div>							
+			</div>
+		</div>
+		<!-- <li class="grid" ng-if="localStores"><a class="color2" href="/#!/lojasparceiras/">Lojas Parceiras</a>
+			<div class="megapanel">
+
+				<div class="row">
+					<div class="col1"  ng-repeat="(store,storeObj) in localStores" ng-init="$last ? megamenuDone() : angular.noop()">
+						<div class="header_nav">
+							<h4 ng-bind="storeObj.title"></h4>
+							<ul>
+								<li  ng-repeat="localStoreType in storeObj.products" >
+									<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+								</li>
+
+							</ul>	
+						</div>							
+					</div>
+				</div>
+				<div class="row">
+					<div class="col1" ng-repeat="store in localStores"></div>
+				</div>
+			</div>
+		</li> -->
+	</div>
 	<div>
 		message:
 		<label ng-bind="order.message"></label>
 		<p ng-bind-html="discount.description"> </p>
 	</div>
-<div class="container" >
-		<div class="head-t" >
-			<div class="logo">
-				<a href="/#!/"><img src="images/icons/Musicamise_site_Curvas.png" width="100%" class="img-responsive" alt=""/> </a>
+	<div class="container" >
+			<div class="head-t" >
+				<div class="logo">
+					<a href="/#!/"><img src="images/icons/Musicamise_site_Curvas.png" width="100%" class="img-responsive" alt=""/> </a>
+				</div>
+				<!-- <div class="search">
+					<form >
+						<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" ng-bind="search.query" placeholder="Search">
+					</form>
+				</div> -->
+				
 			</div>
-			<!-- <div class="search">
-				<form >
-					<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" ng-bind="search.query" placeholder="Search">
-				</form>
-			</div> -->
-			
-		</div>
+	</div>
 </div>

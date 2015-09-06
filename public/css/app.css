@@ -16708,21 +16708,42 @@ ul.megamenu.musicamise {
 }
 
 /* start menu */
-.header_nav h4 {
+.menu-expanded {
+  background-color: #f16136;
+  background-image: linear-gradient(transparent 4%, rgba(255, 255, 255, 0.9) 1%);
+  background-size: 50px 30px;
+  max-height: 250px;
+  min-height: 250px;
+}
+.menu-expanded i {
+  position: absolute;
+  opacity: 0.35;
+}
+.menu-expanded .item {
+  float: left;
+  padding-left: 50px;
+}
+.menu-expanded .item:first-child {
+  padding-left: 100px;
+}
+.menu-expanded .item .header_nav h4 {
   border-bottom: 1px solid #ececec;
   font-size: 1em;
   color: #000;
   line-height: 1.8em;
   text-transform: uppercase;
   margin-bottom: 4%;
+  text-align: center;
 }
-.header_nav h4.top {
+.menu-expanded .item .header_nav h4.top {
   margin-top: 12%;
 }
-.header_nav ul li {
+.menu-expanded .item .header_nav ul li {
+  text-align: center;
   display: block;
 }
-.header_nav ul li a {
+.menu-expanded .item .header_nav ul li a {
+  text-align: center;
   display: block;
   font-size: 0.95em;
   color: #555;
@@ -16734,7 +16755,7 @@ ul.megamenu.musicamise {
   transition: all 0.3s ease-in-out;
   line-height: 2.5em;
 }
-.header_nav ul li a:hover {
+.menu-expanded .item .header_nav ul li a:hover {
   color: #00405d;
   text-decoration: underline;
 }

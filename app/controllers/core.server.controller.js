@@ -106,14 +106,16 @@ exports.mainMenu = function(req,res){
 					            });
 							}
 							var response = {'loja':{collection:{}}};
-							response.loja.collection['Foda de estoque'] = outOFStock;
+							if(outOFStock.length>0){
+								response.loja.collection['Fora de estoque'] = outOFStock;
+							}
 							done(err,response);
 					   	});
    		});
 	},
 	function(response,done) {
 		Collection.find({'onLineVisible':true}).or([{'gender':true},{'mainMenu':true}])
-		.select('-_id slug gender')
+		.select('-_id slug gender otherProducts')
 		.exec(function(err, collectionsSlugs){
 			if(err){
 				return res.status(400).send({
@@ -123,14 +125,17 @@ exports.mainMenu = function(req,res){
 			var collectionsSlugsMapped = [];
 			var collectionSlugGender = [];
 			var collectionsSlugsNotGender = [];
-			collectionsSlugs.map(function(collection){
+			var collectionsSlugsOtherProducts = [];
+
+			collectionsSlugs.forEach(function(collection){
 				if(collection.gender)
 					collectionSlugGender.push(collection.slug);
+				else if(collection.otherProducts)
+					collectionsSlugsOtherProducts.push(collection.slug);
 				else
 					collectionsSlugsNotGender.push(collection.slug);
 			});
-			collectionsSlugsMapped = _.union(collectionSlugGender,collectionsSlugsNotGender);
-
+			collectionsSlugsMapped = _.union(collectionSlugGender,collectionsSlugsOtherProducts,collectionsSlugsNotGender);
 			//todo with inventory?
 			Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 					.distinct('product.$id')
@@ -139,10 +144,11 @@ exports.mainMenu = function(req,res){
 				Product.find({ '_id':{$in:productsId}})
 						.where('onLineVisible').equals(true)
 					   	.where('collectionsSlugs').in(collectionsSlugsMapped)
-					   	.select('-_id collectionsSlugs type')
+					   	.select('-_id collectionsSlugs slug title type')
 					   	.exec(function(err,products){
 
 							var gender = {};
+							var otherProducts = {}; 
 							var collection = response.loja.collection;
 							if(products){
 					            products.forEach(function(product) {
@@ -152,17 +158,23 @@ exports.mainMenu = function(req,res){
 							   					gender[collectionSlug] = [];
 											gender[collectionSlug].push(product.type); 
 											gender[collectionSlug] = _.uniq(gender[collectionSlug], true);        				
+							   			}else if(collectionsSlugsOtherProducts.indexOf(collectionSlug)>=0){
+											if(!otherProducts[collectionSlug])
+												otherProducts[collectionSlug] = [];
+											otherProducts[collectionSlug].push({'slug':product.slug,'title':product.title}); 
+											otherProducts[collectionSlug] = _.uniq(otherProducts[collectionSlug], true);        				
 							   			}else if(collectionsSlugsNotGender.indexOf(collectionSlug)>=0){
-											if(!collection[collectionSlug])
+							   				if(!collection[collectionSlug])
 												collection[collectionSlug] = [];
 											collection[collectionSlug].push(product.type); 
-											collection[collectionSlug] = _.uniq(collection[collectionSlug], true);        				
+											collection[collectionSlug] = _.uniq(collection[collectionSlug], true);
 							   			}
 							   		});
 					            });
 							}
 							response.loja.gender = gender;
 							response.loja.collection = collection;
+							response.loja.otherProducts = otherProducts;
 				            done(err, response);
 	        				// res.json(mainMenu);
 

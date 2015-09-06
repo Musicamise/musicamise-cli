@@ -39,6 +39,10 @@ var CollectionSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	otherProducts: {
+		type: Boolean,
+		default: false
+	}
 });
 
 mongoose.model('Collection', CollectionSchema,'collection');
