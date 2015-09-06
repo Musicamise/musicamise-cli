@@ -19551,6 +19551,9 @@ span.item_price {
 .filter_bar .filter {
   display: inline-block;
 }
+.filter_bar .filter ul.w_nav2 {
+  padding: 0;
+}
 .filter_bar .filter .active {
   background-color: red;
 }

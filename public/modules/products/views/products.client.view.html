@@ -18,11 +18,14 @@
 					<h4>Gender</h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<ul>
+							<select id="gender" >
+						        <option ng-value="collection.slug" ng-repeat="collection in collectionsGender">{{collection.title}}</option>
+						    </select>
+							<!-- <ul>
 								<li class="radio" ng-repeat="collection in collectionsGender" ng-class="genderMarked==collection.slug?'active' : ''">
 									<a ng-href="{{linkGender(collection.slug)}}">{{collection.title}}</a>
 								</li>
-							</ul>	
+							</ul>	 -->
 						</div>
 					</div>
 				</div>
@@ -30,7 +33,10 @@
 					<h4>Model <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Clear Model</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<li class="radio" ng-repeat="model in models" ng-class="modeloCamisaMarked==model?'active' : ''"><a ng-href="{{linkModel(model)}}">{{model}}</a></li>
+							<select id="model" >
+						        <option ng-value="model" ng-repeat="model in models">{{model}}</option>
+						    </select>
+							<!-- <li class="radio" ng-repeat="model in models" ng-class="modeloCamisaMarked==model?'active' : ''"><a ng-href="{{linkModel(model)}}">{{model}}</a></li> -->
 						</div> 
 					</div>
 				</div>
@@ -38,13 +44,16 @@
 					<h4>Size  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Clear Size</a></li></h4>
 					<div class="row1 ">
 						<div class="col col-4">
+							<select id="size" >
+						        <option ng-value="size" ng-repeat="size in sizes">{{size}}</option>
+						    </select>
 							<!-- <label class="checkbox" ng-repeat="size in sizes">
 								<input type="checkbox" ng-click="clickSize(size)"  ng-checked="sizesMarked.indexOf(size)>=0" name="{{size}}"><i></i>{{size}}
 							</label> -->
-							<li class="radio" ng-repeat="size in sizes" ng-class="sizeMarked==size?'active' : ''">
+							<!-- <li class="radio" ng-repeat="size in sizes" ng-class="sizeMarked==size?'active' : ''">
 								<a href="" ng-click="clickSize(size)"> {{size}}
 								</a>
-							</li>
+							</li> -->
 						</div>
 					</div>
 				</div>
@@ -52,9 +61,12 @@
 					<h4>Collections  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Clear Collection</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<li class="radio" ng-repeat="collection in collections" ng-class="collectionMarked==collection.slug?'active' : ''">
+							<select id="collection" >
+						        <option ng-value="collection.slug" ng-repeat="collection in collections">{{collection.title}}</option>
+						    </select>
+							<!-- <li class="radio" ng-repeat="collection in collections" ng-class="collectionMarked==collection.slug?'active' : ''">
 								<a ng-click="clickCollection(collection.slug)" ng-href="{{linkCollection(collection.slug)}}"> {{collection.title}} </a>
-							</li>
+							</li> -->
 						</div>
 					</div>						
 				</div>
@@ -63,13 +75,16 @@
 					<h4>Price <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Clear Price</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
+							<select id="price" >
+						        <option ng-value="price.price" ng-repeat="price in prices">{{price.priceFormatted}}</option>
+						    </select>
 							<!-- <label class="checkbox" ng-repeat="price in prices">
 								<input type="checkbox" ng-click="clickPrice(price)" name="{{price}}" ><i></i>{{price}}
 							</label> -->
-							<li class="radio" ng-repeat="price in prices" ng-class="priceMarked==price.price?'active' : ''">
+							<!-- <li class="radio" ng-repeat="price in prices" ng-class="priceMarked==price.price?'active' : ''">
 								<a href="" ng-click="clickPrice(price.price)"> {{price.priceFormatted}}
 								</a>
-							</li>
+							</li> -->
 						</div> 
 					</div>
 				</div>

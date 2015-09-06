@@ -4,7 +4,9 @@
   border: 1px solid #EBEBEB;
   .filter{
     display: inline-block;
-
+    ul.w_nav2 { 
+        padding: 0;
+    }
     .active{
       background-color: red;
     }
