@@ -15,6 +15,11 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		});
 		$scope.productQuery = {};
 
+		$scope.direction = {};
+		$scope.direction.asc='▲';
+		$scope.direction.desc='▼';
+		$scope.direction.none='▼▲';
+
 		$scope.find = function() {
 			
 			var queryObject = jQuery.extend(true, {}, $location.search());
@@ -38,7 +43,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				console.log(reason);
 			});
 
-			$scope.updateVariablesInProductsView();
+			$scope.updateSelectOptions();
 
 
 		};
@@ -77,7 +82,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
 		};
 
-		$scope.updateVariablesInProductsView = function(){
+		$scope.updateSelectOptions = function(){
 			$scope.productQuery.busy = false;
 			$scope.productQuery.page = 1;
 			$scope.productQuery.findNextPageStopCalling = false;
@@ -155,7 +160,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			if($location.search().order){
 				$scope.orderMarked = $location.search().order;
 			}else{
-				$scope.orderMarked = '';
+				$scope.orderMarked = 'none';
 			}
 
 			if($stateParams.collectionSlug){
@@ -251,12 +256,12 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.size = $scope.sizesMarked;
 				$location.search(object);
-			    // $scope.updateVariablesInProductsView();
-			    $timeout(function(){
-			    	$scope.updateVariables();
-		    	},100);
+			    // $timeout(function(){
+			    // 	$scope.updateVariables();
+		    	// },100);
 
 			}
+			$scope.updateVariables();
 		};
 
 		$scope.updatePrice = function(priceValue){
@@ -266,8 +271,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.price = $scope.priceMarked+'';
 				$location.search(object);		
-			    // $scope.updateVariablesInProductsView();
+			    // $scope.updateSelectOptions();
 			}
+			$scope.updateVariables();
+			
 		};
 
 		

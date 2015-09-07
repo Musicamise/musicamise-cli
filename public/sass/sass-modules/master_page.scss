@@ -170,6 +170,7 @@ a:focus {
 	float: left;
 	margin: 0.15em 0.1em 0;
 	background-color: $light-color;
+    border-radius: 10px;
 	a:hover h3, a:focus h3 {
 	    color: #fff; 
 	    text-decoration: none; 
@@ -193,6 +194,7 @@ a:focus {
 .facebook{
 	img{
 		width: 85%;
+	    	border-radius: 10px;
 	}
 }
 .create_btn {

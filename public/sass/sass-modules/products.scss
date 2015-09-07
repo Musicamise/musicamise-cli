@@ -2,6 +2,8 @@
 
 .filter_bar{
   border: 1px solid #EBEBEB;
+  float: right;
+  width: 94%;
   .filter{
     display: inline-block;
     ul.w_nav2 { 
@@ -118,7 +120,6 @@
   outline:none;
   padding: 20px;
   overflow: auto;
-  height: 200px;
 }
 .sky-form.col.col-4 ul {
 padding: 0;
@@ -450,17 +451,20 @@ list-style: none;
 .women_main{
   padding:2em 0;
 }
-.women{
+.order_bar{
   text-align: left;
   border-bottom: 1px solid #ebebeb;
+  label{
+    display: inline-block;
+  }
 }
-.women h4{
+.order_bar h4{
   float:left;
   font-size:1em;
   text-transform:uppercase;
   color: #333333;
 }
-.women h4{
+.order_bar h4{
   color:#555555;
 }
 .w_nav {

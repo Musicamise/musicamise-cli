@@ -1,8 +1,5 @@
 <section data-ng-controller="ProductsController" data-ng-init="find()"  >
 	<!-- content -->
-	<style type="text/css">
-
-	</style>
 <div class="container">
 	<div class="women_main">
 		<!-- start sidebar -->
@@ -10,15 +7,12 @@
 	  		<div class="filter_bar">
 				<h3>filtros:</h3>
 				<div class="filters-products" ng-if="hasFilter">
-					<ul>
-						<li><a href="#!/products">Clear Filter</a></li>
-					</ul>	
+					<span> <a href="#!/products">Retirar todos os filtros</a> </span>
 				</div>
 				<div class="filter">
 					<h4>Gender</h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<label ng-bind="genderMarked"></label>
 							<select id="gender" ng-model="genderMarked" ng-options="collection.slug as collection.title for collection in collectionsGender" ng-change="updateGender(genderMarked)" >
 						        <option value="">Selecione um genero</option>
 						        
@@ -32,10 +26,9 @@
 					</div>
 				</div>
 				<div  class="filter">
-					<h4>Model <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Clear Model</a></h4>
+					<h4>Modelo <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Remover</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<label ng-bind="modeloCamisaMarked"></label>
 							<select id="model"  ng-model="modeloCamisaMarked" ng-options="model as model for model in models" ng-change="updateModel(modeloCamisaMarked)" >
 						        <option value="">Selecione um modelo</option>
 						    </select>
@@ -44,12 +37,9 @@
 					</div>
 				</div>
 				<div  class="filter">
-					<h4>Size  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Clear Size</a></li></h4>
-					<h4>teste  <a ng-style="sizeMarkedStyle" href="" ng-click="updateVariables()">update</a></li></h4>
-
+					<h4>Tamanho  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Remover</a></li></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<label ng-bind="sizeMarked"></label>
 							<select id="size" ng-model="sizeMarked" ng-options="size for size in sizes" ng-change="updateSize(sizeMarked)">
 						        <option value="">Selecione um tamanho</option>
 						    </select>
@@ -64,10 +54,9 @@
 					</div>
 				</div>
 				<div class="filter" ng-if="collections.length>0">
-					<h4>Collections  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Clear Collection</a></h4>
+					<h4>Coleção  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Remover</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<label ng-bind="collectionMarked"></label>
 							<select id="collection" ng-model="collectionMarked" ng-options="collection.slug as collection.title for collection in collections" ng-change="updateCollection(collectionMarked)" >
 						        <option value="">Selecione uma coleção</option>
 						    </select>
@@ -79,11 +68,9 @@
 				</div>
 			
 				<div  class="filter">
-					<h4>Price <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Clear Price</a></h4>
+					<h4>Preço <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Remover</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<label ng-bind="priceMarked"></label>
-							
 							<select id="price" ng-model="priceMarked" ng-options="price.price as price.priceFormatted for price in prices" ng-change="updatePrice(priceMarked)">
 						        <option value="">Selecione um preço</option>
 						    </select>
@@ -98,7 +85,7 @@
 					</div>
 				</div>
 				<div class="filter">
-					<h4>Color <a ng-style="colorMarkedStyle" href="" ng-click="removeColor()">Clear Color</a></h4>
+					<h4>Cor <a ng-style="colorMarkedStyle" href="" ng-click="removeColor()">Remover</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
 							<ul class="w_nav2">
@@ -128,14 +115,14 @@
 	   	</div>
 		<!-- start content -->
 		<div class="row w_content">
-			<div class="women">
-				<a href="#"><h4>Enthecwear - <span ng-bind="products.length"> </span> items </h4></a>
+			<div class="order_bar">
+				<a href="#"><h4>Musicamise - <span ng-bind="products.length"> </span> itens </h4></a>
 				<ul class="w_nav">
-							<li>Sort : </li>
-			     			<li><a ng-class="sortMarked==='popular'?'active' : ''" href="" ng-click="clickOrder('popular')">popular</a></li> |
-			     			<li><a ng-class="sortMarked==='new'?'active' : ''" href="" ng-click="clickOrder('new')">new </a></li> |
-			     			<li><a ng-class="sortMarked==='discount'?'active' : ''" href="" ng-click="clickOrder('discount')">discount</a></li> |
-			     			<li><a ng-class="sortMarked==='price'?'active' : ''" href="" ng-click="clickOrder('price')">price: Low High </a></li> 
+							<li>Ordenar : </li>
+			     			<li><a ng-class="sortMarked==='popular'?'active' : ''" href="" ng-click="clickOrder('popular')">popular <label ng-bind="sortMarked==='popular'?direction[orderMarked]:direction.none"></label></a></li> |
+			     			<li><a ng-class="sortMarked==='new'?'active' : ''" href="" ng-click="clickOrder('new')">novo <label ng-bind="sortMarked==='new'?direction[orderMarked]:direction.none"></label></a></li> |
+			     			<li><a ng-class="sortMarked==='discount'?'active' : ''" href="" ng-click="clickOrder('discount')">desconto <label ng-bind="sortMarked==='discount'?direction[orderMarked]:direction.none"></label></a></li> |
+			     			<li><a ng-class="sortMarked==='price'?'active' : ''" href="" ng-click="clickOrder('price')">preço <label ng-bind="sortMarked==='price'?direction[orderMarked]:direction.none"></label></a></li> 
 			     			<div class="clear"></div>	
 			     </ul>
 			     <div class="clearfix"></div>	
