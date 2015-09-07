@@ -18,8 +18,10 @@
 					<h4>Gender</h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<select id="gender" >
-						        <option ng-value="collection.slug" ng-repeat="collection in collectionsGender">{{collection.title}}</option>
+							<label ng-bind="genderMarked"></label>
+							<select id="gender" ng-model="genderMarked" ng-options="collection.slug as collection.title for collection in collectionsGender" ng-change="updateGender(genderMarked)" >
+						        <option value="">Selecione um genero</option>
+						        
 						    </select>
 							<!-- <ul>
 								<li class="radio" ng-repeat="collection in collectionsGender" ng-class="genderMarked==collection.slug?'active' : ''">
@@ -33,8 +35,9 @@
 					<h4>Model <a ng-style="modeloCamisaMarkedStyle" href="" ng-click="removeModel()">Clear Model</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<select id="model" >
-						        <option ng-value="model" ng-repeat="model in models">{{model}}</option>
+							<label ng-bind="modeloCamisaMarked"></label>
+							<select id="model"  ng-model="modeloCamisaMarked" ng-options="model as model for model in models" ng-change="updateModel(modeloCamisaMarked)" >
+						        <option value="">Selecione um modelo</option>
 						    </select>
 							<!-- <li class="radio" ng-repeat="model in models" ng-class="modeloCamisaMarked==model?'active' : ''"><a ng-href="{{linkModel(model)}}">{{model}}</a></li> -->
 						</div> 
@@ -42,10 +45,13 @@
 				</div>
 				<div  class="filter">
 					<h4>Size  <a ng-style="sizeMarkedStyle" href="" ng-click="removeSize()">Clear Size</a></li></h4>
+					<h4>teste  <a ng-style="sizeMarkedStyle" href="" ng-click="updateVariables()">update</a></li></h4>
+
 					<div class="row1 ">
 						<div class="col col-4">
-							<select id="size" >
-						        <option ng-value="size" ng-repeat="size in sizes">{{size}}</option>
+							<label ng-bind="sizeMarked"></label>
+							<select id="size" ng-model="sizeMarked" ng-options="size for size in sizes" ng-change="updateSize(sizeMarked)">
+						        <option value="">Selecione um tamanho</option>
 						    </select>
 							<!-- <label class="checkbox" ng-repeat="size in sizes">
 								<input type="checkbox" ng-click="clickSize(size)"  ng-checked="sizesMarked.indexOf(size)>=0" name="{{size}}"><i></i>{{size}}
@@ -61,8 +67,9 @@
 					<h4>Collections  <a ng-style="collectionMarkedStyle" href="" ng-click="removeCollection()">Clear Collection</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<select id="collection" >
-						        <option ng-value="collection.slug" ng-repeat="collection in collections">{{collection.title}}</option>
+							<label ng-bind="collectionMarked"></label>
+							<select id="collection" ng-model="collectionMarked" ng-options="collection.slug as collection.title for collection in collections" ng-change="updateCollection(collectionMarked)" >
+						        <option value="">Selecione uma coleção</option>
 						    </select>
 							<!-- <li class="radio" ng-repeat="collection in collections" ng-class="collectionMarked==collection.slug?'active' : ''">
 								<a ng-click="clickCollection(collection.slug)" ng-href="{{linkCollection(collection.slug)}}"> {{collection.title}} </a>
@@ -75,8 +82,10 @@
 					<h4>Price <a ng-style="priceMarkedStyle" href="" ng-click="removePrice()">Clear Price</a></h4>
 					<div class="row1 ">
 						<div class="col col-4">
-							<select id="price" >
-						        <option ng-value="price.price" ng-repeat="price in prices">{{price.priceFormatted}}</option>
+							<label ng-bind="priceMarked"></label>
+							
+							<select id="price" ng-model="priceMarked" ng-options="price.price as price.priceFormatted for price in prices" ng-change="updatePrice(priceMarked)">
+						        <option value="">Selecione um preço</option>
 						    </select>
 							<!-- <label class="checkbox" ng-repeat="price in prices">
 								<input type="checkbox" ng-click="clickPrice(price)" name="{{price}}" ><i></i>{{price}}

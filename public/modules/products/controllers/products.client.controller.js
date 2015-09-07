@@ -14,8 +14,8 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		  		$scope.find();
 		});
 		$scope.productQuery = {};
+
 		$scope.find = function() {
-			$scope.updateVariablesInProductsView();
 			
 			var queryObject = jQuery.extend(true, {}, $location.search());
 
@@ -37,6 +37,9 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			},function(reason){
 				console.log(reason);
 			});
+
+			$scope.updateVariablesInProductsView();
+
 
 		};
 
@@ -74,99 +77,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
 		};
 
-		$scope.findOne = function() {
-			$scope.product = Product.query({
-				productSlug: $stateParams.productSlug
-			});
-		    //get 5 related items
-		    $scope.relatedProducts = [];
-		    $scope.product.$promise.then(function(product){
-		    	if(product){
-					var queryObject = {};
-					queryObject.quantity = 4;
-					queryObject.productSlug = product.slug;
-					ProductRelated.get(queryObject,function(data) {
-	                	if(data.products){
-	                		$scope.relatedProducts = data.products;
-	                	}
-	            	});
-					
-					$scope.inventories = {};
-					if(product.inventories){
-						if(product.inventories.length===1&&
-							// product.inventories[0].genderSlug.toLowerCase()==='unisex'&&
-							product.inventories[0].size.toLowerCase()==='unico'){
-							$scope.unico=true;
-							$scope.inventoryChecked.id = product.inventories[0]._id;
-						}
-						product.inventories.forEach(function(inventory){
-							if(inventory!==null&&inventory!==undefined&&inventory._id!==undefined){
-								if($.inArray(inventory.genderSlug,Object.keys($scope.inventories))<0){
-									$scope.inventories[inventory.genderSlug] = [];
-									$scope.inventories[inventory.genderSlug].push(inventory);
-								}else{
-									$scope.inventories[inventory.genderSlug].push(inventory);
-								}
-							}
-
-						});
-					}
-		    	}
-
-			},function(error){
-				console.log('error '+ error);
-				$location.path('/404');
-			},function(progressback){
-				console.log('progressback '+ progressback);
-			});
-
-		   	$scope.updateVariablesInSingleProductView();
-			
-		};
-
-		$scope.like = function(productSlug){
-			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
-				$scope.user = response;
-			},function(reason){
-				console.log(reason);
-			});
-		};
-		$scope.dislike = function(productSlug){
-			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
-				$scope.user = response;
-			},function(reason){
-				console.log(reason);
-			});
-		};
-		
-		$scope.alreadyLiked = function(productSlug){
-			if($scope.user){
-				return $scope.user.wishList.indexOf(productSlug)>=0;
-			}else{
-				return false;
-			} 
-		};
-		$scope.loadEtalage = function(){
-		 	$('#etalage').etalage({
-				thumb_image_width: 300,
-				thumb_image_height: 400,
-				source_image_width: 900,
-				source_image_height: 1200,
-				show_hint: true,
-				click_callback: function(image_anchor, instance_id){
-					alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-				}
-			});
-		};
-		$scope.updateVariablesInSingleProductView = function(){
-			$scope.inventoryChecked = {
-		        id: ''
-		      };
-	      	$timeout(function(){
-		      	$scope.loadEtalage();
-		    	},1000);
-		};
-
 		$scope.updateVariablesInProductsView = function(){
 			$scope.productQuery.busy = false;
 			$scope.productQuery.page = 1;
@@ -193,18 +103,25 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			$scope.allCollections.$promise.then(function(allCollections){
 				allCollections.forEach(function(collection){
 					if(collection.gender){
-						$scope.collectionsGender.push(collection);
+						if($scope.collectionsGender.filter(function(o){return o.slug===collection.slug;}).length===0)
+							$scope.collectionsGender.push(collection);
 					}else{
-						$scope.collections.push(collection);
+						if($scope.collections.filter(function(o){return o.slug===collection.slug;}).length===0)
+							$scope.collections.push(collection);
 					}
 				});
 			});
+
 			$scope.sizes = Size.query();
 			$scope.prices = Price.query();
 			$scope.colors = Color.query();
 
-			
 
+
+			$scope.updateVariables();
+		};
+
+		$scope.updateVariables = function(){
 			$scope.path = $location.path();
 
 			if($location.search().size){
@@ -215,7 +132,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			}
 
 			if($location.search().price){
-				$scope.priceMarked = $location.search().price;
+				$scope.priceMarked = parseFloat($location.search().price);
 			}else{
 				$scope.priceMarked = '';
 				$scope.priceMarkedStyle = {display:'none'};
@@ -267,66 +184,90 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			}else{
 				$scope.hasFilter = false;
 			}
-
 		};
-
-		$scope.cartAddItem = function(id){
-			if(id){
-				$scope.orderCall = Order.addItem({id:id});
-				$scope.orderCall.$promise.then(function(response,error,progressback){
-					// console.log(p);
-					if(response.order){
-						$rootScope.order = response.order;
-						$location.path('/cart');		
-					}else if(error){
-						$location.path('/products');		
-					}
-
-
-				});
-			}
-		};
-
 		
+		$scope.updateGender = function(gender){
+			if(gender)
+				$location.path($scope.linkGender(gender));
+		};
+
 
 		$scope.linkGender = function(gender){
-			var queryString = $location.absUrl().split('?')[1];
-			queryString = (queryString)?'?'+queryString:'';
+			var queryString = '';
+			// $location.absUrl().split('?')[1];
+			// queryString = (queryString)?'?'+queryString:'';
 			if($scope.collectionMarked&&$stateParams.model)
-				return '#!/'+$stateParams.model+'/'+gender +'/'+$scope.collectionMarked+queryString;
+				return $stateParams.model+'/'+gender +'/'+$scope.collectionMarked+queryString;
 			else if($scope.collectionMarked) 
-				return '#!/products/collection'+'/'+gender+'/'+ $scope.collectionMarked+queryString;
+				return 'products/collection'+'/'+gender+'/'+ $scope.collectionMarked+queryString;
 			else if($stateParams.model)
-				return '#!/'+$stateParams.model+'/'+gender+queryString;
+				return $stateParams.model+'/'+gender+queryString;
 			else
-				return '#!/'+'products/gender/'+gender+queryString;
+				return 'products/gender/'+gender+queryString;
 		};
 
+		$scope.updateModel = function(model){
+			if(model)
+				$location.path($scope.linkModel(model));
+		};
 
 		$scope.linkModel = function(model){
-			var queryString = $location.absUrl().split('?')[1];
-			queryString = (queryString)?'?'+queryString:'';
+			var queryString = '';
+			// $location.absUrl().split('?')[1];
+			// queryString = (queryString)?'?'+queryString:'';
 			if($scope.collectionMarked&&$stateParams.genderSlug)
-				return '#!/'+model+'/'+$stateParams.genderSlug+'/'+$scope.collectionMarked+queryString;
+				return model+'/'+$stateParams.genderSlug+'/'+$scope.collectionMarked+queryString;
 			else if($scope.collectionMarked)
-				return '#!/'+model+'/'+$scope.collectionMarked+queryString;
+				return model+'/'+$scope.collectionMarked+queryString;
 			else if($stateParams.genderSlug)
-				return '#!/'+model+'/'+$stateParams.genderSlug+queryString;
+				return model+'/'+$stateParams.genderSlug+queryString;
 			else 
-				return '#!/'+model+queryString;
+				return model+queryString;
+		};
+
+		$scope.updateCollection = function(collection){
+			if(collection)
+				$location.path($scope.linkCollection(collection));
 		};
 
 		$scope.linkCollection = function(collection){
-			var queryString = $location.absUrl().split('?')[1];
-			queryString = (queryString)?'?'+queryString:'';
+			var queryString = '';
+			// $location.absUrl().split('?')[1];
+			// queryString = (queryString)?'?'+queryString:'';
 			if($scope.modeloCamisaMarked&&$stateParams.genderSlug)
-				return '#!/'+$scope.modeloCamisaMarked+'/'+$stateParams.genderSlug+'/'+collection+queryString;
+				return $scope.modeloCamisaMarked+'/'+$stateParams.genderSlug+'/'+collection+queryString;
 			else if ($scope.modeloCamisaMarked)
-				return '#!/'+$scope.modeloCamisaMarked+'/collection/'+collection+queryString;
+				return $scope.modeloCamisaMarked+'/collection/'+collection+queryString;
 			else if($stateParams.genderSlug)
-				return '#!/'+'products/collection/'+$stateParams.genderSlug+'/'+collection+queryString;
+				return 'products/collection/'+$stateParams.genderSlug+'/'+collection+queryString;
 			else
-				return '#!/'+'products/collection/'+collection+queryString;
+				return 'products/collection/'+collection+queryString;
+		};
+
+		$scope.updateSize = function(size){
+			if(size){
+				$scope.sizesMarked = size;
+				$scope.sizeMarkedStyle = {display:'block'};
+				var object = $location.search();
+				object.size = $scope.sizesMarked;
+				$location.search(object);
+			    // $scope.updateVariablesInProductsView();
+			    $timeout(function(){
+			    	$scope.updateVariables();
+		    	},100);
+
+			}
+		};
+
+		$scope.updatePrice = function(priceValue){
+			if(priceValue){
+				$scope.priceMarked = priceValue;
+				$scope.priceMarkedStyle = {display:'block'};
+				var object = $location.search();
+				object.price = $scope.priceMarked+'';
+				$location.search(object);		
+			    // $scope.updateVariablesInProductsView();
+			}
 		};
 
 		
@@ -450,33 +391,3 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 	}
 ]);
 
-angular.module('products').controller('ProductsSearchController', ['$scope','$location','$timeout','$stateParams','ProductSearch',
-	function($scope,$location,$timeout,$stateParams,ProductSearch) {
-
-		$scope.$watch(function(){ return $location.search(); }, function(params){
-		    console.log(params);
-		    $scope.search();
-		});
-
-	 	$scope.search = function() {
-			 	
-			$scope.productsServer = ProductSearch.query($location.search());
-			$scope.productsServer.$promise.then(function(response,error,progressback){
-
-					if(response.productsOutOfStock){
-						$scope.productsOutOfStock = response.productsOutOfStock;
-					}
-					if(response.productsForHome){
-						$scope.productsForHome = response.productsForHome;
-					}
-					if(response.prodcutsAccessories){
-						$scope.prodcutsAccessories = response.prodcutsAccessories;
-					}
-					if(response.productsInStock){
-						$scope.productsInStock = response.productsInStock;
-					}
-			});
-
-		};
-	}
-]);
