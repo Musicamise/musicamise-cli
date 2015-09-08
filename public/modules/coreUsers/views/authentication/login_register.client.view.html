@@ -4,9 +4,9 @@
 	<div class="container">
 		<div class="main">
 			<!-- start registration -->
-			<div class="registration">
+			<div class="registration margt20">
 				<div class="registration_left">
-					<h2>new user? <span> create an account </span></h2>
+					<h2>Novo usuario? <span> Crie sua conta! </span></h2>
 					<!-- [if IE] 
 					    < link rel='stylesheet' type='text/css' href='ie.css'/>  
 				 	[endif] -->  
@@ -80,8 +80,8 @@
 							<div class="sky-form">
 								<div class="sky_form1">
 									<ul>
-										<li><label class="radio left"><input data-ng-model="user.gender" type="radio" name="radio" value="masculino" checked=""><i></i>Male</label></li>
-										<li><label class="radio"><input data-ng-model="user.gender" type="radio" value="feminino" name="radio"><i></i>Female</label></li>
+										<li><label class="radio left"><input data-ng-model="user.gender" type="radio" name="radio" value="masculino" checked=""><i></i>Masculino</label></li>
+										<li><label class="radio"><input data-ng-model="user.gender" type="radio" value="feminino" name="radio"><i></i>Feminino</label></li>
 										<div class="clearfix"></div>
 									</ul>
 								</div>
@@ -104,21 +104,21 @@
 								<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
 								<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$invalid">	
 									
-									<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.required">Continuamos precisando de senha!</div>
+									<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.required">Continuamos precisando de sua senha!</div>
 								</div>
 							</div>	
 							<div>
 								<input type="submit" value="create an account" id="register-submit">
 							</div>
 							<div class="sky-form">
-								<label class="checkbox"><input type="checkbox" data-ng-model="user.agreeWithTerms" name="checkbox" ><i></i>i agree to shoppe.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>
+								<label class="checkbox"><input type="checkbox" data-ng-model="user.agreeWithTerms" name="checkbox" ><i></i>Concordo com <a class="terms" href="#">termos de serviço</a> </label>
 							</div>
 						</form>
 						<!-- /Form -->
 					</div>
 				</div>
-				<div class="registration_left">
-					<h2>existing user</h2>
+				<div class="registration_right">
+					<h2>Usuario já existente</h2>
 				 	<div class="registration_form">
 					 <!-- Form -->
 						<form id="registration_form" ng-submit="login(user)" >
@@ -136,10 +136,10 @@
 							<div>
 								<input type="submit" value="sign in" id="register-submit">
 							</div>
-						 	<label for="rememberme-login"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Remember me</i></label> 
+						 	<label for="rememberme-login"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
 
 							<div class="forget">
-								<a href="#!/user/esquecisenha">forgot your password</a>
+								<a href="#!/user/esquecisenha">Esquici a senha</a>
 							</div>
 						</form>
 						<!-- /Form -->

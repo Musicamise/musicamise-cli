@@ -37,11 +37,14 @@
 .registration_left{
 	float: left;
 	width: 45.33333%;
-	margin-left: 9.333%;
-}
-.registration_left:first-child{
 	margin-left: 0;
 }
+.registration_right{
+	float: right;
+	width: 45.33333%;
+	margin-left: 9.333%;
+}
+
 .registration span{
 	color: #777777;
 }

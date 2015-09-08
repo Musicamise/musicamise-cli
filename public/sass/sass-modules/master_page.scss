@@ -286,10 +286,14 @@ form.expandable-box-form:after {
 	label{
 		display: inline-block;
 	}
-
+	a.expandable-box-button { 
+		color:#fff;
+	}
 	#userContainer{
 		display: inline-block;
-
+		.expandable-box{
+		    right: 10px;
+		}
 		form.expandable-box-form {
 			width: 150px;
 			ul{

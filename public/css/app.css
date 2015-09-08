@@ -16636,8 +16636,14 @@ form.expandable-box-form:after {
 .user-expandable-box label {
   display: inline-block;
 }
+.user-expandable-box a.expandable-box-button {
+  color: #fff;
+}
 .user-expandable-box #userContainer {
   display: inline-block;
+}
+.user-expandable-box #userContainer .expandable-box {
+  right: 10px;
 }
 .user-expandable-box #userContainer form.expandable-box-form {
   width: 150px;
@@ -21046,11 +21052,13 @@ ul.qty li p {
 .registration_left {
   float: left;
   width: 45.33333%;
-  margin-left: 9.333%;
+  margin-left: 0;
 }
 
-.registration_left:first-child {
-  margin-left: 0;
+.registration_right {
+  float: right;
+  width: 45.33333%;
+  margin-left: 9.333%;
 }
 
 .registration span {

@@ -33,7 +33,7 @@
 				                            	<label for="password"  ng-keyup="$event.keyCode == 13 && login(user)">Password:</label>
 					                            <input type="password" ng-model='user.password' name="password" id="password">
 						                     </fieldset>
-					                	 	<label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Remember me</i></label> 
+					                	 	<label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Lembre-se de mim</i></label> 
 						                    <input type="submit" id="login" value="Sign in">
 					                	 	<div  class="notmember padt20"  >
 											  <span> Não é membro?	<a type="button" class="btn" ng-href="#!/login">REGISTRE-SE</a>
@@ -50,7 +50,7 @@
 						<div ng-if="authentication.user!==''"  ng-init="bindUserEvent()" class="user-expandable-box">
 							<label > Olá, {{authentication.user.displayName }} </label>
 							<div id="userContainer" class="margt7 container-expandable-box" >
-								<a href="" id="userButton"  class="expandable-box-button" ><span>menu</span></a>
+								<a href="" id="userButton"  class="expandable-box-button padl10 padr40" > <i class="fa fa-bars"></i></a>
 							    <div id="userBox"  class="expandable-box">          
 							     	<form id="userForm" class="expandable-box-form" >
 							     		<fieldset id="body">
