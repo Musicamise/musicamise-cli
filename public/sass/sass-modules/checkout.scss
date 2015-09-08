@@ -3,33 +3,65 @@
 .checkout-options{
 	margin: 100px;
 	text-align: center;
-	label{
+
+	.or{
+		label{
+			font-size: 14pt;
+			&:before{
+				content:'-';
+				padding: 0 4px;
+			}
+			&:after{
+				content:'-';
+				padding: 0 4px;
+
+			}
+		}
+	}
+	label.checkout-btn{
 		padding: 20px;
 		a{
 			color:#fff;
 			padding: 20px;
 		    background-color: $parceiros-color;
-		    border-radius: 10px;
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			transition:none;
+			
     		&:hover, 
 			&:focus {
 				color:#fff;
-				font-weight: 600;
+		    	background-color: $parceiros-color-lighter;
 				text-decoration: none;
+				padding: 22px;
 			}
 		}
 
 	}
-	.checkout-options--noregister{
-		
-	}
+	
 	.checkout-options--register{
 		label.login{
 			padding: 24px;
+			a{
+		    	background-color: $medium2-color;
+		    	&:hover, 
+				&:focus {
+					color:#fff;
+		    		background-color: $medium1-color;
+					text-decoration: none;
+				}
+			}
 		}
 		label.register{
 			a{
 			}
 		}
+	}
+	.checkout-options-disclaimer{
+		text-align: left;
+		margin-left: 38%;
+		margin-top: 20px;	
 	}
 }
 

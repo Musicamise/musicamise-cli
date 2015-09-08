@@ -20347,13 +20347,14 @@ label.size-marker [type="radio"] {
 label.size-marker [type="radio"] + span {
   display: inline-block;
   padding: 1em;
-  border: 1px solid black;
+  border: 1px solid #ee803c;
   border-radius: 10px;
 }
 label.size-marker :checked + span {
   background: #f5ae81;
   border-radius: 10px;
   display: inline-block;
+  border: 1px solid #e75112;
 }
 label.size-marker [type="radio"][disabled] + span {
   background: #f00;
@@ -20706,22 +20707,50 @@ p.product_descr {
   margin: 100px;
   text-align: center;
 }
-.checkout-options label {
+.checkout-options .or label {
+  font-size: 14pt;
+}
+.checkout-options .or label:before {
+  content: '-';
+  padding: 0 4px;
+}
+.checkout-options .or label:after {
+  content: '-';
+  padding: 0 4px;
+}
+.checkout-options label.checkout-btn {
   padding: 20px;
 }
-.checkout-options label a {
+.checkout-options label.checkout-btn a {
   color: #fff;
   padding: 20px;
   background-color: #36526d;
   border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  transition: none;
 }
-.checkout-options label a:hover, .checkout-options label a:focus {
+.checkout-options label.checkout-btn a:hover, .checkout-options label.checkout-btn a:focus {
   color: #fff;
-  font-weight: 600;
+  background-color: #195a96;
   text-decoration: none;
+  padding: 22px;
 }
 .checkout-options .checkout-options--register label.login {
   padding: 24px;
+}
+.checkout-options .checkout-options--register label.login a {
+  background-color: #e75112;
+}
+.checkout-options .checkout-options--register label.login a:hover, .checkout-options .checkout-options--register label.login a:focus {
+  color: #fff;
+  background-color: #ee803c;
+  text-decoration: none;
+}
+.checkout-options .checkout-options-disclaimer {
+  text-align: left;
+  margin-left: 38%;
+  margin-top: 20px;
 }
 
 .cart h2 {

@@ -8,13 +8,15 @@ label.size-marker {
     [type="radio"] + span {
       display:inline-block;
       padding:1em;
-      border: 1px solid black;
+      border: 1px solid $medium1-color;
       border-radius: 10px;
     }
     :checked + span {
       background:$light-color;
       border-radius: 10px;
       display:inline-block;    
+      border: 1px solid $medium2-color;
+
     }
     [type="radio"][disabled] + span {
       background:#f00;  
