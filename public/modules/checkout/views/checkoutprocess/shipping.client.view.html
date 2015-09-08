@@ -44,7 +44,7 @@
 								</div>
 							</div>
  							<div ng-if="Authentication.user">
-								logado!! {{user.displayName}} <span>Not you? <a href="/auth/signout">Logout!</a> </span>
+								Olá, {{user.displayName}} <span>Não é você? <a href="/auth/signout">Logout!</a> </span>
 							</div>
 							
 							<div ng-show="Authentication.user&&Authentication.user.address!==''&&Authentication.user.address.length>0">
