@@ -25,11 +25,12 @@ body a{
 a:hover, 
 a:focus {
 	h3{
-	  color: $light-color;
+	  color: white;
+  	  font-weight: 600;
 	  text-decoration: underline;		
 	}
-  color: $light-color;
-  text-decoration: underline;
+	color:$link-hover-color;
+	text-decoration: underline;
 }
 
 .top_bg{
@@ -44,7 +45,6 @@ a:focus {
 .top_left{
 	float:left;
 	color: #ffffff;
-	margin-top: -5px;
 	ul{
 		padding:0;
 		list-style:none;
@@ -64,7 +64,7 @@ a:focus {
 				transition: all 0.3s ease-in-out;
 			}
 			a:hover{
-				color:$medium2-color;
+				color:$link-hover-color;
 				text-decoration: none;
 			}
 		}
@@ -138,7 +138,10 @@ a:focus {
 	}
 }
 .floatleft{
-	float:left;
+	float:left!important;
+}
+.floatright{
+	float:right!important;
 }
 .padl60{
 	padding-left: 60px!important;
@@ -227,25 +230,26 @@ a:focus {
 
 .log {
 	float: left;
-	width: 19%;
 }
 
-#loginContainer {
+.container-expandable-box {
 	position:relative;
 	a{
 		span {
 			display: block;
 			padding: 2px 14px;
-			border: 1px solid #555;
-			font-weight: 300;
+			/* border: 1px solid #555; */
+			font-weight: 400;
+			color:#fff;
 			border-radius: .4em;
 		}
 	}
+	
 }
 
 
 /* Login Button */
-#loginButton { 
+a.expandable-box-button { 
 	display:inline-block;  
 	position:relative;
 	z-index:30;
@@ -254,31 +258,54 @@ a:focus {
 	span:active,
 	span:focus,
 	span:hover{
-		color:$stronger-color;
+		color:$link-hover-color;
 	}
 }
-#loginBox {
+.expandable-box {
     position:absolute;
 	top: 44px;
 	right: 0px;
     display:none;
     z-index:29;
+
 }
 
 
 /* Login Form */
-#loginForm:after {
+form.expandable-box-form:after {
 		content: '';
 		position: absolute;
 		right: 25px;
 		top: -10px;
 		border-left:10px solid rgba(0, 0, 0, 0);
 		border-right:10px solid rgba(0, 0, 0, 0);
-		border-bottom: 10px solid #f0f0f0;
+		border-bottom: 10px solid $link-hover-color;	
+}
+.user-expandable-box{
+    float: left;
+	label{
+		display: inline-block;
+	}
+
+	#userContainer{
+		display: inline-block;
+
+		form.expandable-box-form {
+			width: 150px;
+			ul{
+				list-style-type: none;
+				padding: 0;
+				li{
+					padding:10px;
+				}
+			}
+		}
+	}
 }
 
-#loginForm {
-	width: 300px;
+form.expandable-box-form {
+
+	width: 260px;
 	background: #fff;
 	border: 1px solid #d6d6d6;
 	fieldset {
@@ -302,7 +329,9 @@ a:focus {
 	}
 	/* Default Input */
 	input {
-		width:92%;
+		&[type=text],&[type=password]{
+			width: 100%;
+		}
 		border:1px solid #DADADA;
 		color: #222;
 		background:#FFF;
@@ -311,11 +340,22 @@ a:focus {
 		-webkit-apperance:none;
 		font-family: 'Open Sans', sans-serif;
 	}
+	.notmember{
+		float:left;
+		span{
+			width: 100%;
+			padding: 0;
+		}
+		a{
+			padding: 0;
+		}
+	}
+
 	/* Sign In Button */
 	 #login {
 		font-family: 'Open Sans', sans-serif;
 		width: auto;
-		float: left;
+		float: right;
 		background:$stronger-color ;
 		border-radius: .4em;
 
@@ -336,7 +376,7 @@ a:focus {
 	/* Forgot your password */
 	span{
 		display:block;
-		padding:0px 0px 15px 17px;
+		text-align: center;
 		a{
 			color:#000;
 			font-size:0.85em;

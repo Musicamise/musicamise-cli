@@ -14,7 +14,8 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		  		$scope.find();
 		});
 		$scope.productQuery = {};
-
+		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
+		$scope.stared = '<i class="fa fa-star"></i> Remover!';
 		$scope.findOne = function() {
 			$scope.product = Product.query({
 				productSlug: $stateParams.productSlug

@@ -19,40 +19,50 @@
 				</div>
 				<div class="top_right ">
 					<div class="log">
-						<div ng-if="authentication.user===''" class="login" ng-init="bindLoginEvent()" >
-							<div id="loginContainer"  ><a href="" id="loginButton"><span>Login</span></a>
-							    <div id="loginBox">                
-							        <form id="loginForm"  ng-submit="login(user)">
+						<div ng-if="authentication.user===''" class="login " ng-init="bindLoginEvent()" >
+							<div id="loginContainer"  class="margt7 container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
+							    <div id="loginBox" class="expandable-box">                
+							        <form id="loginForm" class="expandable-box-form" ng-submit="login(user)">
 							        	<label class="error">{{login_error}}</label>
 						                <fieldset id="body">
 						                	<fieldset>
-						                          <label for="email">Email Address</label>
+						                          <label for="email">Email:</label>
 						                          <input type="text" ng-model='user.email' name="email" id="email">
 						                    </fieldset>
 						                    <fieldset>
-				                            	<label for="password"  ng-keyup="$event.keyCode == 13 && login(user)">Password</label>
+				                            	<label for="password"  ng-keyup="$event.keyCode == 13 && login(user)">Password:</label>
 					                            <input type="password" ng-model='user.password' name="password" id="password">
 						                     </fieldset>
-						                    <input type="submit" id="login" value="Sign in">
 					                	 	<label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Remember me</i></label> 
-					                	 	<div ng-if="authentication.user===''"  >
-											  	<a type="button" class="btn" ng-href="#!/login">REGISTER</a>
+						                    <input type="submit" id="login" value="Sign in">
+					                	 	<div  class="notmember padt20"  >
+											  <span> Não é membro?	<a type="button" class="btn" ng-href="#!/login">REGISTRE-SE</a>
+											  </span>
 											</div>
 						            	</fieldset>
 	 									<!-- <fb:login-button data-scope="email,user_friends" show-faces="true" max-rows="1" size="large" onlogin="checkLoginState()"></fb:login-button> -->
 	 									
-							            <span><a href="#!/user/esquecisenha">Forgot your password?</a></span>
+							            <span class="padb20"><a href="#!/user/esquecisenha">Perdeu a senha?</a></span>
 									</form>
 								</div>
 							</div>
 						</div>
-						<div ng-if="authentication.user!==''">
+						<div ng-if="authentication.user!==''"  ng-init="bindUserEvent()" class="user-expandable-box">
 							<label > Olá, {{authentication.user.displayName }} </label>
-							<ul>
-							 	<li> <a href="#!/user/profile" > Profile </a> </li>|
-								<li> <a href="#!/user/favoritos" > Favoritos </a> </li>|
-								<li> <a href="/auth/signout" > Logout </a>  </li>
-							</ul>
+							<div id="userContainer" class="margt7 container-expandable-box" >
+								<a href="" id="userButton"  class="expandable-box-button" ><span>menu</span></a>
+							    <div id="userBox"  class="expandable-box">          
+							     	<form id="userForm" class="expandable-box-form" >
+							     		<fieldset id="body">
+								        	<ul>
+											 	<li> <i class="fa fa-user"></i></i> <a href="#!/user/profile" > Profile </a> </li>
+												<li> <i class="fa fa-star-o"></i></i> <a href="#!/user/favoritos" > Favoritos </a> </li>
+												<li> <i class="fa fa-power-off"></i></i> <a href="/auth/signout" > Logout </a>  </li>
+											</ul>
+										</fieldset>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="floatleft">

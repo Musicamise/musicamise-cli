@@ -1,82 +1,82 @@
 @mixin generatePadding() {
   @for $i from 1 through 100 {
     .pad#{$i} {
-       padding: #{$i}px #{$i}px;
+       padding: #{$i}px #{$i}px!important;
     }
     .padt#{$i} {
-	     padding-top: #{$i}px;
+	     padding-top: #{$i}px!important;
     }
     .padb#{$i} {
-  	   padding-bottom: #{$i}px;
+  	   padding-bottom: #{$i}px!important;
     }
     .padr#{$i} {
-  	   padding-right: #{$i}px;
+  	   padding-right: #{$i}px!important;
     }
     .padl#{$i} {
-  	   padding-left: #{$i}px;
+  	   padding-left: #{$i}px!important;
     }
     .padtpercent#{$i} {
-       padding-top: $i*1%;
+       padding-top: $i*1%!important;
     }
     .padbpercent#{$i} {
-       padding-bottom: $i*1%;;
+       padding-bottom: $i*1%!important;
     }
     .padrpercent#{$i} {
-       padding-right: $i*1%;;
+       padding-right: $i*1%!important;
     }
     .padlpercent#{$i} {
-       padding-left: $i*1%;;
+       padding-left: $i*1%!important;
     }
   }
 }
 @mixin generateMargin() {
   @for $i from 1 through 100 {
     .marg#{$i} {
-      margin:#{$i}px #{$i}px;
+      margin:#{$i}px #{$i}px!important;
     }
     .margt#{$i} {
-      margin-top: #{$i}px;
+      margin-top: #{$i}px!important;
     }
     .margb#{$i} {
-      margin-bottom: #{$i}px;
+      margin-bottom: #{$i}px!important;
     }
     .margr#{$i} {
-      margin-right: #{$i}px;
+      margin-right: #{$i}px!important;
     }
     .margl#{$i} {
-      margin-left: #{$i}px;
+      margin-left: #{$i}px!important;
     }
     .margtpercent#{$i} {
-      margin-top: $i*1%;;
+      margin-top: $i*1%!important;
     }
     .margbpercent#{$i} {
-      margin-bottom: $i*1%;;
+      margin-bottom: $i*1%!important;
     }
     .margrpercent#{$i} {
-      margin-right: $i*1%;;
+      margin-right: $i*1%!important;
     }
     .marglpercent#{$i} {
-      margin-left: $i*1%;;
+      margin-left: $i*1%!important;
     }
   }
 }
 @mixin generateLeft() {
   @for $i from 1 through 100 {
     .left#{$i} {
-      left:#{$i}px;
+      left:#{$i}px!important;
     }
     .leftpercent#{$i} {
-      left:$i*1%;;
+      left:$i*1%!important;
     }
   }
 }
 @mixin generateRight() {
   @for $i from 1 through 100 {
     .right#{$i} {
-      right:#{$i}px;
+      right:#{$i}px!important;
     }
     .rightpercent#{$i} {
-      right:$i*1%;;
+      right:$i*1%!important;
     }
   }
 }

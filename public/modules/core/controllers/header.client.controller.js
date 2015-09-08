@@ -109,6 +109,25 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			    }
 			});
     	};
+    	$scope.bindUserEvent = function () {
+			var button = $('#userButton');
+			var box = $('#userBox');
+			var form = $('#userForm');
+			button.removeAttr('href');
+			button.mouseup(function(login) {
+			    box.toggle();
+			    button.toggleClass('active');
+			});
+			form.mouseup(function() { 
+			    return false;
+			});
+			$('body').mouseup(function(login) {
+			    if(($(login.target).parent('#userButton').length <= 0)) {
+			        button.removeClass('active');
+			        box.hide();
+			    }
+			});
+    	};
 
     	
 

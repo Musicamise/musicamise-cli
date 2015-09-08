@@ -1,4 +1,38 @@
 /*--checkout--*/
+
+.checkout-options{
+	margin: 100px;
+	text-align: center;
+	label{
+		padding: 20px;
+		a{
+			color:#fff;
+			padding: 20px;
+		    background-color: $parceiros-color;
+		    border-radius: 10px;
+    		&:hover, 
+			&:focus {
+				color:#fff;
+				font-weight: 600;
+				text-decoration: none;
+			}
+		}
+
+	}
+	.checkout-options--noregister{
+		
+	}
+	.checkout-options--register{
+		label.login{
+			padding: 24px;
+		}
+		label.register{
+			a{
+			}
+		}
+	}
+}
+
 .cart h2{
 	font-size:1.5em;
 	margin-bottom:1em;

@@ -1,5 +1,4 @@
 /*--single--*/
-
 label.size-marker {
     position:relative;   
     cursor:pointer;
@@ -9,9 +8,12 @@ label.size-marker {
     [type="radio"] + span {
       display:inline-block;
       padding:1em;
+      border: 1px solid black;
+      border-radius: 10px;
     }
     :checked + span {
-      background:#0f0;
+      background:$light-color;
+      border-radius: 10px;
       display:inline-block;    
     }
     [type="radio"][disabled] + span {
@@ -28,6 +30,14 @@ label.size-marker {
   }
 }
 
+.like_btn{
+  a{
+    text-decoration: none;
+    span.like_span{
+      text-decoration: none;
+    }
+  }
+}
 
 .cont{
   display: block;

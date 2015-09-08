@@ -54,7 +54,7 @@
 								<div ng-if="!unico" ng-repeat="(gender, inventoriesByGender) in inventories">
 
 									<h3 ng-bind="gender"></h3>
-									<h4>Select a size :</h4>
+									<h4>Selecione um tamanho:</h4>
 									<div class="col col-4">
 										<!-- <input type="checkbox"> G
 										<input type="checkbox" checked>GG -->
@@ -73,7 +73,7 @@
 							</div>
 							<div ng-if="product.inventories.length<=0">
 								Estamos em falta desse projeto, mas não desanime! 
-								Peça por aqui:
+								Peça por aqui: 
 							</div>
 							
 							<div class="single-bottom1">
@@ -82,24 +82,26 @@
 							</div>
 						</div>
 						
-						<div ng-show="product.inventories.length>0" class="btn_form">
+						<div ng-show="product.inventories.length>0" class="btn_form margr20 floatleft">
 							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">buy</a>
 						</div>
-
-						<br/><br/>
-						<div ng-if="user" class="btn_form">
+						<div ng-if="user" class="btn_form like_btn floatleft">
 							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">
-								<span  ng-bind="!alreadyLiked(product.slug)?'Gostei!':'Já Gostei!'"></span>
+								<span  class="like_span" ng-bind-html="!alreadyLiked(product.slug)?notStared:stared"> </span>
+								
+								
 							</a>
 						</div>
-						<a ng-if="!user" ng-href="#!/login"><span>Login para favoritar :)</span></a>
+						<a ng-if="!user" class="margt20 floatleft" ng-href="#!/login">
+						Login para favoritar :)
+						</a>
 			   	 	</div>
           	    	<div class="clearfix"></div>
           	   	</div>
       	    
 				<div  ng-if="relatedProducts.length>0" class="single-bottom2">
 					<div class="container">
-						<h6>Related Products</h6>
+						<h6>Produtos relacionados</h6>
 						<ul class="grid_2">
 							<li ng-repeat="product in relatedProducts">
 								<a ng-href="#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
