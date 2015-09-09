@@ -817,7 +817,7 @@ exports.processToPagseguro = function(req,res){
 				});
 				
 			 	console.dir(paymentParameters);
-			 	var urlPagseguro =  config.pagseguro.clientMail;
+			 	var urlPagseguro =  config.pagseguro.clientUrl;
 				request.post({url:urlPagseguro, 
 					form: paymentParameters},
 					function (error, response, body) {

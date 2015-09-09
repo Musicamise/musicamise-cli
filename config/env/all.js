@@ -51,6 +51,7 @@ module.exports = {
 		],
 		js: [
 			'public/plugin/js/*.js',
+			'public/plugin/pagseguro.lightbox/pagseguro.lightbox.js',
 			'public/plugin/etalage/jquery.etalage.min.js',
 			'public/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js',
 			'public/lib/twitter-bootstrap-wizard/prettify.js',

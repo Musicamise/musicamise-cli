@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('checkout').controller('CheckoutController', ['$rootScope','$window','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','UserCheckout','Cep','blockUI',
+angular.module('checkout').controller('CheckoutController', ['$rootScope','$window','$scope','$location','$timeout','$stateParams','OrderCheckout','Authentication','UserCheckout','Cep','blockUI', 
 	function($rootScope,$window,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,UserCheckout,Cep,blockUI) {
 		// checkout controller logic
 		// ...
@@ -146,20 +146,22 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			$scope.orderCall.$promise.then(function(response,error,progressback){
 				 if(response.url){
 
-				  	// PagSeguroLightbox({
-			    //         code: response.code, 
-			    //         success : function(transactionCode) {
-			    //                     alert("success - " + transactionCode);
-			    //                   },
-			    //         abort : function(transactionCode) {
-			    //                 alert("abort - " + transactionCode);
-			    //         }
-			    //     });
+				  	$scope.isOpenLightbox = PagSeguroLightbox({
+			            code: response.code,
+			        	},{
+			            success : function(transactionCode) {
+			                        alert('obrigado pela compra');
+			                        $location.path('/thank-you');
+			                      },
+			            abort : function() {
+			                    alert('Continue comprando.');
+			            }
+			        });
 					 // $window.location = response.url;
-					 PagSeguroLightbox(response.code+'');
-					// if (!$scope.isOpenLightbox){
-					//  	$window.location = response.url;
-					// }
+					 // PagSeguroLightbox(response.code+'');
+					if (!$scope.isOpenLightbox){
+					 	$window.location = response.url;
+					}
 				 }else{
 					 console.log(response);
 					 alert(response);
