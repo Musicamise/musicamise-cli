@@ -20789,7 +20789,6 @@ p.product_descr {
 }
 .user-settings .user-address a {
   cursor: pointer;
-  float: right;
 }
 .user-settings .user-address .user-address-box {
   padding: 10px;

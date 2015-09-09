@@ -22,6 +22,7 @@
 		"angular": true,
 		"ApplicationConfiguration": true,
 		"$": false,
+		"PagSeguroLightbox":false,
 	 	"jQuery": false,
 	 	"FB": false
 	},

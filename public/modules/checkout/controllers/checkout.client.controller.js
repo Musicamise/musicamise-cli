@@ -78,8 +78,8 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 						$location.path('/review');
 
 					}, function(reason) {
-					  	console.log('Failed: ' + reason);
-						//$location.path('/review'); todo error 
+					  	alert('Um erro aconteceu por favor tente novamente');
+						$location.path('/shipping');
 					});
 				}
 
@@ -157,9 +157,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			                    alert('Continue comprando.');
 			            }
 			        });
-					 // $window.location = response.url;
-					 // PagSeguroLightbox(response.code+'');
-					if (!$scope.isOpenLightbox){
+					if ($scope.isOpenLightbox){
 					 	$window.location = response.url;
 					}
 				 }else{
@@ -170,6 +168,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			}, function(reason) {
 				blockUI.stop();
 			  	console.log('Failed: ' + reason.data.message);
+			  	alert('Aconteceu um erro inesperado, por favor tenta novamente.');
 				$location.path('/shipping');
 			});
 		}; 

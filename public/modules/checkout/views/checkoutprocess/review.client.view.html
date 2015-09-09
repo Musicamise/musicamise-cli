@@ -2,31 +2,7 @@
 	<!-- content -->
 <div class="container">
 	<div class="check" ng-if="order.totalItems>0">	
-	 	<div class="col-md-3 cart-total">
-		 	<!-- <a class="continue" ng-href="#!/products">Continue to basket</a> -->
-		 	<div class="price-details">
-				 <h3>Detalhe de preço</h3>
-				 <span>Total</span>
-				 <span class="total1" ng-bind="order.totalValueItemsFormatted"></span>
-				 <span>Deconto</span>
-				 <span class="total1"  ng-bind="'-' + order.totalDiscountFormatted"></span>
-				 <span >Valor de entrega</span>
-				 <span class="total1"  ng-bind="order.totalShippingFormatted"></span>
-				 <div class="clearfix"></div>				 
-			 </div>	
-		 	<ul class="total_price">
-			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span  ng-bind="order.totalFormatted"></span></li>
-			   <div class="clearfix"> </div>
-		 	</ul>
-		 	<div class="clearfix"></div>
-			<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
-			<input class="order"  type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-comprar-assina.gif"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"  ng-click="submitOrder()" />
-			<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
-			<div class="total-item">
-	 		<!-- <a class="cpns" href="#">Apply Coupons</a> -->
-	 		<!-- <p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p> -->
-			</div>
+	 	<div class="col-md-3 cart-total" ng-include="'/modules/checkout/views/checkoutprocess/cart-side-bar.html'" onload="reviewPage=true">
 		</div>
 	 	<div class="col-md-9 cart-items">
 	 		<div >
