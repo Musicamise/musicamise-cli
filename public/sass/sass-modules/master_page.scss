@@ -382,14 +382,14 @@ form.expandable-box-form {
 		display:block;
 		text-align: center;
 		a{
-			color:#000;
 			font-size:0.85em;
 			font-weight:500;
 			background: none;
 			border: none;
 			box-shadow: none;
 		}
-		a:hover{
+		a:hover,
+		a:focus{
 			text-decoration:underline;
 		}
 	}
@@ -443,6 +443,9 @@ ul.megamenu.musicamise {
   	i{
   		position: absolute;
   		opacity: 0.35;
+  	}
+  	.menu-itens{
+  		padding: 0 60px;
   	}
     .item{
     	float: left;

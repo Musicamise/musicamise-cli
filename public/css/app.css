@@ -16731,14 +16731,14 @@ form.expandable-box-form span {
   text-align: center;
 }
 form.expandable-box-form span a {
-  color: #000;
   font-size: 0.85em;
   font-weight: 500;
   background: none;
   border: none;
   box-shadow: none;
 }
-form.expandable-box-form span a:hover {
+form.expandable-box-form span a:hover,
+form.expandable-box-form span a:focus {
   text-decoration: underline;
 }
 
@@ -16791,6 +16791,9 @@ ul.megamenu.musicamise {
 .menu-expanded i {
   position: absolute;
   opacity: 0.35;
+}
+.menu-expanded .menu-itens {
+  padding: 0 60px;
 }
 .menu-expanded .item {
   float: left;
@@ -17954,6 +17957,10 @@ i.mail {
     padding: 2em 0;
   }
 
+  .user-settings {
+    padding: 2em 0;
+  }
+
   .box_1 p {
     margin: 0em 0.3em 0;
   }
@@ -18340,6 +18347,10 @@ i.mail {
   }
 
   .check {
+    padding: 2em 0 0;
+  }
+
+  .user-settings {
     padding: 2em 0 0;
   }
 
@@ -20764,6 +20775,28 @@ p.product_descr {
   margin-top: 20px;
 }
 
+.user-settings {
+  padding: 5em 0;
+}
+.user-settings .side-bar ul {
+  list-style-type: none;
+}
+.user-settings .user-address {
+  padding-top: 10px;
+  width: 30%;
+  text-align: right;
+}
+.user-settings .user-address a {
+  cursor: pointer;
+  float: right;
+}
+.user-settings .user-address .user-address-box {
+  padding: 10px;
+  background-color: #c4c4c4;
+  border-radius: 10px;
+  text-align: left;
+}
+
 .cart h2 {
   font-size: 1.5em;
   margin-bottom: 1em;
@@ -21115,6 +21148,9 @@ label {
   background: #FFFFFF;
   border: 1px solid #e7e7e7;
   font-weight: normal;
+}
+.registration_form select {
+  width: 40%;
 }
 
 .registration_form input[type="submit"] {

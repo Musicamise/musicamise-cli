@@ -65,6 +65,31 @@
 	}
 }
 
+
+.user-settings{
+	padding:5em 0;
+	.side-bar{
+		ul{
+			list-style-type: none;
+		}
+	}
+	.user-address{
+		padding-top: 10px;
+	    width: 30%;
+	    text-align: right;
+		a{
+			cursor: pointer;
+			float:right;
+		}
+		.user-address-box{
+			padding: 10px;
+		    background-color: $light-gray;
+		    border-radius: 10px;
+		    text-align: left;
+		}
+	}
+}
+
 .cart h2{
 	font-size:1.5em;
 	margin-bottom:1em;
@@ -91,6 +116,7 @@
 .check{
 	padding:5em 0;
 }
+
 .cart-item-info h3{
 	font-size:1em;
 	font-weight:600;

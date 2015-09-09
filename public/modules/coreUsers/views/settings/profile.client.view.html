@@ -1,14 +1,8 @@
 <section data-ng-controller="SettingsController" data-ng-init="profile()"  >
 	<!-- content -->
 <div class="container">
-	<div class="check">	
-	 	<div class="col-md-2 ">
-	 		<ul>
-			 	<li class="active"><a href="#!/user/profile">Update profile</a></li>
-				<li ><a href="#!/user/orders">Order history</a></li>
-				<li ><a href="#!/user/favoritos">Favoritos</a></li>
-				<li><a href="#">Privacy</a></li>
-		 	</ul>
+	<div class="user-settings">	
+	 	<div class="col-md-2 side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="user_li=true">
 		</div>
 	 	<div class="col-md-4 ">
 	 		<h1>Profiel User</h1>
@@ -27,7 +21,7 @@
 				</div>
 				<div>
 	 				<label>Senha </label> 
-	 				<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editPassword">Edit password</button>
+	 				<button type="button" class="btn btn-warning btn-sm margt10 margb10" data-toggle="modal" data-target="#editPassword">Edit password</button>
 				</div>
 			  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editProfile">Edit User</button>
 
@@ -38,13 +32,15 @@
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress({})">Add Address</button>
 			<div>
 				<div ng-repeat="address in user.address">
-					<div>
-						<a  ng-href="" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress(address)">Edit Address</a>
-						<a ng-href="" ng-click="removeAddress(address)">Remove Address</a>
-		 				<label>Nome </label>
-						<strong ng-bind="address.name"> </strong>
+					<div class="user-address">
+						<a  ng-href="" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress(address)">Edit <i class="fa fa-pencil-square-o"></i></a>
+						<a ng-href="" ng-click="removeAddress(address)"><i class="fa fa-trash-o"></i></a>
+		 				<div class="user-address-box">
+			 				<label>Nome </label>
+							<strong ng-bind="address.name"> </strong>
+						</div>
 					</div>
-					<div>
+					<!-- <div>
 		 				<label>Address </label>
 						<strong ng-bind="address.address"></strong>
 					</div>
@@ -52,10 +48,10 @@
 		 				<label>Number </label> 
 						<strong ng-bind="address.number"> </strong>
 					</div>
-					<!-- <div>
+					<div>
 		 				<label>Complemento </label> 
 						<strong ng-bind="address.address">{{address.complemnto}} </strong>
-					</div> -->
+					</div>
 					<div>
 		 				<label>Bairro </label> 
 						<strong ng-bind="address.bairro"> </strong>
@@ -67,7 +63,7 @@
 					<div>
 		 				<label>State </label> 
 						<strong ng-bind="address.state"> </strong>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

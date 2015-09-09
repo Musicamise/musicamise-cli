@@ -36,7 +36,7 @@
 					                	 	<label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Lembre-se de mim</i></label> 
 						                    <input type="submit" id="login" value="Sign in">
 					                	 	<div  class="notmember padt20"  >
-											  <span> Não é membro?	<a type="button" class="btn" ng-href="#!/login">REGISTRE-SE</a>
+											  <span> Não é membro?	<a ng-href="#!/login">REGISTRE-SE</a>
 											  </span>
 											</div>
 						            	</fieldset>
@@ -87,7 +87,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-init="bindMenuEvent()" ng-show="menu.show" id="menu-expanded" class="menu-expanded container">
+	<div ng-init="bindMenuEvent()" ng-show="menu.show" id="menu-expanded" class="menu-expanded">
 		
 		<i class="fa fa-music fa-4x rightpercent10 padtpercent6"></i>
 		<i class="fa fa-music fa-3x rightpercent20 padtpercent11"></i>
@@ -97,7 +97,7 @@
 		<i class="fa fa-music fa-2x leftpercent20 padtpercent13"></i>
 		<i class="fa fa-music fa-4x leftpercent40 padtpercent10"></i>
 		<!-- start header menu -->
-		<div ng-show="menu.name==='camisas'" class="row menu-itens camisas">
+		<div ng-show="menu.name==='camisas'" class=" menu-itens camisas">
 			<div class="item" ng-repeat="(key, value) in loja.gender" >
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>

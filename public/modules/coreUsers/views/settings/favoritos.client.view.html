@@ -1,14 +1,8 @@
 <section data-ng-controller="SettingsController" data-ng-init="favoritos()"  >
 	<!-- content -->
 <div class="container">
-	<div class="check">	
-	 	<div class="col-md-2 ">
-	 		<ul>
-			 	<li><a href="#!/user/profile">Update profile</a></li>
-				<li ><a href="#!/user/orders">Order history</a></li>
-				<li class="active"><a href="#!/user/favoritos">Favoritos</a></li>
-				<li><a href="#">Privacy</a></li>
-		 	</ul>
+	<div class="user-settings">	
+	 	<div class="col-md-2 side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="favorite_li=true">
 		</div>
 		<div class="col-md-10 cart-items">
 	 		<h1>Produtos favoritados! :D </h1>

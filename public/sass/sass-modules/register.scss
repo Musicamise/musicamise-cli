@@ -73,19 +73,24 @@ label {
 	margin-bottom: 0;
 	font-weight: normal;
 }
-.registration_form input[type="text"],.registration_form input[type="email"],.registration_form input[type="tel"],.registration_form input[type="password"]{
-	padding: 8px;
-	display: block;
-	width:100%;
-	outline: none;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 0.8925em;
-	color: #333333;
-	-webkit-appearance: none;
-	/*text-transform: capitalize;*/
-	background: #FFFFFF;
-	border: 1px solid rgb(231, 231, 231);
-	font-weight: normal;
+.registration_form {
+	input[type="text"], input[type="email"], input[type="tel"], input[type="password"]{
+		padding: 8px;
+		display: block;
+		width:100%;
+		outline: none;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 0.8925em;
+		color: #333333;
+		-webkit-appearance: none;
+		/*text-transform: capitalize;*/
+		background: #FFFFFF;
+		border: 1px solid rgb(231, 231, 231);
+		font-weight: normal;
+	}
+	select{
+		width:40%;
+	}
 }
 .registration_form input[type="submit"]{
 	-webkit-appearance: none;
