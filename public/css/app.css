@@ -20386,6 +20386,7 @@ label.size-marker [type="radio"][disabled] + span {
 }
 
 .like_btn.btn_form a {
+  color: #000;
   background: #fff;
   text-decoration: none;
 }

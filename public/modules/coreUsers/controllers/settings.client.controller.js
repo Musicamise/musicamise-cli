@@ -3,13 +3,15 @@
 angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'User', 'Authentication','Cep','blockUI',
 	function($scope, $http, $location, User, Authentication,Cep,blockUI) {
 		$scope.user = Authentication.user;
-
+		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
+		$scope.stared = '<i class="fa fa-star"></i> Remover!';
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
 		$scope.profile =function(){
 			$scope.user = Authentication.user;
 		};
+		
 		$scope.orderHistory = function(){
 			$scope.newOrders = [];
 			$scope.oldOrders = [];
@@ -38,6 +40,29 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			},function(reason){
 
 			});
+		};
+
+		$scope.like = function(productSlug){
+			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		$scope.dislike = function(productSlug){
+			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
+				$scope.user = response;
+			},function(reason){
+				console.log(reason);
+			});
+		};
+		
+		$scope.alreadyLiked = function(productSlug){
+			if($scope.user){
+				return $scope.user.wishList.indexOf(productSlug)>=0;
+			}else{
+				return false;
+			} 
 		};
 		
 		// Check if there are additional accounts 

@@ -72,8 +72,8 @@
 								</div>
 							</div>
 							<div ng-if="product.inventories.length<=0">
-								Estamos em falta desse projeto, mas não desanime! 
-								Peça por aqui: 
+								Estamos em falta desse produto, mas não desanime! 
+								Peça por <a href="">aqui</a>
 							</div>
 							
 							<div class="single-bottom1">
@@ -88,7 +88,6 @@
 						<div ng-if="user" class="btn_form like_btn floatleft">
 							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">
 								<span  class="like_span" ng-bind-html="!alreadyLiked(product.slug)?notStared:stared"> </span>
-								
 								
 							</a>
 						</div>

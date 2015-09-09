@@ -19,7 +19,10 @@
 				 		<img ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/></a>
 					</div>
 				   	<div class="cart-item-info">
-						<h3><a ng-href="#!/product/{{product.slug}}" ng-bind="product.title"> </a><span ng-bind="product.type"></span></h3>
+						<h3>
+						     <a ng-href="#!/product/{{product.slug}}" ng-bind="product.title"> </a>
+						     <span ng-bind="product.type"></span>
+					     </h3>
 				 		<span class="item_price">
 					 		<h6>
 					 			<span class="price-new">{{product.priceFormatted}}</span>
@@ -28,8 +31,13 @@
 				 				</span> 
 				 			</h6>
 			 			</span>
+			 			<div ng-if="user" class="btn_form like_btn floatleft">
+							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">
+								<span  class="like_span" ng-bind-html="!alreadyLiked(product.slug)?notStared:stared"> </span>
+								
+							</a>
+						</div>
 				 		<div class="clearfix"></div>
-					 	
 				   	</div>
 			   		<div class="clearfix"></div>
 			  	</div>
