@@ -817,7 +817,8 @@ exports.processToPagseguro = function(req,res){
 				});
 				
 			 	console.dir(paymentParameters);
-				request.post({url:'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout', 
+			 	var urlPagseguro =  config.pagseguro.clientMail;
+				request.post({url:urlPagseguro, 
 					form: paymentParameters},
 					function (error, response, body) {
 					    if (!error && response.statusCode === 200) {
@@ -853,7 +854,7 @@ exports.processToPagseguro = function(req,res){
 										console.log('order');
 										console.log(orderSaved); 
 								 	});
-						    		res.json({url:'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code});
+						    		res.json({url:'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+code,code:code});
 					
 								}
 							 

@@ -20374,10 +20374,15 @@ label.size-marker [type="radio"][disabled] + span {
   text-decoration: none;
 }
 
-.like_btn a {
+.like_btn.btn_form a {
+  background: #fff;
   text-decoration: none;
 }
-.like_btn a span.like_span {
+.like_btn.btn_form a:hover, .like_btn.btn_form a:focus {
+  background: #fff;
+  text-decoration: none;
+}
+.like_btn.btn_form a span.like_span {
   text-decoration: none;
 }
 

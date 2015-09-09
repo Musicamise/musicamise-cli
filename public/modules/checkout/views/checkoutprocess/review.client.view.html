@@ -1,3 +1,5 @@
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+
 <section data-ng-controller="CheckoutController" data-ng-init="reviewOrder()"  >
 	<!-- content -->
 <div class="container">
@@ -20,7 +22,9 @@
 			   <div class="clearfix"> </div>
 		 	</ul>
 		 	<div class="clearfix"></div>
-	 		<a class="order" ng-href="" ng-click="submitOrder()">Page Seguro</a>
+			<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+			<input class="order"  type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-comprar-assina.gif"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"  ng-click="submitOrder()" />
+			<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
 			<div class="total-item">
 	 		<!-- <a class="cpns" href="#">Apply Coupons</a> -->
 	 		<!-- <p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p> -->
@@ -82,7 +86,7 @@
 					 		<div class="clearfix"></div>
 				        </div>	
 					 	<div class="delivery" ng-show="order.shippingAddress.prazo">
-						 	<p>Service Charges : <label ng-bind="order.totalShippingFormatted"></label></p>
+						 	<p> Valor de Servico de entrega : <label ng-bind="order.totalShippingFormatted"></label></p>
 						 	<span >Entregamos em até &nbsp;
 						 	<span ng-bind="order.shippingAddress.prazo"> </span></span>
 					 		<div class="clearfix"></div>

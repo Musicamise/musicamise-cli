@@ -145,9 +145,24 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			blockUI.start();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
 				 if(response.url){
-					 $window.location = response.url;
+
+				  	// PagSeguroLightbox({
+			    //         code: response.code, 
+			    //         success : function(transactionCode) {
+			    //                     alert("success - " + transactionCode);
+			    //                   },
+			    //         abort : function(transactionCode) {
+			    //                 alert("abort - " + transactionCode);
+			    //         }
+			    //     });
+					 // $window.location = response.url;
+					 PagSeguroLightbox(response.code+'');
+					// if (!$scope.isOpenLightbox){
+					//  	$window.location = response.url;
+					// }
 				 }else{
 					 console.log(response);
+					 alert(response);
 				 }
 				 blockUI.stop();
 			}, function(reason) {

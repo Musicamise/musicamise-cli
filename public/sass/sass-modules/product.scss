@@ -32,9 +32,14 @@ label.size-marker {
   }
 }
 
-.like_btn{
+.like_btn.btn_form{
   a{
+    background: #fff;
     text-decoration: none;
+    &:hover,&:focus{
+      background: #fff;
+      text-decoration: none;
+    }
     span.like_span{
       text-decoration: none;
     }
