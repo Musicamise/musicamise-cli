@@ -83,7 +83,7 @@
 						</div>
 						
 						<div ng-show="product.inventories.length>0" class="btn_form margr20 floatleft">
-							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">buy</a>
+							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">Comprar</a>
 						</div>
 						<div ng-if="user" class="btn_form like_btn floatleft">
 							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">

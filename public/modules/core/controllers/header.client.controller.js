@@ -48,7 +48,7 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
     	};
 
 		$scope.clickIconMenu = function(event){
-			$scope.menu.show = true;
+			$scope.menu.show = !$scope.menu.show;
 			$scope.menu.name = event.target.className;
 		};
 

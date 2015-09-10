@@ -432,6 +432,7 @@ ul.megamenu.musicamise {
     min-height: 250px;
   	opacity: 1;
 
+
   	&.ng-hide {
 	  line-height: 0;
 	  opacity: 0;
@@ -443,6 +444,7 @@ ul.megamenu.musicamise {
   	i{
   		position: absolute;
   		opacity: 0.35;
+  		pointer-events: none 
   	}
   	.menu-itens{
   		padding: 0 60px;

@@ -7330,7 +7330,7 @@ button.close {
   }
 }
 .icons-sprite {
-  background: url('../images/../images/icons-s4d4750fbea.png') no-repeat;
+  background: url('../images/../images/icons-sbe5fac2641.png') no-repeat;
 }
 
 .progress {
@@ -16791,6 +16791,7 @@ ul.megamenu.musicamise {
 .menu-expanded i {
   position: absolute;
   opacity: 0.35;
+  pointer-events: none;
 }
 .menu-expanded .menu-itens {
   padding: 0 60px;
