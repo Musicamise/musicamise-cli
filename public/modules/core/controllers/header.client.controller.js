@@ -52,6 +52,14 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			$scope.menu.name = event.target.className;
 		};
 
+		$scope.clickLinkMenu = function(){
+			$scope.menu.show = false;
+			var boxUser = $('#userBox');
+			boxUser.hide();
+			var boxLogin = $('#loginBox');
+			boxLogin.hide();
+
+		};
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
@@ -129,82 +137,6 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			});
     	};
 
-    	
-
-	////facebook start
-		// $scope.checkLoginState = function() {
-		//     FB.getLoginStatus(function(response) {
-		//       $scope.getUserInfo(response);
-		//     });
-	 //  	};
-
-		// $scope.watchLoginChange = function() {
-
-		//   var _self = this;
-
-		//   FB.Event.subscribe('auth.authResponseChange', function(res) {
-
-		//     if (res.status === 'connected') {
-		      
-		//       /* 
-		//        The user is already logged, 
-		//        is possible retrieve his personal info
-		//       */
-		//       _self.getUserInfo();
-
-		      
-		//        This is also the point where you should create a 
-		//        session for the current user.
-		//        For this purpose you can use the data inside the 
-		//        res.authResponse object.
-		      
-
-		//     } 
-		//     else {
-		//     	console.dir(res);
-		//       /*
-		//        The user is not logged to the app, or into Facebook:
-		//        destroy the session on the server.
-		//       */
-		       
-		//     }
-
-		//   });
-
-		// };
-
-		// $scope.getUserInfo = function() {
-
-		//   var _self = this;
-
-		//   FB.api('/me', function(res) {
-
-		//     $rootScope.$apply(function() { 
-
-		//       $rootScope.user = _self.user = res; 
-
-		//     });
-
-		//   });
-
-		// };
-
-		// $scope.logoutFacebook = function() {
-
-		//   var _self = this;
-
-		//   FB.logout(function(response) {
-
-		//     $rootScope.$apply(function() { 
-
-		//       $rootScope.user = _self.user = {}; 
-
-		//     }); 
-
-		//   });
-
-		// };
-    ///facebook end 
 
 	}
 

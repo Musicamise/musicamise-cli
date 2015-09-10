@@ -15,7 +15,16 @@
 	 		<h2 ng-show="newOrders.length>0">Compra Atual</h2>
 	 		<div class="order" ng-repeat="order in newOrders">
 	 			<my-bar order='order'></my-bar>
-	 			<button  type="button" class="btn btn-warning btn-sm margt10 margb10" ng-model="order.value" ng-init="order.value=false" ng-click="order.value=!order.value" >Mais detalhes</button>
+	 			<button  type="button" class="btn btn-warning btn-sm margt10 margb10" ng-model="order.value" ng-init="order.value=false" ng-click="order.value=!order.value" >
+	 			<label ng-show="!order.value">
+		 			<i class="fa fa-plus"></i>
+		 			<span >Mais detalhes</span>
+	 			</label>
+	 			<label ng-show="order.value">
+					<i  class="fa fa-minus"></i>
+		 			<span >Menos detalhes</span>
+	 			</label>
+	 			</button>
 	 			<div ng-show="order.value">
 		 			<div class="col-xs-4 order-address">
 		 				<h3>Endereço de entrega:</h3>

@@ -146,7 +146,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			$scope.orderCall.$promise.then(function(response,error,progressback){
 				 if(response.url){
 
-				  	$scope.isOpenLightbox = PagSeguroLightbox({
+				  	$scope.isOpenLightbox = new PagSeguroLightbox({
 			            code: response.code,
 			        	},{
 			            success : function(transactionCode) {

@@ -7,7 +7,7 @@
 						<li ><a ng-href="#!/" ng-click=""><img class="musicamise"  src="modules/core/img/icons/M1.png"> </a></li>
 						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu($event)"><img class="camisas"  src="modules/core/img/icons/Camisa1.png"> </a></li>
 						<li ng-show="loja.otherProducts"><a ng-href="" ng-click="clickIconMenu($event)"><img class="other-products"   src="modules/core/img/icons/Caneca1.png"> </a></li>
-						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="parceiros"  src="modules/core/img/icons/Parceiros1.png"> </a></li>
+						<li ng-show="localStores"  ><a ng-href="" ng-click="clickIconMenu($event)"><img class="parceiros"  src="modules/core/img/icons/Parceiros1.png"> </a></li>
 						<li ><a ng-href="" ng-click="clickIconMenu($event)"><img class="contato"  class="contato" src="modules/core/img/icons/Contato1.png"> </a></li>
 					</ul>
 					
@@ -55,9 +55,9 @@
 							     	<form id="userForm" class="expandable-box-form" >
 							     		<fieldset id="body">
 								        	<ul>
-											 	<li> <i class="fa fa-user"></i></i> <a href="#!/user/profile" > Profile </a> </li>
-												<li> <i class="fa fa-star-o"></i></i> <a href="#!/user/favoritos" > Favoritos </a> </li>
-												<li> <i class="fa fa-power-off"></i></i> <a href="/auth/signout" > Logout </a>  </li>
+											 	<li ng-click="clickLinkMenu()"> <i class="fa fa-user"></i></i> <a href="#!/user/profile" > Profile </a> </li>
+												<li ng-click="clickLinkMenu()"> <i class="fa fa-star-o"></i></i> <a href="#!/user/favoritos" > Favoritos </a> </li>
+												<li ng-click="clickLinkMenu()"> <i class="fa fa-power-off"></i></i> <a href="/auth/signout" > Logout </a>  </li>
 											</ul>
 										</fieldset>
 									</form>
@@ -102,9 +102,9 @@
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>
 					<ul >
-						<li><a ng-href="/#!/products/gender/{{key}}?sort=new">Novidades</a></li>
+						<li><a ng-click="clickLinkMenu()" ng-href="/#!/products/gender/{{key}}?sort=new">Novidades</a></li>
 						<li  ng-repeat="typeClothes in value" >
-							<a ng-href="/#!/{{typeClothes}}/{{key}}" ng-bind="typeClothes"></a>
+							<a ng-click="clickLinkMenu()" ng-href="/#!/{{typeClothes}}/{{key}}" ng-bind="typeClothes"></a>
 						</li>
 
 					</ul>	
@@ -114,9 +114,9 @@
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>
 					<ul >
-						<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
+						<li><a ng-click="clickLinkMenu()" ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
 						<li  ng-repeat="typeClothes in value" >
-							<a ng-href="/#!/{{typeClothes}}/collection/{{key}}" ng-bind="typeClothes"></a>
+							<a ng-click="clickLinkMenu()" ng-href="/#!/{{typeClothes}}/collection/{{key}}" ng-bind="typeClothes"></a>
 						</li>
 
 					</ul>	
@@ -128,9 +128,9 @@
 				<div class="header_nav">
 					<h4 ng-bind="key"></h4>
 					<ul >
-						<li><a ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
+						<li><a ng-click="clickLinkMenu()" ng-href="/#!/products/collection/{{key}}?sort=new">Novidades</a></li>
 						<li  ng-repeat="product in value" >
-							<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
+							<a ng-click="clickLinkMenu()" ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
 						</li>
 
 					</ul>	
@@ -142,9 +142,9 @@
 				<div class="header_nav">
 					<h4 ng-bind="storeObj.title"></h4>
 					<ul>
-						<li><a ng-href="/#!/lojasparceiras/{{store}}">Novidades</a></li>
+						<li><a ng-click="clickLinkMenu()" ng-href="/#!/lojasparceiras/{{store}}">Novidades</a></li>
 						<li  ng-repeat="localStoreType in storeObj.products" >
-							<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+							<a ng-click="clickLinkMenu()" ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
 						</li>
 
 					</ul>	
@@ -157,7 +157,7 @@
 					<h4 ng-bind="storeObj.title"></h4>
 					<ul>
 						<li  ng-repeat="localStoreType in storeObj.products" >
-							<a ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+							<a ng-click="clickLinkMenu()" ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
 						</li>
 
 					</ul>	
