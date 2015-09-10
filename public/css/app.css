@@ -7330,7 +7330,7 @@ button.close {
   }
 }
 .icons-sprite {
-  background: url('../images/../images/icons-sbe5fac2641.png') no-repeat;
+  background: url('../images/../images/icons-sbac03a8446.png') no-repeat;
 }
 
 .progress {
@@ -18463,6 +18463,19 @@ i.mail {
   text-align: center;
 }
 .arriv .container .arriv-top .masculino img, .arriv .container .arriv-top .feminino img, .arriv .container .arriv-top .infantil img {
+  width: 100%;
+}
+
+.owl-carousel .item {
+  text-align: center;
+}
+.owl-carousel .item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.owl-carousel .item p {
+  color: #000000;
   width: 100%;
 }
 

@@ -34,7 +34,23 @@
 }
 
 
+.owl-carousel {
+  .item{
+    text-align: center;
 
+    img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    
+    p{
+      color:#000000;
+      width:100%;
+    }
+
+  }
+}
 
 .arriv-top {
   margin: 1.5em 0;
