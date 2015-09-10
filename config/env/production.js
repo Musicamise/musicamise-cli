@@ -47,6 +47,7 @@ module.exports = {
 	pagseguro: {
 		clientMail: process.env.PAGSEGURO_MAIL || '',
 		clientSecret: process.env.PAGSEGURO_SECRET || '',
+		clientUrl: process.env.PAGSEGURO_URL ||'' 
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',

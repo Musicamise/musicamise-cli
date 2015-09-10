@@ -1,7 +1,12 @@
 <div class="status" data-ng-controller="SettingsController" >
 	<div class="status-order">
 		<label  ng-show="order.lastStatus">Código da compra: <span ng-bind="order._id"> </span></label>
-		<label  ng-show="order.lastStatus">Status da compra: <span ng-bind="order.lastStatus"> </span></label>
+		<label  ng-show="order.lastStatus">Status da compra: <span ng-bind="order.lastStatus"> </span>
+		</label>
+		<label  ng-show="order.lastStatus">Data da compra: <span >{{order.createdDate| date:'dd/MM/yyyy HH:mm:ss'}} </span>
+		</label>
+			
+
 	</div>
 	<div  class="wizard"  >
 		<div class="status-entrega"  >
