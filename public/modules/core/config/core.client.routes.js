@@ -29,6 +29,12 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 		}).state('centrodeajuda', {
 			url: '/centrodeajuda',
 			templateUrl: 'modules/core/views/centrodeajuda.client.view.html'
+		}).state('trabalheconosco', {
+			url: '/centrodeajuda',
+			templateUrl: 'modules/core/views/trabalhe_conosco.client.view.html'
+		}).state('missao', {
+			url: '/centrodeajuda',
+			templateUrl: 'modules/core/views/missa_visao_e_valores.client.view.html'
 		}).state('404', {
 			url: '/404',
 			templateUrl: 'modules/core/views/home.client.view.html'
