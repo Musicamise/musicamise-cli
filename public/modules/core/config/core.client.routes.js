@@ -13,31 +13,28 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		}).state('contact', {
 			url: '/contact',
-			templateUrl: 'modules/core/views/contact.client.view.html'
+			templateUrl: 'modules/core/views/static/contact.client.view.html'
 		}).state('faq', {
 			url: '/faq',
-			templateUrl: 'modules/core/views/faq.client.view.html'
+			templateUrl: 'modules/core/views/static/faq.client.view.html'
 		}).state('politicas', {
 			url: '/politicas',
-			templateUrl: 'modules/core/views/politicas.client.view.html'
+			templateUrl: 'modules/core/views/static/politicas.client.view.html'
 		}).state('quemsomos', {
 			url: '/quemsomos',
-			templateUrl: 'modules/core/views/quemsomos.client.view.html'
+			templateUrl: 'modules/core/views/static/quemsomos.client.view.html'
 		}).state('comocomprar', {
 			url: '/comocomprar',
-			templateUrl: 'modules/core/views/comocomprar.client.view.html'
+			templateUrl: 'modules/core/views/static/comocomprar.client.view.html'
 		}).state('centrodeajuda', {
 			url: '/centrodeajuda',
-			templateUrl: 'modules/core/views/centrodeajuda.client.view.html'
+			templateUrl: 'modules/core/views/static/centrodeajuda.client.view.html'
 		}).state('trabalheconosco', {
 			url: '/centrodeajuda',
-			templateUrl: 'modules/core/views/trabalhe_conosco.client.view.html'
+			templateUrl: 'modules/core/views/static/trabalhe_conosco.client.view.html'
 		}).state('missao', {
 			url: '/centrodeajuda',
-			templateUrl: 'modules/core/views/missa_visao_e_valores.client.view.html'
-		}).state('404', {
-			url: '/404',
-			templateUrl: 'modules/core/views/home.client.view.html'
+			templateUrl: 'modules/core/views/static/missa_visao_e_valores.client.view.html'
 		});
 	}
 ]);

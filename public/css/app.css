@@ -7330,7 +7330,15 @@ button.close {
   }
 }
 .icons-sprite {
-  background: url('../images/../images/icons-sbac03a8446.png') no-repeat;
+  background: url('../images/../images/icons-s4ebdd54f40.png') no-repeat;
+}
+
+.icons-menu-sprite {
+  background: url('../images/../images/icons-menu-sefb8543d45.png') no-repeat;
+}
+
+.favicon-sprite {
+  background: url('../images/../images/favicon-s1036d715be.png') no-repeat;
 }
 
 .progress {
