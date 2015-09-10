@@ -40,7 +40,8 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			    return false;
 			});
 			$('body').mouseup(function(menu) {
-			    if(($(menu.target).parent('#menu-expanded').length <= 0)) {
+			    if(($(menu.target).parent('#menu-expanded').length <= 0)&&
+			    	$(menu.target).parent('#mainmenu a').length<=0) {
 			        $scope.menu.show = false;
 			        $scope.$apply();
 			    }
