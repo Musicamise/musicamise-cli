@@ -505,7 +505,12 @@ exports.updateOrderOrAddItem = function(req, res) {
 									var order = new Order();
 									inventory.quantity = quantity;
 									order.products.push(inventory);
+									var images = product.images.filter(function(image){ return image.frontImage;});
+									if(images.length<=0){
+										images = product.images.slice(0,1);
+									}
 									order.products[0].product = product;
+									order.products[0].product.images = images;
 									return processOrder(req,res,order,discountCode,giftCard);
 								}else{
 									console.log('out of quantity');
@@ -534,9 +539,14 @@ exports.updateOrderOrAddItem = function(req, res) {
 								}else{
 									if(inventory.quantity>=quantity){
 										inventory.quantity = quantity;
+										
 										orderCached2.products.push(inventory);
+										var images2 = product.images.filter(function(imageTemp){return imageTemp.frontImage;});
+										if(images2.length<=0){
+											images2 = product.images.slice(0,1);
+										}
 										orderCached2.products[orderCached2.products.length-1].product = product;
-
+										orderCached2.products[orderCached2.products.length-1].product.images = images2;
 										return processOrder(req,res,orderCached2,discountCode,giftCard);
 										
 									}else{
