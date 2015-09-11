@@ -1,14 +1,11 @@
 @import "../lib/bootstrap-sass-official/assets/stylesheets/_bootstrap";
 @import "../lib/font-awesome/css/font-awesome.min.css";
+@import 'sass-modules/myfunctions';  
+@import 'sass-modules/vars';  
+@import 'sass-modules/media_queries.scss';
 @import 'sass-modules/images.scss';
 @import 'sass-modules/progress-bar.scss';
 @import 'sass-modules/master_page.scss';
-@import 'sass-modules/1024.scss';
-@import 'sass-modules/800.scss';
-@import 'sass-modules/768.scss';
-@import 'sass-modules/640.scss';
-@import 'sass-modules/480.scss';
-@import 'sass-modules/320.scss';
 @import 'sass-modules/search.scss';
 @import 'sass-modules/home-content.scss';
 @import 'sass-modules/megamenu.scss';

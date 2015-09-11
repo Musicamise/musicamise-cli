@@ -1,0 +1,11 @@
+@media #{$mobile} {
+  @import "media_queries/_360";
+}
+
+@media #{$tablets} {
+  @import "media_queries/_500";
+}
+
+@media #{$desktops} {
+  @import "media_queries/_960";
+}

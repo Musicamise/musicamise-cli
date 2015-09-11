@@ -1,33 +1,35 @@
-@media (max-width:1024px){
-	.grid_list {
-	padding-bottom: 1.5em;
-	margin-bottom: 1.5em;
+.mobile-only { display: none !important; }
+.tablet-only { display: none !important; }
+.tablet-mobile-only { display: none !important; }
+.grid_list {
+  padding-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 .header_right {
   float: right;
   width: 48%;
 }
 .grid_text h3, .grid_text-middle h3 {
-	font-size: 15px;
+  font-size: 15px;
 }
 .grid_text p, .grid_text-middle p {
-	font-size: 12px;
+  font-size: 12px;
 }
 .content_text h4 a {
-	font-size: 1.2em;
+  font-size: 1.2em;
 }
 .span1_of_2 {
-	width: 26.33333%;
+  width: 26.33333%;
 }
 .span_3_of_2 {
-	width: 52.3333%;
+  width: 52.3333%;
 }
 .button1 {
-	padding: 7px 10px;
+  padding: 7px 10px;
 }
 .view .mask, .view .content {
-	top: 138px;
-	left: 82px;
+  top: 138px;
+  left: 82px;
 }
 .arriv h3 {
   font-size: 1.4em;
@@ -97,5 +99,4 @@
 }
 .our-st li {
    font-size:0.9em;
-}
 }
