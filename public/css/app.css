@@ -7329,16 +7329,296 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite {
-  background: url('../images/../images/icons-s4ebdd54f40.png') no-repeat;
+.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-feminino-o, .icons-feminino, .icons-infantil-o, .icons-infantil, .icons-masculino-o, .icons-masculino, .icons-pagseguro_info, .icons-simbolo_Logo {
+  background: url('../images/../images/icons-s69dc3327cd.png') no-repeat;
 }
 
-.icons-menu-sprite {
+.icons-menu-sprite, .icons-menu-camisa-cor, .icons-menu-camisa, .icons-menu-caneca-cor, .icons-menu-caneca, .icons-menu-contato-cor, .icons-menu-contato, .icons-menu-logo-cor, .icons-menu-logo, .icons-menu-parceiros-cor, .icons-menu-parceiros {
   background: url('../images/../images/icons-menu-sefb8543d45.png') no-repeat;
 }
 
-.favicon-sprite {
+.favicon-sprite, .favicon-android-icon-144x144, .favicon-android-icon-192x192, .favicon-android-icon-36x36, .favicon-android-icon-48x48, .favicon-android-icon-72x72, .favicon-android-icon-96x96, .favicon-apple-icon-114x114, .favicon-apple-icon-120x120, .favicon-apple-icon-144x144, .favicon-apple-icon-152x152, .favicon-apple-icon-180x180, .favicon-apple-icon-57x57, .favicon-apple-icon-60x60, .favicon-apple-icon-72x72, .favicon-apple-icon-76x76, .favicon-apple-icon-precomposed, .favicon-apple-icon, .favicon-favicon-16x16, .favicon-favicon-32x32, .favicon-favicon-96x96, .favicon-ms-icon-144x144, .favicon-ms-icon-150x150, .favicon-ms-icon-310x310, .favicon-ms-icon-70x70 {
   background: url('../images/../images/favicon-s1036d715be.png') no-repeat;
+}
+
+.icons-carrinho_vermelho {
+  background-position: 0 -1650px;
+}
+
+.icons-close_1 {
+  background-position: 0 -1778px;
+}
+
+.icons-entrar-fb2 {
+  background-position: 0 -1682px;
+}
+
+.icons-entrarfb-mobile {
+  background-position: 0 -1728px;
+}
+
+.icons-entrarfb {
+  background-position: 0 -1612px;
+}
+
+.icons-feminino-o {
+  background-position: 0 -1342px;
+}
+
+.icons-feminino {
+  background-position: 0 -454px;
+}
+
+.icons-infantil-o {
+  background-position: 0 -681px;
+}
+
+.icons-infantil {
+  background-position: 0 0;
+}
+
+.icons-masculino-o {
+  background-position: 0 -1115px;
+}
+
+.icons-masculino {
+  background-position: 0 -227px;
+}
+
+.icons-pagseguro_info {
+  background-position: 0 -908px;
+}
+
+.icons-simbolo_Logo {
+  background-position: 0 -1569px;
+}
+
+.icons-menu-camisa-cor {
+  background-position: 0 -426px;
+}
+
+.icons-menu-camisa {
+  background-position: 0 -568px;
+}
+
+.icons-menu-caneca-cor {
+  background-position: 0 -284px;
+}
+
+.icons-menu-caneca {
+  background-position: 0 -355px;
+}
+
+.icons-menu-contato-cor {
+  background-position: 0 -497px;
+}
+
+.icons-menu-contato {
+  background-position: 0 -639px;
+}
+
+.icons-menu-logo-cor {
+  background-position: 0 0;
+}
+
+.icons-menu-logo {
+  background-position: 0 -213px;
+}
+
+.icons-menu-parceiros-cor {
+  background-position: 0 -142px;
+}
+
+.icons-menu-parceiros {
+  background-position: 0 -71px;
+}
+
+.favicon-android-icon-144x144 {
+  background-position: 0 -1375px;
+}
+
+.favicon-android-icon-192x192 {
+  background-position: 0 -431px;
+}
+
+.favicon-android-icon-36x36 {
+  background-position: 0 -2463px;
+}
+
+.favicon-android-icon-48x48 {
+  background-position: 0 -2422px;
+}
+
+.favicon-android-icon-72x72 {
+  background-position: 0 -2119px;
+}
+
+.favicon-android-icon-96x96 {
+  background-position: 0 -1877px;
+}
+
+.favicon-apple-icon-114x114 {
+  background-position: 0 -1763px;
+}
+
+.favicon-apple-icon-120x120 {
+  background-position: 0 -1643px;
+}
+
+.favicon-apple-icon-144x144 {
+  background-position: 0 -1499px;
+}
+
+.favicon-apple-icon-152x152 {
+  background-position: 0 -1098px;
+}
+
+.favicon-apple-icon-180x180 {
+  background-position: 0 -788px;
+}
+
+.favicon-apple-icon-57x57 {
+  background-position: 0 -2373px;
+}
+
+.favicon-apple-icon-60x60 {
+  background-position: 0 -2313px;
+}
+
+.favicon-apple-icon-72x72 {
+  background-position: 0 -2181px;
+}
+
+.favicon-apple-icon-76x76 {
+  background-position: 0 -2043px;
+}
+
+.favicon-apple-icon-precomposed {
+  background-position: 0 -596px;
+}
+
+.favicon-apple-icon {
+  background-position: 0 -265px;
+}
+
+.favicon-favicon-16x16 {
+  background-position: 0 -2522px;
+}
+
+.favicon-favicon-32x32 {
+  background-position: 0 -2494px;
+}
+
+.favicon-favicon-96x96 {
+  background-position: 0 -1960px;
+}
+
+.favicon-ms-icon-144x144 {
+  background-position: 0 -1250px;
+}
+
+.favicon-ms-icon-150x150 {
+  background-position: 0 -968px;
+}
+
+.favicon-ms-icon-310x310 {
+  background-position: 0 0;
+}
+
+.favicon-ms-icon-70x70 {
+  background-position: 0 -2253px;
+}
+
+.icon {
+  display: block;
+}
+.icon.icons-entrar-fb2 {
+  height: 46px;
+  width: 202px;
+}
+.icon.icons-entrarfb {
+  height: 38px;
+  width: 150px;
+}
+.icon.icons-carrinho_vermelho {
+  height: 32px;
+  width: 37px;
+}
+.icon.icons-close_1 {
+  height: 28px;
+  width: 28px;
+}
+.icon.icons-feminino {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-feminino-o {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-masculino {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-masculino-o {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-infantil {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-infantil-o {
+  height: 227px;
+  width: 380px;
+}
+.icon.icons-pagseguro_info {
+  height: 207px;
+  width: 500px;
+}
+.icon.icons-simbolo_Logo {
+  height: 43px;
+  width: 50px;
+}
+.icon.icons-menu-camisa-cor {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-camisa {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-caneca-cor {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-caneca {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-contato-cor {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-contato {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-logo-cor {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-logo {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-parceiros-cor {
+  height: 71px;
+  width: 83px;
+}
+.icon.icons-menu-parceiros {
+  height: 71px;
+  width: 83px;
 }
 
 .progress {

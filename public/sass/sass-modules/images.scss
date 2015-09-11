@@ -2,3 +2,82 @@
 @import "../images/icons-menu/*.png";
 @import "../images/favicon/*.png";
 
+
+$icons: sprite-map("../images/icons/*.png", $spacing: 1px, $layout: smart);
+$icons-menu: sprite-map("../images/icons-menu/*.png", $spacing: 1px, $layout: smart);
+@include all-icons-sprites; 
+@include all-icons-menu-sprites; 
+@include all-favicon-sprites; 
+
+.icon {
+	display: block;
+
+	&.icons-entrar-fb2{
+		@include sprite-dimensions($icons,entrar-fb2);
+	}
+	&.icons-entrarfb{
+		@include sprite-dimensions($icons,entrarfb);
+	}
+	&.icons-carrinho_vermelho{
+		@include sprite-dimensions($icons,carrinho_vermelho);
+	}
+	&.icons-close_1{
+		@include sprite-dimensions($icons,close_1);
+	}
+	&.icons-feminino{
+		@include sprite-dimensions($icons,feminino);
+	}
+	&.icons-feminino-o{
+		@include sprite-dimensions($icons,feminino-o);
+	}
+	&.icons-masculino{
+		@include sprite-dimensions($icons,masculino);
+	}
+	&.icons-masculino-o{
+		@include sprite-dimensions($icons,masculino-o);
+	}
+	&.icons-infantil{
+		@include sprite-dimensions($icons,infantil);
+	}
+	&.icons-infantil-o{
+		@include sprite-dimensions($icons,infantil-o);
+	}
+	&.icons-pagseguro_info{
+		@include sprite-dimensions($icons,pagseguro_info);
+	}
+	&.icons-simbolo_Logo{
+		@include sprite-dimensions($icons,simbolo_Logo);
+	}
+
+	&.icons-menu-camisa-cor{
+		@include sprite-dimensions($icons-menu,camisa-cor);
+	}
+	&.icons-menu-camisa{
+		@include sprite-dimensions($icons-menu,camisa);
+	}
+	&.icons-menu-caneca-cor{
+		@include sprite-dimensions($icons-menu,caneca-cor);
+	}
+	&.icons-menu-caneca{
+		@include sprite-dimensions($icons-menu,caneca);
+	}
+	&.icons-menu-contato-cor{
+		@include sprite-dimensions($icons-menu,contato-cor);
+	}
+	&.icons-menu-contato{
+		@include sprite-dimensions($icons-menu,contato);
+	}
+	&.icons-menu-logo-cor{
+		@include sprite-dimensions($icons-menu,logo-cor);
+	}
+	&.icons-menu-logo{
+		@include sprite-dimensions($icons-menu,logo);
+	}
+	&.icons-menu-parceiros-cor{
+		@include sprite-dimensions($icons-menu,parceiros-cor);
+	}
+	&.icons-menu-parceiros{
+		@include sprite-dimensions($icons-menu,parceiros);
+	}
+
+}
