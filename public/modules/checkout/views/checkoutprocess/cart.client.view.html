@@ -8,9 +8,8 @@
 	 		<h1>Meu carrinho ({{order.totalItems}})</h1>
 			
  			<div  class="cart-header" ng-repeat="product in order.products" >
-		 		<script> 
-			   	</script>
-		 		<div class="close1" ng-click='cartRemoveItem(product._id)'> </div>
+		 		 
+		 		<div class="icon icons-close_1" ng-click='cartRemoveItem(product._id)'> </div>
 			 	<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
 				 		<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/>

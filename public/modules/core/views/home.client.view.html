@@ -25,8 +25,10 @@
 						<div ng-if="frontCollections.length>0" class="col-md-4 " ng-class="frontCollections[0].slug">
 							<label class="gender-label" ng-bind="frontCollections[0].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[0].gender?'gender':'collection'}}/{{frontCollections[0].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-								<img ng-hide="picture"  src="images/icons/masculinopb.png">
-								<img ng-show="picture" src="images/icons/masculino.png">
+								<i ng-hide="picture" class="icon icons-{{frontCollections[0].slug}}-o" > </i>
+
+								<i ng-show="picture" class="icon icons-{{frontCollections[0].slug}}" > </i>
+							
 							</a>
 							<!-- <div class="arriv-info" >
 								<h3 ng-bind="frontCollections[0].title"></h3>
@@ -39,8 +41,9 @@
 						<div ng-if="frontCollections.length>1" class="col-md-4 "  ng-class="frontCollections[1].slug">
 							<label class="gender-label" ng-bind="frontCollections[1].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[1].gender?'gender':'collection'}}/{{frontCollections[1].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-								<img ng-hide="picture"  src="images/icons/femininopb.png">
-								<img ng-show="picture" src="images/icons/feminino.png">
+								<i ng-hide="picture" class="icon icons-{{frontCollections[1].slug}}-o" > </i>
+
+								<i ng-show="picture" class="icon icons-{{frontCollections[1].slug}}" > </i>
 							</a>
 							<!-- <div class="arriv-info" >
 								<h3 ng-bind="frontCollections[1].title"></h3>
@@ -53,8 +56,9 @@
 						<div  ng-if="frontCollections.length>2" class="col-md-4 " ng-class="frontCollections[2].slug">
 							<label class="gender-label" ng-bind="frontCollections[2].title"> </label>
 							<a  ng-href="/#!/products/{{frontCollections[2].gender?'gender':'collection'}}/{{frontCollections[2].slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-								<img ng-hide="picture"  src="images/icons/infantilpb.png">
-								<img ng-show="picture" src="images/icons/infantil.png">
+								<i ng-hide="picture" class="icon icons-{{frontCollections[2].slug}}-o" > </i>
+
+								<i ng-show="picture" class="icon icons-{{frontCollections[2].slug}}" > </i>
 							</a>
 							<!-- <div class="arriv-info"  >
 								<h3 ng-bind="frontCollections[2].title" ></h3>
@@ -93,7 +97,7 @@
 	<div class="frete-gratis margb55">
 		<div class="container">
 			<a href="#">
-				<img  src="/images/icons-menu/M1.png">
+				<i class="icon icons-menu-logo-cor" > </i>
 				<h3>Frete Gratis!</h3>
 			</a>
 		 	
@@ -104,7 +108,7 @@
 	<div class="parcerias margb60 margt20">
 		<div class="container">
 			<a href="#!/lojasparceiras/">
-				<img class="icon-parcerias" src="/images/icons-menu/Parceiros1.png">
+				<i class="icon icons-menu-parceiros-cor" > </i>
 				<h3>Parcerias</h3>
 			</a>
 			<!-- Jssor Slider Begin -->

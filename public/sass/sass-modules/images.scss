@@ -23,6 +23,14 @@ $icons-menu: sprite-map("../images/icons-menu/*.png", $spacing: 1px, $layout: sm
 	}
 	&.icons-close_1{
 		@include sprite-dimensions($icons,close_1);
+  		cursor: pointer;
+		right: 0px;
+  		top: 0px;
+		-webkit-transition: color 0.2s ease-in-out;
+		-moz-transition: color 0.2s ease-in-out;
+		-o-transition: color 0.2s ease-in-out;
+		transition: color 0.2s ease-in-out;
+
 	}
 	&.icons-feminino{
 		@include sprite-dimensions($icons,feminino);

@@ -7547,6 +7547,13 @@ button.close {
 .icon.icons-close_1 {
   height: 28px;
   width: 28px;
+  cursor: pointer;
+  right: 0px;
+  top: 0px;
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 .icon.icons-feminino {
   height: 227px;
@@ -18621,7 +18628,7 @@ i.mail {
     margin-top: 1em;
   }
 
-  .close1, .close2 {
+  .icons-close_1 {
     top: 31px;
   }
 
@@ -21168,20 +21175,6 @@ p.product_descr {
 .cart-item-info h4 span {
   font-size: 0.65em;
   font-weight: 400;
-}
-
-.close1, .close2 {
-  background: url("../images/close_1.png") no-repeat 0px 0px;
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  -webkit-transition: color 0.2s ease-in-out;
-  -moz-transition: color 0.2s ease-in-out;
-  -o-transition: color 0.2s ease-in-out;
-  transition: color 0.2s ease-in-out;
 }
 
 .cart-header {
