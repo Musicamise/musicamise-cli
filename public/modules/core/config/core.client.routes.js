@@ -30,10 +30,10 @@ angular.module('core',['users']).config(['$stateProvider', '$urlRouterProvider',
 			url: '/centrodeajuda',
 			templateUrl: 'modules/core/views/static/centrodeajuda.client.view.html'
 		}).state('trabalheconosco', {
-			url: '/centrodeajuda',
+			url: '/trabalheconosco',
 			templateUrl: 'modules/core/views/static/trabalhe_conosco.client.view.html'
 		}).state('missao', {
-			url: '/centrodeajuda',
+			url: '/missao',
 			templateUrl: 'modules/core/views/static/missa_visao_e_valores.client.view.html'
 		});
 	}
