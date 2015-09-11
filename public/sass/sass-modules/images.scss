@@ -1,10 +1,12 @@
-@import "../images/icons/*.png";
-@import "../images/icons-menu/*.png";
-@import "../images/favicon/*.png";
+@import "icons/*.png";
+@import "gender/*.png";
+@import "icons-menu/*.png";
+@import "favicon/*.png";
+@import "myfunctions";
 
-
-$icons: sprite-map("../images/icons/*.png", $spacing: 1px, $layout: smart);
-$icons-menu: sprite-map("../images/icons-menu/*.png", $spacing: 1px, $layout: smart);
+$icons: sprite-map("icons/*.png", $spacing: 1px, $layout: smart);
+$gender: sprite-map("gender/*.png", $spacing: 1px, $layout: smart);
+$icons-menu: sprite-map("icons-menu/*.png", $spacing: 1px, $layout: smart);
 @include all-icons-sprites; 
 @include all-icons-menu-sprites; 
 @include all-favicon-sprites; 
@@ -33,23 +35,24 @@ $icons-menu: sprite-map("../images/icons-menu/*.png", $spacing: 1px, $layout: sm
 
 	}
 	&.icons-feminino{
-		@include sprite-dimensions($icons,feminino);
+		@include responsive-sprite($gender, feminino);
 	}
 	&.icons-feminino-o{
-		@include sprite-dimensions($icons,feminino-o);
+		@include responsive-sprite($gender, feminino-o);
 	}
 	&.icons-masculino{
-		@include sprite-dimensions($icons,masculino);
+		@include responsive-sprite($gender,masculino);
 	}
 	&.icons-masculino-o{
-		@include sprite-dimensions($icons,masculino-o);
+		@include responsive-sprite($gender,masculino-o);
 	}
 	&.icons-infantil{
-		@include sprite-dimensions($icons,infantil);
+		@include responsive-sprite($gender,infantil);
 	}
 	&.icons-infantil-o{
-		@include sprite-dimensions($icons,infantil-o);
+		@include responsive-sprite($gender,infantil-o);
 	}
+	
 	&.icons-pagseguro_info{
 		@include sprite-dimensions($icons,pagseguro_info);
 	}

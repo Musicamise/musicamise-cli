@@ -191,7 +191,7 @@ i.ars {
     background-color: $musicamise-color;
     color: white;
   }
-  img{
+  img,i{
     width: 6%;
     position: absolute;
   }
@@ -207,7 +207,7 @@ i.ars {
     background-color: $parceiros-color;
     color: white;
   }
-  img.icon-parcerias{
+  i{
     width: 6%;
     position: absolute;
     z-index: 100;

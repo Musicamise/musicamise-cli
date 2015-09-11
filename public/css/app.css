@@ -7329,68 +7329,48 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-feminino-o, .icons-feminino, .icons-infantil-o, .icons-infantil, .icons-masculino-o, .icons-masculino, .icons-pagseguro_info, .icons-simbolo_Logo {
-  background: url('../images/../images/icons-s69dc3327cd.png') no-repeat;
+.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-pagseguro_info, .icons-simbolo_Logo {
+  background: url('../images/icons-s01982fce65.png') no-repeat;
+}
+
+.gender-sprite {
+  background: url('../images/gender-sdc8560b17a.png') no-repeat;
 }
 
 .icons-menu-sprite, .icons-menu-camisa-cor, .icons-menu-camisa, .icons-menu-caneca-cor, .icons-menu-caneca, .icons-menu-contato-cor, .icons-menu-contato, .icons-menu-logo-cor, .icons-menu-logo, .icons-menu-parceiros-cor, .icons-menu-parceiros {
-  background: url('../images/../images/icons-menu-sefb8543d45.png') no-repeat;
+  background: url('../images/icons-menu-sf96cfd0bb4.png') no-repeat;
 }
 
 .favicon-sprite, .favicon-android-icon-144x144, .favicon-android-icon-192x192, .favicon-android-icon-36x36, .favicon-android-icon-48x48, .favicon-android-icon-72x72, .favicon-android-icon-96x96, .favicon-apple-icon-114x114, .favicon-apple-icon-120x120, .favicon-apple-icon-144x144, .favicon-apple-icon-152x152, .favicon-apple-icon-180x180, .favicon-apple-icon-57x57, .favicon-apple-icon-60x60, .favicon-apple-icon-72x72, .favicon-apple-icon-76x76, .favicon-apple-icon-precomposed, .favicon-apple-icon, .favicon-favicon-16x16, .favicon-favicon-32x32, .favicon-favicon-96x96, .favicon-ms-icon-144x144, .favicon-ms-icon-150x150, .favicon-ms-icon-310x310, .favicon-ms-icon-70x70 {
-  background: url('../images/../images/favicon-s1036d715be.png') no-repeat;
+  background: url('../images/favicon-s8ef1293992.png') no-repeat;
 }
 
 .icons-carrinho_vermelho {
-  background-position: 0 -1650px;
+  background-position: 0 -288px;
 }
 
 .icons-close_1 {
-  background-position: 0 -1778px;
+  background-position: 0 -416px;
 }
 
 .icons-entrar-fb2 {
-  background-position: 0 -1682px;
+  background-position: 0 -320px;
 }
 
 .icons-entrarfb-mobile {
-  background-position: 0 -1728px;
+  background-position: 0 -366px;
 }
 
 .icons-entrarfb {
-  background-position: 0 -1612px;
-}
-
-.icons-feminino-o {
-  background-position: 0 -1342px;
-}
-
-.icons-feminino {
-  background-position: 0 -454px;
-}
-
-.icons-infantil-o {
-  background-position: 0 -681px;
-}
-
-.icons-infantil {
-  background-position: 0 0;
-}
-
-.icons-masculino-o {
-  background-position: 0 -1115px;
-}
-
-.icons-masculino {
-  background-position: 0 -227px;
+  background-position: 0 -250px;
 }
 
 .icons-pagseguro_info {
-  background-position: 0 -908px;
+  background-position: 0 0;
 }
 
 .icons-simbolo_Logo {
-  background-position: 0 -1569px;
+  background-position: 0 -207px;
 }
 
 .icons-menu-camisa-cor {
@@ -7556,28 +7536,58 @@ button.close {
   transition: color 0.2s ease-in-out;
 }
 .icon.icons-feminino {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 20%;
 }
 .icon.icons-feminino-o {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 0%;
 }
 .icon.icons-masculino {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 100%;
 }
 .icon.icons-masculino-o {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 80%;
 }
 .icon.icons-infantil {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 60%;
 }
 .icon.icons-infantil-o {
-  height: 227px;
-  width: 380px;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 59.73684%;
+  background: url('../images/gender-sb01da24867.png');
+  background-size: 100%;
+  background-position: 0 40%;
 }
 .icon.icons-pagseguro_info {
   height: 207px;
@@ -16727,6 +16737,8 @@ a:focus h3 {
 .top_left ul.mainmenu li {
   display: block;
   padding: 2.5px 0;
+  position: relative;
+  z-index: 99999;
 }
 .top_left ul.mainmenu li a {
   text-align: start;
@@ -16826,6 +16838,9 @@ a:focus h3 {
 .box_cart a:hover h3, .box_cart a:focus h3 {
   color: #fff;
   text-decoration: none;
+}
+.box_cart i {
+  display: inline-block;
 }
 .box_cart h3 {
   color: #7A8499;
@@ -17178,6 +17193,12 @@ ul.megamenu.musicamise {
   text-decoration: none;
 }
 
+.customer-footer .icon {
+  overflow: hidden;
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+}
 .customer-footer li {
   display: block;
 }
@@ -18923,7 +18944,7 @@ i.ars {
   background-color: #f16136;
   color: white;
 }
-.frete-gratis img {
+.frete-gratis img, .frete-gratis i {
   width: 6%;
   position: absolute;
 }
@@ -18938,7 +18959,7 @@ i.ars {
   background-color: #36526d;
   color: white;
 }
-.parcerias img.icon-parcerias {
+.parcerias i {
   width: 6%;
   position: absolute;
   z-index: 100;

@@ -78,35 +78,37 @@ a:focus {
 	    float: left;
 		padding-top: 20px;
 		li{
+			display: block;
+			padding: 2.5px 0;
+			position: relative;
+			z-index: 99999;
 			a{
 				text-align: start;
 				cursor: pointer;
 			}
-			display: block;
-			padding: 2.5px 0;
 			img{
 				width: 60px;
     			z-index: 100;
-			}
-			img.musicamise{
-			    position: absolute;
-		        margin-top: 0;
-			}
-			img.camisas{
-			    position: absolute;
-		        margin-top: 50px;
-			}
-			img.other-products{
-			    position: absolute;
-		        margin-top: 100px;
-			}
-			img.parceiros{
-			    position: absolute;
-		        margin-top: 150px;
-			} 
-			img.contato{
-			    position: absolute;
-		        margin-top: 200px;
+				&.musicamise{
+				    position: absolute;
+			        margin-top: 0;
+				}
+				&.camisas{
+				    position: absolute;
+			        margin-top: 50px;
+				}
+				&.other-products{
+				    position: absolute;
+			        margin-top: 100px;
+				}
+				&.parceiros{
+				    position: absolute;
+			        margin-top: 150px;
+				} 
+				&.contato{
+				    position: absolute;
+			        margin-top: 200px;
+				}
 			}
 		}
 	}
@@ -177,6 +179,9 @@ a:focus {
 	a:hover h3, a:focus h3 {
 	    color: #fff; 
 	    text-decoration: none; 
+	}
+	i{
+		display: inline-block;
 	}
 	h3{
 		color: #7A8499;
@@ -475,6 +480,7 @@ ul.megamenu.musicamise {
 				li{
 					text-align: center;
 					display: block;
+					
 					a{
 						text-align: center;
 						display: block;
@@ -549,6 +555,12 @@ ul.megamenu.musicamise {
 }
 
 .customer-footer {
+	.icon{
+		overflow: hidden;
+	    zoom:0.5;
+	    -moz-transform:scale(0.5);
+	    -moz-transform-origin: 0 0;
+	}
 	li {
 		display:block;
 		a {

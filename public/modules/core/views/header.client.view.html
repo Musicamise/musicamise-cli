@@ -5,10 +5,10 @@
 				<div class="top_left">
 					<ul class="mainmenu" id="mainmenu">
 						<li ><a ng-href="#!/" ng-click=""><i class="musicamise icon icons-menu-logo-cor" > </i> </a></li>
-						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu($event)"><i class="camisas icon icons-menu-camisa-cor"  > </i></a></li>
-						<li ng-show="loja.otherProducts"><a ng-href="" ng-click="clickIconMenu($event)"><i class="other-products icon icons-menu-caneca-cor"   > </i></a></li>
-						<li ng-show="localStores"  ><a ng-href="" ng-click="clickIconMenu($event)"><i class="parceiros icon icons-menu-parceiros-cor" > </i></a></li>
-						<li ng-show="false"><a ng-href="" ng-click="clickIconMenu($event)"><i class="contato icon icons-menu-contato-cor"> </i></a></li>
+						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu('camisas')"><i class="camisas icon icons-menu-camisa-cor"  > </i></a></li>
+						<li ng-show="loja.otherProducts"><a ng-href="" ng-click="clickIconMenu('other-products')"><i class="other-products icon icons-menu-caneca-cor"   > </i></a></li>
+						<li ng-show="localStores"  ><a ng-href="" ng-click="clickIconMenu('parceiros')"><i class="parceiros icon icons-menu-parceiros-cor" > </i></a></li>
+						<li ng-show="false"><a ng-href="" ng-click="clickIconMenu('contato')"><i class="contato icon icons-menu-contato-cor"> </i></a></li>
 					</ul>
 					
 					<ul  class="helpmenu">
@@ -40,7 +40,6 @@
 											  </span>
 											</div>
 						            	</fieldset>
-	 									<!-- <fb:login-button data-scope="email,user_friends" show-faces="true" max-rows="1" size="large" onlogin="checkLoginState()"></fb:login-button> -->
 	 									
 							            <span class="padb20"><a href="#!/user/esquecisenha">Perdeu a senha?</a></span>
 									</form>
@@ -72,9 +71,7 @@
 					</div>
 					<div class="cart box_cart">
 						<a href="/#!/cart">
-							<h3 class="marg5"> <!-- 
-								<span class="">{{order.totalFormatted}}</span> (
-								<span id="" class="">{{order.totalItems}}</span> item) -->
+							<h3 class="marg5">
 								<i class="icon icons-carrinho_vermelho"> </i>
 								<span id="" class="">{{order.totalItems}}</span> 
 							</h3>
