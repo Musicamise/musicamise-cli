@@ -7342,6 +7342,10 @@ button.close {
     display: none !important;
   }
 
+  .mobile-menu {
+    padding-top: 10px;
+  }
+
   ul.icon1 {
     display: none;
   }
@@ -18118,6 +18122,9 @@ a:focus h3 {
 .top_right {
   float: right;
 }
+.top_right i.icons-entrarfb-mobile {
+  border-radius: 10px;
+}
 .top_right h2 {
   text-transform: uppercase;
   font-size: 12px;
@@ -18188,7 +18195,7 @@ a:focus h3 {
   color: #7A8499;
   float: left;
   color: #000;
-  font-size: 17pt;
+  font-size: 28pt;
   float: left;
 }
 .box_cart p {
