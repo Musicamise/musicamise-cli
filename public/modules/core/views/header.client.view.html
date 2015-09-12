@@ -1,8 +1,8 @@
 <div data-ng-controller="HeaderController" data-ng-init="headerLoginAndCart()" >
-	<div class="top_bg" >
+	<div class="top_bg " >
 		<div class="container" >
-			<div class="header_top">
-				<div class="top_left">
+			<div class="header_top row">
+				<div class="top_left col-xs-4">
 					<ul  class="mainmenu desktop-tablet-only" id="mainmenu">
 						<li ><a ng-href="#!/" ng-click=""><i class="musicamise icon icons-menu-logo-cor" > </i> </a></li>
 						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu('camisas')"><i class="camisas icon icons-menu-camisa-cor"  > </i></a></li>
@@ -17,7 +17,7 @@
 						<li><a href="/#!/politicas">Formas de entrega</a></li>
 					</ul>
 				</div>
-				<div class="top_right ">
+				<div class="top_right col-xs-8 ">
 					<div class="log">
 						<div ng-if="authentication.user===''" class="login " ng-init="bindLoginEvent()" >
 							<div id="loginContainer"  class="margt7 container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
@@ -183,13 +183,13 @@
 			</div>
 		</li> -->
 	</div>
-	<div>
+	<div class="row">
 		message:
 
 		<label ng-bind="order.message"></label>
 		<p ng-bind-html="discount.description"> </p>
 	</div>
-	<div class="container" >
+	<div class="container row" >
 			<div class="head-t" >
 				<div class="logo">
 					<a href="/#!/"><img src="/images/Musicamise_site_Curvas.png" width="50%" alt="Musicamise"
