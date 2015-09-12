@@ -2,7 +2,7 @@
 	<div class="top_bg " >
 		<div class="container" >
 			<div class="header_top row">
-				<div class="top_left col-xs-4">
+				<div class="top_left col-xs-3">
 					<ul  class="mainmenu desktop-tablet-only" id="mainmenu">
 						<li ><a ng-href="#!/" ng-click=""><i class="musicamise icon icons-menu-logo-cor" > </i> </a></li>
 						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu('camisas')"><i class="camisas icon icons-menu-camisa-cor"  > </i></a></li>
@@ -11,14 +11,33 @@
 						<li ng-show="false"><a ng-href="" ng-click="clickIconMenu('contato')"><i class="contato icon icons-menu-contato-cor"> </i></a></li>
 					</ul>
 					
-					<ul  class="helpmenu">
+					<ul  class="helpmenu desktop-tablet-only">
 						<li><a href="/#!/centrodeajuda">Ajuda</a></li>|
 						<li><a href="/#!/contact">Contato</a></li>|
 						<li><a href="/#!/politicas">Formas de entrega</a></li>
 					</ul>
+					<ul  class="mobile-menu mobile-only">
+						<i class="fa fa-bars fa-lg"></i>
+					</ul>
 				</div>
-				<div class="top_right col-xs-8 ">
-					<div class="log">
+				<div class="top_right col-xs-9 ">
+					<div class="cart box_cart">
+						<a href="/#!/cart">
+							<h3 class="marg5">
+								<i class="icon icons-carrinho_vermelho"> </i>
+								<span id="" class="">{{order.totalItems}}</span> 
+							</h3>
+						</a>	
+						<!-- <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p> -->
+						<div class="clearfix"> </div>
+					</div>
+					<div class="floatright">
+						<a class="facebook" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
+							<i class="icon icons-entrarfb desktop-tablet-only"></i>
+							<i class="icon icons-entrarfb-mobile mobile-only"></i>
+						</a>
+					</div>
+					<div class="floatright">
 						<div ng-if="authentication.user===''" class="login " ng-init="bindLoginEvent()" >
 							<div id="loginContainer"  class="margt7 container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
 							    <div id="loginBox" class="expandable-box">                
@@ -63,21 +82,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="floatleft">
-						<a class="facebook" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
-							<i class="icon icons-entrarfb"></i>
-						</a>
-					</div>
-					<div class="cart box_cart">
-						<a href="/#!/cart">
-							<h3 class="marg5">
-								<i class="icon icons-carrinho_vermelho"> </i>
-								<span id="" class="">{{order.totalItems}}</span> 
-							</h3>
-						</a>	
-						<!-- <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p> -->
-						<div class="clearfix"> </div>
 					</div>
 				</div>
 				<div class="clearfix"> </div>

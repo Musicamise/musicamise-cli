@@ -17,9 +17,14 @@ $icons-menu: sprite-map("icons-menu/*.png", $spacing: 1px, $layout: smart);
 	&.icons-entrar-fb2{
 		@include sprite-dimensions($icons,entrar-fb2);
 	}
+
 	&.icons-entrarfb{
 		@include sprite-dimensions($icons,entrarfb);
 	}
+	&.icons-entrarfb-mobile{
+		@include sprite-dimensions($icons,entrarfb-mobile);
+	}
+
 	&.icons-carrinho_vermelho{
 		@include sprite-dimensions($icons,carrinho_vermelho);
 	}

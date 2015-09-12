@@ -112,7 +112,7 @@ a:focus {
 	}
 
 	ul.helpmenu{
-		padding-left: 70px;
+		padding-left: 0px;
 	}
 }
 
@@ -120,7 +120,6 @@ a:focus {
 
 .top_right{
 	float: right;
-	width: 40%;
 	 h2{
 		text-transform:uppercase;
 		font-size:12px;
@@ -170,7 +169,7 @@ a:focus {
 	margin-bottom:1em;
 }
 .box_cart {
-	float: left;
+	float: right;
 	margin: 0.15em 0.1em 0;
 	background-color: $light-color;
     border-radius: 10px;

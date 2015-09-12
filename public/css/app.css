@@ -7984,7 +7984,7 @@ button.close {
   }
 }
 @media screen and (min-width: 500px) and (max-width: 959px) {
-  .tablet-only {
+  .mobile-only {
     display: none !important;
   }
 
@@ -7992,7 +7992,7 @@ button.close {
     display: none !important;
   }
 
-  .desktop-tablet-only {
+  .desktop-mobile-only {
     display: none !important;
   }
 
@@ -8858,6 +8858,10 @@ button.close {
 .icon.icons-entrarfb {
   height: 38px;
   width: 150px;
+}
+.icon.icons-entrarfb-mobile {
+  height: 50px;
+  width: 50px;
 }
 .icon.icons-carrinho_vermelho {
   height: 32px;
@@ -18108,12 +18112,11 @@ a:focus h3 {
   margin-top: 200px;
 }
 .top_left ul.helpmenu {
-  padding-left: 70px;
+  padding-left: 0px;
 }
 
 .top_right {
   float: right;
-  width: 40%;
 }
 .top_right h2 {
   text-transform: uppercase;
@@ -18169,7 +18172,7 @@ a:focus h3 {
 }
 
 .box_cart {
-  float: left;
+  float: right;
   margin: 0.15em 0.1em 0;
   background-color: #f5ae81;
   border-radius: 10px;
