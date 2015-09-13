@@ -15,6 +15,19 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			$scope.search.query = $location.search().q;
 		});
 
+		$scope.numberformat =  function (n, len) {
+            var num = parseInt(n, 10);
+            len = parseInt(len, 10);
+            if (isNaN(num) || isNaN(len)) {
+                return n;
+            }
+            num = ''+num;
+            while (num.length < len) {
+                num = '0'+num;
+            }
+            return num;
+        };
+
 		$scope.headerLoginAndCart = function(){
 			$scope.authentication = Authentication;
 			$rootScope.order = {};
@@ -32,6 +45,8 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			});
 
 		};
+
+
 		
 		$scope.bindMenuEvent = function () {
 			var menu = $('#menu-expanded');
@@ -142,3 +157,13 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 	}
 
 ]);
+
+// angular.module('core', []).filter('digits', function() {
+// 	return function(input) {
+// 	   if (input < 10) { 
+// 	          input = '0' + input;
+// 	      }
+
+// 	      return input;
+// 	    }
+// });
