@@ -18117,6 +18117,7 @@ a:focus h3 {
 }
 .top_left ul.helpmenu {
   padding-left: 0px;
+  white-space: nowrap;
 }
 
 .top_right {

@@ -17,6 +17,7 @@ module.exports = {
 				'public/lib/fancybox-plus/css/jquery.fancybox-plus.css',
 				'public/plugin/owl-carousel/owl.theme.css',
 				'public/plugin/owl-carousel/owl.carousel.css',
+				'public/plugin/jasny-bootstrap/css/jasny-bootstrap.min.css',
 			],
 			js: [
 				'public/plugin/js/jquery-1.11.1.min.js',
@@ -50,7 +51,7 @@ module.exports = {
 			'public/plugin/etalage/etalage.css',
 		],
 		js: [
-			'public/plugin/js/*.js',
+			'public/plugin/jasny-bootstrap/js/jasny-bootstrap.min.js',
 			'public/plugin/pagseguro.lightbox/pagseguro.lightbox.js',
 			'public/plugin/etalage/jquery.etalage.min.js',
 			'public/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js',
