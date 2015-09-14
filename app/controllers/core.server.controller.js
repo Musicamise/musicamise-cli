@@ -302,7 +302,7 @@ exports.mainPage = function(req,res){
 							.where('onLineVisible').equals(true)
 						   	.where('collectionsSlugs').in(['destaque'])
 						   	.select('-_id slug price title priceFormatted priceOldFormatted priceCompareWith images')
-						   	.limit(4)
+						   	// .limit(10)
 						   	.exec(function(err,products){
 						   		if(!err){
 			   						products.forEach(function(product,indexProduct){

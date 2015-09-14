@@ -62,14 +62,13 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 		
 		$scope.initCarousel = function(id){
 			$('#'+id).owlCarousel({
-
 				navigation : false,
 				slideSpeed : 300,
 				paginationSpeed : 400,
 				singleItem : true,
 				navigationText: false,
 				responsive: true,
-				autoPlay:false,
+				autoPlay:true,
 				rewindNav:true,
 				// 'singleItem:true' is a shortcut for:
 				// items : 1, 
@@ -86,19 +85,26 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 				loop:true,
 			    margin:10,
 			    responsiveClass:true,
+			   	navigation : true,
+				rewindNav:true,
+				navigationText: [
+			      "<i class='icon-chevron-left icon-white'><</i>",
+			      "<i class='icon-chevron-right icon-white'>></i>"
+			      ],
 			    responsive:{
 			        0:{
 			            items:1,
-			            nav:true
+			            loop:true
+
 			        },
 			        600:{
 			            items:3,
-			            nav:false
+			            loop:true
+
 			        },
 			        1000:{
 			            items:5,
-			            nav:true,
-			            loop:false
+			            loop:true
 			        }
 			    }
 
