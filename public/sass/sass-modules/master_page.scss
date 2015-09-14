@@ -146,17 +146,18 @@ a:focus {
 .floatright{
 	float:right!important;
 }
-.padl60{
-	padding-left: 60px!important;
-}
 .head-t {
   padding: 1em 0;
 }
+
 .logo {
   float: left;
   margin: 0 0 1.5em 0;
-  width: 50%;
   margin-left: 25%;
+  width: 45%;
+  img{
+  	width: 100%;
+  }
 }
 
 .header_right {
@@ -240,6 +241,7 @@ a:focus {
 
 .container-expandable-box {
 	position:relative;
+	margin-top: 7px;
 	a{
 		span {
 			display: block;

@@ -3,16 +3,36 @@
 .desktop-tablet-only { display: none !important; }
 
 
+
 .mobile-menu{
   padding-top: 10px;
 }
+.container{
+  padding: 0;
+}
+div.header_top {
+  padding: 0;
+  .top_left{
+    .navbar-toggle{
+      padding: 0;
+    }
+    .navmenu-nav{
+      span{
+        color:#000000;
+      }
+    }
+  }
+
+  .top_right{
+    .container-expandable-box {
+      margin-top: 14px;
+      }
+  }
+}
+
 
 ul.icon1 {
 	display: none;
-}
-.logo {
-  float: left;
-  width: 45%;
 }
 .create_btn {
 	display:none;
@@ -33,11 +53,9 @@ ul.icon1 {
 	background: #fff;
 }
 .top_left {
-  float: none;
   text-align: center;
 }
 .top_right {
-  float: none;
   text-align: center;
 }
 .reg {
@@ -386,9 +404,7 @@ p.prod-desc, p.product_descr {
   padding: 0px 1px;
   font-size: 11px;
 }
-.header_top {
-  padding: 13px 0 2px;
-}
+
 .header_right {
   float: right;
   width: 42%;
@@ -400,9 +416,6 @@ p.prod-desc, p.product_descr {
 .icon1 {
   width: 39%;
   margin: 0px 0;
-}
-.logo {
-  margin: 0;
 }
 .log {
   width: 45%;

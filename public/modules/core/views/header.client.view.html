@@ -17,17 +17,40 @@
 						<li><a href="/#!/politicas">Formas de entrega</a></li>
 					</ul>
 					<nav id="myNavmenu" class="mobile-only navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-					  <a class="navmenu-brand" href="#">Brand</a>
-					  <ul class="nav navmenu-nav">
+					  <a class="navmenu-brand" href="#!/"> <i class="icon icons-simbolo_Logo"></i> Musicamise </a>
+					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.gender">
+					  	<span ng-bind="key"></span>
+					    <li ng-repeat="typeClothes in value">
+					    	<a ng-href="/#!/{{typeClothes}}/{{key}}"ng-bind="typeClothes"></a>
+				    	</li>
+					  </ul>
+					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.collection">
+					  	<span ng-bind="key"></span>
+					    <li ng-repeat="typeClothes in value">
+					    	<a ng-href="/#!/{{typeClothes}}/collection/{{key}}"ng-bind="typeClothes"></a>
+				    	</li>
+					  </ul>
+					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.otherProducts">
+					  	<span ng-bind="key"></span>
+					    <li  ng-repeat="product in value" >
+					    	<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
+				    	</li>
+					  </ul>
+					  <ul class="nav navmenu-nav" ng-repeat="(store,storeObj) in localStores">
+					  	<span ng-bind="key"></span>
+					    <li  ng-repeat="localStoreType in storeObj.products">
+					    	<a  ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+				    	</li>
+					  </ul>
+					  
+					 <!--  <ul class="nav navmenu-nav">
 					    <li class="active"><a href="#">Home</a></li>
 					    <li><a href="#">Link</a></li>
 					    <li><a href="#">Link</a></li>
-					  </ul>
+					  </ul> -->
 					</nav>
 			  		<button type="button" class="mobile-only navbar-toggle floatleft" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
+					   <i class="fa fa-bars fa-2x"> </i>
 				  	</button>
 				</div>
 				<div class="top_right col-xs-9 ">
@@ -35,21 +58,20 @@
 						<a href="/#!/cart">
 							<h3 class="marg5">
 								<i class="icon icons-carrinho_vermelho"> </i>
-								<span id="" class=""  ></span> 
+								<span id="" class="" ng-bind="numberformat(order.totalItems,2)" ></span> 
 							</h3>
 						</a>	
 						<!-- <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p> -->
 						<div class="clearfix"> </div>
 					</div>
-					<div class="floatright">
+					<div class="floatright desktop-tablet-only ">
 						<a class="facebook" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
-							<i class="icon icons-entrarfb desktop-tablet-only"></i>
-							<i class="icon icons-entrarfb-mobile mobile-only"></i>
+							<i class="icon icons-entrarfb "></i>
 						</a>
 					</div>
 					<div class="floatright">
 						<div ng-if="authentication.user===''" class="login " ng-init="bindLoginEvent()" >
-							<div id="loginContainer"  class="margt7 container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
+							<div id="loginContainer"  class="container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
 							    <div id="loginBox" class="expandable-box">                
 							        <form id="loginForm" class="expandable-box-form" ng-submit="login(user)">
 							        	<label class="error">{{login_error}}</label>
@@ -64,9 +86,13 @@
 						                     </fieldset>
 					                	 	<label for="rememberme"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme"> <i>Lembre-se de mim</i></label> 
 						                    <input type="submit" id="login" value="Sign in">
+
 					                	 	<div  class="notmember padt20"  >
-											  <span> Não é membro?	<a ng-href="#!/login">REGISTRE-SE</a>
-											  </span>
+										  		<span> Não é membro?	<a ng-href="#!/login">REGISTRE-SE</a>
+										  		</span>
+											  	<a class="facebook mobile-only floatright" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
+													ou <i class="icon icons-entrarfb-mobile mobile-only"></i>
+												</a>
 											</div>
 						            	</fieldset>
 	 									
@@ -198,15 +224,13 @@
 		</li> -->
 	</div>
 	<div class="row">
-		message:
-
 		<label ng-bind="order.message"></label>
 		<p ng-bind-html="discount.description"> </p>
 	</div>
-	<div class="container row" >
+	<div class="row" >
 			<div class="head-t" >
 				<div class="logo">
-					<a href="/#!/"><img src="/images/Musicamise_site_Curvas.png" width="50%" alt="Musicamise"
+					<a href="/#!/"><img src="/images/Musicamise_site_Curvas.png"  alt="Musicamise"
 					/></a>
 				</div>
 				<!-- <div class="search">
