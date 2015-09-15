@@ -18,30 +18,38 @@
 					</ul>
 					<nav id="myNavmenu" class="mobile-only navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
 					  <a class="navmenu-brand" href="#!/"> <i class="icon icons-simbolo_Logo"></i> Musicamise </a>
-					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.gender">
-					  	<span ng-bind="key"></span>
-					    <li ng-repeat="typeClothes in value">
-					    	<a ng-href="/#!/{{typeClothes}}/{{key}}"ng-bind="typeClothes"></a>
-				    	</li>
-					  </ul>
-					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.collection">
-					  	<span ng-bind="key"></span>
-					    <li ng-repeat="typeClothes in value">
-					    	<a ng-href="/#!/{{typeClothes}}/collection/{{key}}"ng-bind="typeClothes"></a>
-				    	</li>
-					  </ul>
-					  <ul class="nav navmenu-nav" ng-repeat="(key, value) in loja.otherProducts">
-					  	<span ng-bind="key"></span>
-					    <li  ng-repeat="product in value" >
-					    	<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
-				    	</li>
-					  </ul>
-					  <ul class="nav navmenu-nav" ng-repeat="(store,storeObj) in localStores">
-					  	<span ng-bind="key"></span>
-					    <li  ng-repeat="localStoreType in storeObj.products">
-					    	<a  ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
-				    	</li>
-					  </ul>
+					  <div  ng-repeat="(key, value) in loja.gender">
+					  	<h3 ng-bind="key"></h3>
+					  	<ul class="nav navmenu-nav">
+						    <li ng-repeat="typeClothes in value">
+						    	<a ng-href="/#!/{{typeClothes}}/{{key}}"ng-bind="typeClothes"></a>
+					    	</li>
+				    	</ul>
+					  </div>
+					  <div  ng-repeat="(key, value) in loja.collection">
+					  	<h3 ng-bind="key"></h3>
+					  	<ul class="nav navmenu-nav">
+						    <li ng-repeat="typeClothes in value">
+						    	<a ng-href="/#!/{{typeClothes}}/collection/{{key}}"ng-bind="typeClothes"></a>
+					    	</li>
+				    	</ul>
+					  </div>
+					  <div  ng-repeat="(key, value) in loja.otherProducts">
+					  	<h3 ng-bind="key"></h3>
+					  	<ul class="nav navmenu-nav">
+						    <li  ng-repeat="product in value" >
+						    	<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
+					    	</li>
+				    	</ul>
+					  </div>
+					  <div  ng-repeat="(store,storeObj) in localStores">
+					  	<h3 ng-bind="key"></h3>
+					  	<ul class="nav navmenu-nav">
+						    <li  ng-repeat="localStoreType in storeObj.products">
+						    	<a  ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
+					    	</li>
+						</ul>
+					 </div>
 					  
 					 <!--  <ul class="nav navmenu-nav">
 					    <li class="active"><a href="#">Home</a></li>

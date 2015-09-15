@@ -47,6 +47,18 @@ label.size-marker {
   }
 }
 
+.single-product-page{
+
+  .owl-theme .owl-controls .owl-buttons .owl-prev{
+    left: -7px;
+    top: 85px; 
+  }
+  .owl-theme .owl-controls .owl-buttons .owl-next{
+    right: -7px;
+    top: 85px;
+  }
+}
+
 .cont{
   display: block;
   float:left;

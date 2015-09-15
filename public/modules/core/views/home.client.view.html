@@ -59,7 +59,7 @@
 			<div class="special-top">
 				<div id="owl-demo3" class="owl-carousel"  >
 
-	                <div class="item" ng-repeat="product in destaque" ng-init="$last?initDestaque('owl-demo3'):angular.noop()">
+	                <div class="item" ng-repeat="product in destaque" ng-init="$last?initProductsCarousel('owl-demo3'):angular.noop()">
 	                	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
 	                		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
 		   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />

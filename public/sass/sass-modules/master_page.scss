@@ -43,6 +43,11 @@ a:focus {
 .top_left{
 	float:left;
 	color: #ffffff;
+	.navmenu{
+		h3{
+			color:#000000;
+		}
+	}
 	ul{
 		padding:0;
 		list-style:none;

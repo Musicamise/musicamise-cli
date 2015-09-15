@@ -79,7 +79,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 
 	      		});
 		};
-		$scope.initDestaque = function(id){
+		$scope.initProductsCarousel = function(id){
 			$('#'+id).owlCarousel({
 
 				loop:true,

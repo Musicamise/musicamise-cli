@@ -16706,6 +16706,9 @@ a:focus h3 {
   float: left;
   color: #ffffff;
 }
+.top_left .navmenu h3 {
+  color: #000000;
+}
 .top_left ul {
   padding: 0;
   list-style: none;
@@ -19091,6 +19094,15 @@ label.size-marker [type="radio"][disabled] + span {
 }
 .like_btn.btn_form a span.like_span {
   text-decoration: none;
+}
+
+.single-product-page .owl-theme .owl-controls .owl-buttons .owl-prev {
+  left: -7px;
+  top: 85px;
+}
+.single-product-page .owl-theme .owl-controls .owl-buttons .owl-next {
+  right: -7px;
+  top: 85px;
 }
 
 .cont {

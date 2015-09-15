@@ -1,4 +1,4 @@
-<section data-ng-controller="ProductSingleController" data-ng-init="findOne()">
+<section class="single-product-page"  data-ng-controller="ProductSingleController" data-ng-init="findOne()">
  <!-- content -->
 
 <link rel="stylesheet" href="plugin/etalage/etalage.css">
@@ -7,29 +7,28 @@
 	<!-- start content -->
 	<div class="women_main">
 		<div class="row single">
-			<div class="col-md-12 det">
+			<div class="col-md-12">
 		  		<div class="single_left">
 					<div class="grid images_3_of_2">
-						<ul id="etalage">
-							<li ng-repeat="image in product.images" >
-								<a ng-href="">
-									<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
+						<div class="desktop-tablet-only">
+							<ul id="etalage">
+								<li ng-repeat="image in product.images"  >
+									<a ng-href="">
+										<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
+										<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div id="owl-demo"  class="owl-carousel mobile-only"  >
+			                <div class="item" ng-repeat="image in product.images" ng-init="$last?initProductsCarousel('owl-demo'):angular.noop()">
+			                	<a ng-href="" >
+			                		<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
 									<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
-								</a>
-							</li>
-							<!-- <li>
-								<img class="etalage_thumb_image" src="images/d2.jpg" class="img-responsive" />
-								<img class="etalage_source_image" src="images/d2.jpg" class="img-responsive" title="" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/d3.jpg" class="img-responsive"  />
-								<img class="etalage_source_image" src="images/d3.jpg"class="img-responsive"  />
-							</li>
-						    <li>
-								<img class="etalage_thumb_image" src="images/d4.jpg" class="img-responsive"  />
-								<img class="etalage_source_image" src="images/d4.jpg"class="img-responsive"  />
-							</li> -->
-						</ul>
+			            		</a>
+			            	</div>
+		              	</div>
+
 					 	<div class="clearfix"></div>		
 				  	</div>
 				  	<div class="desc1 span_3_of_2">
@@ -101,7 +100,21 @@
 				<div  ng-if="relatedProducts.length>0" class="single-bottom2">
 					<div class="container">
 						<h6>Produtos relacionados</h6>
-						<ul class="grid_2">
+						<div id="owl-demo1" class="owl-carousel"  >
+			                <div class="item" ng-repeat="product in relatedProducts" ng-init="$last?initProductsCarousel('owl-demo1'):angular.noop()">
+			                	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+			                		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+				   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+			            		</a>
+		            		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
+		            		 	<div class="special-info grid_1 simpleCart_shelfItem">
+									<h5 ng-bind="product.title"></h5>
+									<div class="item_add"><span class="item_price"><h6 >APENAS <span ng-bind="product.priceFormatted"></span></h6></span></div>
+								</div>
+			            	</div>
+		              	</div>
+
+						<!-- <ul class="grid_2">
 							<li ng-repeat="product in relatedProducts">
 								<a ng-href="#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
 					   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
@@ -122,7 +135,7 @@
 								</div>
 							</li>
 							<div class="clearfix"> </div>
-				     	</ul>
+				     	</ul> -->
 			     		<br/>
 		   	  		</div>
 	   	  		</div>
