@@ -88,8 +88,8 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 			   	navigation : true,
 				rewindNav:true,
 				navigationText: [
-			      "<i class='icon-chevron-left icon-white'><</i>",
-			      "<i class='icon-chevron-right icon-white'>></i>"
+			      '<i class="icon-chevron-left icon-white"><</i>',
+			      '<i class="icon-chevron-right icon-white">></i>'
 			      ],
 			    responsive:{
 			        0:{

@@ -15,7 +15,6 @@ module.exports = {
 			css: [
 				'public/lib/angular-block-ui/dist/angular-block-ui.min.css',
 				'public/lib/fancybox-plus/css/jquery.fancybox-plus.css',
-				'public/plugin/owl-carousel/owl.theme.css',
 				'public/plugin/owl-carousel/owl.carousel.css',
 				'public/plugin/jasny-bootstrap/css/jasny-bootstrap.min.css',
 			],

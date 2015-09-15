@@ -272,7 +272,7 @@ a.expandable-box-button {
 .expandable-box {
     position:absolute;
 	top: 44px;
-	right: 0px;
+	right: -90px;
     display:none;
     z-index:29;
 
@@ -283,7 +283,7 @@ a.expandable-box-button {
 form.expandable-box-form:after {
 		content: '';
 		position: absolute;
-		right: 25px;
+		right: 110px;
 		top: -10px;
 		border-left:10px solid rgba(0, 0, 0, 0);
 		border-right:10px solid rgba(0, 0, 0, 0);

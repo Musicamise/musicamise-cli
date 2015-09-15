@@ -30,6 +30,24 @@ div.header_top {
   }
 }
 
+.products-page{
+  .filter_bar{
+    .filter{
+      h4{
+        display: inline-block;
+      }
+      .col{
+        display: inline-block;
+      }
+    }
+  }
+  .order_bar{
+    .w_nav {
+      float:left;
+    }
+  }
+
+}
 
 ul.icon1 {
 	display: none;
@@ -108,7 +126,6 @@ ul.icon1 {
   margin: 0 auto;
 }
 .special h3 {
-  width: 50%;
 }
 .special h3:before {
   width: 64px;
@@ -473,7 +490,6 @@ ul.icon1 {
 }
 .special h3 {
   font-size: 1.1em;
-  width: 35%;
   padding: 0.25em;
 }
 .special h3:before {
