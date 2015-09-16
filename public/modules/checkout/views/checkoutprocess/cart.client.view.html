@@ -2,9 +2,9 @@
 	<!-- content -->
 <div class="container">
 	<div class="check" ng-if="order.totalItems>0">	
-	 	<div class="col-md-3 cart-total" ng-include="'/modules/checkout/views/checkoutprocess/cart-side-bar.html'" onload="cartPage=true">
+	 	<div class="col-sm-3 cart-total" ng-include="'/modules/checkout/views/checkoutprocess/cart-side-bar.html'" onload="cartPage=true">
 		</div>
-	 	<div class="col-md-9 cart-items">
+	 	<div class="col-sm-9 cart-items">
 	 		<h1>Meu carrinho ({{order.totalItems}})</h1>
 			
  			<div  class="cart-header" ng-repeat="product in order.products" >

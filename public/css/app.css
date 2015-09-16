@@ -16816,9 +16816,10 @@ a:focus h3 {
 
 .logo {
   float: left;
-  margin: 0 0 1.5em 0;
-  margin-left: 25%;
-  width: 45%;
+  width: 90%;
+  padding-left: 20%;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 .logo img {
   width: 100%;
