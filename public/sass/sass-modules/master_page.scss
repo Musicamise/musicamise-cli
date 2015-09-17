@@ -485,15 +485,14 @@ ul.megamenu.musicamise {
 		&:first-child{
 			padding-left: 100px;
 		}
-
 		.header_nav {
 			h4{
 				border-bottom: 1px solid rgb(236, 236, 236);
 				font-size: 1em;
 				color: #000;
-				line-height: 1.8em;
+				line-height: 2.2em;
 				text-transform: uppercase;
-				margin-bottom: 4%;
+				margin-bottom: 0;
 				text-align: center;
 			}
 			h4.top{
@@ -501,6 +500,8 @@ ul.megamenu.musicamise {
 			}
 
 			ul {
+				list-style: none;
+    			padding: 0;
 				li{
 					text-align: center;
 					display: block;
@@ -516,7 +517,7 @@ ul.megamenu.musicamise {
 						-moz-transition: all 0.3s ease-in-out;
 						-o-transition: all 0.3s ease-in-out;
 						transition: all 0.3s ease-in-out;
-						line-height: 2.5em;
+						line-height: 2.1em;
 					}
 					a:hover{
 						color:#00405d;

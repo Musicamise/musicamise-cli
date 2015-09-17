@@ -2,9 +2,9 @@
 	<!-- content -->
 <div class="container">
 	<div class="user-settings">	
-	 	<div class="col-md-2 side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="order_li=true">
+	 	<div class="col-sm-4  desktop-tablet-only side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="order_li=true">
 		</div>
-		<div class="col-md-10 cart-items">
+		<div class="col-sm-8 cart-items">
 	 		<h1>Historico de compras</h1>
 	 		<div ng-hide="newOrders.length>0||oldOrders.length>0">
 		 		<p>
@@ -26,7 +26,19 @@
 	 			</label>
 	 			</button>
 	 			<div ng-show="order.value">
-		 			<div class="col-xs-4 order-address">
+		 			<div class="col-sm-4 order-address">
+		 				<h3>Forma de Pagamento</h3>
+		 				<div>
+							<p ng-if='order.pagSeguroInfo.paymentMethodType==="BOLETO"'>
+								<i class="fa fa-barcode"></i>
+								<label ng-bind='order.pagSeguroInfo.paymentMethodCode'>	</label>
+							</p>
+							<p ng-if='order.pagSeguroInfo.paymentMethodType!=="BOLETO"'>
+								<i class="fa fa-credit-card"></i>
+								<i ng-class="icon {{order.pagSeguroInfo.paymentMethodCode}} "></i>
+							</p>
+							<label ng-bind='order.totalFormatted+" - "+ order.pagSeguroInfo.installmentCount+"X"'>	</label>
+						</div>
 		 				<h3>Endereço de entrega:</h3>
 						<div>
 							<label> Rua:</label>
@@ -53,7 +65,7 @@
 							<label > Brasil	</label>
 						</div>
 		 			</div>
-		 			<div class="col-xs-8 order-products">
+		 			<div class="col-sm-8 order-products">
 			 			<div class="cart-header" ng-repeat="product in order.products" >
 						 	<div class="cart-sec simpleCart_shelfItem">
 								<div class="cart-item cyc">

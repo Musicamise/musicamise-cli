@@ -17144,13 +17144,17 @@ ul.megamenu.musicamise {
   border-bottom: 1px solid #ececec;
   font-size: 1em;
   color: #000;
-  line-height: 1.8em;
+  line-height: 2.2em;
   text-transform: uppercase;
-  margin-bottom: 4%;
+  margin-bottom: 0;
   text-align: center;
 }
 .menu-expanded .item .header_nav h4.top {
   margin-top: 12%;
+}
+.menu-expanded .item .header_nav ul {
+  list-style: none;
+  padding: 0;
 }
 .menu-expanded .item .header_nav ul li {
   text-align: center;
@@ -17167,7 +17171,7 @@ ul.megamenu.musicamise {
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  line-height: 2.5em;
+  line-height: 2.1em;
 }
 .menu-expanded .item .header_nav ul li a:hover {
   color: #00405d;
@@ -20703,10 +20707,6 @@ p.cart a {
   }
 
   .total-item, .cart-items {
-    padding: 0;
-  }
-
-  .total-item, .cart-items {
     margin: 1em 0 0;
   }
 
@@ -20716,10 +20716,6 @@ p.cart a {
 
   a.cpns {
     padding: 8px 10px;
-  }
-
-  .cart-total {
-    padding: 0;
   }
 
   .item_add a {

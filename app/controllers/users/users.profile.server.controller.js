@@ -200,7 +200,7 @@ exports.orderHistory = function(req, res) {
 											{'status':'DEVOLVIDA'}]}},
 				$or:[{'email':user.email},{'user.email':user.email}]})
 			.sort('-updatedDate')
-			.select('-pagSeguroInfo -user -_class -emailSents ')
+			.select('  -user -_class -emailSents ')
 			.exec(function(err,orders){
 				if(err){ 	
 					console.log('error:'+ err);
@@ -209,6 +209,14 @@ exports.orderHistory = function(req, res) {
 					});
 				}
 				orders.forEach(function(order){
+					
+					var newPagSeguroInfo = {};
+
+					newPagSeguroInfo.installmentCount = order.pagSeguroInfo.installmentCount;
+					newPagSeguroInfo.grossAmount  = order.pagSeguroInfo.grossAmount;
+					newPagSeguroInfo.paymentMethodCode  = order.pagSeguroInfo.paymentMethodCode;
+					newPagSeguroInfo.paymentMethodType = order.pagSeguroInfo.paymentMethodType;
+					order.pagSeguroInfo = newPagSeguroInfo;
 					order.lastStatus = order.localvar.lastStatus;
 				});
 
