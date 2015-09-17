@@ -4,6 +4,7 @@ angular.module('localStore').controller('LocalStoreController', ['$rootScope','$
 	function($rootScope,$window,$scope,$location,$timeout,$stateParams,LocalStore,Authentication,blockUI) {
 		// checkout controller logic
 		// ...
+	    window.scrollTo(0, 0);
 		$scope.Authentication = Authentication;
 		$scope.localStore = {};
 		$scope.localStore.products = [];

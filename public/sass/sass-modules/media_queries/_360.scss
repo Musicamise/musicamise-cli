@@ -16,17 +16,54 @@ div.header_top {
     .navbar-toggle{
       padding: 0;
     }
-    .navmenu-nav{
+    .navmenu{
+      text-align: left;
+      background-color: $musicamise-color;
       span{
-        color:#000000;
+          color:#000000;
+        }
+      .navmenu-header{
+        text-align: center;
+        background-color: white;
+        .navmenu-brand{
+          i{
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+      .navmenu-nav{
+        a{
+          padding: 10px 10px;
+          background-color: $light-color;
+          display: block;
+        }
       }
     }
+
   }
 
   .top_right{
-    .container-expandable-box {
-      margin-top: 14px;
+    .user-menu{
+      width: 46%;
+      padding: 0;  
+      .login{
+        text-align: right;
+        #loginBox{
+          text-align: left;
+        }
       }
+      .user-expandable-box{
+        width: 100%;
+        label{
+          width: 80%;
+          padding: 15px 0;
+        }
+      }
+      .container-expandable-box {
+        margin-top: 14px;
+      }
+    }
   }
 }
 
@@ -47,6 +84,21 @@ div.header_top {
     }
   }
 
+}
+
+
+.user-profile-page{
+  .user-settings{
+    .user-address{
+      width: 100%;      
+    }
+  } 
+}
+
+.shipping-page{
+  .registration{
+    margin: 0;
+  }
 }
 
 ul.icon1 {

@@ -4,9 +4,9 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
  'MainMenu','Order','User','blockUI','fancyboxService',
 	function($window,$rootScope,$scope,$location, Authentication, MainMenu,Order,User,blockUI,fancyboxService) {
 		$scope.authentication = Authentication;
+	    window.scrollTo(0, 0);
 
 		// $scope.isCollapsed = false;
-		
 		$scope.user = Authentication.user;
 		$scope.search = {};
 		$scope.menu = {};
@@ -27,7 +27,10 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
             }
             return num;
         };
-
+        $scope.isEmpty = function (obj) {
+		    for (var i in obj) if (obj.hasOwnProperty(i)) return false;
+		    return true;
+		};
 		$scope.headerLoginAndCart = function(){
 			$scope.authentication = Authentication;
 			$rootScope.order = {};

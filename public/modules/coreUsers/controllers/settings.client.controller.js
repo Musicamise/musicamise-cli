@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'User', 'Authentication','Cep','blockUI',
-	function($scope, $http, $location, User, Authentication,Cep,blockUI) {
+angular.module('users').controller('SettingsController', ['$rootScope','$scope', '$http', '$location', 'User', 'Authentication','Cep','blockUI',
+	function($rootScope,$scope, $http, $location, User, Authentication,Cep,blockUI) {
+	    window.scrollTo(0, 0);
 		$scope.user = Authentication.user;
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';

@@ -5,7 +5,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 	function($scope,$timeout, Authentication,MainPage,blockUI,fancyboxService,SendContact) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
-
+	    window.scrollTo(0, 0);
 		$scope.inicialCall = function() {
 			$scope.mainContent = {};
 			$scope.imagePromotion = [];

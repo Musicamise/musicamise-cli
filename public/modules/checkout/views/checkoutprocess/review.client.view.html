@@ -2,11 +2,11 @@
 	<!-- content -->
 <div class="container">
 	<div class="check" ng-if="order.totalItems>0">	
-	 	<div class="col-md-3 cart-total" ng-include="'/modules/checkout/views/checkoutprocess/cart-side-bar.html'" onload="reviewPage=true">
-		</div>
-	 	<div class="col-md-9 cart-items">
+	 	
+	 	<div class="col-md-8 cart-items">
 	 		<div >
-				<h1>Usuario:</h1>
+				<h1>Avalie sua compra:</h1>
+				<h3>Usuario:</h3>
 				<div>
 					<label> Nome:</label>
 					<label ng-bind='order.user.displayName'>	</label>
@@ -15,7 +15,7 @@
 					<label> Email:</label>
 					<label ng-bind='order.user.email'>	</label>
 				</div>
-				<h1>Endereço de entrega:</h1>
+				<h3>Endereço de entrega:</h3>
 				<div>
 					<label> Rua:</label>
 					<label ng-bind='order.shippingAddress.address'>	</label>
@@ -69,6 +69,8 @@
 			   		<div class="clearfix"></div>
 			  	</div>
 		 	</div>
+		</div>
+		<div class="col-md-4 cart-total" ng-include="'/modules/checkout/views/checkoutprocess/cart-side-bar.html'" onload="reviewPage=true">
 		</div>
 		<div class="clearfix"> </div>
 	</div>

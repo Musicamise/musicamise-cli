@@ -705,7 +705,7 @@ exports.processToPagseguro = function(req,res){
 		var key = 'order'+req.sessionID;
 		console.log('init');
 		myCache.get(key, function( err, orderCachedJsonString ){
-			if(err){ 	
+			if(err||!orderCachedJsonString){ 	
 				console.log('error:'+ err);
 				done(err);
 			}else{

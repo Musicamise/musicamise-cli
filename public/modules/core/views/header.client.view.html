@@ -17,39 +17,26 @@
 						<li><a href="/#!/politicas">Formas de entrega</a></li>
 					</ul>
 					<nav id="myNavmenu" class="mobile-only navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-					  <a class="navmenu-brand" href="#!/"> <i class="icon icons-simbolo_Logo"></i> Musicamise </a>
-					  <div  ng-repeat="(key, value) in loja.gender">
-					  	<h3 ng-bind="key"></h3>
-					  	<ul class="nav navmenu-nav">
-						    <li ng-repeat="typeClothes in value">
-						    	<a ng-href="/#!/{{typeClothes}}/{{key}}"ng-bind="typeClothes"></a>
-					    	</li>
-				    	</ul>
-					  </div>
-					  <div  ng-repeat="(key, value) in loja.collection">
-					  	<h3 ng-bind="key"></h3>
-					  	<ul class="nav navmenu-nav">
-						    <li ng-repeat="typeClothes in value">
-						    	<a ng-href="/#!/{{typeClothes}}/collection/{{key}}"ng-bind="typeClothes"></a>
-					    	</li>
-				    	</ul>
-					  </div>
-					  <div  ng-repeat="(key, value) in loja.otherProducts">
-					  	<h3 ng-bind="key"></h3>
-					  	<ul class="nav navmenu-nav">
-						    <li  ng-repeat="product in value" >
-						    	<a ng-href="/#!/products/{{product.slug}}" ng-bind="product.title"></a>
-					    	</li>
-				    	</ul>
-					  </div>
-					  <div  ng-repeat="(store,storeObj) in localStores">
-					  	<h3 ng-bind="key"></h3>
-					  	<ul class="nav navmenu-nav">
-						    <li  ng-repeat="localStoreType in storeObj.products">
-						    	<a  ng-href="/#!/lojasparceiras/{{store}}" ng-bind="localStoreType"></a>
-					    	</li>
-						</ul>
-					 </div>
+					  	<div class="navmenu-header">
+						  	<a class="navmenu-brand" href="#!/"> <i class="icon icons-simbolo_Logo"></i>  <span>Musicamise</span></a> 
+					  	</div>
+
+					  	<div class="nav navmenu-nav"  ng-if="!isEmpty(loja.gender)">
+						  	<h3>Genero</h3>
+					    	<a ng-repeat="(key, value) in loja.gender"  ng-href="/#!/{{key}}" ng-bind="key"></a>
+					  	</div>
+					  	<div  class="nav navmenu-nav" ng-if="!isEmpty(loja.collection)">
+						  	<h3 >Coleções</h3>
+					    	<a ng-repeat="(key, value) in loja.collection" ng-href="/#!/collection/{{key}}" ng-bind="key"></a>
+					  	</div>
+					  	<div  class="nav navmenu-nav" ng-if="!isEmpty(loja.otherProducts)" >
+						  	<h3>Acessórios</h3>
+					    	<a   ng-repeat="(key, value) in loja.otherProducts" ng-href="/#!/collection/{{key}}" ng-bind="key"></a>
+					  	</div>
+					  	<div  class="nav navmenu-nav" ng-if="!isEmpty(localStores)"  >
+						  	<h3>Parceiros</h3>
+					    	<a ng-repeat="(store,storeObj) in localStores" ng-href="/#!/lojasparceiras/{{store}}" ng-bind="storeObj.title"></a>
+					 	</div>
 					  
 					 <!--  <ul class="nav navmenu-nav">
 					    <li class="active"><a href="#">Home</a></li>
@@ -78,7 +65,7 @@
 							<i class=" tablet-only icon icons-entrarfb-mobile "></i>
 						</a>
 					</div>
-					<div class="floatright">
+					<div class="user-menu">
 						<div ng-if="authentication.user===''" class="login " ng-init="bindLoginEvent()" >
 							<div id="loginContainer"  class="container-expandable-box" ><a href="" id="loginButton" class="expandable-box-button"><span>Login</span></a>
 							    <div id="loginBox" class="expandable-box">                
@@ -112,8 +99,8 @@
 						</div>
 						<div ng-if="authentication.user!==''"  ng-init="bindUserEvent()" class="user-expandable-box">
 							<label > Olá, {{authentication.user.displayName }} </label>
-							<div id="userContainer" class="margt7 container-expandable-box" >
-								<a href="" id="userButton"  class="expandable-box-button padl10 padr40" > <i class="fa fa-bars fa-lg"></i></a>
+							<div id="userContainer" class="container-expandable-box" >
+								<a href="" id="userButton"  class="expandable-box-button" > <i class="fa fa-angle-down fa-lg"></i></a>
 							    <div id="userBox"  class="expandable-box">          
 							     	<form id="userForm" class="expandable-box-form" >
 							     		<fieldset id="body">
@@ -240,6 +227,8 @@
 		<a href="/#!/"><img src="/images/Musicamise_site_Curvas.png"  alt="Musicamise"
 		/></a>
 	</div>
+	<div class="clearfix"> </div>
+	
 	<!-- <div class="search">
 		<form >
 			<input type="search" ng-keyup="$event.keyCode == 13 && search(search.query)" ng-model="search.query" ng-bind="search.query" placeholder="Search">

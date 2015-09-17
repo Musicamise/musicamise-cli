@@ -4,6 +4,8 @@ angular.module('checkout').controller('CheckOrderController', ['$rootScope','$wi
 	function($rootScope,$window,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,blockUI) {
 		// checkout controller logic
 		// ...
+	    window.scrollTo(0, 0);
+		
 		var statusOrderEnum = {
 			'PAGO':3,
 			'DISPONIVEL':4,

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('products').controller('ProductsSearchController', ['$scope','$location','$timeout','$stateParams','ProductSearch',
-	function($scope,$location,$timeout,$stateParams,ProductSearch) {
-
+angular.module('products').controller('ProductsSearchController', ['$rootScope','$scope','$location','$timeout','$stateParams','ProductSearch',
+	function($rootScope,$scope,$location,$timeout,$stateParams,ProductSearch) {
+	    window.scrollTo(0, 0);
 		$scope.$watch(function(){ return $location.search(); }, function(params){
 		    console.log(params);
 		    $scope.search();

@@ -4,6 +4,8 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 	function($rootScope,$window,$scope,$location,$timeout,$stateParams,OrderCheckout,Authentication,UserCheckout,Cep,blockUI) {
 		// checkout controller logic
 		// ...
+	    window.scrollTo(0, 0);
+		
 		$scope.Authentication = Authentication;
 		$scope.cartInit = function(){
 

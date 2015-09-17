@@ -5,6 +5,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User) {
 		// Products controller logic
 		//in controller that doesn't reload
+	    window.scrollTo(0, 0);
 		$scope.authentication = Authentication;
 		$scope.user = Authentication.user;
 		$scope.$on('$locationChangeSuccess',function(){

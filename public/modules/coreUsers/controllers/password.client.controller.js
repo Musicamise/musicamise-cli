@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication','blockUI',
-	function($scope, $stateParams, $http, $location, Authentication,blockUI) {
+angular.module('users').controller('PasswordController', ['$rootScope','$scope', '$stateParams', '$http', '$location', 'Authentication','blockUI',
+	function($rootScope,$scope, $stateParams, $http, $location, Authentication,blockUI) {
+	    window.scrollTo(0, 0);
 		$scope.authentication = Authentication;
-
 		//If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 
