@@ -1,18 +1,69 @@
 @import "icons/*.png";
 @import "gender/*.png";
 @import "icons-menu/*.png";
+@import "icons-card/*.png";
 @import "favicon/*.png";
 @import "myfunctions";
 
 $icons: sprite-map("icons/*.png", $spacing: 1px, $layout: smart);
 $gender: sprite-map("gender/*.png", $spacing: 1px, $layout: smart);
 $icons-menu: sprite-map("icons-menu/*.png", $spacing: 1px, $layout: smart);
+$icons-card: sprite-map("icons-card/*.png", $spacing: 1px, $layout: smart);
 @include all-icons-sprites; 
 @include all-icons-menu-sprites; 
 @include all-favicon-sprites; 
+@include all-icons-card-sprites; 
+
 
 .icon {
 	display: block;
+
+
+	&.icons-card-CARTAO_DE_CREDITO_VISA{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_VISA);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_MASTERCARD{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_MASTERCARD);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_AMERICAN_EXPRESS{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_AMERICAN_EXPRESS);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_DINERS{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_DINERS);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_HIPERCARD{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_HIPERCARD);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_AURA{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_AURA);
+	}
+	&.icons-card-CARTAO_DE_CREDITO_ELO{
+		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_ELO);
+	}
+
+	&.icons-card-BOLETO_BRADESCO{
+		@include sprite-dimensions($icons-card,BOLETO_BRADESCO);
+	}
+	&.icons-card-BOLETO_SANTANDER{
+		@include sprite-dimensions($icons-card,BOLETO_SANTANDER);
+	}
+	&.icons-card-DEBITO_ONLINE_BRADESCO{
+		@include sprite-dimensions($icons-card,DEBITO_ONLINE_BRADESCO);
+	}
+	&.icons-card-DEBITO_ONLINE_ITAU{
+		@include sprite-dimensions($icons-card,DEBITO_ONLINE_ITAU);
+	}
+	&.icons-card-DEBITO_ONLINE_BANCO_DO_BRASIL{
+		@include sprite-dimensions($icons-card,DEBITO_ONLINE_BANCO_DO_BRASIL);
+	}
+	&.icons-card-DEBITO_ONLINE_BANRISUL{
+		@include sprite-dimensions($icons-card,DEBITO_ONLINE_BANRISUL);
+	}
+	&.icons-card-DEBITO_ONLINE_HSBC{
+		@include sprite-dimensions($icons-card,DEBITO_ONLINE_HSBC);
+	} 
+
+	
 
 	&.icons-entrar-fb2{
 		@include sprite-dimensions($icons,entrar-fb2);
@@ -37,7 +88,6 @@ $icons-menu: sprite-map("icons-menu/*.png", $spacing: 1px, $layout: smart);
 		-moz-transition: color 0.2s ease-in-out;
 		-o-transition: color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out;
-
 	}
 	&.icons-feminino{
 		@include responsive-sprite($gender, feminino);
@@ -95,5 +145,10 @@ $icons-menu: sprite-map("icons-menu/*.png", $spacing: 1px, $layout: smart);
 	&.icons-menu-parceiros{
 		@include sprite-dimensions($icons-menu,parceiros);
 	}
+
+
+
+
+
 
 }

@@ -61,6 +61,10 @@ var StatusOrderSchema = new Schema({
     status: {type: String,enum: statusEnum,default:'' }
 });
 var OrderSchema = new Schema({
+	friendlyId:{
+		type: String,
+		default: '',
+	},
 	products: {
 		type: [objectInventorySchema],
 		default:[]
@@ -164,7 +168,6 @@ OrderSchema.pre('save', function(next) {
 		delete this.lastStatus;
 	if(this.localvar)
 		delete this.localvar;
-	
 	if(this.message)
 		delete this.message;
 	if (this.user) {
@@ -179,8 +182,18 @@ OrderSchema.pre('save', function(next) {
 		delete this.discountCode.endDate;
 		delete this.discountCode.createdDate;
 	}
-
+	if(!this.friendlyId){
+		OrderSchema.count({},function (err, count) {
+			if (err) {
+				console.log('err on count order'+ err);
+			}else{
+				this.friendlyId = 'ordem-'+(count+1);
+			}
+			next();
+		});
+	}
 	next();
+
 });
 OrderSchema.virtual('localvar.lastStatus').get(function () {
 	if(this.status.length>0){

@@ -2,7 +2,7 @@
 	<!-- content -->
 <div class="container">
 	<div class="user-settings">	
-	 	<div class="col-sm-4  desktop-tablet-only side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="order_li=true">
+	 	<div class="col-sm-4  desktop-only side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="order_li=true">
 		</div>
 		<div class="col-sm-8 cart-items">
 	 		<h1>Historico de compras</h1>
@@ -15,115 +15,10 @@
 	 		<h2 ng-show="newOrders.length>0">Compra Atual</h2>
 	 		<div class="order" ng-repeat="order in newOrders">
 	 			<my-bar order='order'></my-bar>
-	 			<button  type="button" class="btn btn-warning btn-sm margt10 margb10" ng-model="order.value" ng-init="order.value=false" ng-click="order.value=!order.value" >
-	 			<label ng-show="!order.value">
-		 			<i class="fa fa-plus"></i>
-		 			<span >Mais detalhes</span>
-	 			</label>
-	 			<label ng-show="order.value">
-					<i  class="fa fa-minus"></i>
-		 			<span >Menos detalhes</span>
-	 			</label>
-	 			</button>
-	 			<div ng-show="order.value">
-		 			<div class="col-sm-4 order-address">
-		 				<h3>Forma de Pagamento</h3>
-		 				<div>
-							<p ng-if='order.pagSeguroInfo.paymentMethodType==="BOLETO"'>
-								<i class="fa fa-barcode"></i>
-								<label ng-bind='order.pagSeguroInfo.paymentMethodCode'>	</label>
-							</p>
-							<p ng-if='order.pagSeguroInfo.paymentMethodType!=="BOLETO"'>
-								<i class="fa fa-credit-card"></i>
-								<i ng-class="icon {{order.pagSeguroInfo.paymentMethodCode}} "></i>
-							</p>
-							<label ng-bind='order.totalFormatted+" - "+ order.pagSeguroInfo.installmentCount+"X"'>	</label>
-						</div>
-		 				<h3>Endereço de entrega:</h3>
-						<div>
-							<label> Rua:</label>
-							<label ng-bind='order.shippingAddress.address'>	</label>
-						</div>
-						<div>
-							<label> CEP:</label>
-							<label ng-bind='order.shippingAddress.cep'>	</label>
-						</div>
-						<div>
-							<label> Bairro:</label>
-							<label ng-bind='order.shippingAddress.bairro'>	</label>
-						</div>
-						<div>
-							<label> Cidade:</label>
-							<label ng-bind='order.shippingAddress.city'>	</label>
-						</div>
-						<div>
-							<label> Estado:</label>
-							<label ng-bind='order.shippingAddress.state'>	</label>
-						</div>
-						<div>
-							<label> Pais:</label>
-							<label > Brasil	</label>
-						</div>
-		 			</div>
-		 			<div class="col-sm-8 order-products">
-			 			<div class="cart-header" ng-repeat="product in order.products" >
-						 	<div class="cart-sec simpleCart_shelfItem">
-								<div class="cart-item cyc">
-							 		<a ng-href="#!/product/{{product.product.slug}}" > 
-						 			<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/></a>
-								</div>
-							   	<div class="cart-item-info">
-									<h3><a ng-href="#!/product/{{product.product.slug}}" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
-									<ul class="qty">
-										<li><p>Size : <label ng-bind="product.size"></label></p></li>
-										<li><p>Qty :  <label ng-bind="product.quantity"></p></li>
-									</ul>
-								 	<div class="delivery">
-									 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
-								 		<div class="clearfix"></div>
-							        </div>	
-								 	<div class="delivery">
-									 	<p>Custo de Entrega : <label ng-bind="order.totalShippingFormatted"></label></p>
-									 	<span ng-show="order.shippingAddress.prazo"> Entregamos em até &nbsp;
-								 		<span ng-bind="order.shippingAddress.prazo"> </span></span>
-								 		<div class="clearfix"></div>
-							        </div>		
-							   	</div>
-						   		<div class="clearfix"></div>
-						  	</div>
-					 	</div>
-		 			</div>
-	 			</div>
 		 	</div>
 	 		<h2 ng-if="oldOrders.length>0">Compras antigas</h2>
-	 		<div ng-repeat="order in oldOrders">
+		 	<div class="order" ng-repeat="order in oldOrders">
 	 			<my-bar order='order'></my-bar>
-	 			<div class="cart-header" ng-repeat="product in order.products" >
-				 	<div class="cart-sec simpleCart_shelfItem">
-						<div class="cart-item cyc">
-					 		<a ng-href="#!/product/{{product.product.slug}}" > 
-				 			<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/></a>
-						</div>
-					   	<div class="cart-item-info">
-							<h3><a ng-href="#!/product/{{product.product.slug}}" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
-							<ul class="qty">
-								<li><p>Size : <label ng-bind="product.size"></label></p></li>
-								<li><p>Qty :  <label ng-bind="product.quantity"></p></li>
-							</ul>
-						 	<div class="delivery">
-							 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
-						 		<div class="clearfix"></div>
-					        </div>	
-						 	<div class="delivery">
-							 	<p>Custo de Entrega : <label ng-bind="order.totalShippingFormatted"></label></p>
-							 	<span ng-show="order.shippingAddress.prazo"> Entregamos em até &nbsp;
-						 		<span ng-bind="order.shippingAddress.prazo"> </span></span>
-						 		<div class="clearfix"></div>
-					        </div>		
-					   	</div>
-				   		<div class="clearfix"></div>
-				  	</div>
-			 	</div>
 		 	</div>
 		</div>
 		<div class="clearfix"> </div>

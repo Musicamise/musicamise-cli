@@ -7341,6 +7341,10 @@ button.close {
   background: url('../images/icons-menu-sf96cfd0bb4.png') no-repeat;
 }
 
+.icons-card-sprite, .icons-card-BOLETO_BRADESCO, .icons-card-BOLETO_SANTANDER, .icons-card-CARTAO_DE_CREDITO_AMERICAN_EXPRESS, .icons-card-CARTAO_DE_CREDITO_AURA, .icons-card-CARTAO_DE_CREDITO_DINERS, .icons-card-CARTAO_DE_CREDITO_ELO, .icons-card-CARTAO_DE_CREDITO_HIPERCARD, .icons-card-CARTAO_DE_CREDITO_MASTERCARD, .icons-card-CARTAO_DE_CREDITO_VISA, .icons-card-DEBITO_ONLINE_BANCO_DO_BRASIL, .icons-card-DEBITO_ONLINE_BANRISUL, .icons-card-DEBITO_ONLINE_BRADESCO, .icons-card-DEBITO_ONLINE_HSBC, .icons-card-DEBITO_ONLINE_ITAU {
+  background: url('../images/icons-card-s907e4fa22b.png') no-repeat;
+}
+
 .favicon-sprite, .favicon-android-icon-144x144, .favicon-android-icon-192x192, .favicon-android-icon-36x36, .favicon-android-icon-48x48, .favicon-android-icon-72x72, .favicon-android-icon-96x96, .favicon-apple-icon-114x114, .favicon-apple-icon-120x120, .favicon-apple-icon-144x144, .favicon-apple-icon-152x152, .favicon-apple-icon-180x180, .favicon-apple-icon-57x57, .favicon-apple-icon-60x60, .favicon-apple-icon-72x72, .favicon-apple-icon-76x76, .favicon-apple-icon-precomposed, .favicon-apple-icon, .favicon-favicon-16x16, .favicon-favicon-32x32, .favicon-favicon-96x96, .favicon-ms-icon-144x144, .favicon-ms-icon-150x150, .favicon-ms-icon-310x310, .favicon-ms-icon-70x70 {
   background: url('../images/favicon-s8ef1293992.png') no-repeat;
 }
@@ -7509,8 +7513,120 @@ button.close {
   background-position: 0 -2253px;
 }
 
+.icons-card-BOLETO_BRADESCO {
+  background-position: 0 -352px;
+}
+
+.icons-card-BOLETO_SANTANDER {
+  background-position: 0 -320px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_AMERICAN_EXPRESS {
+  background-position: 0 -96px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_AURA {
+  background-position: 0 -64px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_DINERS {
+  background-position: 0 0;
+}
+
+.icons-card-CARTAO_DE_CREDITO_ELO {
+  background-position: 0 -32px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_HIPERCARD {
+  background-position: 0 -128px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_MASTERCARD {
+  background-position: 0 -160px;
+}
+
+.icons-card-CARTAO_DE_CREDITO_VISA {
+  background-position: 0 -288px;
+}
+
+.icons-card-DEBITO_ONLINE_BANCO_DO_BRASIL {
+  background-position: 0 -192px;
+}
+
+.icons-card-DEBITO_ONLINE_BANRISUL {
+  background-position: 0 -224px;
+}
+
+.icons-card-DEBITO_ONLINE_BRADESCO {
+  background-position: 0 -384px;
+}
+
+.icons-card-DEBITO_ONLINE_HSBC {
+  background-position: 0 -416px;
+}
+
+.icons-card-DEBITO_ONLINE_ITAU {
+  background-position: 0 -256px;
+}
+
 .icon {
   display: block;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_VISA {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_MASTERCARD {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_AMERICAN_EXPRESS {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_DINERS {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_HIPERCARD {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_AURA {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-CARTAO_DE_CREDITO_ELO {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-BOLETO_BRADESCO {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-BOLETO_SANTANDER {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-DEBITO_ONLINE_BRADESCO {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-DEBITO_ONLINE_ITAU {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-DEBITO_ONLINE_BANCO_DO_BRASIL {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-DEBITO_ONLINE_BANRISUL {
+  height: 32px;
+  width: 32px;
+}
+.icon.icons-card-DEBITO_ONLINE_HSBC {
+  height: 32px;
+  width: 32px;
 }
 .icon.icons-entrar-fb2 {
   height: 46px;
