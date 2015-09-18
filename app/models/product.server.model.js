@@ -22,7 +22,7 @@ var objectProductSchema = {
 		default: '',
 		trim: true
 	},
-	canBuy{
+	canBuy:{
 		type: Boolean,
 		default: true
 	},
