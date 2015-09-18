@@ -4,10 +4,10 @@
 			<div class="header_top row">
 				<div class="top_left col-xs-3">
 					<ul  class="mainmenu desktop-tablet-only" id="mainmenu">
-						<li ><a ng-href="#!/" ng-click=""><i class="musicamise icon icons-menu-logo-cor" > </i> </a></li>
+						<li ><a ng-href="#!/" ng-click="menu.show=false"><i class="musicamise icon icons-menu-logo-cor" > </i> </a></li>
 						<li ng-show="loja.gender"><a ng-href="" ng-click="clickIconMenu('camisas')"><i class="camisas icon icons-menu-camisa-cor"  > </i></a></li>
 						<li ng-show="loja.otherProducts"><a ng-href="" ng-click="clickIconMenu('other-products')"><i class="other-products icon icons-menu-caneca-cor"   > </i></a></li>
-						<li ng-show="localStores"  ><a ng-href="" ng-click="clickIconMenu('parceiros')"><i class="parceiros icon icons-menu-parceiros-cor" > </i></a></li>
+						<li ng-show="!isEmpty(localStores)"  ><a ng-href="" ng-click="clickIconMenu('parceiros')"><i class="parceiros icon icons-menu-parceiros-cor" > </i></a></li>
 						<li ng-show="false"><a ng-href="" ng-click="clickIconMenu('contato')"><i class="contato icon icons-menu-contato-cor"> </i></a></li>
 					</ul>
 					

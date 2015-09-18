@@ -20,11 +20,11 @@
 <div ng-if="cartPage" class="total-item">
 	<h3>Opcional</h3>
 	<h4>Código de desconto ou Cupon</h4>
-	<input type='text' placeholder="Cupon ex:AQUI-TEM-DESCONTO"  ng-model='order.discountCode._id' > <br/><br/>
+	<input type='text' placeholder="Cupon"  ng-model='order.discountCode._id' > <br/><br/>
 	<a class="cpns" href="" ng-click="applyDiscount(order.discountCode._id)">Aplicar desconto</a><br/><br/>
 	<h4>Cep de entrega</h4><br/>
 	<form id='form' name="form"  action="javacript:void(0)"  novalidate>
-	<input placeholder="Cep ex:52031-300" name="cep" ng-model='order.shippingAddress.cep' type="text" tabindex="2"  mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' required autofocus><br/><br/>
+	<input placeholder="Cep ex:52031-300" name="cep" ng-model='order.shippingAddress.cep' type="text" tabindex="2"  mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' required ><br/><br/>
 	<a class="cpns" href="" ng-click="!form.cep.$invalid?applyShippingAddress(order.shippingAddress.cep) : angular.noop() ">Aplicar cep</a>
 	</form>
 	<!-- <p><a ng-href="#!/login">Log In</a> to use accounts - linked coupons</p> -->

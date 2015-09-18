@@ -15,10 +15,13 @@
 	 		<h2 ng-show="newOrders.length>0">Compra Atual</h2>
 	 		<div class="order" ng-repeat="order in newOrders">
 	 			<my-bar order='order'></my-bar>
+				<div class="clearfix"> </div>
 		 	</div>
 	 		<h2 ng-if="oldOrders.length>0">Compras antigas</h2>
 		 	<div class="order" ng-repeat="order in oldOrders">
 	 			<my-bar order='order'></my-bar>
+				<div class="clearfix"> </div>
+	 			
 		 	</div>
 		</div>
 		<div class="clearfix"> </div>

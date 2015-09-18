@@ -19189,26 +19189,29 @@ span.brand {
 }
 
 /*--single--*/
-label.size-marker {
+.size-marker {
+  display: inline-block;
+}
+.size-marker label {
   position: relative;
   cursor: pointer;
 }
-label.size-marker [type="radio"] {
+.size-marker label [type="radio"] {
   display: none;
 }
-label.size-marker [type="radio"] + span {
+.size-marker label [type="radio"] + span {
   display: inline-block;
   padding: 1em;
   border: 1px solid #ee803c;
   border-radius: 10px;
 }
-label.size-marker :checked + span {
+.size-marker label :checked + span {
   background: #f5ae81;
   border-radius: 10px;
   display: inline-block;
   border: 1px solid #e75112;
 }
-label.size-marker [type="radio"][disabled] + span {
+.size-marker label [type="radio"][disabled] + span {
   background: #f00;
 }
 

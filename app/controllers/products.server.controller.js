@@ -96,7 +96,7 @@ exports.readProductSlug = function(req, res) {
 		var count = 0;
 		Inventory.find({'_id':{$in:inventoriesObj},'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 		.select('-product -_class').exec(function(err,inventories){
-			
+			console.log(err);
 			inventories.forEach(function(inventory,indexInventory){
 				product.inventories.forEach(function(inventoryFromProduct,indexInventoryFromProduct){
 					if(inventory._id.toString()+''===inventoryFromProduct.oid+''){

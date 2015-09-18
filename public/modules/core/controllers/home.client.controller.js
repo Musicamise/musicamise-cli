@@ -34,7 +34,10 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 			 	blockUI.stop();
 			});
 		};
-
+		 $scope.isEmpty = function (obj) {
+		    for (var i in obj) if (obj.hasOwnProperty(i)) return false;
+		    return true;
+		};
 		$scope.initPromotionBanner = function(){
 		 	$timeout(function() {
 			 	$scope.openPromotionScreen();

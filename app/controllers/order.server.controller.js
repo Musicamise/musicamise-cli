@@ -230,7 +230,7 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 		}
 
 	},function(result,done){
-		if(order.shippingUpdated){
+		/*if(order.shippingUpdated){
 			var cepDestino ;
 			if(order.shippingAddress)
 				cepDestino = order.shippingAddress.cep;
@@ -262,7 +262,9 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 		}else{
 			result.destinoAddress = undefined;
 			done(undefined,result);
-		}
+		}*/
+		result.destinoAddress = undefined;
+		done(undefined,result);
 
 	},function(result,done) {
 		var cepDestino ;
@@ -338,8 +340,10 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 		if(order.products.length>0){
 			var inventoryIds = [];
 			order.products.forEach(function(product,_index){
+				console.log(product);
 				inventoryIds.push(product._id);
 			});
+			console.log(inventoryIds);
 			Inventory.find({ '_id':{$in:inventoryIds},'orderOutOfStock':false})
 				 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 				 .select('-_class')
@@ -464,10 +468,9 @@ exports.updateOrderOrAddItem = function(req, res) {
 	var giftCard = req.body.giftCard;
 
 	var inventoryId = req.body.inventoryId||req.body.id;
-	
 
 	if(inventoryId){
-		Inventory.findOne({ '_id':new ObjectId(inventoryId),'orderOutOfStock':false})
+		Inventory.findOne({ '_id':inventoryId,'orderOutOfStock':false})
 		 .or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
 		 .select('-_class')
 		 .exec(function(err,inventory){

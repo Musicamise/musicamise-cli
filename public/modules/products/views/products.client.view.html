@@ -119,7 +119,7 @@
 							 		<h6>
 							 			<span class="price-new">{{product.priceFormatted}}</span>
 							 			<br/>
-							 			<span class="price-old">{{product.priceOldFormatted}}
+							 			<span ng-show="product.priceCompareWith>0" class="price-old">{{product.priceOldFormatted}}
 						 				</span> 
 						 			</h6>
 					 			</span>

@@ -16,7 +16,7 @@
 						<h3><a ng-href="" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
 						<ul class="qty">
 							<li><p>Tamanho : <label ng-bind="product.size"></label></p></li>
-							<li><p>Quantidade : <input type='number' class='quantity' ng-model='product.quantity' min="1" max="4" ng-change="updateQuantity(product._id,product.quantity)" ng-value="product.quantity"></p></li>
+							<li><p>Quantidade : <i class="fa fa-minus fa-lg" ng-click="(product.quantity>1)&&(product.quantity=product.quantity-1)&&updateQuantity(product._id,product.quantity)"></i> <input type='number' class='quantity' ng-model='product.quantity' min="1" max="4" ng-change="updateQuantity(product._id,product.quantity)" ng-value="product.quantity"><i class="fa fa-plus fa-lg" ng-click="(product.quantity<=3)&&(product.quantity=product.quantity+1)&&updateQuantity(product._id,product.quantity)"></i></p></li>
 						</ul>
 					 	<div class="delivery">
 						 	<p>Total: <label ng-bind="product.priceWithQuantityFormatted"></label></p>

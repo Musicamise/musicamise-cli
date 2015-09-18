@@ -22,12 +22,14 @@ module.exports = function() {
 				}
 				if (!user) {
 					return done(null, false, {
-						message: 'Unknown user or invalid password'
+						message: 'Email ou senha inválido'
+						// message: 'Unknown user or invalid password'
 					});
 				}
 				if (!user.authenticate(password)) {
 					return done(null, false, {
-						message: 'Unknown user or invalid password'
+						message: 'Email ou senha inválido'
+						// message: 'Unknown user or invalid password'
 					});
 				}
 				user.password = undefined;

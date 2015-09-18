@@ -5,7 +5,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		// checkout controller logic
 		// ...
 	    window.scrollTo(0, 0);
-		
+
 		$scope.Authentication = Authentication;
 		$scope.cartInit = function(){
 
@@ -194,17 +194,19 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		};
 		$scope.updateQuantity = function(id,quantity){
 			if(id){	
-				blockUI.start();
-				$scope.orderCall = OrderCheckout.addItem({id:id,quantity:quantity});
-				$scope.orderCall.$promise.then(function(response,error,progressback){
-					if(!jQuery.isEmptyObject(response.order)){
-						$rootScope.order = response.order;
-					}
-					blockUI.stop();
-				},function(reason){
-					console.log(reason);
-					blockUI.stop();
-				});
+				if(quantity<5){
+					blockUI.start();
+					$scope.orderCall = OrderCheckout.addItem({id:id,quantity:quantity});
+					$scope.orderCall.$promise.then(function(response,error,progressback){
+						if(!jQuery.isEmptyObject(response.order)){
+							$rootScope.order = response.order;
+						}
+						blockUI.stop();
+					},function(reason){
+						console.log(reason);
+						blockUI.stop();
+					});
+				} 
 			}
 			$location.path('/cart');
 		};
@@ -247,13 +249,16 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		};
 		
 		$scope.thankyou = function(){
-			if(!$location.search().id) $location.path('/');
+			if(!$location.search().id){
+				$location.path('/');	
+			} 
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
-				if(!response.order.pagSeguroInfo){
-					$location.url($location.path('/'));
-				}
+				// if(!response.order.pagSeguroInfo){
+				// 	$location.url($location.path('/'));
+				// }
 				$scope.orderCall = OrderCheckout.clean();
+				
 			});
 		};
 	}	

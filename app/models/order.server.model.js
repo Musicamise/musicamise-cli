@@ -11,10 +11,15 @@ var Address = require('./address.server.model').getAddressSchema();
 var DiscountCode = require('./discountCode.server.model').getDiscountCodeSchema();
 var Product = require('./product.server.model').getProductSchema();
 var GiftCard = require('./giftCard.server.model').getGiftCardSchema();
+var moment = require('moment');
 
 var DBRef = mongoose.SchemaTypes.DBRef;
 var objectInventorySchema = {
-	 
+ 	_id: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	orderOutOfStock: {
 		type: Boolean,
 		default: true
@@ -183,14 +188,9 @@ OrderSchema.pre('save', function(next) {
 		delete this.discountCode.createdDate;
 	}
 	if(!this.friendlyId){
-		OrderSchema.count({},function (err, count) {
-			if (err) {
-				console.log('err on count order'+ err);
-			}else{
-				this.friendlyId = 'ordem-'+(count+1);
-			}
-			next();
-		});
+		this.friendlyId = 'ordem-'+
+							Math.floor((Math.random() * 10000) + 1)+'-'+
+							moment().format('DDMMYYYYHHmm');
 	}
 	next();
 

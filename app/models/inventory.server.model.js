@@ -11,7 +11,11 @@ var DBRef = mongoose.SchemaTypes.DBRef;
  * Article Schema
  */
 var objectInventorySchema = {
-	 
+	_id: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	orderOutOfStock: {
 		type: Boolean,
 		default: true
