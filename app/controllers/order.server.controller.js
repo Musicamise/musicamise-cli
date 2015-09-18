@@ -33,19 +33,29 @@ var discountIsApplicable = function(cartItems,discountObject){
 	var allCollections = [];
 	var allProductSlugs = [];
 	var total = 0;
+	console.log('discountIsApplicable - ');
+	console.log(cartItems);
 	cartItems.forEach(function(product,index){
 	 	allCollections = allCollections.concat(cartItems[index].product.collectionsSlugs);
 	 	allProductSlugs.push(cartItems[index].product.slug);
-	 	total = total+cartItems[index].product.total;
+	 	total = total+cartItems[index].product.price;
 	});
 	var discountCodeIsApplicable = false;
-
+	console.log('total');
+	console.log(total);
+	console.log('allCollections');
+	console.log(allCollections);
+	console.log('allProductSlugs');
+	console.log(allProductSlugs);
+	
 	if(discountObject){
 		switch(discountObject.ordersValidation){
 			case 'all':
 				discountCodeIsApplicable = true;
 				break;
 			case 'overValue':
+				console.log('overValue');
+
 				discountCodeIsApplicable = total>=discountObject.overValueOf;
 				break;
 			case 'collections':
@@ -87,10 +97,14 @@ var contability = function(order,discountObject,giftCardObject){
 	}
 
 	if(discountObject){
+		console.log('entrou com object discount');
 		if(order.products.length>0){
 			switch(discountObject.whereApply){
 				case 'oncePerOrder':
+					console.log('entrou com oncePerOrder');
 					if(discountIsApplicable(order.products,discountObject)){
+						console.log('is applicable');
+
 						switch(discountObject.typeForPay){
 							case 'value':
 								order.totalDiscount = discountObject.valueOf;
@@ -316,14 +330,16 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 			discountCode = order.discountCode._id;
 		else if(discountCodePost)
 			discountCode = discountCodePost;
+
 		if(discountCode){
+			console.log('entrou em discount');
 		DiscountCode.findOne({_id:discountCode,active:true,
 				$and:[{$or:[{noTimesLimits:true},{timesLeft:{$gt:0}}]},
 						{$or:[{noDateLimits:true},{endDate:{$lte:new Date()}}]}
 					 ]
 				})
 				.exec(function(err,discountObject){
-
+					console.log(discountObject);
 					if(!err&&discountObject){
 						order.discountCode = discountObject;
 					}
@@ -366,7 +382,9 @@ var processOrder = function(req,res,order,discountCodePost,giftCardPost){
 
 		var discountObject = order.discountCode;
 		var giftCardObject = order.giftCard;
+		console.log('doing the counts');
 		order = contability(order,discountObject,giftCardObject);
+
 		myCache.set(key,JSON.stringify(order) , function( err, success ){
 			if( !err && success ){
 		 		console.log('cache sucess:'+ success);
