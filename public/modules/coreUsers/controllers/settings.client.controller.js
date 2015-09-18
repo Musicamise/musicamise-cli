@@ -216,7 +216,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
     		order: '=order'
 	    },
 	    link: function(scope, element, attrs, tabsCtrl) {
-	    	scope.$watch("order",function(newValue,oldValue) {
+	    	scope.$watch('order' ,function(newValue,oldValue) {
 		    	var order = newValue;
 		    	if(order.lastStatus&&statusOrderEnum[order.lastStatus]===3){
 					var wizardDiv = $(element).find('.wizard');

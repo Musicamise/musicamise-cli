@@ -36,9 +36,9 @@ var objectProductSchema = {
 		default: '',
 		trim: true
 	},
-	type: {
-		type: String,
-		default: '',
+	types: {
+		type: [String],
+		default: [],
 		trim: true
 	},
 	collectionsSlugs: {

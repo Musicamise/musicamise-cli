@@ -29,6 +29,16 @@ var objectInventorySchema = {
 		default: '',
 		trim: true
 	},
+	type: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	color: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	genderSlug: {
 		type: String,
 		default: '',

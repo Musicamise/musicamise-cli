@@ -29,9 +29,9 @@ exports.search = function(req,res){
 	.exec(function(err,products){
 
 		products.forEach(function(product,index){
-			if(product.type==='poster'||product.type==='obra_de_arte'){
+			if(product.type.indexOf('poster')>0||product.type.indexOf('obra_de_arte')>0){
 				productsForHome.push(product);
-			}else if(product.type==='lenco'||product.type==='acessorio'){
+			}else if(product.type.indexOf('lenco')>0||product.type.indexOf('acessorio')>0){
 				prodcutsAccessories.push(product);
 			}else{
 				product.inventories.forEach(function(inventory){
@@ -272,7 +272,12 @@ exports.list = function(req, res) {
  	if(gender){
  		query.where('genderSlug').equals(gender);
  	}
-
+ 	if(model){
+ 		query.where('type').equals(model);
+ 	}
+ 	if(color){
+		query.where('color').equals(color);
+	}	
  	query.distinct('product.$id').exec(function(err, productsId){
 		if(err){
 			return res.status(400).send({
@@ -288,12 +293,12 @@ exports.list = function(req, res) {
 		if(collection){
 			queryProduct.where('collectionsSlugs').in([collection]);
 		}
-		if(color){
-			queryProduct.where('color').equals(color);
-		}
-		if(model){
-			queryProduct.where('type').equals(model);
-		}
+		// if(color){
+		// 	queryProduct.where('color').equals(color);
+		// }
+		// if(model){
+		// 	queryProduct.where('type').in(model);
+		// }
 		if(userTags){
 			queryProduct.where('userTags').in(userTags.split(','));
 		}
@@ -391,21 +396,22 @@ exports.availableSizeWithCollectionSlug = function(req,res){
 };
 
 exports.availableColor = function(req,res){
-	Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).distinct('product.$id').exec(function(err,productsId){
+	Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).distinct('color').exec(function(err,colors){
 		if(err){
 			return res.status(400).send({
 				message: err
 			});		
 		}
-		Product.find({ '_id':{$in:productsId}}).distinct('color').exec(function(err,colors){
-			if(err){
-				return res.status(400).send({
-					message: err
-				});
-			}		
-			colors = colors.filter(function(color){return color!=='';});
- 			res.json(colors);
-		});
+		res.json(colors);
+		// Product.find({ '_id':{$in:productsId}}).distinct('color').exec(function(err,colors){
+		// 	if(err){
+		// 		return res.status(400).send({
+		// 			message: err
+		// 		});
+		// 	}		
+		// 	colors = colors.filter(function(color){return color!=='';});
+ 	// 		res.json(colors);
+		// });
 	});
 };
 
@@ -439,20 +445,20 @@ exports.availableColorWithCollectionSlug = function(req,res){
 	}
 };
 exports.availableModel = function(req,res){
-	Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).distinct('product.$id').exec(function(err,productsId){
+	Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).distinct('type').exec(function(err,models){
 		if(err){
 			return res.status(400).send({
 				message: err
 			});		
 		}
-		Product.find({ '_id':{$in:productsId}}).distinct('type').exec(function(err,models){
+		res.json(models);
+		/*Product.find({ '_id':{$in:productsId}}).distinct('type').exec(function(err,models){
 			if(err){
 				return res.status(400).send({
 					message: err
 				});
 			}		
- 			res.json(models);
-		});
+		});*/
 	});
 };
 exports.availableModelWithCollectionSlug = function(req,res){

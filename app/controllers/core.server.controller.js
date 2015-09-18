@@ -144,9 +144,8 @@ exports.mainMenu = function(req,res){
 				Product.find({ '_id':{$in:productsId}})
 						.where('onLineVisible').equals(true)
 					   	.where('collectionsSlugs').in(collectionsSlugsMapped)
-					   	.select('-_id collectionsSlugs slug title type')
+					   	.select('-_id collectionsSlugs slug title types')
 					   	.exec(function(err,products){
-
 							var gender = {};
 							var otherProducts = {}; 
 							var collection = response.loja.collection;
@@ -156,7 +155,8 @@ exports.mainMenu = function(req,res){
 							   			if(collectionSlugGender.indexOf(collectionSlug)>=0){
 							   				if(!gender[collectionSlug])
 							   					gender[collectionSlug] = [];
-											gender[collectionSlug].push(product.type); 
+											gender[collectionSlug] = gender[collectionSlug].concat(product.types); 
+
 											gender[collectionSlug] = _.uniq(gender[collectionSlug], true);        				
 							   			}else if(collectionsSlugsOtherProducts.indexOf(collectionSlug)>=0){
 											if(!otherProducts[collectionSlug])
@@ -166,7 +166,7 @@ exports.mainMenu = function(req,res){
 							   			}else if(collectionsSlugsNotGender.indexOf(collectionSlug)>=0){
 							   				if(!collection[collectionSlug])
 												collection[collectionSlug] = [];
-											collection[collectionSlug].push(product.type); 
+											gender[collectionSlug] = gender[collectionSlug].concat(product.types); 
 											collection[collectionSlug] = _.uniq(collection[collectionSlug], true);
 							   			}
 							   		});

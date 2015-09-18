@@ -277,6 +277,18 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			$scope.updateVariables();
 			
 		};
+		$scope.updateColor = function(colorValue){
+			if(colorValue){
+				$scope.colorMarked = colorValue;
+				$scope.colorMarkedStyle = {display:'block'};
+				var object = $location.search();
+				object.color = $scope.colorMarked+'';
+				$location.search(object);		
+			    // $scope.updateSelectOptions();
+			}
+			$scope.updateVariables();
+			
+		};
 
 		
 		$scope.clickOrder = function(order){
