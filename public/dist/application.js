@@ -2756,7 +2756,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
     		order: '=order'
 	    },
 	    link: function(scope, element, attrs, tabsCtrl) {
-	    	scope.$watch("order",function(newValue,oldValue) {
+	    	scope.$watch('order' ,function(newValue,oldValue) {
 		    	var order = newValue;
 		    	if(order.lastStatus&&statusOrderEnum[order.lastStatus]===3){
 					var wizardDiv = $(element).find('.wizard');
@@ -3265,6 +3265,18 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				$scope.priceMarkedStyle = {display:'block'};
 				var object = $location.search();
 				object.price = $scope.priceMarked+'';
+				$location.search(object);		
+			    // $scope.updateSelectOptions();
+			}
+			$scope.updateVariables();
+			
+		};
+		$scope.updateColor = function(colorValue){
+			if(colorValue){
+				$scope.colorMarked = colorValue;
+				$scope.colorMarkedStyle = {display:'block'};
+				var object = $location.search();
+				object.color = $scope.colorMarked+'';
 				$location.search(object);		
 			    // $scope.updateSelectOptions();
 			}
