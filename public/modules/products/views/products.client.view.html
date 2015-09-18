@@ -133,6 +133,12 @@
 
 				<div ng-show='productQuery.busy'>Carregando produtos...</div>
 			</div>
+			<div class="check" ng-if="products.length<=0">
+				<div class="col-md-9 cart-items">
+			 		<h1>Desculpe não temos produtos com esse filtro :(</h1>
+					<h3><a href="#!/products"> Continue Comprando :) </a></h3>
+				</div>
+			</div>
 		</div>
 			<!-- end grids_of_4 -->
 		

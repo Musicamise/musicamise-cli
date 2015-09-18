@@ -517,7 +517,9 @@ exports.updateOrderOrAddItem = function(req, res) {
 									return processOrder(req,res,order,discountCode,giftCard);
 								}else{
 									console.log('out of quantity');
+
 									var orderCached = new Order(JSON.parse(orderCachedJsonString));
+									orderCached.message='Não foi possível atualizar.';
 									return processOrder(req,res,orderCached,discountCode,giftCard);
 								}
 							}else{
@@ -554,6 +556,7 @@ exports.updateOrderOrAddItem = function(req, res) {
 										
 									}else{
 										console.log('out of quantity');
+										orderCached2.message='Não foi possível atualizar.';
 										return processOrder(req,res,orderCached2,discountCode,giftCard);
 									}
 								}

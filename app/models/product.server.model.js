@@ -22,6 +22,10 @@ var objectProductSchema = {
 		default: '',
 		trim: true
 	},
+	canBuy{
+		type: Boolean,
+		default: true
+	},
 	images: {
 		type: [Imagem],
 		default: []
