@@ -3081,41 +3081,42 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			$scope.productQuery.busy = false;
 			$scope.productQuery.page = 1;
 			$scope.productQuery.findNextPageStopCalling = false;
-			$scope.models = Model.query();
-			$scope.models.$promise.then(function(allCollections){
-				if($stateParams.model){
-			  		var notModel = true;
-					if(allCollections){
-						allCollections.forEach(function(model){
-							if(model===$stateParams.model){
-								notModel = false;							
-							}
-						});
-					}
-					if(notModel){
-						$location.path('/');
-					}
-				}	
-			});
-			$scope.allCollections = Collection.query();
-			$scope.collectionsGender = [];
-			$scope.collections = [];
-			$scope.allCollections.$promise.then(function(allCollections){
-				allCollections.forEach(function(collection){
-					if(collection.gender){
-						if($scope.collectionsGender.filter(function(o){return o.slug===collection.slug;}).length===0)
-							$scope.collectionsGender.push(collection);
-					}else{
-						if($scope.collections.filter(function(o){return o.slug===collection.slug;}).length===0)
-							$scope.collections.push(collection);
-					}
+			if(!$scope.models){
+				$scope.models = Model.query();
+				$scope.models.$promise.then(function(allCollections){
+					if($stateParams.model){
+				  		var notModel = true;
+						if(allCollections){
+							allCollections.forEach(function(model){
+								if(model===$stateParams.model){
+									notModel = false;							
+								}
+							});
+						}
+						if(notModel){
+							$location.path('/');
+						}
+					}	
 				});
-			});
+				$scope.allCollections = Collection.query();
+				$scope.collectionsGender = [];
+				$scope.collections = [];
+				$scope.allCollections.$promise.then(function(allCollections){
+					allCollections.forEach(function(collection){
+						if(collection.gender){
+							if($scope.collectionsGender.filter(function(o){return o.slug===collection.slug;}).length===0)
+								$scope.collectionsGender.push(collection);
+						}else{
+							if($scope.collections.filter(function(o){return o.slug===collection.slug;}).length===0)
+								$scope.collections.push(collection);
+						}
+					});
+				});
 
-			$scope.sizes = Size.query();
-			$scope.prices = Price.query();
-			$scope.colors = Color.query();
-
+				$scope.sizes = Size.query();
+				$scope.prices = Price.query();
+				$scope.colors = Color.query();
+			}
 
 
 			$scope.updateVariables();
@@ -3278,7 +3279,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.color = $scope.colorMarked+'';
 				$location.search(object);		
-			    // $scope.updateSelectOptions();
+				// $scope.updateVariables();
 			}
 			$scope.updateVariables();
 			
