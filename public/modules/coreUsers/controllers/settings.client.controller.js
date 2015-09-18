@@ -216,26 +216,28 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
     		order: '=order'
 	    },
 	    link: function(scope, element, attrs, tabsCtrl) {
-	    	var order = scope.order;
-	    	if(order.lastStatus&&statusOrderEnum[order.lastStatus]===3){
-				var wizardDiv = $(element).find('.wizard');
-				wizardDiv.show();
-				wizardDiv.bootstrapWizard({onTabShow: function(tab, navigation, index) {
-					var $total = navigation.find('li').length;
-					var $current = statusEntregaEnum[order.statusEntrega];
-					var $percent = ($current/$total) * 100;
-					navigation.find('li').attr('class','disabled');
-				 	navigation.find('li:lt('+$current+')').attr('class','active');
-					navigation.parent().find('.bar').css({width:$percent+'%'});
-				},
-				'tabClass': 'nav nav-pills',
-				onTabClick: function(tab, navigation, index) {
-						return false;
-					}
-				});
-			}else{
-				$(element).find('.wizard').hide();
-			}
+	    	scope.$watch("order",function(newValue,oldValue) {
+		    	var order = newValue;
+		    	if(order.lastStatus&&statusOrderEnum[order.lastStatus]===3){
+					var wizardDiv = $(element).find('.wizard');
+					wizardDiv.show();
+					wizardDiv.bootstrapWizard({onTabShow: function(tab, navigation, index) {
+						var $total = navigation.find('li').length;
+						var $current = statusEntregaEnum[order.statusEntrega];
+						var $percent = ($current/$total) * 100;
+						navigation.find('li').attr('class','disabled');
+					 	navigation.find('li:lt('+$current+')').attr('class','active');
+						navigation.parent().find('.bar').css({width:$percent+'%'});
+					},
+					'tabClass': 'nav nav-pills',
+					onTabClick: function(tab, navigation, index) {
+							return false;
+						}
+					});
+				}else{
+					$(element).find('.wizard').hide();
+				}
+		 	});
 	    },
     	templateUrl: 'modules/coreUsers/views/settings/order_status_bar.client.view.html'
   	};

@@ -114,6 +114,9 @@ $icons-card: sprite-map("icons-card/*.png", $spacing: 1px, $layout: smart);
 	&.icons-new{
 		@include sprite-dimensions($icons,new);
 	}
+	&.icons-promotion{
+		@include sprite-dimensions($icons,new);
+	}
 	&.icons-simbolo_Logo{
 		@include sprite-dimensions($icons,simbolo_Logo);
 	}

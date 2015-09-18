@@ -159,7 +159,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			                    alert('Continue comprando.');
 			            }
 			        });
-					if ($scope.isOpenLightbox){
+					if (!$scope.isOpenLightbox){
 					 	$window.location = response.url;
 					}
 				 }else{

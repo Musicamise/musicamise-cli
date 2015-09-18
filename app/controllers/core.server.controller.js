@@ -301,7 +301,7 @@ exports.mainPage = function(req,res){
 					Product.find({ '_id':{$in:productsId}})
 							.where('onLineVisible').equals(true)
 						   	.where('collectionsSlugs').in(['destaque'])
-						   	.select('-_id slug price title priceFormatted priceOldFormatted priceCompareWith images')
+						   	.select('-_id newProduct slug price title priceFormatted priceOldFormatted priceCompareWith images')
 						   	// .limit(10)
 						   	.exec(function(err,products){
 						   		if(!err){

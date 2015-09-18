@@ -405,7 +405,7 @@ exports.getOrderById = function(req,res){
 											{'status':'CANCELADO'},
 											{'status':'DEVOLVIDA'}]}},
 					'createdDate':{$gte:nowThreeMonthsAgo.valueOf()}})
-					.select('-pagSeguroInfo -user -_class -emailSents  ')
+					.select(' -user -_class -emailSents  ')
 					.exec(function(err,order){
 						if(err){
 							console.log('error in getOrderById');  

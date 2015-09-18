@@ -55,7 +55,7 @@ module.exports = {
 			'public/plugin/etalage/jquery.etalage.min.js',
 			'public/lib/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js',
 			'public/lib/twitter-bootstrap-wizard/prettify.js',
-			'public/plugin/owl-carousel/owl.carousel.js',
+			'public/plugin/owl-carousel/owl.carousel.min.js',
 			'public/lib/fancybox-plus/src/jquery.fancybox-plus.js',
 			'public/lib/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',
 			'public/config.js',

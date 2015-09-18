@@ -79,11 +79,14 @@ a:focus {
 		position: absolute;
 	    float: left;
 		padding-top: 20px;
+	    pointer-events: none;
 		li{
 			display: block;
 			padding: 2.5px 0;
 			position: relative;
 			z-index: 99999;
+	    	pointer-events: auto;
+			
 			a{
 				text-align: start;
 				cursor: pointer;

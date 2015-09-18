@@ -14,6 +14,7 @@
 							<ul id="etalage">
 								<li ng-repeat="image in product.images"  >
 									<a ng-href="">
+										<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
 										<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
@@ -24,6 +25,7 @@
 						<div id="owl-demo"  class="owl-carousel mobile-only"  >
 			                <div class="item" ng-repeat="image in product.images" ng-init="$last?initProductsCarousel('owl-demo'):angular.noop()">
 			                	<a ng-href="" >
+									<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 			                		<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
 									<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />

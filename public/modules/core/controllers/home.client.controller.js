@@ -1,11 +1,11 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authentication','MainPage','blockUI','fancyboxService','SendContact',
-	function($scope,$timeout, Authentication,MainPage,blockUI,fancyboxService,SendContact) {
+angular.module('core').controller('HomeController', ['$rootScope','$scope','$timeout', 'Authentication','MainPage','blockUI','fancyboxService','SendContact',
+	function($rootScope,$scope,$timeout, Authentication,MainPage,blockUI,fancyboxService,SendContact) {
 		// This provides Authentication context.
-		$scope.authentication = Authentication;
 	    window.scrollTo(0, 0);
+		$scope.authentication = Authentication;
 		$scope.inicialCall = function() {
 			$scope.mainContent = {};
 			$scope.imagePromotion = [];
@@ -25,7 +25,7 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 						$scope.mainContent.images.push(image);
 					}
 				});	
-				if($scope.imagePromotion.length>0){
+				if($scope.imagePromotion.length>0&&!$rootScope.promotionImageAlreadyShow){
 					$scope.initPromotionBanner();
 				}
 			 	$scope.destaque = response.destaque;
@@ -34,14 +34,16 @@ angular.module('core').controller('HomeController', ['$scope','$timeout', 'Authe
 			 	blockUI.stop();
 			});
 		};
-		 $scope.isEmpty = function (obj) {
+	 	$scope.isEmpty = function (obj) {
 		    for (var i in obj) if (obj.hasOwnProperty(i)) return false;
 		    return true;
 		};
+
 		$scope.initPromotionBanner = function(){
 		 	$timeout(function() {
 			 	$scope.openPromotionScreen();
 		 	}, 14000);
+		 	$rootScope.promotionImageAlreadyShow = true;
 		};
 
 		$scope.promotionImage = {

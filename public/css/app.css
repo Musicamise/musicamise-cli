@@ -7329,16 +7329,16 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-new, .icons-pagseguro_info, .icons-simbolo_Logo {
-  background: url('../images/icons-s879c92a860.png') no-repeat;
+.icons-sprite, .icons-CarrinhoAmar, .icons-CarrinhoBlue, .icons-CarrinhoGreen, .icons-CarrinhoLar, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-new, .icons-pagseguro_info, .icons-promotion, .icons-simbolo_Logo {
+  background: url('../images/icons-s0e454e16a1.png') no-repeat;
 }
 
 .gender-sprite {
-  background: url('../images/gender-sdc8560b17a.png') no-repeat;
+  background: url('../images/gender-s74b6527a85.png') no-repeat;
 }
 
 .icons-menu-sprite, .icons-menu-camisa-cor, .icons-menu-camisa, .icons-menu-caneca-cor, .icons-menu-caneca, .icons-menu-contato-cor, .icons-menu-contato, .icons-menu-logo-cor, .icons-menu-logo, .icons-menu-parceiros-cor, .icons-menu-parceiros {
-  background: url('../images/icons-menu-sf96cfd0bb4.png') no-repeat;
+  background: url('../images/icons-menu-s04f865d619.png') no-repeat;
 }
 
 .icons-card-sprite, .icons-card-BOLETO_BRADESCO, .icons-card-BOLETO_SANTANDER, .icons-card-CARTAO_DE_CREDITO_AMERICAN_EXPRESS, .icons-card-CARTAO_DE_CREDITO_AURA, .icons-card-CARTAO_DE_CREDITO_DINERS, .icons-card-CARTAO_DE_CREDITO_ELO, .icons-card-CARTAO_DE_CREDITO_HIPERCARD, .icons-card-CARTAO_DE_CREDITO_MASTERCARD, .icons-card-CARTAO_DE_CREDITO_VISA, .icons-card-DEBITO_ONLINE_BANCO_DO_BRASIL, .icons-card-DEBITO_ONLINE_BANRISUL, .icons-card-DEBITO_ONLINE_BRADESCO, .icons-card-DEBITO_ONLINE_HSBC, .icons-card-DEBITO_ONLINE_ITAU {
@@ -7349,76 +7349,96 @@ button.close {
   background: url('../images/favicon-s8ef1293992.png') no-repeat;
 }
 
+.icons-CarrinhoAmar {
+  background-position: 0 -801px;
+}
+
+.icons-CarrinhoBlue {
+  background-position: 0 -929px;
+}
+
+.icons-CarrinhoGreen {
+  background-position: 0 -897px;
+}
+
+.icons-CarrinhoLar {
+  background-position: 0 -833px;
+}
+
 .icons-carrinho_vermelho {
-  background-position: 0 -482px;
+  background-position: 0 -865px;
 }
 
 .icons-close_1 {
-  background-position: 0 -610px;
+  background-position: 0 -773px;
 }
 
 .icons-entrar-fb2 {
-  background-position: 0 -514px;
+  background-position: 0 -245px;
 }
 
 .icons-entrarfb-mobile {
-  background-position: 0 -560px;
+  background-position: 0 -723px;
 }
 
 .icons-entrarfb {
-  background-position: 0 -250px;
+  background-position: 0 -207px;
 }
 
 .icons-new {
-  background-position: 0 -288px;
+  background-position: 0 -485px;
 }
 
 .icons-pagseguro_info {
   background-position: 0 0;
 }
 
+.icons-promotion {
+  background-position: 0 -291px;
+}
+
 .icons-simbolo_Logo {
-  background-position: 0 -207px;
+  background-position: 0 -679px;
 }
 
 .icons-menu-camisa-cor {
-  background-position: 0 -426px;
+  background-position: 0 -432px;
 }
 
 .icons-menu-camisa {
-  background-position: 0 -568px;
+  background-position: 0 -504px;
 }
 
 .icons-menu-caneca-cor {
-  background-position: 0 -284px;
+  background-position: 0 -360px;
 }
 
 .icons-menu-caneca {
-  background-position: 0 -355px;
+  background-position: 0 -216px;
 }
 
 .icons-menu-contato-cor {
-  background-position: 0 -497px;
+  background-position: 0 -576px;
 }
 
 .icons-menu-contato {
-  background-position: 0 -639px;
+  background-position: 0 -648px;
 }
 
 .icons-menu-logo-cor {
-  background-position: 0 0;
+  background-position: 0 -72px;
 }
 
 .icons-menu-logo {
-  background-position: 0 -213px;
+  background-position: 0 0;
 }
 
 .icons-menu-parceiros-cor {
-  background-position: 0 -142px;
+  background-position: 0 -288px;
 }
 
 .icons-menu-parceiros {
-  background-position: 0 -71px;
+  background-position: 0 -144px;
 }
 
 .favicon-android-icon-144x144 {
@@ -7646,7 +7666,7 @@ button.close {
 }
 .icon.icons-carrinho_vermelho {
   height: 32px;
-  width: 37px;
+  width: 38px;
 }
 .icon.icons-close_1 {
   height: 28px;
@@ -7664,7 +7684,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 20%;
 }
@@ -7673,7 +7693,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 0%;
 }
@@ -7682,7 +7702,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 100%;
 }
@@ -7691,7 +7711,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 80%;
 }
@@ -7700,7 +7720,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 60%;
 }
@@ -7709,7 +7729,7 @@ button.close {
   display: block;
   height: 0;
   padding-bottom: 59.73684%;
-  background: url('../images/gender-sb01da24867.png');
+  background: url('../images/gender-sac1e501227.png');
   background-size: 100%;
   background-position: 0 40%;
 }
@@ -7721,49 +7741,53 @@ button.close {
   height: 194px;
   width: 194px;
 }
+.icon.icons-promotion {
+  height: 194px;
+  width: 194px;
+}
 .icon.icons-simbolo_Logo {
-  height: 43px;
+  height: 44px;
   width: 50px;
 }
 .icon.icons-menu-camisa-cor {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-camisa {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-caneca-cor {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-caneca {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-contato-cor {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-contato {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-logo-cor {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-logo {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-parceiros-cor {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 .icon.icons-menu-parceiros {
-  height: 71px;
-  width: 83px;
+  height: 72px;
+  width: 84px;
 }
 
 .progress {
@@ -16864,12 +16888,14 @@ a:focus h3 {
   position: absolute;
   float: left;
   padding-top: 20px;
+  pointer-events: none;
 }
 .top_left ul.mainmenu li {
   display: block;
   padding: 2.5px 0;
   position: relative;
   z-index: 99999;
+  pointer-events: auto;
 }
 .top_left ul.mainmenu li a {
   text-align: start;
