@@ -5,7 +5,7 @@
 	 	<div class="col-md-2  desktop-only side-bar" ng-include="'/modules/coreUsers/views/settings/user-settings-side-bar.html'"  onload="user_li=true">
 		</div>
 	 	<div class="col-md-4 ">
-	 		<h1>Profiel User</h1>
+	 		<h1>Perfil do Usuário</h1>
 	 		<div>
 	 			<div>
 	 				<label>Nome Completo </label>
@@ -21,19 +21,19 @@
 				</div>
 				<div>
 	 				<label>Senha </label> 
-	 				<button type="button" class="btn btn-warning btn-sm margt10 margb10" data-toggle="modal" data-target="#editPassword">Edit password</button>
+	 				<button type="button" class="btn btn-warning btn-sm margt10 margb10" data-toggle="modal" data-target="#editPassword">Editar senha</button>
 				</div>
-			  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editProfile">Edit User</button>
+			  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editProfile">Editar usuário</button>
 
 	 		</div>
 		</div>
 		<div class="col-md-6 ">
-	 		<h1>Endreço Cadastrados</h1>
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress({})">Add Address</button>
+	 		<h1>Endreços Cadastrados</h1>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress({})">Adicionar Endereço</button>
 			<div>
 				<div ng-repeat="address in user.address">
 					<div class="user-address">
-						<a  ng-href="" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress(address)">Edit <i class="fa fa-pencil-square-o"></i></a>
+						<a  ng-href="" data-toggle="modal" data-target="#editOrAddAddress" ng-click="bindAddress(address)">Editar <i class="fa fa-pencil-square-o"></i></a>
 						<a ng-href="" ng-click="removeAddress(address)"><i class="fa fa-trash-o"></i></a>
 		 				<div class="user-address-box">
 			 				<label>Nome </label>
@@ -122,7 +122,7 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
 				</div>
 
@@ -160,8 +160,8 @@
 								<div class="sky-form">
 									<div class="sky_form1">
 										<ul>
-											<li><label class="radio left"><input tabindex="4" data-ng-model="user.gender" type="radio" name="radio" value="masculino" checked=""><i></i>Male</label></li>
-											<li><label class="radio"><input data-ng-model="user.gender" type="radio" value="feminino" name="radio"><i></i>Female</label></li>
+											<li><label class="radio left"><input tabindex="4" data-ng-model="user.gender" type="radio" name="radio" value="masculino" checked=""><i></i>Masculino</label></li>
+											<li><label class="radio"><input data-ng-model="user.gender" type="radio" value="feminino" name="radio"><i></i>Feminino</label></li>
 											<div class="clearfix"></div>
 										</ul>
 									</div>
@@ -176,7 +176,7 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
 				</div>
 
@@ -286,7 +286,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
 				</div>
 
