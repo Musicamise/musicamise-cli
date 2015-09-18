@@ -7329,8 +7329,8 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-pagseguro_info, .icons-simbolo_Logo {
-  background: url('../images/icons-s01982fce65.png') no-repeat;
+.icons-sprite, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-new, .icons-pagseguro_info, .icons-simbolo_Logo {
+  background: url('../images/icons-s879c92a860.png') no-repeat;
 }
 
 .gender-sprite {
@@ -7350,23 +7350,27 @@ button.close {
 }
 
 .icons-carrinho_vermelho {
-  background-position: 0 -288px;
+  background-position: 0 -482px;
 }
 
 .icons-close_1 {
-  background-position: 0 -416px;
+  background-position: 0 -610px;
 }
 
 .icons-entrar-fb2 {
-  background-position: 0 -320px;
+  background-position: 0 -514px;
 }
 
 .icons-entrarfb-mobile {
-  background-position: 0 -366px;
+  background-position: 0 -560px;
 }
 
 .icons-entrarfb {
   background-position: 0 -250px;
+}
+
+.icons-new {
+  background-position: 0 -288px;
 }
 
 .icons-pagseguro_info {
@@ -7712,6 +7716,10 @@ button.close {
 .icon.icons-pagseguro_info {
   height: 207px;
   width: 500px;
+}
+.icon.icons-new {
+  height: 194px;
+  width: 194px;
 }
 .icon.icons-simbolo_Logo {
   height: 43px;
