@@ -37,7 +37,7 @@
 				  	</div>
 				  	<div class="desc1 span_3_of_2">
 						<h3>{{product.title}}</h3>
-						<span class="brand">Modelo: <a href="#">{{product.type}} </a>
+						<span class="brand">Modelo: <a ng-repeat="type in product.types" href="#">{{type}} </a>
 						</span>
 						<br/>
 						<span class="code">Código do Produto : {{product.slug}}</span>
@@ -54,14 +54,14 @@
 							<br/>
 							<div ng-if="product.inventories.length>0">
 							
-								<div ng-if="!unico" ng-repeat="(gender, inventoriesByGender) in inventories">
+								<div ng-if="!unico" ng-repeat="(genderAndType, inventoriesByGenderAndType) in inventories">
 
-									<h3 ng-bind="gender"></h3>
+									<h3 ng-bind="genderAndType"></h3>
 									<h4>Selecione um tamanho:</h4>
 									<div class="col col-4">
 										<!-- <input type="checkbox"> G
 										<input type="checkbox" checked>GG -->
-										<div class="size-marker" ng-repeat="inventory in inventoriesByGender">
+										<div class="size-marker" ng-repeat="inventory in inventoriesByGenderAndType">
 											<label  >
 											    <input name="size" ng-disabled="inventory.quantity<=0"  ng-model="inventoryChecked.id"  value="{{inventory._id}}"  class="fancy-select"  type="radio">
 											    <span ng-bind="inventory.size" ></span>

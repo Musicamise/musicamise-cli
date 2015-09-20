@@ -33,20 +33,12 @@ var discountIsApplicable = function(cartItems,discountObject){
 	var allCollections = [];
 	var allProductSlugs = [];
 	var total = 0;
-	console.log('discountIsApplicable - ');
-	console.log(cartItems);
 	cartItems.forEach(function(product,index){
 	 	allCollections = allCollections.concat(cartItems[index].product.collectionsSlugs);
 	 	allProductSlugs.push(cartItems[index].product.slug);
-	 	total = total+cartItems[index].product.price;
+	 	total = total+cartItems[index].priceWithQuantity;
 	});
 	var discountCodeIsApplicable = false;
-	console.log('total');
-	console.log(total);
-	console.log('allCollections');
-	console.log(allCollections);
-	console.log('allProductSlugs');
-	console.log(allProductSlugs);
 	
 	if(discountObject){
 		switch(discountObject.ordersValidation){

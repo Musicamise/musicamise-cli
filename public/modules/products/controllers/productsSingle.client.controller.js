@@ -45,10 +45,10 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 						product.inventories.forEach(function(inventory){
 							if(inventory!==null&&inventory!==undefined&&inventory._id!==undefined){
 								if($.inArray(inventory.genderSlug,Object.keys($scope.inventories))<0){
-									$scope.inventories[inventory.genderSlug] = [];
-									$scope.inventories[inventory.genderSlug].push(inventory);
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type] = [];
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type].push(inventory);
 								}else{
-									$scope.inventories[inventory.genderSlug].push(inventory);
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type].push(inventory);
 								}
 							}
 
