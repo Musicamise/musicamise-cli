@@ -7,32 +7,29 @@
 		<!-- grids_of_4 -->
 		<div class="grids_of_4" >
 			<h3>Produtos em estoque</h3>
-		  	<div class="grid1_of_4" ng-repeat="product in productsInStock" >
-				<div class="content_box">
-					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
-		   		  	</a>
-		    		<h4>
-	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
-		    			</a>
-	    			</h4>
-			     	<p>{{product.type}} new: {{product.newProduct}}</p>
-				 	<div class="grid_1 simpleCart_shelfItem">
-					 	<div class="item_add">
-					 		<span class="item_price">
-						 		<h6>
-						 			<span class="price-new">{{product.priceFormatted}}</span>
-						 			<br/>
-						 			<span class="price-old">{{product.priceOldFormatted}}
-					 				</span> 
-					 			</h6>
-				 			</span>
-			 			</div>
-						<!-- <div class="item_add"><span class="item_price"><a href="" >add to cart</a></span></div> -->
-				 	</div>
-			   	</div>
-			</div >
+			<div id="owl-demo1" class="owl-carousel"  >
+	            <div class="item" ng-repeat="product in productsInStock" ng-init="$last?initProductsCarousel('owl-demo1'):angular.noop()">
+	            	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+	            		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
+						<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
+	            		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+	   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+	        		</a>
+	    		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
+	    		 	<div class="special-info grid_1 simpleCart_shelfItem">
+						<h5 ng-bind="product.title"></h5>
+						<div class="item_add">
+							<span class="item_price">
+								<h6 >APENAS 
+								<span ng-bind="product.priceFormatted"></span><br/>
+								<span ng-show="product.priceCompareWith>0" class="price-old">{{product.priceOldFormatted}} </span>
+								</h6>
+
+							</span>
+						</div>
+					</div>
+	        	</div>
+	      	</div>
 			<div ng-if="productsInStock.length===0">
 				<p>Nenhum produto encontrado</p>
 			</div>		
@@ -40,32 +37,29 @@
 		</div>
 	 	<div class="grids_of_4" >
 	 		<h3>Produtos para Casa</h3>
-		  	<div class="grid1_of_4" ng-repeat="product in productsForHome" >
-				<div class="content_box">
-					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
-		   		  	</a>
-		    		<h4>
-	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
-		    			</a>
-	    			</h4>
-			     	<p>{{product.type}} new: {{product.newProduct}}</p>
-				 	<div class="grid_1 simpleCart_shelfItem">
-					 	<div class="item_add">
-					 		<span class="item_price">
-						 		<h6>
-						 			<span class="price-new">{{product.priceFormatted}}</span>
-						 			<br/>
-						 			<span class="price-old">{{product.priceOldFormatted}}
-					 				</span> 
-					 			</h6>
-				 			</span>
-			 			</div>
-						<!-- <div class="item_add"><span class="item_price"><a href="" >add to cart</a></span></div> -->
-				 	</div>
-			   	</div>
-			</div >
+	 		<div id="owl-demo2" class="owl-carousel"  >
+	            <div class="item" ng-repeat="product in productsForHome" ng-init="$last?initProductsCarousel('owl-demo2'):angular.noop()">
+	            	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+	            		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
+						<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
+	            		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+	   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+	        		</a>
+	    		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
+	    		 	<div class="special-info grid_1 simpleCart_shelfItem">
+						<h5 ng-bind="product.title"></h5>
+						<div class="item_add">
+							<span class="item_price">
+								<h6 >APENAS 
+								<span ng-bind="product.priceFormatted"></span><br/>
+								<span ng-show="product.priceCompareWith>0" class="price-old">{{product.priceOldFormatted}} </span>
+								</h6>
+
+							</span>
+						</div>
+					</div>
+	        	</div>
+	      	</div>
 			<div ng-if="productsForHome.length===0">
 				<p>Nenhum produto encontrado</p>
 			</div>		
@@ -73,32 +67,29 @@
 		</div>
 		<div class="grids_of_4" >
 		 	<h3>Acessórios</h3>
-		  	<div class="grid1_of_4" ng-repeat="product in prodcutsAccessories" >
-				<div class="content_box">
-					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
-		   		  	</a>
-		    		<h4>
-	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
-		    			</a>
-	    			</h4>
-			     	<p>{{product.type}} new: {{product.newProduct}}</p>
-				 	<div class="grid_1 simpleCart_shelfItem">
-					 	<div class="item_add">
-					 		<span class="item_price">
-						 		<h6>
-						 			<span class="price-new">{{product.priceFormatted}}</span>
-						 			<br/>
-						 			<span class="price-old">{{product.priceOldFormatted}}
-					 				</span> 
-					 			</h6>
-				 			</span>
-			 			</div>
-						<!-- <div class="item_add"><span class="item_price"><a href="" >add to cart</a></span></div> -->
-				 	</div>
-			   	</div>
-			</div >
+		  	<div id="owl-demo3" class="owl-carousel"  >
+	            <div class="item" ng-repeat="product in prodcutsAccessories" ng-init="$last?initProductsCarousel('owl-demo3'):angular.noop()">
+	            	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+	            		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
+						<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
+	            		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+	   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+	        		</a>
+	    		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
+	    		 	<div class="special-info grid_1 simpleCart_shelfItem">
+						<h5 ng-bind="product.title"></h5>
+						<div class="item_add">
+							<span class="item_price">
+								<h6 >APENAS 
+								<span ng-bind="product.priceFormatted"></span><br/>
+								<span ng-show="product.priceCompareWith>0" class="price-old">{{product.priceOldFormatted}} </span>
+								</h6>
+
+							</span>
+						</div>
+					</div>
+	        	</div>
+	      	</div>
 			<div ng-if="prodcutsAccessories.length===0">
 				<p>Nenhum produto encontrado</p>
 			</div>		
@@ -106,40 +97,35 @@
 		</div>
 		<div class="grids_of_4" >
 		 	<h3>Fora de estoque</h3>
-		  	<div class="grid1_of_4" ng-repeat="product in productsOutOfStock" >
-				<div class="content_box">
-					<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-		   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-		   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
-		   		  	</a>
-		    		<h4>
-	    				<a ng-href="/#!/product/{{product.slug}}" ng-bind="product.title">  
-		    			</a>
-	    			</h4>
-			     	<p>{{product.type}} new: {{product.newProduct}}</p>
-				 	<div class="grid_1 simpleCart_shelfItem">
-					 	<div class="item_add">
-					 		<span class="item_price">
-						 		<h6>
-						 			<span class="price-new">{{product.priceFormatted}}</span>
-						 			<br/>
-						 			<span class="price-old">{{product.priceOldFormatted}}
-					 				</span> 
-					 			</h6>
-				 			</span>
-			 			</div>
-						<!-- <div class="item_add"><span class="item_price"><a href="" >add to cart</a></span></div> -->
-				 	</div>
-			   	</div>
-			</div >
+		  	<div id="owl-demo4" class="owl-carousel"  >
+	            <div class="item" ng-repeat="product in productsOutOfStock" ng-init="$last?initProductsCarousel('owl-demo4'):angular.noop()">
+	            	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+	            		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
+						<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
+	            		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+	   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+	        		</a>
+	    		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
+	    		 	<div class="special-info grid_1 simpleCart_shelfItem">
+						<h5 ng-bind="product.title"></h5>
+						<div class="item_add">
+							<span class="item_price">
+								<h6 >APENAS 
+								<span ng-bind="product.priceFormatted"></span><br/>
+								<span ng-show="product.priceCompareWith>0" class="price-old">{{product.priceOldFormatted}} </span>
+								</h6>
+
+							</span>
+						</div>
+					</div>
+	        	</div>
+	      	</div>
 			<div ng-if="productsOutOfStock.length===0">
 				<p>Nenhum produto encontrado</p>
 			</div>			
 			<div class="clearfix"></div>
 		</div>
 		<!-- end grids_of_4 -->
-		
-		
 	</div>
 	<div class="clearfix"></div>
 	

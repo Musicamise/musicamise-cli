@@ -25,7 +25,7 @@ var numeral = require('numeral');
 var request = require('request');
 
 var NodeCache = require('node-cache');
-var myCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+var myCache = new NodeCache({ stdTTL: 1000, checkperiod: 600 });
 var cepOrigen = '52031300';
 
 var discountIsApplicable = function(cartItems,discountObject){

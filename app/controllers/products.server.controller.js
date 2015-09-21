@@ -24,7 +24,10 @@ exports.search = function(req,res){
 	var inventoriesObj = [];
 
 
-	Product.find({'onLineVisible':true,$or:[{'title' : {$regex : query,$options:'i'}},{'slug' : {$regex : query,$options:'i'}},{'description' : {$regex : query,$options:'i'}},{'userTags' : {$elemMatch : {$regex:query,$options:'i'}}}]})
+	Product.find({'onLineVisible':true,$or:[{'title' : {$regex : query,$options:'i'}},
+		{'slug' : {$regex : query,$options:'i'}},
+		{'description' : {$regex : query,$options:'i'}},
+		{'userTags' : {$elemMatch : {$regex:query,$options:'i'}}}]})
 	.select('-_class -createdDate')
 	.exec(function(err,products){
 
@@ -126,7 +129,7 @@ exports.listRelated = function(req, res) {
 	}
 	var inventoriesObj = [];
 	var product = req.product;
-	var quantity = req.query.quantity||4;
+	var quantity = req.query.quantity||10;
 	var query = Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]);
 	query.distinct('product.$id').exec(function(err, productsId){
 		if(err){
