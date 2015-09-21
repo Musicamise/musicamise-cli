@@ -3437,6 +3437,37 @@ angular.module('products').controller('ProductsSearchController', ['$rootScope',
 			});
 
 		};
+		$scope.initProductsCarousel = function(id){
+			$('#'+id).owlCarousel({
+
+				loop:true,
+			    margin:10,
+			    responsiveClass:true,
+			   	navigation : true,
+				rewindNav:true,
+				navigationText: [
+			      '<i class="icon-chevron-left icon-white"><</i>',
+			      '<i class="icon-chevron-right icon-white">></i>'
+			      ],
+			    responsive:{
+			        0:{
+			            items:1,
+			            loop:true
+
+			        },
+			        600:{
+			            items:3,
+			            loop:true
+
+			        },
+			        1000:{
+			            items:5,
+			            loop:true
+			        }
+			    }
+
+      		});
+		};
 	}
 ]);
 'use strict';
@@ -3486,10 +3517,10 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 						product.inventories.forEach(function(inventory){
 							if(inventory!==null&&inventory!==undefined&&inventory._id!==undefined){
 								if($.inArray(inventory.genderSlug,Object.keys($scope.inventories))<0){
-									$scope.inventories[inventory.genderSlug] = [];
-									$scope.inventories[inventory.genderSlug].push(inventory);
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type] = [];
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type].push(inventory);
 								}else{
-									$scope.inventories[inventory.genderSlug].push(inventory);
+									$scope.inventories[inventory.genderSlug+'-'+inventory.type].push(inventory);
 								}
 							}
 
