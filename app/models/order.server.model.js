@@ -104,6 +104,10 @@ var OrderSchema = new Schema({
 		type: String,
 		default: '',
 	},
+	statusCompra:{
+		type: String,
+		default: '',
+	},
 	user: {
 	},
 	shippingAddress: {

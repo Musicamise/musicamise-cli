@@ -872,6 +872,7 @@ exports.processToPagseguro = function(req,res){
 									var status = new StatusOrder();
 									status.status = 'AGUARDANDO';
 									order.status.push(status);
+									order.statusCompra = status.status;
 									order.pagSeguroInfo = {};
 									order.pagSeguroInfo.reference = code;
 								 	order.save(function(err,orderSaved){
