@@ -6,40 +6,52 @@
 	 	<div class="col-md-8 cart-items">
 	 		<div >
 				<h1>Avalie sua compra:</h1>
-				<h3>Usuario:</h3>
-				<div>
-					<label> Nome:</label>
-					<label ng-bind='order.user.displayName'>	</label>
+				
+				<div class="margb25">
+					
+					<h3>Usuario:</h3>
+					<div>
+						<strong> Nome:</strong>
+						<span ng-bind='order.user.displayName'>	</span>
+					</div>
+					<div>
+						<strong> Email:</strong>
+						<span ng-bind='order.user.email'>	</span>
+					</div>
 				</div>
-				<div>
-					<label> Email:</label>
-					<label ng-bind='order.user.email'>	</label>
-				</div>
+
 				<h3>Endereço de entrega:</h3>
-				<div>
-					<label> Rua:</label>
-					<label ng-bind='order.shippingAddress.address'>	</label>
+				<div class="row margb30">
+					<div class="col-md-4">
+						<div >
+							<strong> Rua:</strong>
+							<span ng-bind='order.shippingAddress.address'>	</span>
+						</div>
+						<div>
+							<strong> CEP:</strong>
+							<span ng-bind='order.shippingAddress.cep'>	</span>
+						</div>
+						<div>
+							<strong> Bairro:</strong>
+							<span ng-bind='order.shippingAddress.bairro'>	</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div>
+							<strong> Cidade:</strong>
+							<span ng-bind='order.shippingAddress.city'>	</span>
+						</div>
+						<div>
+							<strong> Estado:</strong>
+							<span ng-bind='order.shippingAddress.state'>	</span>
+						</div>
+						<div>
+							<strong> Pais:</strong>
+							<span > Brasil	</span>
+						</div>
+					</div>
 				</div>
-				<div>
-					<label> CEP:</label>
-					<label ng-bind='order.shippingAddress.cep'>	</label>
-				</div>
-				<div>
-					<label> Bairro:</label>
-					<label ng-bind='order.shippingAddress.bairro'>	</label>
-				</div>
-				<div>
-					<label> Cidade:</label>
-					<label ng-bind='order.shippingAddress.city'>	</label>
-				</div>
-				<div>
-					<label> Estado:</label>
-					<label ng-bind='order.shippingAddress.state'>	</label>
-				</div>
-				<div>
-					<label> Pais:</label>
-					<label > Brasil	</label>
-				</div>
+
 			</div>
 	 		<h1>Carrinho ({{order.totalItems}})</h1>
 			
@@ -50,19 +62,21 @@
 				 		<img ng-src="{{product.product.images[0].url}}" class="img-responsive" alt=""/>
 					</div>
 				   	<div class="cart-item-info">
-						<h3><a href="#" ng-bind="product.product.title"> </a><span ng-bind="product.product.type"></span></h3>
+						<h3 ng-bind="product.product.title+' - '+product.type"></h3>
 						<ul class="qty">
-							<li><p>Size : <label ng-bind="product.size"></label></p></li>
-							<li><p>Qty : <label ng-bind="product.quantity"></label></p></li>
+							<li><p><span ng-bind="product.genderSlug"></span></p></li>
+							<li><p>Tamanho : <span ng-bind="product.size"></span></p></li>
+							<li><p>Quantidade : <span ng-bind="product.quantity"></span></p></li>
 						</ul>
 					 	<div class="delivery">
-						 	<p>Total : <label ng-bind="product.priceWithQuantityFormatted"></label></p>
+						 	<p><strong>Total :&nbsp;&nbsp;</strong> <span ng-bind="product.priceWithQuantityFormatted"></span></p>
 					 		<div class="clearfix"></div>
 				        </div>	
 					 	<div class="delivery" ng-show="order.shippingAddress.prazo">
-						 	<p> Valor de Servico de entrega : <label ng-bind="order.totalShippingFormatted"></label></p>
-						 	<span >Entregamos em até &nbsp;
-						 	<span ng-bind="order.shippingAddress.prazo"> </span></span>
+						 	<p><strong>Valor de Servico de entrega:&nbsp;&nbsp;</strong><span ng-bind="order.totalShippingFormatted"></span></p>
+						 	<br/>
+						 	<p >Entregamos em até &nbsp;
+						 	<span ng-bind="order.shippingAddress.prazo"> </span></p>
 					 		<div class="clearfix"></div>
 				        </div>	
 				   	</div>

@@ -28,6 +28,11 @@ var objectInventorySchema = {
 		type: Boolean,
 		default: true
 	},
+	type: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	size: {
 		type: String,
 		default: '',
