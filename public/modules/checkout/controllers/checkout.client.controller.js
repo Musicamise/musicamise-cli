@@ -20,6 +20,14 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		$scope.shipping = function(){
 			$scope.address = {};
 			$scope.user = ($scope.Authentication.user)? $scope.Authentication.user : {};
+			
+			if($location.search().edit&&
+				$rootScope.order&&
+				$rootScope.order.shippingAddress&&
+				$rootScope.order.user){
+				$scope.address = $rootScope.order.shippingAddress;
+				$scope.user = $rootScope.order.user;
+			}
 			$scope.address.blockAll = true;
 
 			$scope.orderCall = OrderCheckout.get();

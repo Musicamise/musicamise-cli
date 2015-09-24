@@ -50,14 +50,14 @@
 							<div ng-show="Authentication.user&&Authentication.user.address!==''&&Authentication.user.address.length>0">
 								<select ng-model="selectedSavedAddress" ng-change="selectDeliveryAddress(selectedSavedAddress)">
 									<option value="">Selecione um endereço</option>
-									<option ng-repeat="addressSaved in user.address" ng-bind="addressSaved.name||(addressSaved.address+' '+addressSaved.number+' '+addressSaved.city)" ng-value="addressSaved._id"
+									<option ng-selected="{{addressSaved._id===address._id}}"  ng-repeat="addressSaved in user.address" ng-bind="addressSaved.name||(addressSaved.address+' '+addressSaved.number+' '+addressSaved.city)" ng-value="addressSaved._id"
 									></option>
 								</select>
 								<button ng-model="address.newAddress" name="newAddresslink" ng-click="address.openAddressForm = true">
 									<label ng-show="address._id===undefined">Adicionar novo endereço</label>
-									<label ng-show="address._id!==undefined">Edit endereço</label>
+									<label ng-show="address._id!==undefined">Editar endereço</label>
 								</button>
-
+								<p ng-show="address._id!==undefined">Deseja apagar esse endereço? <a href="#!/user/profile">Click aqui.</a></p>
 							</div>
 							<!-- <label ng-show="form.newAddresslink.$touched">new address</label>
 							<label ng-bind="address.openAddressForm!==undefined"></label> -->
@@ -67,12 +67,12 @@
 								<label ng-show="address._id!==undefined">Editando o endereço</label>
 								
 								<div class="sky-form" ng-show="Authentication.user&&address._id===undefined">
-									<label class="checkbox"><input tabindex="5" type="checkbox" data-ng-model="address.saveaddress" name="saveaddress" tabindex="4"  ><i></i>Salvar o endereço</label>
+									<label class="checkbox"><input tabindex="5" type="checkbox" data-ng-model="address.saveaddress" name="saveaddress"   ><i></i>Salvar o endereço</label>
 								</div>
 								<div ng-show="error" class="text-center text-danger">
 									<strong ng-bind="error"></strong>
 								</div>
-								<div ng-if="Authentication.user">
+								<div class="margb20" ng-if="Authentication.user&&address.saveaddress">
 									<label>
 										<input placeholder="Nome do endereco" name="name" ng-model="address.name" type="text" tabindex="6"   autofocus>
 									</label> 
@@ -88,28 +88,33 @@
 										<input placeholder="Numero" ng-model="address.number" type="text" tabindex="8" name="number"  required autofocus>
 									</label>
 									<div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o número</div>
+								</div>
+								<div>
+									<label>
+										<input placeholder="Complemento" ng-model="address.complemento" type="text" tabindex="9" name="complemento" autofocus>
+									</label>
 								</div>		
 								<div>
 									<label>
-										<input placeholder="Endereço"  ng-model="address.address" ng-disabled="address.blockAll" type="text" tabindex="8" name="address"  required autofocus>
+										<input placeholder="Endereço"  ng-model="address.address" ng-disabled="address.blockAll" type="text" tabindex="10" name="address"  required autofocus>
 									</label>
 									<div ng-show="form.address.$touched&&form.address.$error.required">Por favor coloca o endereço</div>
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Bairro"  ng-disabled="address.blockAll" ng-model="address.bairro" type="text" tabindex="9" name="bairro" autofocus>
+										<input placeholder="Bairro"  ng-disabled="address.blockAll" ng-model="address.bairro" type="text" tabindex="11" name="bairro" autofocus>
 									</label>
 									<!-- <div ng-show="form.number.$touched&&form.number.$error.required">Por favor coloca o endereço</div> -->
 								</div>	
 								<div>
 									<label>
-										<input placeholder="Cidade" ng-disabled="address.blockAll"  ng-model="address.city" type="text" tabindex="10" name="city" required autofocus>
+										<input placeholder="Cidade" ng-disabled="address.blockAll"  ng-model="address.city" type="text" tabindex="12" name="city" required autofocus>
 									</label>
 									<div ng-show="form.city.$touched&&form.city.$error.required">Por favor coloca a cidade</div>
 								</div>						
 								<div>
 									<label>
-										<select  class="sky-form select" ng-model="address.state" tabindex="11" ng-disabled="address.blockAll" name="state"  required autofocus>
+										<select  class="sky-form select" ng-model="address.state" tabindex="13" ng-disabled="address.blockAll" name="state"  required autofocus>
 											<option value="">Selecione</option>
 											<option value="AC">Acre</option>
 											<option value="AL">Alagoas</option>
@@ -152,7 +157,7 @@
 								</div>
 							</div>
 							<div>
-								<input type="submit" tabindex="12" ng-class="{disabled:form.$error.required}" ng-disabled="form.$error.required" ng-click="submitShipping(address,user)" value="Continuar" id="shipping-submit">
+								<input type="submit" tabindex="14" ng-class="{disabled:form.$error.required}" ng-disabled="form.$error.required" ng-click="submitShipping(address,user)" value="Continuar" id="shipping-submit">
 							</div>
 							<!-- <div class="sky-form">
 								<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>i agree to shoppe.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>

@@ -46,6 +46,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 		$scope.like = function(productSlug){
 			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -53,6 +54,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 		$scope.dislike = function(productSlug){
 			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -120,6 +122,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successPassword = 'Salvo com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorPassword = reason.data.message;
@@ -136,6 +139,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successUser = 'Salvo com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorUser = 'Erro ao salvar!';
@@ -152,6 +156,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successAddress = 'Salvo com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorAddress = 'Erro ao salvar!';
@@ -168,6 +173,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successAddress = 'Removido com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorAddress = 'Erro ao salvar!';

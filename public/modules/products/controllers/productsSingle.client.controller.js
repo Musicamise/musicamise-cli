@@ -70,6 +70,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.like = function(productSlug){
 			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -77,6 +78,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.dislike = function(productSlug){
 			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});

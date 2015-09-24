@@ -18,6 +18,7 @@
 						<strong> Email:</strong>
 						<span ng-bind='order.user.email'>	</span>
 					</div>
+					<a href="#!/shipping?edit=true">Editar</a> 
 				</div>
 
 				<h3>Endereço de entrega:</h3>
@@ -27,16 +28,25 @@
 							<strong> Rua:</strong>
 							<span ng-bind='order.shippingAddress.address'>	</span>
 						</div>
+						<div >
+							<strong> Número:</strong>
+							<span ng-bind='order.shippingAddress.number'>	</span>
+						</div>
 						<div>
 							<strong> CEP:</strong>
 							<span ng-bind='order.shippingAddress.cep'>	</span>
 						</div>
 						<div>
+							<strong> Complemento:</strong>
+							<span ng-bind='order.shippingAddress.complemento'>	</span>
+						</div>
+						
+					</div>
+					<div class="col-md-6">
+						<div>
 							<strong> Bairro:</strong>
 							<span ng-bind='order.shippingAddress.bairro'>	</span>
 						</div>
-					</div>
-					<div class="col-md-6">
 						<div>
 							<strong> Cidade:</strong>
 							<span ng-bind='order.shippingAddress.city'>	</span>
@@ -49,6 +59,7 @@
 							<strong> Pais:</strong>
 							<span > Brasil	</span>
 						</div>
+						<a href="#!/shipping?edit=true">Editar</a> 
 					</div>
 				</div>
 

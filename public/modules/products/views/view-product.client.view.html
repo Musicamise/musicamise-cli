@@ -37,7 +37,7 @@
 				  	</div>
 				  	<div class="desc1 span_3_of_2">
 						<h3>{{product.title}}</h3>
-						<span class="brand">Modelo: <a ng-repeat="type in product.types" href="#">{{type}} </a>
+						<span class="brand">Modelo: <a ng-repeat="type in product.types" href="#">{{type}}{{$last ? '' : ', '}} </a>
 						</span>
 						<br/>
 						<span class="code">Código do Produto : {{product.slug}}</span>
