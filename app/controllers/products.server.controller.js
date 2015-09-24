@@ -315,9 +315,9 @@ exports.list = function(req, res) {
 					break;
 				case 'new':
 					if(order==='desc')
-						queryProduct.sort({'newProduct':-1});
-					else
 						queryProduct.sort({'newProduct':1});
+					else
+						queryProduct.sort({'newProduct':-1});
 					break;
 				case 'discount':
 					if(order==='desc')

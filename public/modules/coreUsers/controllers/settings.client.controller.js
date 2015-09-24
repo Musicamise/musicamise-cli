@@ -120,13 +120,11 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				//save or update address for user!
 				$scope.userCall = User.changePassword(passwordDetails);
 				$scope.userCall.$promise.then(function(response,error,progressback){
-					$scope.successPassword = 'Salvo com sucesso!';
-					$scope.user = response;
-					Authentication.user = response;
-					// $scope.profile();
+					$scope.successPassword = response.message;
 				},function(reason){
 					$scope.errorPassword = reason.data.message;
 				});
+				$scope.passwordDetails={};
 
 			}else{
 				$location.path('/profile');

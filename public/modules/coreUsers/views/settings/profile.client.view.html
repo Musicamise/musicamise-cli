@@ -40,30 +40,6 @@
 							<strong ng-bind="address.name"> </strong>
 						</div>
 					</div>
-					<!-- <div>
-		 				<label>Address </label>
-						<strong ng-bind="address.address"></strong>
-					</div>
-					<div>
-		 				<label>Number </label> 
-						<strong ng-bind="address.number"> </strong>
-					</div>
-					<div>
-		 				<label>Complemento </label> 
-						<strong ng-bind="address.address">{{address.complemnto}} </strong>
-					</div>
-					<div>
-		 				<label>Bairro </label> 
-						<strong ng-bind="address.bairro"> </strong>
-					</div>
-					<div>
-		 				<label>City </label> 
-						<strong ng-bind="address.city"> </strong>
-					</div>
-					<div>
-		 				<label>State </label> 
-						<strong ng-bind="address.state"> </strong>
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -84,36 +60,38 @@
 								<div ng-show="errorPassword||successPassword" class="text-center text-danger">
 									<strong ng-bind="errorPassword||successPassword"></strong>
 								</div>
-								<div>
-									<label>
-										<input placeholder="Senha atual" name="password" id="user-password" ng-minlength=7 ng-model="passwordDetails.currentPassword" type="password" tabindex="1" required>
-									</label>
-									<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$invalid">
-										<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
-										<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.required">Precisamos de uma senha!</div>
+								<div ng-hide="errorPassword||successPassword">
+									<div >
+										<label>
+											<input placeholder="Senha atual" name="password" id="user-password" ng-minlength=7 ng-model="passwordDetails.currentPassword" type="password" tabindex="1" required>
+										</label>
+										<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$invalid">
+											<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
+											<div ng-show="formNewPassword.password.$touched&&formNewPassword.password.$error.required">Precisamos de uma senha!</div>
+										</div>
 									</div>
-								</div>
-								<div>
-									<label>
-										<input placeholder="Nova Senha" name="newPassword" id="passwordDetails-newPassword" ng-minlength=7 ng-model="passwordDetails.newPassword" type="password" tabindex="2" required>
-									</label>
-									<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$invalid">
-										<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
-										<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.required">Precisamos de uma senha!</div>
+									<div>
+										<label>
+											<input placeholder="Nova Senha" name="newPassword" id="passwordDetails-newPassword" ng-minlength=7 ng-model="passwordDetails.newPassword" type="password" tabindex="2" required>
+										</label>
+										<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$invalid">
+											<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
+											<div ng-show="formNewPassword.newPassword.$touched&&formNewPassword.newPassword.$error.required">Precisamos de uma senha!</div>
 
+										</div>
+									</div>						
+									<div>
+										<label>
+											<input placeholder="Digite novamente" name="repeatPassword" id="user.repeatPassword"  ng-model="passwordDetails.verifyPassword" type="password" tabindex="3" pw-check="passwordDetails.newPassword" required>
+										</label>
+										<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
+										<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$invalid">	
+										<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.required">Continuamos precisando de senha!</div>
+										</div>
+									</div>	
+									<div>
+										<input type="submit" ng-class="{disabled:formNewPassword.$invalid}" ng-disabled="formNewPassword.$invalid" ng-click="changePassword(passwordDetails)" value="Atualizar a Senha" >
 									</div>
-								</div>						
-								<div>
-									<label>
-										<input placeholder="Digite novamente" name="repeatPassword" id="user.repeatPassword"  ng-model="passwordDetails.verifyPassword" type="password" tabindex="3" pw-check="passwordDetails.newPassword" required>
-									</label>
-									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
-									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$invalid">	
-									<div ng-show="formNewPassword.repeatPassword.$touched&&formNewPassword.repeatPassword.$error.required">Continuamos precisando de senha!</div>
-									</div>
-								</div>	
-								<div>
-									<input type="submit" ng-class="{disabled:formNewPassword.$invalid}" ng-disabled="formNewPassword.$invalid" ng-click="changePassword(passwordDetails)" value="Atualizar a Senha" >
 								</div>
 								
 							</form>
@@ -210,17 +188,23 @@
 										</label>
 										<div ng-show="formAddress.cep.$touched&&formAddress.cep.$invalid">Coloca o CEP</div>
 									</div>	
-									<div>
-										<label>
-											<input placeholder="Endereço"  ng-model="address.address" type="text" tabindex="3" name="address"  required autofocus>
-										</label>
-										<!-- <div ng-show="formAddress.address.$touched&&formAddress.address.$error.required">Por favor coloca o endereço</div> -->
-									</div>	
+									
 									<div>
 										<label>
 											<input placeholder="Numero" ng-model="address.number" type="text" tabindex="4" name="number"  required autofocus>
 										</label>
 										<div ng-show="formAddress.number.$touched&&formAddress.number.$error.required">Por favor coloca o número</div>
+									</div>
+									<div>
+										<label>
+											<input placeholder="Complemento" ng-model="address.complemento" type="text" tabindex="4" name="complemento"  required autofocus>
+										</label>
+									</div>		
+									<div>
+										<label>
+											<input placeholder="Endereço"  ng-model="address.address" type="text" tabindex="3" name="address"  required autofocus>
+										</label>
+										<!-- <div ng-show="formAddress.address.$touched&&formAddress.address.$error.required">Por favor coloca o endereço</div> -->
 									</div>	
 									<div>
 										<label>
@@ -279,7 +263,7 @@
 									</div>
 								</div>
 								<div>
-									<input type="submit" ng-class="{disabled:formAddress.$invalid}" ng-disabled="formAddress.invalid" ng-click="addOrEditAddress(address)" value="Adicionar Endereço" >
+									<input type="submit" ng-class="{disabled:formAddress.$invalid}" ng-disabled="formAddress.invalid" ng-click="addOrEditAddress(address)" value="{{address._id?'Editar Endereço':'Adicionar Endereço'}}" >
 								</div>
 							</form>
 							<!-- /Form -->

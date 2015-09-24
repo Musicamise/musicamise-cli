@@ -34,7 +34,7 @@ exports.forgot = function(req, res, next) {
 				}, '-salt -password', function(err, user) {
 					if (!user) {
 						return res.status(400).send({
-							message: 'No account with that email has been found'
+							message: 'Nenhuma conta com esse email foi encontrada.'
 						});
 					} 
 					// else if (user.provider !== 'local') {
@@ -53,7 +53,7 @@ exports.forgot = function(req, res, next) {
 				});
 			} else {
 				return res.status(400).send({
-					message: 'Email field must not be blank'
+					message: 'O email deve ser preenchido.'
 				});
 			}
 		},
@@ -79,7 +79,7 @@ exports.forgot = function(req, res, next) {
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
-						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+						message: 'Um Email acabou de ser enviado para: ' + user.email + ', nele terá mais informações.'
 					});
 				}
 
@@ -168,12 +168,12 @@ exports.reset = function(req, res, next) {
 						});
 					} else {
 						return res.status(400).send({
-							message: 'Passwords do not match'
+							message: 'Senhas não são iguais.'
 						});
 					}
 				} else {
 					return res.status(400).send({
-						message: 'Password reset token is invalid or has expired.'
+						message: 'Token para resetar a senha é inválido ou expirou.'
 					});
 				}
 			});
@@ -192,7 +192,7 @@ exports.reset = function(req, res, next) {
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,
-				subject: 'Your password has been changed',
+				subject: 'Sua senha acabou de ser modificada.',
 				html: emailHTML
 			};
 
@@ -234,7 +234,7 @@ exports.changePassword = function(req, res) {
 											res.status(400).send(err);
 										} else {
 											res.send({
-												message: 'Password changed successfully'
+												message: 'Senha alterada com sucesso!'
 											});
 										}
 									});
@@ -242,28 +242,28 @@ exports.changePassword = function(req, res) {
 							});
 						} else {
 							res.status(400).send({
-								message: 'Passwords do not match'
+								message: 'Senhas não são iguais.'
 							});
 						}
 					} else {
 						res.status(400).send({
-							message: 'Current password is incorrect'
+							message: 'Senha incorreta'
 						});
 					}
 				} else {
 					res.status(400).send({
-						message: 'User is not found'
+						message: 'Usuário não encontrado.'
 					});
 				}
 			});
 		} else {
 			res.status(400).send({
-				message: 'Please provide a new password'
+				message: 'Por favor, coloca uma nova senha.'
 			});
 		}
 	} else {
 		res.status(400).send({
-			message: 'User is not signed in'
+			message: 'Usuário não logado.'
 		});
 	}
 };
