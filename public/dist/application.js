@@ -1448,6 +1448,14 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 		$scope.shipping = function(){
 			$scope.address = {};
 			$scope.user = ($scope.Authentication.user)? $scope.Authentication.user : {};
+			
+			if($location.search().edit&&
+				$rootScope.order&&
+				$rootScope.order.shippingAddress&&
+				$rootScope.order.user){
+				$scope.address = $rootScope.order.shippingAddress;
+				$scope.user = $rootScope.order.user;
+			}
 			$scope.address.blockAll = true;
 
 			$scope.orderCall = OrderCheckout.get();
@@ -1587,7 +1595,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			                    alert('Continue comprando.');
 			            }
 			        });
-					if ($scope.isOpenLightbox){
+					if (!$scope.isOpenLightbox){
 					 	$window.location = response.url;
 					}
 				 }else{
@@ -2616,6 +2624,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 		$scope.like = function(productSlug){
 			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -2623,6 +2632,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 		$scope.dislike = function(productSlug){
 			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -2688,12 +2698,11 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				//save or update address for user!
 				$scope.userCall = User.changePassword(passwordDetails);
 				$scope.userCall.$promise.then(function(response,error,progressback){
-					$scope.successPassword = 'Salvo com sucesso!';
-					$scope.user = response;
-					// $scope.profile();
+					$scope.successPassword = response.message;
 				},function(reason){
 					$scope.errorPassword = reason.data.message;
 				});
+				$scope.passwordDetails={};
 
 			}else{
 				$location.path('/profile');
@@ -2706,6 +2715,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successUser = 'Salvo com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorUser = 'Erro ao salvar!';
@@ -2722,6 +2732,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successAddress = 'Salvo com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorAddress = 'Erro ao salvar!';
@@ -2738,6 +2749,7 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 				$scope.userCall.$promise.then(function(response,error,progressback){
 					$scope.successAddress = 'Removido com sucesso!';
 					$scope.user = response;
+					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
 					$scope.errorAddress = 'Erro ao salvar!';
@@ -3572,6 +3584,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.like = function(productSlug){
 			User.addWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
@@ -3579,6 +3592,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.dislike = function(productSlug){
 			User.removeWishList({productSlug:productSlug}).$promise.then(function(response){
 				$scope.user = response;
+				Authentication.user = response;
 			},function(reason){
 				console.log(reason);
 			});
