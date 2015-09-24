@@ -110,12 +110,7 @@
 							<div>
 								<input type="submit" value="create an account" id="register-submit">
 							</div>
-							<div class="floatright desktop-tablet-only margt7 ">
-								<a class="facebook" href="/auth/facebook" data-ng-hide="" class="undecorated-link">
-									<i class=" desktop-only icon icons-entrarfb "></i>
-									<i class=" tablet-only icon icons-entrarfb-mobile "></i>
-								</a>
-							</div>
+							
 							<div class="sky-form">
 								<label class="checkbox"><input type="checkbox" data-ng-model="user.agreeWithTerms" name="checkbox" ><i></i>Concordo com <a class="terms" href="#">termos de serviço</a> </label>
 							</div>
@@ -127,23 +122,28 @@
 					<h2>Usuario já existente</h2>
 				 	<div class="registration_form">
 					 <!-- Form -->
-						<form id="registration_form" ng-submit="login(user)" >
+						<form id="registration_form" ng-submit="login(login_model)" >
 				        	<label class="error">{{login_error}}</label>
 							<div>
 								<label>
-									<input placeholder="email:" type="email" ng-model='user.email' name="email" tabindex="3" required>
+									<input placeholder="email:" type="email" ng-model='login_model.email' name="email" tabindex="3" required>
 								</label>
 							</div>
 							<div>
 								<label>
-									<input placeholder="password" type="password" ng-model='user.password' name="password" tabindex="4" required>
+									<input placeholder="password" type="password" ng-model='login_model.password' name="password" tabindex="4" required>
 								</label>
 							</div>						
 							<div>
 								<input type="submit" value="sign in" id="register-submit">
 							</div>
-						 	<label for="rememberme-login"><input ng-model='user.rememberme' ng-keyup="$event.keyCode == 13 && login(user)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
-
+						 	<label for="rememberme-login"><input ng-model='login_model.rememberme' ng-keyup="$event.keyCode == 13 && login(login_model)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
+						 	<div class="floatright desktop-tablet-only margt7 ">
+								<a class="facebook" href="/auth/facebook" data-ng-hide="" class="undecorated-link">
+									<i class=" desktop-only icon icons-entrarfb "></i>
+									<i class=" tablet-only icon icons-entrarfb-mobile "></i>
+								</a>
+							</div>
 							<div class="forget">
 								<a href="#!/user/esquecisenha">Esquici a senha</a>
 							</div>

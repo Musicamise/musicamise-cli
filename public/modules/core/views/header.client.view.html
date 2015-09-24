@@ -84,7 +84,7 @@
 						                    <input type="submit" id="login" value="Sign in">
 
 					                	 	<div  class="notmember padt20"  >
-										  		<span> Não é membro?	<a ng-href="#!/login">REGISTRE-SE</a>
+										  		<span> Não é membro?	<a ng-click='clickLinkMenu()' ng-href="#!/login">REGISTRE-SE</a>
 										  		</span>
 											  	<a class="facebook mobile-only floatright" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
 													ou <i class="icon icons-entrarfb-mobile mobile-only"></i>
@@ -92,7 +92,7 @@
 											</div>
 						            	</fieldset>
 	 									
-							            <span class="padb20"><a href="#!/user/esquecisenha">Perdeu a senha?</a></span>
+							            <span class="padb20"><a ng-click='clickLinkMenu()' href="#!/user/esquecisenha">Perdeu a senha?</a></span>
 									</form>
 								</div>
 							</div>
