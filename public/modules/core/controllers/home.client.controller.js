@@ -116,8 +116,6 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
       		});
 		};
 		
-	 	
-
 		$scope.stopPromotionBannerBlocker = function(){
 			var myBlockUI = blockUI.instances.get('myBlockUI');
 
@@ -126,11 +124,10 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
 		  			myBlockUI.stop();
 			    }
 			});
-
 	  	};
 
-	  	$scope.contact = function() {
-	  		$scope.userContact = {};
+  		$scope.contact = function() {
+  			$scope.userContact = {};
 	  	};
 	  	
   		$scope.sendContact = function() {
@@ -150,7 +147,6 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
 	  				$scope.error = reason.data.message;
 	  			});
 			}
-  			
 	  	};
 	  	
 	}

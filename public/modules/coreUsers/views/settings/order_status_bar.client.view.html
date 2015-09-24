@@ -37,7 +37,7 @@
 	<div ng-show="order.value" >
 		<div class="col-sm-4 order-address">
 			<h3>Forma de Pagamento</h3>
-			<div>
+			<div ng-if='order.pagSeguroInfo'>
 				<p ng-if='order.pagSeguroInfo.paymentMethodType==="BOLETO"'>
 					<i class="fa fa-barcode"></i>
 					<label ng-bind='order.pagSeguroInfo.paymentMethodCode'>	</label>
@@ -48,25 +48,40 @@
 				</p>
 				<label ng-bind='order.totalFormatted+" - "+ order.pagSeguroInfo.installmentCount+"X"'>	</label>
 			</div>
+			<div ng-if='!order.pagSeguroInfo'>
+				<p>Produto pago a vista</p> 
+			</div>
+
 			<h3>Endereço de entrega:</h3>
-			<div>
-				<label ng-bind='order.shippingAddress.address'>	</label>
+			<div ng-if='order.shippingAddress'>
+				
+				<div>
+					<label ng-bind='order.shippingAddress.address'>	</label>
+				</div>
+				<div>
+					<label ng-bind='order.shippingAddress.cep'>	</label>
+				</div>
+				<div>
+					<label ng-bind='order.shippingAddress.bairro'>	</label>
+				</div>
+				<div>
+					<label ng-bind='order.shippingAddress.city'>	</label>
+				</div>
+				<div>
+					<label ng-bind='order.shippingAddress.state'>	</label>
+				</div>
+				<div>
+					<label > Brasil	</label>
+				</div>
 			</div>
-			<div>
-				<label ng-bind='order.shippingAddress.cep'>	</label>
+			<div ng-if='!order.shippingAddress'>
+				<div>
+					<label>Entrega em mãos</label>
+					<p>Se precisa tirar alguma dúvida entre em contato <a href="#!/contact">aqui.</a></p>
+				</div>
 			</div>
-			<div>
-				<label ng-bind='order.shippingAddress.bairro'>	</label>
-			</div>
-			<div>
-				<label ng-bind='order.shippingAddress.city'>	</label>
-			</div>
-			<div>
-				<label ng-bind='order.shippingAddress.state'>	</label>
-			</div>
-			<div>
-				<label > Brasil	</label>
-			</div>
+
+
 		</div>
 		<div class="col-sm-8 order-products">
 			<div class="cart-header" ng-repeat="product in order.products" >

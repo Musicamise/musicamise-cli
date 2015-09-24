@@ -252,13 +252,17 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			if(!$location.search().id){
 				$location.path('/');	
 			} 
-			$scope.orderCall = OrderCheckout.get();
-			$scope.orderCall.$promise.then(function(response,error,progressback){
-				// if(!response.order.pagSeguroInfo){
+
+			OrderCheckout.clean().$promise.then(function(response,error,progressback){
+				 //if(!response.order.pagSeguroInfo){
 				// 	$location.url($location.path('/'));
 				// }
-				$scope.orderCall = OrderCheckout.clean();
-				
+				OrderCheckout.get().$promise.then(function(response,error,progressback){
+					// console.log(p);
+					if(!jQuery.isEmptyObject(response.order)){
+						$rootScope.order = response.order;
+					}
+				});
 			});
 		};
 	}	

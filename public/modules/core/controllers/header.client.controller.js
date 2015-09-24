@@ -5,7 +5,8 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 	function($window,$rootScope,$scope,$location, Authentication, MainMenu,Order,User,blockUI,fancyboxService) {
 		$scope.authentication = Authentication;
 	    window.scrollTo(0, 0);
-
+	    $scope.redirect = $location.search().redirect;
+	    
 		// $scope.isCollapsed = false;
 		$scope.user = Authentication.user;
 		$scope.search = {};
@@ -82,7 +83,11 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
-			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			if($scope.user){
+				return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			}else{
+				return $scope.authentication.user.provider === provider || ($scope.authentication.user.additionalProvidersData && $scope.authentication.user.additionalProvidersData[provider]);
+			}
 		};
 
 		$scope.login = function(user){
@@ -92,9 +97,17 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 					console.log(error);
 				}else if(!jQuery.isEmptyObject(userResponse)){
 					console.log(userResponse);
-					// window.user = userResponse;
+					$scope.authentication.user = userResponse;
 				}
-			 	$window.location.reload();
+
+				if($location.search().redirect){
+					// var url = window.location.href; 
+					// $window.location.href = url;
+					$location.path($location.search().redirect);
+					$location.search({});
+				}else{
+			 		$window.location.reload();
+				}
 			 	// $route.reload();
 			},function(err){
 				$scope.login_error = err.data.message;
@@ -137,19 +150,20 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			});
     	};
     	$scope.bindUserEvent = function () {
-			var button = $('#userButton');
+			var button = $('.userButton');
 			var box = $('#userBox');
 			var form = $('#userForm');
 			button.removeAttr('href');
-			button.mouseup(function(login) {
+			button.mouseup(function(click) {
 			    box.toggle();
 			    button.toggleClass('active');
 			});
 			form.mouseup(function() { 
 			    return false;
 			});
-			$('body').mouseup(function(login) {
-			    if(($(login.target).parent('#userButton').length <= 0)) {
+			$('body').mouseup(function(click) {
+			    if(!$(click.target).hasClass('userButton')&&
+			    	$(click.target).parent('.userButton').length <= 0) {
 			        button.removeClass('active');
 			        box.hide();
 			    }

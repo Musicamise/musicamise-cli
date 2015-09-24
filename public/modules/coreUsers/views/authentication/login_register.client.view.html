@@ -73,22 +73,22 @@
 							</div> -->
 							<div>
 								<label>
-									<input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="3" required>
+									<input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="2" required>
 								</label>
 								<div ng-show="form.email.$touched&&(form.email.$error.email||form.email.$error.required)">Fale seu email.</div>
 							</div>
 							<div class="sky-form">
 								<div class="sky_form1">
 									<ul>
-										<li><label class="radio left"><input data-ng-model="user.gender" type="radio" name="radio" value="masculino" checked=""><i></i>Masculino</label></li>
-										<li><label class="radio"><input data-ng-model="user.gender" type="radio" value="feminino" name="radio"><i></i>Feminino</label></li>
+										<li><label class="radio left"><input data-ng-model="user.gender" tabindex="3" type="radio" name="radio" value="masculino" checked=""><i></i>Masculino</label></li>
+										<li><label class="radio"><input data-ng-model="user.gender" tabindex="4" type="radio" value="feminino" name="radio"><i></i>Feminino</label></li>
 										<div class="clearfix"></div>
 									</ul>
 								</div>
 							</div>
 							<div>
 								<label>
-									<input placeholder="password" name="password" id="user-password" ng-minlength=7 ng-model="user.password" type="password" tabindex="4" required>
+									<input placeholder="password" name="password" id="user-password" ng-minlength=7 ng-model="user.password" type="password" tabindex="5" required>
 								</label>
 								<div ng-show="form.password.$touched&&form.password.$invalid">
 									<div ng-show="form.password.$touched&&form.password.$error.minlength">Senha deve ser maior que 7 caracteres.</div>
@@ -99,7 +99,7 @@
 							</div>						
 							<div>
 								<label>
-									<input placeholder="retype password" name="repeatPassword" id="user.repeatPassword"  ng-model="user.repeatPassword" type="password" tabindex="4" pw-check="user.password" required>
+									<input placeholder="retype password" name="repeatPassword" id="user.repeatPassword"  ng-model="user.repeatPassword" type="password" tabindex="6" pw-check="user.password" required>
 								</label>
 								<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$error.pwmatch">Senha deve ser igual</div>
 								<div ng-show="form.repeatPassword.$touched&&form.repeatPassword.$invalid">	
@@ -108,11 +108,11 @@
 								</div>
 							</div>	
 							<div>
-								<input type="submit" value="create an account" id="register-submit">
+								<input tabindex="8" type="submit" value="create an account" id="register-submit">
 							</div>
 							
 							<div class="sky-form">
-								<label class="checkbox"><input type="checkbox" data-ng-model="user.agreeWithTerms" name="checkbox" ><i></i>Concordo com <a class="terms" href="#">termos de serviço</a> </label>
+								<label class="checkbox"><input tabindex="7" type="checkbox" data-ng-model="user.agreeWithTerms" name="checkbox" ><i></i>Concordo com <a class="terms" href="#">termos de serviço</a> </label>
 							</div>
 						</form>
 						<!-- /Form -->
@@ -126,20 +126,20 @@
 				        	<label class="error">{{login_error}}</label>
 							<div>
 								<label>
-									<input placeholder="email:" type="email" ng-model='login_model.email' name="email" tabindex="3" required>
+									<input placeholder="email:" type="email" ng-model='login_model.email' name="email" tabindex="9" required>
 								</label>
 							</div>
 							<div>
 								<label>
-									<input placeholder="password" type="password" ng-model='login_model.password' name="password" tabindex="4" required>
+									<input placeholder="password" type="password" ng-model='login_model.password' name="password" tabindex="10" required>
 								</label>
 							</div>						
 							<div>
-								<input type="submit" value="sign in" id="register-submit">
+								<input  tabindex="11" type="submit" value="sign in" id="register-submit">
 							</div>
-						 	<label for="rememberme-login"><input ng-model='login_model.rememberme' ng-keyup="$event.keyCode == 13 && login(login_model)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
+						 	<label for="rememberme-login"><input tabindex="12" ng-model='login_model.rememberme' ng-keyup="$event.keyCode == 13 && login(login_model)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
 						 	<div class="floatright desktop-tablet-only margt7 ">
-								<a class="facebook" href="/auth/facebook" data-ng-hide="" class="undecorated-link">
+								<a class="facebook" ng-href="/auth/facebook?redirect={{redirect}}" data-ng-hide="" class="undecorated-link">
 									<i class=" desktop-only icon icons-entrarfb "></i>
 									<i class=" tablet-only icon icons-entrarfb-mobile "></i>
 								</a>

@@ -56,7 +56,7 @@ var objectUserSchema = {
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
+		validate: [validateLocalStrategyPassword, 'Senha deve ser maior que 7 caracteres.']
 	},
 	marketingEmail:{
 		type: Boolean,

@@ -114,21 +114,31 @@ label {
 	font-size:1em;
 	margin-bottom: 5px;
 }
-.registration_form input[type="submit"]{
-	&.disabled{
-    background: #DDDDDD;
- 	cursor: auto;
-
-    &:hover{
-      background: #DDDDDD;
-    }
-  }
+.registration_form {
+	input[type="text"],select{
+		&:disabled{
+			background: #dddddd;
+		}
+	}
+	input[type="submit"]{
+		&.disabled{
+	    	background: #DDDDDD;
+	 		cursor: auto;
+	    	&:hover{
+	      		background: #DDDDDD;
+	    	}
+		}
+	    &:hover{
+	    	color: #ffffff;
+			background:#EE803C;
+	    }
+	    &:focus{
+	    	color: #ffffff;
+			background:#EE803C;
+	    }
+  	}
 }
 
-.registration_form input[type="submit"]:hover{
-	color: #ffffff;
-	background:#EE803C;
-}
 .terms{
 	text-decoration:underline;
 	text-transform:capitalize;

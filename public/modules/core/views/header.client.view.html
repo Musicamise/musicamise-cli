@@ -60,7 +60,7 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="floatright desktop-tablet-only margt7 ">
-						<a class="facebook" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
+						<a class="facebook" ng-href="/auth/facebook?redirect={{redirect}}" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
 							<i class=" desktop-only icon icons-entrarfb "></i>
 							<i class=" tablet-only icon icons-entrarfb-mobile "></i>
 						</a>
@@ -86,7 +86,7 @@
 					                	 	<div  class="notmember padt20"  >
 										  		<span> Não é membro?	<a ng-click='clickLinkMenu()' ng-href="#!/login">REGISTRE-SE</a>
 										  		</span>
-											  	<a class="facebook mobile-only floatright" href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
+											  	<a class="facebook mobile-only floatright"  ng-href="/auth/facebook?redirect={{redirect}}" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
 													ou <i class="icon icons-entrarfb-mobile mobile-only"></i>
 												</a>
 											</div>
@@ -98,9 +98,9 @@
 							</div>
 						</div>
 						<div ng-if="authentication.user!==''"  ng-init="bindUserEvent()" class="user-expandable-box">
-							<label > Olá, {{authentication.user.displayName }} </label>
+							<label class="userButton" >Olá, {{authentication.user.displayName }}   </label>
 							<div id="userContainer" class="container-expandable-box" >
-								<a href="" id="userButton"  class="expandable-box-button" > <i class="fa fa-angle-down fa-lg"></i></a>
+								<a href="" id="userButton"  class="userButton expandable-box-button" > <i class="fa fa-angle-down fa-lg"></i></a>
 							    <div id="userBox"  class="expandable-box">          
 							     	<form id="userForm" class="expandable-box-form" >
 							     		<fieldset id="body">

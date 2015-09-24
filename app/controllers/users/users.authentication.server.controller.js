@@ -28,8 +28,6 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.fullName||(user.firstName + ' ' + user.lastName);
 
-	console.log(user);
-
 	// Then save the user 
 	user.save(function(err) {
 		if (err) {
@@ -260,7 +258,9 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 					});
 					
 				} else{
-					 if(!user.providerData||user.providerData===undefined){
+					
+					if(!user.providerData||user.providerData===undefined){
+
 						user.provider = providerUserProfile.provider;
 						user.providerData = providerUserProfile.providerData;
 						// And save the user
@@ -282,6 +282,10 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 			// Add the provider data to the additional provider data field
 			if (!user.additionalProvidersData) user.additionalProvidersData = {};
 			user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+
+			//this rule is important if the user ever connect to the facebook 
+			//the provider will be changed
+			user.provider = providerUserProfile.provider;
 
 			// Then tell mongoose that we've updated the additionalProvidersData field
 			user.markModified('additionalProvidersData');

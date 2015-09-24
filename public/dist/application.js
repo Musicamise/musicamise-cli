@@ -1587,7 +1587,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			                    alert('Continue comprando.');
 			            }
 			        });
-					if (!$scope.isOpenLightbox){
+					if ($scope.isOpenLightbox){
 					 	$window.location = response.url;
 					}
 				 }else{
@@ -1680,13 +1680,17 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			if(!$location.search().id){
 				$location.path('/');	
 			} 
-			$scope.orderCall = OrderCheckout.get();
-			$scope.orderCall.$promise.then(function(response,error,progressback){
-				// if(!response.order.pagSeguroInfo){
+
+			OrderCheckout.clean().$promise.then(function(response,error,progressback){
+				 //if(!response.order.pagSeguroInfo){
 				// 	$location.url($location.path('/'));
 				// }
-				$scope.orderCall = OrderCheckout.clean();
-				
+				OrderCheckout.get().$promise.then(function(response,error,progressback){
+					// console.log(p);
+					if(!jQuery.isEmptyObject(response.order)){
+						$rootScope.order = response.order;
+					}
+				});
 			});
 		};
 	}	
@@ -1897,7 +1901,8 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 	function($window,$rootScope,$scope,$location, Authentication, MainMenu,Order,User,blockUI,fancyboxService) {
 		$scope.authentication = Authentication;
 	    window.scrollTo(0, 0);
-
+	    $scope.redirect = $location.search().redirect;
+	    
 		// $scope.isCollapsed = false;
 		$scope.user = Authentication.user;
 		$scope.search = {};
@@ -1974,7 +1979,11 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
-			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			if($scope.user){
+				return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			}else{
+				return $scope.authentication.user.provider === provider || ($scope.authentication.user.additionalProvidersData && $scope.authentication.user.additionalProvidersData[provider]);
+			}
 		};
 
 		$scope.login = function(user){
@@ -1984,9 +1993,17 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 					console.log(error);
 				}else if(!jQuery.isEmptyObject(userResponse)){
 					console.log(userResponse);
-					// window.user = userResponse;
+					$scope.authentication.user = userResponse;
 				}
-			 	$window.location.reload();
+
+				if($location.search().redirect){
+					// var url = window.location.href; 
+					// $window.location.href = url;
+					$location.path($location.search().redirect);
+					$location.search({});
+				}else{
+			 		$window.location.reload();
+				}
 			 	// $route.reload();
 			},function(err){
 				$scope.login_error = err.data.message;
@@ -2029,19 +2046,20 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 			});
     	};
     	$scope.bindUserEvent = function () {
-			var button = $('#userButton');
+			var button = $('.userButton');
 			var box = $('#userBox');
 			var form = $('#userForm');
 			button.removeAttr('href');
-			button.mouseup(function(login) {
+			button.mouseup(function(click) {
 			    box.toggle();
 			    button.toggleClass('active');
 			});
 			form.mouseup(function() { 
 			    return false;
 			});
-			$('body').mouseup(function(login) {
-			    if(($(login.target).parent('#userButton').length <= 0)) {
+			$('body').mouseup(function(click) {
+			    if(!$(click.target).hasClass('userButton')&&
+			    	$(click.target).parent('.userButton').length <= 0) {
 			        button.removeClass('active');
 			        box.hide();
 			    }
@@ -2180,8 +2198,6 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
       		});
 		};
 		
-	 	
-
 		$scope.stopPromotionBannerBlocker = function(){
 			var myBlockUI = blockUI.instances.get('myBlockUI');
 
@@ -2190,11 +2206,10 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
 		  			myBlockUI.stop();
 			    }
 			});
-
 	  	};
 
-	  	$scope.contact = function() {
-	  		$scope.userContact = {};
+  		$scope.contact = function() {
+  			$scope.userContact = {};
 	  	};
 	  	
   		$scope.sendContact = function() {
@@ -2214,7 +2229,6 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
 	  				$scope.error = reason.data.message;
 	  			});
 			}
-  			
 	  	};
 	  	
 	}
@@ -2420,6 +2434,7 @@ angular.module('users').config(['$stateProvider',
 angular.module('users').controller('AuthenticationController', ['$rootScope','$scope', '$http', '$location', 'Authentication','blockUI','User','$window',
 	function($rootScope,$scope, $http, $location, Authentication,blockUI,User,$window) {
 		$scope.authentication = Authentication;
+	    $scope.redirect = $location.search().redirect;
 	    window.scrollTo(0, 0);
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
@@ -2429,18 +2444,24 @@ angular.module('users').controller('AuthenticationController', ['$rootScope','$s
 			if(!$scope.user){
 				$scope.error = 'Preencha o cadastro!';
 			}else 
-			if($scope.user.password!==$scope.user.repeatPassword){
+			if($scope.user.repeatPassword.length<7) {
+				$scope.error = 'A deve ter mais de 7 caracteres';
+			}else if($scope.user.password!==$scope.user.repeatPassword){
 				$scope.error = 'As senhas devem ser iguais';
-			}else if($scope.user.password.length<6){
-				$scope.error = 'A deve ter mais de 6 caracteres';
 			}else{
 
 				$http.post('/auth/signup', $scope.user).success(function(response) {
 					// If successful we assign the response to the global user model
 					$scope.authentication.user = response;
 
+					if($location.search().redirect){
+						$location.path($location.search().redirect);
+						$location.search({});
+					}else{
+						$location.path('/');
+					}
 					// And redirect to the index page
-					$location.path('/');
+
 				}).error(function(response) {
 					$scope.error = response.message;
 				});
@@ -2455,16 +2476,25 @@ angular.module('users').controller('AuthenticationController', ['$rootScope','$s
 					console.log(error);
 				}else if(!jQuery.isEmptyObject(userResponse)){
 					console.log(userResponse);
-					// window.user = userResponse;
+					$scope.authentication.user = userResponse;
 				}
-			 	$window.location.reload();
+
+				if($location.search().redirect){
+					// var url = window.location.href; 
+					// $window.location.href = url;
+					$location.path($location.search().redirect);
+					$location.search({});
+				}else{
+			 		$window.location.reload();
+				}
 			 	// $route.reload();
 			},function(err){
 				$scope.login_error = err.data.message;
 				console.log(err);
 			});
 		};
-		
+
+
 		// $scope.signin = function() {
 		// 	$http.post('/auth/signin', $scope.credentials).success(function(response) {
 		// 		// If successful we assign the response to the global user model

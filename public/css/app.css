@@ -20040,6 +20040,9 @@ label {
   margin-bottom: 5px;
 }
 
+.registration_form input[type="text"]:disabled, .registration_form select:disabled {
+  background: #dddddd;
+}
 .registration_form input[type="submit"].disabled {
   background: #DDDDDD;
   cursor: auto;
@@ -20047,8 +20050,11 @@ label {
 .registration_form input[type="submit"].disabled:hover {
   background: #DDDDDD;
 }
-
 .registration_form input[type="submit"]:hover {
+  color: #ffffff;
+  background: #EE803C;
+}
+.registration_form input[type="submit"]:focus {
   color: #ffffff;
   background: #EE803C;
 }

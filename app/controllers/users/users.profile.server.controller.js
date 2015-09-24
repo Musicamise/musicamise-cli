@@ -210,14 +210,18 @@ exports.orderHistory = function(req, res) {
 				}
 				orders.forEach(function(order){
 					
-					var newPagSeguroInfo = {};
+					if(order.pagSeguroInfo){
 
-					newPagSeguroInfo.installmentCount = order.pagSeguroInfo.installmentCount;
-					newPagSeguroInfo.grossAmount  = order.pagSeguroInfo.grossAmount;
-					newPagSeguroInfo.paymentMethodCode  = order.pagSeguroInfo.paymentMethodCode;
-					newPagSeguroInfo.paymentMethodType = order.pagSeguroInfo.paymentMethodType;
-					order.pagSeguroInfo = newPagSeguroInfo;
+						var newPagSeguroInfo = {};
+
+						newPagSeguroInfo.installmentCount = order.pagSeguroInfo.installmentCount;
+						newPagSeguroInfo.grossAmount  = order.pagSeguroInfo.grossAmount;
+						newPagSeguroInfo.paymentMethodCode  = order.pagSeguroInfo.paymentMethodCode;
+						newPagSeguroInfo.paymentMethodType = order.pagSeguroInfo.paymentMethodType;
+						order.pagSeguroInfo = newPagSeguroInfo;
+					}
 					order.lastStatus = order.localvar.lastStatus;
+					
 				});
 
 				var newOrders = [];
