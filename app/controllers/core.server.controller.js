@@ -107,9 +107,9 @@ exports.mainMenu = function(req,res){
 					            });
 							}
 							var response = {'loja':{collection:{}}};
-							if(outOFStock.length>0){
-								response.loja.collection['Fora de estoque'] = outOFStock;
-							}
+							// if(outOFStock.length>0){
+							// 	response.loja.collection['Fora de estoque'] = outOFStock;
+							// }
 							done(err,response);
 					   	});
    		});
@@ -138,48 +138,30 @@ exports.mainMenu = function(req,res){
 			});
 			collectionsSlugsMapped = _.union(collectionSlugGender,collectionsSlugsOtherProducts,collectionsSlugsNotGender);
 			//todo with inventory?
-			Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
-					.distinct('product.$id')
-			 		.exec(function(err, productsId){
-
-				Product.find({ '_id':{$in:productsId}})
-						.where('onLineVisible').equals(true)
-					   	.where('collectionsSlugs').in(collectionsSlugsMapped)
-					   	.select('-_id collectionsSlugs slug title types')
-					   	.exec(function(err,products){
-							var gender = {};
+			Inventory.aggregate([
+                     { $match: {'orderOutOfStock':false,$or:[{'quantity':{$gt:0}},{'sellInOutOfStock':true}]} },
+                     { $group: { _id: '$genderSlug', models: { $push: '$type' } } },
+                   ],function(err, reponses){
+                   			var gender = {};
 							var otherProducts = {}; 
 							var collection = response.loja.collection;
-							if(products){
-					            products.forEach(function(product) {
-						       		product.collectionsSlugs.forEach(function(collectionSlug){
-							   			if(collectionSlugGender.indexOf(collectionSlug)>=0){
-							   				if(!gender[collectionSlug])
-							   					gender[collectionSlug] = [];
-											gender[collectionSlug] = gender[collectionSlug].concat(product.types); 
+							reponses.forEach(function(elem){
+								if(collectionSlugGender.indexOf(elem._id)>=0){
+									gender[elem._id] = elem.models;
+								}
+								if(collectionsSlugsOtherProducts.indexOf(elem._id)>=0){
+									otherProducts[elem._id] = elem.models;
+								}
+								if(collectionsSlugsNotGender.indexOf(elem._id)>=0){
+									collection[elem._id] = elem.models;
+								}
+							}); 
 
-											gender[collectionSlug] = _.uniq(gender[collectionSlug], true);        				
-							   			}else if(collectionsSlugsOtherProducts.indexOf(collectionSlug)>=0){
-											if(!otherProducts[collectionSlug])
-												otherProducts[collectionSlug] = [];
-											otherProducts[collectionSlug].push({'slug':product.slug,'title':product.title}); 
-											otherProducts[collectionSlug] = _.uniq(otherProducts[collectionSlug], true);        				
-							   			}else if(collectionsSlugsNotGender.indexOf(collectionSlug)>=0){
-							   				if(!collection[collectionSlug])
-												collection[collectionSlug] = [];
-											gender[collectionSlug] = gender[collectionSlug].concat(product.types); 
-											collection[collectionSlug] = _.uniq(collection[collectionSlug], true);
-							   			}
-							   		});
-					            });
-							}
 							response.loja.gender = gender;
 							response.loja.collection = collection;
 							response.loja.otherProducts = otherProducts;
 				            done(err, response);
 	        				// res.json(mainMenu);
-
-				}); 
 			});
 			
 		});
