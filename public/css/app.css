@@ -18490,6 +18490,11 @@ span.item_price {
   border-color: red;
 }
 
+div.row.products {
+  min-height: 1000px;
+  padding-top: 50px;
+}
+
 .w_nav1 ul {
   padding: 0;
   list-style: none;
@@ -19000,6 +19005,7 @@ span.item_price {
 /*-- start w_content --*/
 .women_main {
   padding: 2em 0;
+  min-height: 700px;
 }
 
 .order_bar {
