@@ -147,13 +147,13 @@ exports.mainMenu = function(req,res){
 							var collection = response.loja.collection;
 							reponses.forEach(function(elem){
 								if(collectionSlugGender.indexOf(elem._id)>=0){
-									gender[elem._id] = elem.models;
+									gender[elem._id] = _.unique(elem.models);
 								}
 								if(collectionsSlugsOtherProducts.indexOf(elem._id)>=0){
-									otherProducts[elem._id] = elem.models;
+									otherProducts[elem._id] = _.unique(elem.models);
 								}
 								if(collectionsSlugsNotGender.indexOf(elem._id)>=0){
-									collection[elem._id] = elem.models;
+									collection[elem._id] = _.unique(elem.models);
 								}
 							}); 
 
