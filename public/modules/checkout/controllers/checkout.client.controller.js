@@ -73,7 +73,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 							$window.user= response;
 						}
 					},function(reason){
-						console.log('Save user address Failed: ' + reason.message);
+						console.log('Save user\'s address Failed: ' + reason.message);
 					});
 				}
 
@@ -85,6 +85,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 						if(!jQuery.isEmptyObject(response.order)){
 							$rootScope.order = response.order;
 						}
+						$location.search({});
 						$location.path('/review');
 
 					}, function(reason) {
