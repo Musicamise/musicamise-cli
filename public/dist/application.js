@@ -1857,13 +1857,14 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 	// $rootScope.FB = {};
   $window.fbAsyncInit = function() {
     // Executed when the SDK is loaded
+    var facebookAppId = facebookAppId;
+    FB.init({ 
 
-    // FB.init({ 
-
-    //   appId: '539560766079177', 
-    //   cookie: true, 
-    //   xfbml: true
-    // });
+      appId: facebookAppId, 
+      cookie: true, 
+      status: true,
+      xfbml: true
+    });
 
     //User.watchAuthenticationStatusChange();
    //  FB.getLoginStatus(function(response) {
@@ -1892,13 +1893,13 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 
     // Load the SDK asynchronously
 
-  //  (function(d, s, id) {
-  //   var js, fjs = d.getElementsByTagName(s)[0];
-  //   if (d.getElementById(id)) return;
-  //   js = d.createElement(s); js.id = id;
-  //   js.src = '//connect.facebook.net/en_US/all.js';
-  //   fjs.parentNode.insertBefore(js, fjs);
-  // }(document, 'script', 'facebook-jssdk'));
+   (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = '//connect.facebook.net/en_US/all.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
 	
 
@@ -3516,19 +3517,22 @@ angular.module('products').controller('ProductsSearchController', ['$rootScope',
 'use strict';
 
 angular.module('products').controller('ProductSingleController', ['$rootScope','$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User',
-	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User','SendContact',
+	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User,SendContact) {
 		// Products controller logic
 		//in controller that doesn't reload
 	    window.scrollTo(0, 0);
+		$scope.fullUrl = $location.absUrl();
 		$scope.authentication = Authentication;
 		$scope.user = Authentication.user;
+		// $scope.facebookAppId = facebookAppId;
 		$scope.$on('$locationChangeSuccess',function(){
 		  //update your scope based on new $routeParams
 
 		  	if($location.path()===$scope.path)
 		  		$scope.find();
 		});
+		$scope.product = {};
 		$scope.productQuery = {};
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';
@@ -3600,7 +3604,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		};
 		
 		$scope.alreadyLiked = function(productSlug){
-			if($scope.user){
+			if($scope.user&&$scope.user.wishList){
 				return $scope.user.wishList.indexOf(productSlug)>=0;
 			}else{
 				return false;
@@ -3694,6 +3698,24 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 			$location.search(object);
 
 		};
+
+		$scope.sendPedido = function(email) {
+  			if(!email)
+				$scope.error = 'Preencha o Email!';
+			var userContact = {};
+			userContact.name = $scope.user.displayName||email;
+			userContact.email = email;
+			userContact.phone = '';
+			userContact.subject = 'Pedido de camisa '+$scope.product.title;
+			userContact.content = 'Pedido de reprint feito pelo email: '+email+'\n com produto '+$scope.product.title;
+			if(!$scope.error){
+				SendContact.send({userContact:userContact}).$promise.then(function(response,error,progressback){
+  					$scope.success = response.message;
+	  			},function(reason){
+	  				$scope.error = reason.data.message;
+	  			});
+			}
+	  	};
 	}
 ]);
 'use strict';

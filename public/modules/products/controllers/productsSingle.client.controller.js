@@ -9,7 +9,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.fullUrl = $location.absUrl();
 		$scope.authentication = Authentication;
 		$scope.user = Authentication.user;
-		$scope.facebookAppId = facebookAppId;
+		// $scope.facebookAppId = facebookAppId;
 		$scope.$on('$locationChangeSuccess',function(){
 		  //update your scope based on new $routeParams
 

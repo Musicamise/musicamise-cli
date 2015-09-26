@@ -57,7 +57,7 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 	// $rootScope.FB = {};
   $window.fbAsyncInit = function() {
     // Executed when the SDK is loaded
-
+    var facebookAppId = facebookAppId;
     FB.init({ 
 
       appId: facebookAppId, 
