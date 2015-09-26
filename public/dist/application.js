@@ -3087,7 +3087,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		};
 
 		$scope.findNextPage = function(){
-			if ($scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
+			if ($scope.products<10||$scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
    			if ($scope.productQuery.page) 
    				$scope.productQuery.page=$scope.productQuery.page+1; 
 

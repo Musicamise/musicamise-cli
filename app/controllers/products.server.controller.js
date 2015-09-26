@@ -399,22 +399,15 @@ exports.availableSizeWithCollectionSlug = function(req,res){
 };
 
 exports.availableColor = function(req,res){
-	Inventory.find({'orderOutOfStock':false}).or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}]).distinct('color').exec(function(err,colors){
+	Inventory.find({'orderOutOfStock':false})
+	.or([{'quantity':{$gt:0}},{'sellInOutOfStock':true}])
+	.distinct('color').exec(function(err,colors){
 		if(err){
 			return res.status(400).send({
 				message: err
 			});		
 		}
-		res.json(colors);
-		// Product.find({ '_id':{$in:productsId}}).distinct('color').exec(function(err,colors){
-		// 	if(err){
-		// 		return res.status(400).send({
-		// 			message: err
-		// 		});
-		// 	}		
-		// 	colors = colors.filter(function(color){return color!=='';});
- 	// 		res.json(colors);
-		// });
+		res.json(_.filter(colors,function(color){return color!=='';}));
 	});
 };
 
