@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('products').controller('ProductSingleController', ['$rootScope','$scope','$location','$timeout','$stateParams','Product',
-	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User',
-	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User) {
+	'ProductRelated','Collection','Size','Price','Color','Model','Order','ProductSearch','blockUI','Authentication','User','SendContact',
+	function($rootScope,$scope,$location,$timeout,$stateParams,Product,ProductRelated,Collection,Size,Price,Color,Model,Order,ProductSearch,blockUI,Authentication,User,SendContact) {
 		// Products controller logic
 		//in controller that doesn't reload
 	    window.scrollTo(0, 0);
@@ -14,6 +14,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		  	if($location.path()===$scope.path)
 		  		$scope.find();
 		});
+		$scope.product = {};
 		$scope.productQuery = {};
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';
@@ -85,7 +86,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		};
 		
 		$scope.alreadyLiked = function(productSlug){
-			if($scope.user){
+			if($scope.user&&$scope.user.wishList){
 				return $scope.user.wishList.indexOf(productSlug)>=0;
 			}else{
 				return false;
@@ -179,5 +180,23 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 			$location.search(object);
 
 		};
+
+		$scope.sendPedido = function(email) {
+  			if(!email)
+				$scope.error = 'Preencha o Email!';
+			var userContact = {};
+			userContact.name = $scope.user.displayName||email;
+			userContact.email = email;
+			userContact.phone = '';
+			userContact.subject = 'Pedido de camisa '+$scope.product.title;
+			userContact.content = 'Pedido de reprint feito pelo email: '+email+'\n com produto '+$scope.product.title;
+			if(!$scope.error){
+				SendContact.send({userContact:userContact}).$promise.then(function(response,error,progressback){
+  					$scope.success = response.message;
+	  			},function(reason){
+	  				$scope.error = reason.data.message;
+	  			});
+			}
+	  	};
 	}
 ]);

@@ -75,8 +75,13 @@
 								</div>
 							</div>
 							<div ng-if="product.inventories.length<=0">
+								<p>
 								Estamos em falta desse produto, mas não desanime! 
-								Peça por <a href="#">aqui</a>
+								</p>
+								<p>
+								Peça por <button type="button" class="btn btn-warning btn-sm margt10 margb10" data-toggle="modal" data-target="#pedirCamisa">AQUI</button>
+								</p>
+
 							</div>
 							
 							<div class="single-bottom1">
@@ -88,13 +93,13 @@
 						<div ng-hide="!product.canBuy||product.inventories.length<=0" class="btn_form margr20 floatleft">
 							<a href="" ng-class="{disabled:(inventoryChecked.id==='')}" ng-disabled="inventoryChecked.id!==''" ng-click="cartAddItem(inventoryChecked.id)">Comprar</a>
 						</div>
-						<div ng-if="user" class="btn_form like_btn floatleft">
+						<div ng-if="Authentication.user" class="btn_form like_btn floatleft">
 							<a href=""  ng-click="!alreadyLiked(product.slug)?like(product.slug):dislike(product.slug)">
 								<span  class="like_span" ng-bind-html="!alreadyLiked(product.slug)?notStared:stared"> </span>
 								
 							</a>
 						</div>
-						<a ng-if="!user" class="margt20 floatleft" ng-href="#!/login">
+						<a ng-if="!Authentication.user" class="margt20 floatleft" ng-href="#!/login">
 						Login para favoritar :)
 						</a>
 			   	 	</div>
@@ -158,6 +163,47 @@
 		<div class="clearfix"></div>		
 	</div>
 	<!-- end content -->
+</div>
+<!-- Modal -->
+<div class="modal fade" id="pedirCamisa" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Quero essa camisa!</h4>
+				<p>Coloque seu email, para receber uma notificação quando essa camisa ficar disponível!</p>
+			</div>
+			<div class="modal-body">
+				<div class="registration_form" >
+					<!-- Form -->
+					<form id="registration_form" name="formNewPassword"  novalidate autocomplete="off">
+						<div ng-show="error||success" class="text-center text-danger">
+							<strong ng-bind="error||success"></strong>
+						</div>
+						<div ng-hide="error||success">
+							<div >
+								<label>
+									<input placeholder="email:" name="email"  data-ng-model="user.email" type="email" tabindex="2" required>
+								</label>
+								<div ng-show="formNewPassword.email.$touched&&(formNewPassword.email.$error.email||formNewPassword.email.$error.required)">Fale seu email.
+								</div>
+							</div>
+							<div>
+								<input type="submit" ng-class="{disabled:formNewPassword.$invalid}" ng-disabled="formNewPassword.$invalid" ng-click="sendPedido(user.email)" value="Enviar" >
+							</div>
+						</div>
+						
+					</form>
+					<!-- /Form -->
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 

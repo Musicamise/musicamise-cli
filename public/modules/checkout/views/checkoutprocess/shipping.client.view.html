@@ -30,8 +30,11 @@
 								</div> -->
 								<div>
 									<label>
-										<input ng-model="user.email" placeholder="email address:" type="email" tabindex="2" required>
+										<input placeholder="email address:" name="email"  data-ng-model="user.email" type="email" tabindex="2" required>
 									</label>
+									<div ng-show="form.email.$touched&&(form.email.$error.email||form.email.$error.required)">Fale seu email.
+									</div>
+
 								</div>
 								<div class="sky-form">
 									<div class="sky_form1">
