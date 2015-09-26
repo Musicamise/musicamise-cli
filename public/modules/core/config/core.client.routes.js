@@ -58,12 +58,13 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
   $window.fbAsyncInit = function() {
     // Executed when the SDK is loaded
 
-    // FB.init({ 
+    FB.init({ 
 
-    //   appId: '539560766079177', 
-    //   cookie: true, 
-    //   xfbml: true
-    // });
+      appId: facebookAppId, 
+      cookie: true, 
+      status: true,
+      xfbml: true
+    });
 
     //User.watchAuthenticationStatusChange();
    //  FB.getLoginStatus(function(response) {
@@ -92,13 +93,13 @@ angular.module('core').run(['$rootScope', '$window', 'User','Authentication',
 
     // Load the SDK asynchronously
 
-  //  (function(d, s, id) {
-  //   var js, fjs = d.getElementsByTagName(s)[0];
-  //   if (d.getElementById(id)) return;
-  //   js = d.createElement(s); js.id = id;
-  //   js.src = '//connect.facebook.net/en_US/all.js';
-  //   fjs.parentNode.insertBefore(js, fjs);
-  // }(document, 'script', 'facebook-jssdk'));
+   (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = '//connect.facebook.net/en_US/all.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
 	
 

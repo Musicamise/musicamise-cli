@@ -1,3 +1,8 @@
+<meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://s3-sa-east-1.amazonaws.com/musicamise/voltei2_estampa.jpg" />
 <section class="single-product-page"  data-ng-controller="ProductSingleController" data-ng-init="findOne()">
  <!-- content -->
 
@@ -37,6 +42,7 @@
 				  	</div>
 				  	<div class="desc1 span_3_of_2">
 						<h3>{{product.title}}</h3>
+						<div class="fb-like" data-href="{{fullUrl}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div><br/>
 						<span class="brand">Modelo: <a ng-repeat="type in product.types" href="#">{{type}}{{$last ? '' : ', '}} </a>
 						</span>
 						<br/>

@@ -6,6 +6,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		// Products controller logic
 		//in controller that doesn't reload
 	    window.scrollTo(0, 0);
+		$scope.fullUrl = $location.absUrl();
 		$scope.authentication = Authentication;
 		$scope.user = Authentication.user;
 		$scope.$on('$locationChangeSuccess',function(){

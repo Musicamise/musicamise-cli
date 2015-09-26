@@ -129,6 +129,8 @@
 				<div class="clearfix"> </div>
 			</div> -->
 	</div> 
+	<div id="fb-root"></div>
+	<script></script>
 	<div class="footer">
 
 		<i class="fa fa-music fa-4x rightpercent10 padtpercent6"></i>
@@ -141,8 +143,10 @@
 
 		<a href="/#!/"><img src="/images/Musicamise_site_Curvas.png" width="20%" class="img-responsive padb20" alt=""/> </a>
 		<div class="container">
+			
 			<div class="col-sm-4 customer-footer">
 				<h2>Área do Cliente</h2>
+
 				<li><a href="/#!/centrodeajuda">Centro de ajuda</a></li>
 				<li><a href="/#!/faq">FAQ</a></li>
 				<li><a href="/#!/comocomprar">Como comprar</a></li>
@@ -207,7 +211,7 @@
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
-
+		var facebookAppId = {{facebookAppId}};
 	</script>
 
 	<!--
