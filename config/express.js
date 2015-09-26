@@ -43,6 +43,7 @@ module.exports = function(db) {
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
 		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
+		res.locals.urlImage = req.protocol+ '://' + req.headers.host +'/images/Musicamise_site_Curvas.png';
 		next();
 	});
 
