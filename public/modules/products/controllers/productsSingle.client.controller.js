@@ -20,6 +20,10 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.productQuery = {};
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';
+		
+		$scope.clickGArelacionados = function(slug){
+			ga('send', 'event', 'relacionado', 'click', slug);
+		};
 		$scope.findOne = function() {
 
 			$scope.product = Product.query({

@@ -45,6 +45,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			});
 
 			$scope.updateSelectOptions();
+			ga('send', {
+			  'hitType': 'pageview',
+			  'page': $location.path(),
+			});
 
 
 		};

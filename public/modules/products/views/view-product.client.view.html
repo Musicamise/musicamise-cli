@@ -112,7 +112,7 @@
 						<h6>Produtos relacionados</h6>
 						<div id="owl-demo1" class="owl-carousel"  >
 			                <div class="item" ng-repeat="product in relatedProducts" ng-init="$last?initProductsCarousel('owl-demo1'):angular.noop()">
-			                	<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
+			                	<a ng-href="/#!/product/{{product.slug}}" ng-click="clickGArelacionados(product.slug)" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
 			                		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
 									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
 			                		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
