@@ -194,8 +194,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		};
 		
 		$scope.updateGender = function(gender){
-			if(gender)
+			if(gender){
 				$location.path($scope.linkGender(gender));
+				ga('send', 'event', 'button', 'click', 'gender');
+			}
 		};
 
 
@@ -214,8 +216,11 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		};
 
 		$scope.updateModel = function(model){
-			if(model)
+			if(model){
 				$location.path($scope.linkModel(model));
+				ga('send', 'event', 'button', 'click', 'model');
+
+			}
 		};
 
 		$scope.linkModel = function(model){
@@ -233,8 +238,11 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 		};
 
 		$scope.updateCollection = function(collection){
-			if(collection)
+			if(collection){
 				$location.path($scope.linkCollection(collection));
+				ga('send', 'event', 'button', 'click', 'collection');
+
+			}
 		};
 
 		$scope.linkCollection = function(collection){
@@ -258,6 +266,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.size = $scope.sizesMarked;
 				$location.search(object);
+				ga('send', 'event', 'button', 'click', 'size');
 			    // $timeout(function(){
 			    // 	$scope.updateVariables();
 		    	// },100);
@@ -273,6 +282,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.price = $scope.priceMarked+'';
 				$location.search(object);		
+				ga('send', 'event', 'button', 'click', 'price');
 			    // $scope.updateSelectOptions();
 			}
 			$scope.updateVariables();
@@ -285,6 +295,7 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 				var object = $location.search();
 				object.color = $scope.colorMarked+'';
 				$location.search(object);		
+				ga('send', 'event', 'button', 'click', 'color');
 				// $scope.updateVariables();
 			}
 			$scope.updateVariables();

@@ -21,6 +21,7 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';
 		$scope.findOne = function() {
+
 			$scope.product = Product.query({
 				productSlug: $stateParams.productSlug
 			});
@@ -28,6 +29,10 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		    $scope.relatedProducts = [];
 		    $scope.product.$promise.then(function(product){
 		    	if(product){
+		  			ga('send', 'pageview', {
+					  'page': product.slug,
+					  'title': product.title
+					});
 					var queryObject = {};
 					queryObject.quantity = 4;
 					queryObject.productSlug = product.slug;
@@ -152,6 +157,8 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 				$scope.orderCall = Order.addItem({id:id});
 				$scope.orderCall.$promise.then(function(response,error,progressback){
 					// console.log(p);
+					ga('send', 'event', 'button', 'click', id);
+
 					if(response.order){
 						$rootScope.order = response.order;
 						$location.path('/cart');		

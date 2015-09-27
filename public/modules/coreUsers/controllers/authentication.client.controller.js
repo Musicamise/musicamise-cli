@@ -8,7 +8,9 @@ angular.module('users').controller('AuthenticationController', ['$rootScope','$s
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 		//$scope.$watch('user', function() { $scope.error = null; }, true);
-
+		$scope.fbclick = function(){
+			ga('send', 'event', 'button', 'click', 'facebookconnect');
+		};
 		$scope.signup = function() {
 			if(!$scope.user){
 				$scope.error = 'Preencha o cadastro!';

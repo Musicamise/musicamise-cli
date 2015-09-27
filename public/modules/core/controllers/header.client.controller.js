@@ -15,7 +15,9 @@ angular.module('core').controller('HeaderController', ['$window','$rootScope','$
 		$scope.$watch(function(){ return $location.search().q; }, function(params){
 			$scope.search.query = $location.search().q;
 		});
-
+		$scope.fbclick = function(){
+			ga('send', 'event', 'button', 'click', 'facebookconnect');
+		};
 		$scope.numberformat =  function (n, len) {
             var num = parseInt(n, 10);
             len = parseInt(len, 10);

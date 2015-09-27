@@ -139,7 +139,7 @@
 							</div>
 						 	<label for="rememberme-login"><input tabindex="12" ng-model='login_model.rememberme' ng-keyup="$event.keyCode == 13 && login(login_model)" name="rememberme" type="checkbox" id="rememberme-login"> <i>Lembre-se de mim</i></label> 
 						 	<div class="floatright desktop-tablet-only margt7 ">
-								<a class="facebook" ng-href="/auth/facebook?redirect={{redirect}}" data-ng-hide="" class="undecorated-link">
+								<a class="facebook" ng-href="/auth/facebook?redirect={{redirect}}" ng-click="fbclick()" data-ng-hide="" class="undecorated-link">
 									<i class=" desktop-only icon icons-entrarfb "></i>
 									<i class=" tablet-only icon icons-entrarfb-mobile "></i>
 								</a>
