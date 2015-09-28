@@ -2100,6 +2100,17 @@ angular.module('core').controller('HomeController', ['$rootScope','$scope','$tim
 		// This provides Authentication context.
 	    window.scrollTo(0, 0);
 		$scope.authentication = Authentication;
+		$scope.clickGAdestaque = function(slug){
+			ga('send', 'event', 'destaque', 'click', slug);
+		};
+		$scope.clickGAbanner = function(slug){
+			if(slug)
+				ga('send', 'event', 'banner', 'click', slug);
+		};
+		$scope.clickGAgender = function(slug){
+			if(slug)
+				ga('send', 'event', 'button', 'click', slug);
+		};
 		$scope.inicialCall = function() {
 			$scope.mainContent = {};
 			$scope.imagePromotion = [];
@@ -3087,6 +3098,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 			});
 
 			$scope.updateSelectOptions();
+			ga('send', {
+			  'hitType': 'pageview',
+			  'page': $location.path(),
+			});
 
 
 		};
@@ -3551,6 +3566,10 @@ angular.module('products').controller('ProductSingleController', ['$rootScope','
 		$scope.productQuery = {};
 		$scope.notStared = '<i class="fa fa-star-o"></i> Gostei!';
 		$scope.stared = '<i class="fa fa-star"></i> Remover!';
+		
+		$scope.clickGArelacionados = function(slug){
+			ga('send', 'event', 'relacionado', 'click', slug);
+		};
 		$scope.findOne = function() {
 
 			$scope.product = Product.query({
