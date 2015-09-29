@@ -1,10 +1,15 @@
-# musicamise-cli
+# Musicamise - Client Side
 Musicamise client side 
 
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
+[![Musicamise Logo](https://s3-sa-east-1.amazonaws.com/musicamise/Logo.png)](http://www.musicamise.com/)
 
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
 [![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
+
+Musicamise is a ecommecer music lovers. We are basically doing it for fun and love. All the products can be found [here](http://www.musicamise.com/).
+
+This project is live and using Mean.JS see description on how to load:
 
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components. 
 
