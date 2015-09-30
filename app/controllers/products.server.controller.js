@@ -32,9 +32,9 @@ exports.search = function(req,res){
 	.exec(function(err,products){
 
 		products.forEach(function(product,index){
-			if(product.type.indexOf('poster')>0||product.type.indexOf('obra_de_arte')>0){
+			if(product.types.indexOf('poster')>0||product.types.indexOf('obra_de_arte')>0){
 				productsForHome.push(product);
-			}else if(product.type.indexOf('lenco')>0||product.type.indexOf('acessorio')>0){
+			}else if(product.types.indexOf('lenco')>0||product.types.indexOf('acessorio')>0){
 				prodcutsAccessories.push(product);
 			}else{
 				product.inventories.forEach(function(inventory){
