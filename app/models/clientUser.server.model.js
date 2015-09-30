@@ -60,7 +60,7 @@ var objectUserSchema = {
 	},
 	marketingEmail:{
 		type: Boolean,
-		default: false
+		default: true
 	},
 	active:{
 		type: Boolean,
