@@ -112,15 +112,20 @@ exports.readProductSlug = function(req, res) {
 					return inventory._id!==undefined;
 				}
 			);	
-
+			if(product.inventories.length===0){
+				delete product.price;
+				delete product.priceCompareWith;
+				delete product.priceOldFormatted;
+				delete product.priceFormatted;
+			}
 			res.json(product);
 
 		});
 	}else{
 		res.json(product);
 	}
-
 };
+
 exports.listRelated = function(req, res) {
 	if(req.err){
 		return res.status(400).send({
@@ -195,7 +200,6 @@ exports.listRelated = function(req, res) {
 	// }else{
 	// 	res.json(product);
 	// }
-
 };
 
 exports.readProductCollectionSlug = function(req, res) {
@@ -360,6 +364,61 @@ exports.list = function(req, res) {
  			res.json({products:products,queryDate:new Date()});
 		});
 	});
+};
+
+exports.esgotados = function(req,res){
+	Inventory.aggregate([{$group:{_id:'$product',inventories:{$push:'$$ROOT'},count:{$sum:1}}}])
+ 		.exec(function(err, result){
+			if(err){
+			return res.status(400).send({
+				message: err
+			});
+		}
+		var productsId = [];
+		result.forEach(function(product){
+			var isToAdd= true;
+			product.inventories.forEach(function(inventory){
+				if(!inventory.orderOutOfStock&&(inventory.sellInOutOfStock||inventory.quantity>0)){
+					isToAdd = false;
+				}
+			});
+			if(isToAdd)
+				productsId.push(product._id.oid);
+		});
+		var quantity = req.query.quantity||10;
+		var page = req.query.page||1;
+		productsId = productsId.slice((page-1)*quantity,quantity);
+		Product.find({ '_id':{$in:productsId}})
+			.where('onLineVisible').equals(true)
+		   	.select('-priceCompareWith -priceOldFormatted -priceFormatted -price')
+		   	.exec(function(err,products){
+		   		if(err){
+					return res.status(400).send({
+						message: err
+					});
+				}
+				products.forEach(function(product,indexProduct){
+					var images = [];
+
+					var frontImages = product.images.filter(function(image,indexImage){
+						return image.frontImage;
+					});
+					var notFrontImage = product.images.filter(function(image,indexImage){
+						return !image.frontImage;
+					});
+
+					if(frontImages.length>0){
+						images = _.union(frontImages.slice(0,1),notFrontImage.slice(0,1));
+					}else{
+						images = notFrontImage.slice(0,2);
+					}
+					products[indexProduct].images = images;
+					products[indexProduct].inventories = [];
+				});
+				res.json({products:products,queryDate:new Date()});
+	   		});
+		});
+
 };
 
 exports.availableSize = function(req,res){

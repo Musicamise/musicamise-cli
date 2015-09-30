@@ -1,9 +1,123 @@
 <section data-ng-controller="HomeController" ng-init='contact()' >
 	<!-- content -->
-	<div class="main">
-		<div class="contact">				
-		 	Centro de ajuda
+	<div ng-init="show='envio'" class="main">
+		<div class="contact">	
+			<div class="banner padb20">
+				<img src="http://placehold.it/350x150">
+			</div>
+			<div class="padb20">
+				
+			<span class="fa-stack fa-lg">
+			  <i class="fa fa-square-o fa-stack-2x"></i>
+			  <i class="fa fa-twitter fa-stack-1x"></i>
+			</span>
+			Centro de ajuda<br>
+			</div>
+
 			<div class="clearfix"></div>		
+			<div class="row">
+				<div class="col-md-4">
+					<ul class="fa-ul">
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='envio'">Envio</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='produtos'">Produtos e Tamanhos</a></li>
+					  <li><i class="fa-li fa fa-spinner fa-spin"></i><a ng-href="" ng-click="show='troca'">Troca</a></li>
+					  <li><i class="fa-li fa fa-square"></i><a ng-href="" ng-click="show='cancelamento'">Cancelamento</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='seguranca'">Segurança</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='pagamento'">Pagemento</a></li>
+					  <li><i class="fa-li fa fa-spinner fa-spin"></i><a  ng-href="" ng-click="show='pagseguro'">Pagseguro</a></li>
+					  <li><i class="fa-li fa fa-square"></i><a ng-href="" ng-click="show='cartao'">Cartão Fidelidade</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='sobre'">Sobre Musicamise</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i><a ng-href="" ng-click="show='lojista'">Lojista</a></li>
+					  <li><i class="fa-li fa fa-spinner fa-spin"></i><a ng-href="" ng-click="show='conta'">Minha conta</a></li>
+					</ul>
+				  	<ul class="fa-ul">
+					  <li><i class="fa-li fa fa-square"></i><a ng-href="/#!/contact" >Fale conosco</a></li>
+					  <li><i class="fa-li fa fa-check-square"></i>Imprimir</li>
+					</ul>
+				</div>
+				<div class="col-md-8">
+					<div ng-show="show=='envio'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='produtos'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='troca'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='cancelamento'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='seguranca'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='pagamento'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='pagseguro'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='sobre'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='lojista'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+					<div ng-show="show=='conta'" >
+						<p>
+							Maecenas efficitur nisl velit, id scelerisque urna iaculis rutrum. Vivamus dignissim, dolor in feugiat accumsan, ipsum dui finibus dui, eu semper arcu nisi a velit. Proin gravida lorem turpis, et lacinia ante hendrerit sit amet. Suspendisse convallis tempus sem id maximus. Phasellus bibendum, elit vitae elementum posuere, ante nibh lacinia odio, id pulvinar eros quam pellentesque ligula. Suspendisse potenti. Nunc justo erat, rhoncus nec magna tempor, sodales facilisis leo. Etiam a viverra odio.
+						</p>
+						<p>
+							Donec nibh ex, molestie in dui non, vehicula porta massa. Curabitur at nibh vitae urna facilisis commodo a quis risus. Suspendisse ac efficitur lacus. Aliquam erat volutpat. Aenean ac eros ornare, faucibus erat eu, tincidunt quam. Quisque enim diam, porta et ultricies vel, sollicitudin id augue. Suspendisse vel nisi varius, cursus purus quis, vestibulum nunc. Nulla pharetra nunc sit amet massa ultrices posuere. Pellentesque gravida lectus eu mauris ultrices varius.
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">

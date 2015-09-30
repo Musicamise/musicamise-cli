@@ -14,6 +14,7 @@
 							<ul id="etalage">
 								<li ng-repeat="image in product.images"  >
 									<a ng-href="">
+										<i ng-if="!product.price" class="icon icons-out" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
@@ -25,6 +26,7 @@
 						<div id="owl-demo"  class="owl-carousel mobile-only"  >
 			                <div class="item" ng-repeat="image in product.images" ng-init="$last?initProductsCarousel('owl-demo'):angular.noop()">
 			                	<a ng-href="" >
+									<i ng-if="!product.price" class="icon icons-out" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 			                		<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
@@ -43,7 +45,7 @@
 						<br/>
 						<span class="code">Código do Produto : {{product.slug}}</span>
 						<p></p>
-						<div class="price">
+						<div class="price" ng-show="product.price">
 							<span class="text">Preço:</span>
 							<span class="price-new">{{product.priceFormatted}}</span>
 							<span ng-show="product.priceCompareWith>0" ng-bind="product.priceOldFormatted" class="price-old"> </span> 
@@ -108,13 +110,13 @@
           	   	</div>
       	    
 				<div  ng-if="relatedProducts.length>0" class="single-bottom2">
-					<div class="container">
+					<div class="container padt100">
 						<h6>Produtos relacionados</h6>
 						<div id="owl-demo1" class="owl-carousel"  >
 			                <div class="item" ng-repeat="product in relatedProducts" ng-init="$last?initProductsCarousel('owl-demo1'):angular.noop()">
 			                	<a ng-href="/#!/product/{{product.slug}}" ng-click="clickGArelacionados(product.slug)" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
-			                		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 15px;"></i>
-									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 15px;"></i>
+			                		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
+									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
 			                		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
 				   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
 			            		</a>
@@ -208,23 +210,4 @@
 </div>
 
 
-<script src="plugin/icheck-1.x/icheck.js"></script>
-<script type="text/javascript">
-
-			 
-			
- 
-</script>
-
-<script type="text/javascript">
-	// $(document).ready(function(){
-	// 	  $('input').iCheck({
-	// 	    checkboxClass: 'icheckbox_minimal-green',
-	// 	    radioClass: 'iradio_minimal-green',
-	// 	    increaseArea: '20%' // optional
-	// 	  });
-	 
-	// });
-	
-</script>
 </section>

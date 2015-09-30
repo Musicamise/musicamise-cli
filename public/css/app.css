@@ -7329,8 +7329,8 @@ button.close {
     display: none !important;
   }
 }
-.icons-sprite, .icons-CarrinhoAmar, .icons-CarrinhoBlue, .icons-CarrinhoGreen, .icons-CarrinhoLar, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-new, .icons-pagseguro_info, .icons-promotion, .icons-simbolo_Logo {
-  background: url('../images/icons-s0e454e16a1.png') no-repeat;
+.icons-sprite, .icons-CarrinhoAmar, .icons-CarrinhoBlue, .icons-CarrinhoGreen, .icons-CarrinhoLar, .icons-carrinho_vermelho, .icons-close_1, .icons-entrar-fb2, .icons-entrarfb-mobile, .icons-entrarfb, .icons-new, .icons-out, .icons-pagseguro_info, .icons-promotion, .icons-simbolo_Logo {
+  background: url('../images/icons-s9cb674cdfd.png') no-repeat;
 }
 
 .gender-sprite {
@@ -7350,27 +7350,27 @@ button.close {
 }
 
 .icons-CarrinhoAmar {
-  background-position: 0 -801px;
+  background-position: 0 -995px;
 }
 
 .icons-CarrinhoBlue {
-  background-position: 0 -929px;
+  background-position: 0 -1123px;
 }
 
 .icons-CarrinhoGreen {
-  background-position: 0 -897px;
+  background-position: 0 -1091px;
 }
 
 .icons-CarrinhoLar {
-  background-position: 0 -833px;
+  background-position: 0 -1027px;
 }
 
 .icons-carrinho_vermelho {
-  background-position: 0 -865px;
+  background-position: 0 -1059px;
 }
 
 .icons-close_1 {
-  background-position: 0 -773px;
+  background-position: 0 -967px;
 }
 
 .icons-entrar-fb2 {
@@ -7387,6 +7387,10 @@ button.close {
 
 .icons-new {
   background-position: 0 -485px;
+}
+
+.icons-out {
+  background-position: 0 -773px;
 }
 
 .icons-pagseguro_info {
@@ -7742,6 +7746,10 @@ button.close {
   width: 194px;
 }
 .icon.icons-promotion {
+  height: 194px;
+  width: 194px;
+}
+.icon.icons-out {
   height: 194px;
   width: 194px;
 }
@@ -20333,8 +20341,9 @@ p.cart a {
 
 /* start contact */
 .contact {
-  margin: 2% 0;
+  margin: 6% 0;
   display: block;
+  min-height: 1000px;
 }
 
 .contact h2 {

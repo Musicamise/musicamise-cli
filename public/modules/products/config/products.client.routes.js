@@ -13,6 +13,10 @@ angular.module('products').config(['$stateProvider',
 			url: '/products',
 			templateUrl: 'modules/products/views/products.client.view.html'
 		}).
+		state('productsEsgotados', {
+			url: '/products/esgotados',
+			templateUrl: 'modules/products/views/products-esgotados.client.view.html'
+		}).
 		state('productWithSlug', {
 			url: '/product/:productSlug',
 			templateUrl: 'modules/products/views/view-product.client.view.html'

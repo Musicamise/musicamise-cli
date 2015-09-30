@@ -12,6 +12,8 @@ module.exports = function(app) {
 		.get(products.search);
 	app.route('/api/products')
 		.get(products.list);
+	app.route('/api/products/esgotados')
+		.get(products.esgotados);
 	app.route('/api/products/related/:productSlug')
 		.get(products.listRelated);
 

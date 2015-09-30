@@ -72,7 +72,7 @@ exports.mainMenu = function(req,res){
 	async.waterfall([
 	function(done) {
 		//products out of stock
-		Inventory.aggregate([{$group:{_id:'$product',inventories:{$push:'$$ROOT'},count:{$sum:1}}}])
+		/*Inventory.aggregate([{$group:{_id:'$product',inventories:{$push:'$$ROOT'},count:{$sum:1}}}])
 			 		.exec(function(err, result){
 		 			if(err){
 						return res.status(400).send({
@@ -107,12 +107,14 @@ exports.mainMenu = function(req,res){
 					            });
 							}
 							var response = {'loja':{collection:{}}};
-							// if(outOFStock.length>0){
-							// 	response.loja.collection['Fora de estoque'] = outOFStock;
-							// }
+							if(outOFStock.length>0){
+								response.loja.collection['Fora de estoque'] = outOFStock;
+							}
 							done(err,response);
 					   	});
-   		});
+   		});*/
+		var response = {'loja':{collection:{}}};
+		done(undefined,response);
 	},
 	function(response,done) {
 		Collection.find({'onLineVisible':true}).or([{'gender':true},{'mainMenu':true}])

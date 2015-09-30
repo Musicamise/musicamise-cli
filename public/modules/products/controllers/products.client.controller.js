@@ -52,7 +52,45 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
 
 		};
+		$scope.findEsgotados = function() {
+			Product.query({
+				productSlug: 'esgotados'
+			}).$promise.then(function(response,error,progressback){
+				if(response.products)
+					$scope.products = response.products;
+			},function(reason){
+				console.log(reason);
+			});
+			$scope.productQuery.page = 1;
 
+			ga('send', {
+			  'hitType': 'pageview',
+			  'page': $location.path(),
+			});
+
+		};
+		$scope.findNextPageEsgotados = function(){
+			if ($scope.products<10||$scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
+   			if ($scope.productQuery.page) 
+   				$scope.productQuery.page=$scope.productQuery.page+1; 
+
+   			$scope.productQuery.busy = true;
+			var queryObject = jQuery.extend(true, {}, $location.search());
+			queryObject.productSlug = 'esgotados';
+			
+			if ($scope.productQuery.page) 
+				queryObject.page = $scope.productQuery.page;
+
+			Product.query(queryObject).$promise.then(function(response,error,progressback){
+				if(response.products)
+					$scope.products = $scope.products.concat(response.products);
+				if(response.products.length===0)
+					$scope.productQuery.findNextPageStopCalling = true;
+				$scope.productQuery.busy = false;
+			},function(reason){
+				console.log(reason);
+			});
+		};
 		$scope.findNextPage = function(){
 			if ($scope.products<10||$scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
    			if ($scope.productQuery.page) 
