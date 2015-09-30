@@ -3127,11 +3127,10 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
 		};
 		$scope.findNextPageEsgotados = function(){
-			if ($scope.products<10||$scope.productQuery.busy||$scope.productQuery.findNextPageStopCalling) return;
+			if ($scope.products<10||$scope.productQuery.findNextPageStopCalling) return;
    			if ($scope.productQuery.page) 
    				$scope.productQuery.page=$scope.productQuery.page+1; 
 
-   			$scope.productQuery.busy = true;
 			var queryObject = jQuery.extend(true, {}, $location.search());
 			queryObject.productSlug = 'esgotados';
 			
@@ -3143,7 +3142,6 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 					$scope.products = $scope.products.concat(response.products);
 				if(response.products.length===0)
 					$scope.productQuery.findNextPageStopCalling = true;
-				$scope.productQuery.busy = false;
 			},function(reason){
 				console.log(reason);
 			});
