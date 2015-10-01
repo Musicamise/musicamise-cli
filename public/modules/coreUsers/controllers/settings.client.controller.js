@@ -157,7 +157,11 @@ angular.module('users').controller('SettingsController', ['$rootScope','$scope',
 					Authentication.user = response;
 					// $scope.profile();
 				},function(reason){
-					$scope.errorAddress = 'Erro ao salvar!';
+					if(reason&&reason.data)
+						$scope.errorAddress = reason.data.message||'Erro ao salvar!';
+					else
+						$scope.errorAddress = 'Erro ao salvar!';
+						
 				});
 
 			}else{

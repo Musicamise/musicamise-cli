@@ -6,7 +6,7 @@ var ApplicationConfiguration = (function() {
 	var applicationModuleName = 'musicamise-cli';
 	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate', 'ngTouch', 
 							'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ngMask',
-							'blockUI','fancyboxplus','infinite-scroll','me-lazyload','dcbImgFallback'];
+							'blockUI','fancyboxplus'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

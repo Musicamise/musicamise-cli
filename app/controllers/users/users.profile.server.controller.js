@@ -97,8 +97,16 @@ exports.updateAddress = function(req,res){
 							user.address[indexSelect]._id = address._id;
 						}
 					}else{
-						address._id = user.address.length+'';
-						user.address.push(address);
+						if(user.address.length<5){
+
+							address._id = user.address.length+'';
+							user.address.push(address);
+						}else{
+							return res.status(400).send({
+								message: 'Número máximo de endereços cadastrados'
+							});
+						}
+
 					}
 					user.save(function (err) {
 						console.log(err);
@@ -115,12 +123,12 @@ exports.updateAddress = function(req,res){
 			});
 		}else{
 			return res.status(200).send({
-						message: 'Complete os campos do endereço'
+						message: 'Complete os campos do endereço.'
 					});
 		}
 	}else{
 		res.status(400).send({
-			message: 'User is not signed in'
+			message: 'Usuário não logado.'
 		});
 	}
 

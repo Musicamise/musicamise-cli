@@ -31,9 +31,6 @@ module.exports = {
 				'public/lib/angular-fancybox-plus/js/angular-fancybox-plus.js',
 				'public/lib/angular-block-ui/dist/angular-block-ui.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
-				'public/plugin/img-lazyload/me-lazyload.js',
-				'public/lib/angular-img-fallback/angular.dcb-img-fallback.min.js',
 			]
 		},
 		css: 'public/dist/application.min.css',

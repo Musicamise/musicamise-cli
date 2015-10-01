@@ -8,7 +8,7 @@
 
 				                <div class="item" ng-repeat="image in mainContent.images" ng-init="$last?initCarousel('owl-demo'):angular.noop()">
 				                	<a ng-href="{{image.redirectUrl||''}}" ng-click="clickGAbanner(image.redirectUrl)" target="_blank">
-				                		<img  class="img-responsive" ng-src="{{image.url}}" alt="{{image.name}}"> 
+				                		<img  class="img-responsive" placehold="{{image.url}}" alt="{{image.name}}"> 
 			                		</a>
 			                		 <p ng-if="image.subtitle" ng-bind="image.subtitle"></p>
 			                	</div>
@@ -73,8 +73,8 @@
 	                	<a ng-href="/#!/product/{{product.slug}}" ng-click="clickGAdestaque(product.slug)" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
 	                		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 							<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
-							<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
-		   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+							<img ng-hide="product.images.length>1&&picture"  placehold="{{product.images[0].url}}" class="img-responsive" alt="product.title"/>
+		   	   	 			<img ng-if="product.images.length>1" ng-show="picture"    placehold="{{product.images[1].url}}"  class="img-responsive" alt="product.title" />
 	            		</a>
             		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
             		 	<div class="special-info grid_1 simpleCart_shelfItem">
@@ -125,7 +125,7 @@
 
                 <div class="item" ng-repeat="localStore in localStores" ng-init="$last?initCarousel('owl-demo1'):angular.noop()">
                 	<a ng-href="{{localStore.images[0].redirectUrl||'#!/lojasparceiras/'+localStore.slug}}" target="_blank">
-                		<img  class="img-responsive" ng-src="{{localStore.images[0].url}}" alt="{{localStore.images[0].name}}"> 
+                		<img  class="img-responsive" placehold="{{localStore.images[0].url}}" alt="{{localStore.images[0].name}}"> 
             		</a>
             		 <p ng-if="localStore.slug" ng-bind="localStore.title"></p>
             	</div> 

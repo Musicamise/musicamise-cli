@@ -80,7 +80,7 @@ var contability = function(order,discountObject,giftCardObject){
 			order.products[index].priceWithQuantityFormatted = 'R$'+ numeral(order.products[index].priceWithQuantity).format('0.00').replace('.',',');
 			
 			order.totalValueItems = order.totalValueItems +  order.products[index].quantity* order.products[index].product.price;
-		 	order.totalItems =  order.totalItems +1;
+		 	order.totalItems =  order.totalItems +order.products[index].quantity;
 
 		});
 	}else{

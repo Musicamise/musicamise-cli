@@ -17,8 +17,8 @@
 										<i ng-if="!product.price" class="icon icons-out" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 										<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
-										<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
-										<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
+										<img class="etalage_thumb_image" placehold="{{image.url}}" class="img-responsive" />
+										<img class="etalage_source_image" placehold="{{image.url}}" class="img-responsive" title="" />
 									</a>
 								</li>
 							</ul>
@@ -29,8 +29,8 @@
 									<i ng-if="!product.price" class="icon icons-out" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
-			                		<img class="etalage_thumb_image" ng-src="{{image.url}}" class="img-responsive" />
-									<img class="etalage_source_image" ng-src="{{image.url}}" class="img-responsive" title="" />
+			                		<img class="etalage_thumb_image" placehold="{{image.url}}" class="img-responsive" />
+									<img class="etalage_source_image" placehold="{{image.url}}" class="img-responsive" title="" />
 			            		</a>
 			            	</div>
 		              	</div>
@@ -117,8 +117,8 @@
 			                	<a ng-href="/#!/product/{{product.slug}}" ng-click="clickGArelacionados(product.slug)" ng-mouseenter="picture=true" ng-mouseleave="picture=false" >
 			                		<i ng-if="!product.newProduct&&product.priceCompareWith>0" class="icon icons-promotion" style="    position: absolute;    top: 0;     right: 0px;"></i>
 									<i ng-if="product.newProduct" class="icon icons-new" style="    position: absolute;    top: 0;     right: 0px;"></i>
-			                		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
-				   	   	 			<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
+			                		<img ng-hide="product.images.length>1&&picture" placehold="{{product.images[0].url}}"   class="img-responsive" alt="product.title"/>
+				   	   	 			<img ng-if="product.images.length>1" ng-show="picture" placehold="{{product.images[1].url}}"   class="img-responsive" alt="product.title" />
 			            		</a>
 		            		 	<!-- <p ng-if="image.subtitle" ng-bind="image.subtitle"></p> -->
 		            		 	<div class="special-info grid_1 simpleCart_shelfItem">

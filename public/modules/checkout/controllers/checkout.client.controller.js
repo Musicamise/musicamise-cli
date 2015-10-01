@@ -21,6 +21,7 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 			$scope.address = {};
 			$scope.user = ($scope.Authentication.user)? $scope.Authentication.user : {};
 			
+			$scope.address.blockAll = true;
 			if($location.search().edit&&
 				$rootScope.order&&
 				$rootScope.order.shippingAddress&&
@@ -28,7 +29,6 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 				$scope.address = $rootScope.order.shippingAddress;
 				$scope.user = $rootScope.order.user;
 			}
-			$scope.address.blockAll = true;
 
 			$scope.orderCall = OrderCheckout.get();
 			$scope.orderCall.$promise.then(function(response,error,progressback){
@@ -70,10 +70,11 @@ angular.module('checkout').controller('CheckoutController', ['$rootScope','$wind
 						if(response){
 							console.log(response); 
 							$scope.user = response;
-							$window.user= response;
+							Authentication.user= response;
 						}
 					},function(reason){
-						console.log('Save user\'s address Failed: ' + reason.message);
+						alert(reason.data.message);
+						console.log('Save user\'s address Failed: ' + reason.data.message);
 					});
 				}
 

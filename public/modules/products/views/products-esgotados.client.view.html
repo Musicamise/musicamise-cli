@@ -9,14 +9,14 @@
 		     <div class="clearfix"></div>	
 		</div>
 		<!-- grids_of_4 -->
-		<div class="col-lg-12">
-		 	<div infinite-scroll='findNextPageEsgotados()' infinite-scroll-distance='1'>
+		<div scrolly="findNextPageEsgotados()" class="col-lg-12">
+		 	<div >
 			  	<div class="col-xs-6 col-md-3" ng-repeat="product in products" >
 					<div class="content_box">
 						<a ng-href="#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
 							<i ng-if="!product.price" class="icon icons-out" style="    position: absolute;    top: 0;     right: 15px;"></i>
-			   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-			   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
+			   	   	 		<img ng-hide="product.images.length>1&&picture" placehold="{{product.images[0].url}}" class="img-responsive" alt=""/>
+			   	   	 		<img ng-if="product.images.length>1" ng-show="picture" placehold="{{product.images[1].url}}" class="img-responsive" alt="" />
 			   		  	</a>
 			    		<h4>
 		    				<a ng-href="#!/product/{{product.slug}}" ng-bind="product.title">  

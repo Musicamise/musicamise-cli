@@ -8,7 +8,7 @@
 	 		 <div id="owl-demo" class="owl-carousel"  >
 	                <div class="item" ng-repeat="image in localStore.images" ng-init="$last?initCarousel():angular.noop()">
 	                	<a ng-href="{{image.redirectUrl||''}}" target="_blank">
-	                		<img  class="img-responsive" ng-src="{{image.url}}" alt="{{image.name}}"> 
+	                		<img  class="img-responsive" placehold="{{image.url}}" alt="{{image.name}}"> 
                 		</a>
                 		 <p ng-if="image.subtitle" ng-bind="image.subtitle"></p>
                 	</div>
@@ -22,8 +22,8 @@
 			 	<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
 						<a ng-href="/#!/product/{{product.slug}}" ng-mouseenter="picture=true" ng-mouseleave="picture=false">
-			   	   	 		<img ng-hide="product.images.length>1&&picture" ng-src="{{product.images[0].url}}" class="img-responsive" alt=""/>
-			   	   	 		<img ng-if="product.images.length>1" ng-show="picture" ng-src="{{product.images[1].url}}" class="img-responsive" alt="" />
+			   	   	 		<img ng-hide="product.images.length>1&&picture" placehold="{{product.images[0].url}}" class="img-responsive" alt=""/>
+			   	   	 		<img ng-if="product.images.length>1" ng-show="picture" placehold="{{product.images[1].url}}" class="img-responsive" alt="" />
 		   		  		</a>
 					</div>
 				   	<div class="cart-item-info">

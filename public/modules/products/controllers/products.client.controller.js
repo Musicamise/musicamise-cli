@@ -462,4 +462,17 @@ angular.module('products').controller('ProductsController', ['$rootScope','$scop
 
 	}
 ]);
+angular.module('products').directive('scrolly', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var raw = element[0];
+            $(document).bind('scroll', function (event) {
+                if (event.target.scrollingElement.scrollTop > raw.scrollHeight) {
+                    scope.$apply(attrs.scrolly);
+                }
+            });
+        }
+    };
+});
 

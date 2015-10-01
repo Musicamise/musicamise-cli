@@ -79,12 +79,23 @@
 									<label>
 										<input placeholder="Nome do endereco" name="name" ng-model="address.name" type="text" tabindex="6"   autofocus>
 									</label> 
+									<div>
+										<span>
+											Nome do endereço é opcional.
+										</span>
+									</div>
 								</div>	
 								<div>
 									<label>
 										<input placeholder="Cep ex:52031-300" name="cep" ng-model="address.cep" type="text" tabindex="7"  mask='ddddd-ddd' mask-repeat='1' mask-restrict='reject' mask-clean='true' mask-validate='true' mask-limit='true' ng-blur="!form.cep.$invalid? getAddress(address.cep) : angular.noop()" required autofocus>
 									</label>
 									<div ng-show="form.cep.$touched&&form.cep.$invalid">Coloca o CEP</div>
+									<div ng-show="!address.blockAll">Não foi possível achar seu cep ou ocoreu um erro na busca. <br/> Por favor preencha os campos a seguir.</div>
+									<div>
+										<span>
+											Não sabe seu cep? Click <a target="_blank" href="http://www.buscacep.correios.com.br/sistemas/buscacep/">Aqui</a>
+										</span>
+									</div>
 								</div>
 								<div>
 									<label>
