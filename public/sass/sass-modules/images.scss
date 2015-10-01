@@ -14,11 +14,8 @@ $icons-card: sprite-map("icons-card/*.png", $spacing: 1px, $layout: smart);
 @include all-favicon-sprites; 
 @include all-icons-card-sprites; 
 
-
 .icon {
 	display: block;
-
-
 	&.icons-card-CARTAO_DE_CREDITO_VISA{
 		@include sprite-dimensions($icons-card,CARTAO_DE_CREDITO_VISA);
 	}
