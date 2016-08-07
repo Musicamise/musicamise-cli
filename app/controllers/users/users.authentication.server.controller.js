@@ -97,7 +97,7 @@ exports.oauthCallback = function(strategy) {
 				if (err) {
 					return res.redirect('/#!/login');
 				}
-				return res.redirect(redirectURL || '/');
+				return res.redirect('/');
 			});
 		})(req, res, next);
 	};
