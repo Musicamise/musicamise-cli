@@ -480,13 +480,14 @@ ul.megamenu.musicamise {
   	}
   	.menu-itens{
   		padding: 0 60px;
+  		margin-right:0px!important;
   	}
     .item{
     	float: left;
 		padding-left: 50px;
 
 		&:first-child{
-			padding-left: 100px;
+			padding-left: 150px;
 		}
 		.header_nav {
 			h4{
