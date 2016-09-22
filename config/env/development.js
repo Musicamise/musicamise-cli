@@ -6,14 +6,14 @@ module.exports = {
 		title: 'musicamise-cli - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || '',
-		clientSecret: process.env.FACEBOOK_SECRET || '',
+		clientID: process.env.FACEBOOK_ID || 'FACEBOOK_ID',
+		clientSecret: process.env.FACEBOOK_SECRET || 'FACEBOOK_SECRET',
 		callbackURL: '/auth/facebook/callback'
 	},
 	pagseguro: {
-		clientMail: process.env.PAGSEGURO_MAIL || '',
-		clientSecret: process.env.PAGSEGURO_SECRET || '',
-		clientUrl: process.env.PAGSEGURO_URL ||'' 
+		clientMail: process.env.PAGSEGURO_MAIL || 'PAGSEGURO_MAIL',
+		clientSecret: process.env.PAGSEGURO_SECRET || 'PAGSEGURO_SECRET',
+		clientUrl: process.env.PAGSEGURO_URL ||'PAGSEGURO_URL' 
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
@@ -36,12 +36,12 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || '',
+		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || '',
+			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || '',
-				pass: process.env.MAILER_PASSWORD || ''
+				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
 	}
