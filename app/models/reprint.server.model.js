@@ -5,7 +5,6 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
-var DBRef = mongoose.SchemaTypes.DBRef;
 
 /**
  * Product Schema

@@ -9,6 +9,7 @@ module.exports = function(app) {
 	app.route('/api/mainmenu').get(core.mainMenu);
 	app.route('/api/mainpage').get(core.mainPage);
 	app.route('/api/sendcontact').post(core.sendContact);
+	app.route('/api/address').get(core.address);
 
 	
 };

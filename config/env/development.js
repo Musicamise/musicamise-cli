@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/musicamise',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/musicamise'
 	app: {
 		title: 'musicamise-cli - Development Environment'
 	},
@@ -13,6 +13,7 @@ module.exports = {
 	pagseguro: {
 		clientMail: process.env.PAGSEGURO_MAIL || '',
 		clientSecret: process.env.PAGSEGURO_SECRET || '',
+		clientUrl: process.env.PAGSEGURO_URL ||'' 
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',

@@ -19,6 +19,7 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 var	orderController = require('../../app/controllers/order.server.controller');
 var	DiscountCode = mongoose.model('DiscountCode');
+var request = require('request');
 
 exports.index = function(req, res) {
 	SiteContent.findOne({'visible':true,'_id':'socialPage'}).exec(function(err,content){
@@ -376,5 +377,23 @@ exports.sendContact = function(req, res, next) {
 				message: err
 			});
 		}	
+	});
+};
+
+/**
+ * Get Address by 3 party reques (Address GET)
+ */
+exports.address = function(req, res, next) {
+	var cep = req.query.cep;
+	request.get({url:'https://viacep.com.br/ws/'+cep+'/json/', 
+		timeout: 120000},
+		function (error, response, body) {
+		    if (!error && response.statusCode === 200) {
+				return res.json(JSON.parse(body));
+		    }else{
+		    	return res.status(400).send({
+					message: error
+				});
+		    }
 	});
 };

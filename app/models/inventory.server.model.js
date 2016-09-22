@@ -5,7 +5,6 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
-var DBRef = mongoose.SchemaTypes.DBRef;
 
 /**
  * Article Schema
@@ -57,7 +56,8 @@ var objectInventorySchema = {
 		default: '',
 		trim: true
 	},
-	product:{type: DBRef, resolve: true}
+	product:{type: Schema.Types.Mixed,
+		ref: 'Product'}
 
 };
 

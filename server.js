@@ -17,15 +17,19 @@ var db = mongoose.connect(config.db, function(err) {
 	if (err) {
 		console.error(chalk.red('Could not connect to MongoDB!'));
 		console.log(chalk.red(err));
+	}else{
+		console.log(chalk.green('Connected'));
+		console.log(chalk.green(mongoose.version.split('.')[0]));
+
 	}
 });
 
 // Access the mongoose-dbref module and the utilities
-var dbref = require('mongoose-dbref');
-var utils = dbref.utils;
+// var dbref = require('mongoose-dbref');
+// var utils = dbref.utils;
 
-// Install the monkey patches
-var loaded = dbref.install(mongoose);
+// // Install the monkey patches
+// var loaded = dbref.install(mongoose);
 
 
 // Init the express application

@@ -5,7 +5,6 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
-var DBRef = mongoose.SchemaTypes.DBRef;
 var Imagem = require('./image.server.model').getImageSchema();
 
 /**
@@ -72,7 +71,8 @@ var objectProductSchema = {
 		type: String,
 		default:''
 	},
-	inventories:[DBRef]
+	inventories:[{type: Schema.Types.Mixed,
+		ref: 'Inventory'}]
 };
 var ProductSchema = new Schema(objectProductSchema);
 exports.getProductSchema = function(){

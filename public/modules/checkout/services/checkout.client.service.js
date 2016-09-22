@@ -51,7 +51,7 @@ angular.module('checkout').factory('OrderCheckout', ['$resource',
 
 angular.module('checkout').factory('Cep', ['$resource',
 	function($resource) {
-		return $resource('http://cep.correiocontrol.com.br/:cep.json', {
+		return $resource('/api/address?cep=:cep', {
 			cep:'@cep',
 			},{'get': {
 					method: 'GET', 

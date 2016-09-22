@@ -89,7 +89,7 @@ exports.readProductSlug = function(req, res) {
 	}
 	var inventoriesObj = [];
 	var product = req.product;
-	
+	console.log('asdasd',product.inventories);
 	if(product.inventories){
 		product.inventories.forEach(function(inventory){
 			if(inventory)

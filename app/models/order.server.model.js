@@ -13,7 +13,6 @@ var Product = require('./product.server.model').getProductSchema();
 var GiftCard = require('./giftCard.server.model').getGiftCardSchema();
 var moment = require('moment');
 
-var DBRef = mongoose.SchemaTypes.DBRef;
 var objectInventorySchema = {
  	_id: {
 		type: String,
